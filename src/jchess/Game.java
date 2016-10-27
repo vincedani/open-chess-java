@@ -215,7 +215,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener
     }
 
     /** Method to get value from loaded txt line
-     *  @param line Line which is readed
+     *  @param line Line which is read
      *  @return result String with loaded value
      *  @throws ReadGameError object class when something goes wrong
      */
@@ -257,14 +257,15 @@ public class Game extends JPanel implements MouseListener, ComponentListener
             this.blockedChessboard = true;
         }
         //dirty hacks starts over here :) 
-        //to fix rendering artefacts on first run
+        //to fix rendering artifacts on first run
         Game activeGame = JChessApp.jcv.getActiveTabGame();
-        if( activeGame != null && JChessApp.jcv.getNumberOfOpenedTabs() == 0 )
+        if( activeGame != null && JChessApp.jcv.getNumberOfOpenedTabs() == 1 )
         {
             activeGame.chessboard.resizeChessboard(activeGame.chessboard.get_height(false));
             activeGame.chessboard.repaint();
             activeGame.repaint();
         }
+        
         chessboard.repaint();
         this.repaint();
         //dirty hacks ends over here :)

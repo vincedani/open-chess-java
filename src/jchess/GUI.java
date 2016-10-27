@@ -23,16 +23,11 @@ package jchess;
 import java.awt.*;
 import java.net.*;
 import java.io.*;
-import java.io.InputStreamReader;
-import javax.swing.*;
-import javax.swing.JPanel;
-import java.io.IOException;
 import java.util.Properties;
 import java.io.FileOutputStream;
-import java.util.logging.Logger;
 
 /** Class representing the game interface which is seen by a player and
- * where are lockated available for player opptions, current games and where
+ * where are located available for player options, current games and where
  * can he start a new game (load it or save it)
  */
 public class GUI
@@ -94,14 +89,15 @@ public class GUI
             path = path.substring(0, lastSlash);
         }
         path = path.replace("%20", " ");
-        return path;
+        return path.substring(1);
     }
 
     static Properties getConfigFile()
     {
         Properties defConfFile = new Properties();
         Properties confFile = new Properties();
-        File outFile = new File(GUI.getJarPath() + File.separator + "config.txt");
+        String jarPath= GUI.getJarPath();
+        File outFile = new File(jarPath + "config.txt");
         try
         {
             defConfFile.load(GUI.class.getResourceAsStream("config.txt"));
@@ -119,14 +115,16 @@ public class GUI
             }
             catch (java.io.IOException exc)
             {
+            	exc.printStackTrace();
             }
         }
         try
         {   
-            confFile.load(new FileInputStream("config.txt"));
+            confFile.load(new FileInputStream(jarPath +"config.txt"));
         }
         catch (java.io.IOException exc)
         {
+        	exc.printStackTrace();
         }
         return confFile;
     }
