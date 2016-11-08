@@ -132,6 +132,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
                     exc.getMessage()
                 );
                 System.out.println("Something wrong creating window - perhaps themeList is null");                
+                exc.printStackTrace();
             }
         }
     }
