@@ -25,7 +25,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jchess.Player.playerTypes;
+
+import jchess.game.Settings;
+import jchess.game.Player.playerTypes;
 
 /**
  * Class responsible for server references: For running the server,

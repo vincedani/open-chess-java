@@ -22,13 +22,13 @@ import org.jdesktop.application.SingleFrameApplication;
  * The main class of the application.
  */
 public class JChessApp extends SingleFrameApplication {
-     static JChessView jcv;
+     private static JChessView jcv;
     /**
      * At startup create and show the main frame of the application.
      */
     @Override protected void startup() {
-        jcv = new JChessView(this);
-        show(jcv);
+        setJcv(new JChessView(this));
+        show(getJcv());
     }
 
     /**
@@ -53,4 +53,12 @@ public class JChessApp extends SingleFrameApplication {
     public static void main(String[] args) {
         launch(JChessApp.class, args);
     }
+
+	public static JChessView getJcv() {
+		return jcv;
+	}
+
+	public static void setJcv(JChessView jcv) {
+		JChessApp.jcv = jcv;
+	}
 }

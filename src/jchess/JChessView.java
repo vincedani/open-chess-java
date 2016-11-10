@@ -20,6 +20,16 @@ import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
+
+import jchess.game.Game;
+import jchess.game.Settings;
+import jchess.gui.GUI;
+import jchess.gui.JChessAboutBox;
+import jchess.gui.JChessTabbedPane;
+import jchess.gui.NewGameWindow;
+import jchess.gui.PawnPromotionWindow;
+import jchess.gui.ThemeChooseWindow;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -239,7 +249,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        gamesPane = new jchess.JChessTabbedPane();
+        gamesPane = new jchess.gui.JChessTabbedPane();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         newGameItem = new javax.swing.JMenuItem();
@@ -574,7 +584,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    protected Game getActiveTabGame() throws ArrayIndexOutOfBoundsException
+    public Game getActiveTabGame() throws ArrayIndexOutOfBoundsException
     {
         Game activeGame = (Game)this.gamesPane.getComponentAt(this.gamesPane.getSelectedIndex());
         return activeGame;
