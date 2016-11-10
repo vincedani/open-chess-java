@@ -55,7 +55,7 @@ public class Square
     void setPiece(Piece piece)
     {
         this.piece = piece;
-        this.piece.square = this;
+        this.piece.setSquare(this);
     }
 
 

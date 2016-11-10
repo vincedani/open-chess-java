@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.pieces;
+package jchess.game;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -29,11 +29,8 @@ import javax.swing.table.*;
 
 import jchess.board.Chessboard;
 import jchess.board.Square;
-import jchess.game.Game;
-import jchess.game.Move;
-import jchess.game.Player;
-import jchess.game.Settings;
-import jchess.game.Settings.gameTypes;
+import jchess.pieces.Move;
+import jchess.pieces.Piece;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -76,7 +73,7 @@ public class Moves extends AbstractTableModel
         this.scrollPane = new JScrollPane(this.table);
         this.scrollPane.setMaximumSize(new Dimension(100, 100));
         this.table.setMinimumSize(new Dimension(100, 100));
-        this.game = game;
+        this.game = game;//I think that this class should not have access to the game!
 
         this.tableModel.addColumn(this.names[0]);
         this.tableModel.addColumn(this.names[1]);
@@ -181,7 +178,7 @@ public class Moves extends AbstractTableModel
     public void addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove, boolean wasEnPassant, Piece promotedPiece)
     {
         boolean wasCastling = castlingMove != castling.none;
-        String locMove = new String(begin.piece.symbol);
+        String locMove = new String(begin.piece.getSymbol());
         
         if( game.settings.upsideDown )
         {
@@ -214,7 +211,7 @@ public class Moves extends AbstractTableModel
             locMove += Integer.toString(8 - end.getPozY());//add number of Square to which move was made
         }
         
-        if (begin.piece.symbol.equals("") && begin.getPozX() - end.getPozX() != 0 && end.piece == null)
+        if (begin.piece.getSymbol().equals("") && begin.getPozX() - end.getPozX() != 0 && end.piece == null)
         {
             locMove += "(e.p)";//pawn take down opponent en passant
             wasEnPassant = true;
@@ -454,7 +451,7 @@ public class Moves extends AbstractTableModel
         return str;
     }
 
-    /** Method to set all moves from String with validation test (usefoul for network game)
+    /** Method to set all moves from String with validation test (useful for network game)
      *  @param  moves String to set in String like PGN with full-notation format
      */
     public void setMoves(String moves)
@@ -462,7 +459,7 @@ public class Moves extends AbstractTableModel
         int from = 0;
         int to = 0;
         int n = 1;
-        ArrayList<String> tempArray = new ArrayList();
+        ArrayList<String> tempArray = new ArrayList<String>();
         int tempStrSize = moves.length() - 1;
         while (true)
         {
@@ -573,18 +570,18 @@ public class Moves extends AbstractTableModel
                 {
                     for(int j=0; j<squares[i].length && !pieceFound; j++)
                     {
-                        if(squares[i][j].piece == null || this.game.getActivePlayer().getColor() != squares[i][j].piece.player.getColor())
+                        if(squares[i][j].piece == null || this.game.getActivePlayer().getColor() != squares[i][j].piece.getPlayer().getColor())
                         {
                             continue;
                         }
-                        ArrayList pieceMoves = squares[i][j].piece.allMoves();
+                        ArrayList<Square> pieceMoves = squares[i][j].piece.allMoves();
                         for(Object square : pieceMoves)
                         {
                             Square currSquare = (Square)square;
                             if(currSquare.getPozX() == xTo && currSquare.getPozY() == yTo)
                             {
-                                xFrom = squares[i][j].piece.square.getPozX();
-                                yFrom = squares[i][j].piece.square.getPozY();
+                                xFrom = squares[i][j].piece.getSquare().getPozX();
+                                yFrom = squares[i][j].piece.getSquare().getPozY();
                                 pieceFound = true;
                             }
                         }

@@ -20,7 +20,6 @@
  */
 package jchess.pieces;
 
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -36,184 +35,148 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 /**
-Class to represent a piece (any kind) - this class should be extended to represent pawn, bishop etc.
+ * Class to represent a piece (any kind) - this class should be extended to
+ * represent pawn, bishop etc.
  */
-public abstract class Piece
-{
+public abstract class Piece {
 
-    private Chessboard chessboard; // <-- this relations isn't in class diagram, but it's necessary :/
-    public Square square;
-    public Player player;
-    private String name;
-    protected String symbol;
-    protected static Image imageBlack;// = null;
-    protected static Image imageWhite;// = null;
-    public Image orgImage;
-    public Image image;
-    public static short value = 0;
+	private Chessboard chessboard; // <-- this relations isn't in class diagram,
+									// but it's necessary :/
+	private Square square;
+	private Player player;
+	private String name;
+	protected String symbol;
+	protected static Image imageBlack;// = null;
+	protected static Image imageWhite;// = null;
+	private Image orgImage;
+	private Image image;
 
-    Piece(Chessboard chessboard, Player player)
-    {
-        this.setChessboard(chessboard);
-        this.player = player;
-        if (player.getColor() == player.getColor().black)
-        {
-            image = imageBlack;
-        }
-        else
-        {
-            image = imageWhite;
-        }
-        this.setName(this.getClass().getSimpleName());
+	public Piece(Chessboard chessboard, Player player) {
+		this.setChessboard(chessboard);
+		this.setPlayer(player);
+		this.setName(this.getClass().getSimpleName());
 
-    }
-    /* Method to draw piece on chessboard
-     * @graph : where to draw
-     */
+	}
+	/*
+	 * Method to draw piece on chessboard
+	 * 
+	 * @graph : where to draw
+	 */
 
-    public final void draw(Graphics g)
-    {
-        try
-        {
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            Point topLeft = this.getChessboard().getTopLeftPoint();
-            int height = this.getChessboard().get_square_height();
-            int x = (this.square.getPozX() * height) + topLeft.x;
-            int y = (this.square.getPozY() * height) + topLeft.y;
-            float addX = (height - image.getWidth(null)) / 2;
-            float addY = (height - image.getHeight(null)) / 2;
-            if (image != null && g != null)
-            {
-                Image tempImage = orgImage;
-                BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
-                Graphics2D imageGr = (Graphics2D) resized.createGraphics();
-                imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                imageGr.drawImage(tempImage, 0, 0, height, height, null);
-                imageGr.dispose();
-                image = resized.getScaledInstance(height, height, 0);
-                g2d.drawImage(image, x, y, null);
-            }
-            else
-            {
-                System.out.println("image is null!");
-            }
+	public final void draw(Graphics g) {
+		try {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			Point topLeft = this.getChessboard().getTopLeftPoint();
+			int height = this.getChessboard().get_square_height();
+			int x = (this.getSquare().getPozX() * height) + topLeft.x;
+			int y = (this.getSquare().getPozY() * height) + topLeft.y;
+			float addX = (height - getImage().getWidth(null)) / 2;
+			float addY = (height - getImage().getHeight(null)) / 2;
+			if (getImage() != null && g != null) {
+				Image tempImage = orgImage;
+				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
+				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
+				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				imageGr.drawImage(tempImage, 0, 0, height, height, null);
+				imageGr.dispose();
+				setImage(resized.getScaledInstance(height, height, 0));
+				g2d.drawImage(getImage(), x, y, null);
+			} else {
+				System.out.println("image is null!");
+			}
 
-        }
-        catch (java.lang.NullPointerException exc)
-        {
-            System.out.println("Something wrong when painting piece: " + exc.getMessage());
-        }
-    }
+		} catch (java.lang.NullPointerException exc) {
+			System.out.println("Something wrong when painting piece: " + exc.getMessage());
+		}
+	}
 
-    void clean()
-    {
-    }
+	void clean() {
+	}
 
-    /** method check if Piece can move to given square
-     * @param square square where piece want to move (Square object)
-     * @param allmoves  all moves which can piece do
-     * */
-    boolean canMove(Square square, ArrayList allmoves)
-    {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        ArrayList moves = allmoves;
-        for (Iterator it = moves.iterator(); it.hasNext();)
-        {
-            Square sq = (Square) it.next();//get next from iterator
-            if (sq == square)
-            {//if adress is the same
-                return true; //piece canMove
-            }
-        }
-        return false;//if not, piece cannot move
-    }
+	/**
+	 * method check if Piece can move to given square
+	 * 
+	 * @param square
+	 *            square where piece want to move (Square object)
+	 * @param allmoves
+	 *            all moves which can piece do
+	 */
+	boolean canMove(Square square, ArrayList<Square> allmoves) {
+		// throw new UnsupportedOperationException("Not supported yet.");
+		ArrayList<Square> moves = allmoves;
+		for (Iterator<Square> it = moves.iterator(); it.hasNext();) {
+			Square sq = it.next();// get next from iterator
+			if (sq == square) {// if address is the same
+				return true; // piece canMove
+			}
+		}
+		return false;// if not, piece cannot move
+	}
 
-    void setImage()
-    {
-        if (this.player.getColor() == this.player.getColor().black)
-        {
-            image = imageBlack;
-        }
-        else
-        {
-            image = imageWhite;
-        }
-    }
-    //void setImages(String white, String black) {
-        /* method set image to black or white (depends on player color)
-     * @white: String with name of image with white piece
-     * @black: String with name of image with black piece
-     * */
-    //    this.imageBlack = black;
-    //     this.imageWhite = white;
-    //     if(player.color == player.color.black) {
-    //         this.image = GUI.loadImage(imageBlack);
-    //     } else {
-    //          this.image = GUI.loadImage(imageWhite);
-    //     }
-    //  }/*--endOf-setImages(String white, String black)--*/
+	abstract public ArrayList<Square> allMoves();
 
-    abstract public ArrayList allMoves();
+	/**
+	 * Method is useful for out of bounds protection
+	 * 
+	 * @param x
+	 *            x position on chessboard
+	 * @param y
+	 *            y position on chessboard
+	 * @return true if parameters are out of bounds (array)
+	 */
+	protected boolean isout(int x, int y) {
+		if (x < 0 || x > 7 || y < 0 || y > 7) {
+			return true;
+		}
+		return false;
+	}
 
-    /** Method is useful for out of bounds protection
-     * @param x  x position on chessboard
-     * @param y y position on chessboard
-     * @return true if parameters are out of bounds (array)
-     * */
-    protected boolean isout(int x, int y)
-    {
-        if (x < 0 || x > 7 || y < 0 || y > 7)
-        {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * @param x
+	 *            y position on chessboard
+	 * @param y
+	 *            y position on chessboard
+	 * @return true if can move, false otherwise
+	 */
+	protected boolean checkPiece(int x, int y) {
+		if (getChessboard().squares[x][y].piece != null
+				&& getChessboard().squares[x][y].piece.getName().equals("King")) {
+			return false;
+		}
+		Piece piece = getChessboard().squares[x][y].piece;
+		if (piece == null || // if this sqhuare is empty
+				piece.getPlayer() != this.getPlayer()) // or piece is another
+														// player
+		{
+			return true;
+		}
+		return false;
+	}
 
-    /** 
-     * @param x y position on chessboard
-     * @param y  y position on chessboard
-     * @return true if can move, false otherwise
-     * */
-    protected boolean checkPiece(int x, int y)
-    {
-        if (getChessboard().squares[x][y].piece != null
-                && getChessboard().squares[x][y].piece.getName().equals("King"))
-        {
-            return false;
-        }
-        Piece piece = getChessboard().squares[x][y].piece;
-        if (piece == null || //if this sqhuare is empty
-                piece.player != this.player) //or piece is another player
-        {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * Method check if piece has other owner than calling piece
+	 * 
+	 * @param x
+	 *            x position on chessboard
+	 * @param y
+	 *            y position on chessboard
+	 * @return true if owner(player) is different
+	 */
+	protected boolean otherOwner(int x, int y) {
+		Square sq = getChessboard().squares[x][y];
+		if (sq.piece == null) {
+			return false;
+		}
+		if (this.getPlayer() != sq.piece.getPlayer()) {
+			return true;
+		}
+		return false;
+	}
 
-    /** Method check if piece has other owner than calling piece
-     * @param x x position on chessboard
-     * @param y y position on chessboard
-     * @return true if owner(player) is different
-     * */
-    protected boolean otherOwner(int x, int y)
-    {
-        Square sq = getChessboard().squares[x][y];
-        if (sq.piece == null)
-        {
-            return false;
-        }
-        if (this.player != sq.piece.player)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public String getSymbol()
-    {
-        return this.symbol;
-    }
+	public String getSymbol() {
+		return this.symbol;
+	}
 
 	public String getName() {
 		return name;
@@ -229,5 +192,48 @@ public abstract class Piece
 
 	public void setChessboard(Chessboard chessboard) {
 		this.chessboard = chessboard;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image imageBlack, Image imageWhite) {
+		//Set the image according to the color
+		if (this.getPlayer().getColor() == this.getPlayer().getColor().black) {
+			image = imageBlack;
+		} else {
+			image = imageWhite;
+		}
+		orgImage = image;
+	}
+
+	public void setImage(Image image) {
+		//Set the image when resizing
+		this.image = image;
+	}
+
+	public Square getSquare() {
+		return square;
+	}
+
+	public void setSquare(Square square) {
+		this.square = square;
+	}
+
+	public Image getOrgImage() {
+		return orgImage;
+	}
+
+	public void setOrgImage(Image orgImage) {
+		this.orgImage = orgImage;
 	}
 }

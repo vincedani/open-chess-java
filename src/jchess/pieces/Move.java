@@ -16,13 +16,11 @@
 /*
  * Author: Mateusz Sławomir Lach ( matlak, msl )
  */
-package jchess.game;
+package jchess.pieces;
 
 import jchess.board.Chessboard;
 import jchess.board.Square;
-import jchess.pieces.Moves;
-import jchess.pieces.Piece;
-import jchess.pieces.Moves.castling;
+import jchess.game.Moves.castling;
 
 public class Move
 {
