@@ -88,7 +88,7 @@ public class Pawn extends Piece
      * Annotation to superclass Piece changing pawns location
      * @return  ArrayList with new possition of piece
      */
-    @Override
+    
     public ArrayList<Square> allMoves()
     {
         //System.out.println(this.player.goDown);//4test
@@ -102,7 +102,7 @@ public class Pawn extends Piece
             first = this.getSquare().getPozY() + 1;//if yes, change value
             second = this.getSquare().getPozY() + 2;//if yes, change value
         }
-        if (this.isout(first, first))
+        if (this.pieceBehaviour.isout(first, first))
         {//out of bounds protection
             return list;//return empty list
         }
@@ -152,7 +152,7 @@ public class Pawn extends Piece
                 }
             }
         }
-        if (!this.isout(this.getSquare().getPozX() - 1, this.getSquare().getPozY())) //out of bounds protection
+        if (!this.pieceBehaviour.isout(this.getSquare().getPozX() - 1, this.getSquare().getPozY())) //out of bounds protection
         {
             //capture
             sq = getChessboard().squares[this.getSquare().getPozX() - 1][first];
@@ -209,7 +209,7 @@ public class Pawn extends Piece
                 }
             }
         }
-        if (!this.isout(this.getSquare().getPozX() + 1, this.getSquare().getPozY()))
+        if (!this.pieceBehaviour.isout(this.getSquare().getPozX() + 1, this.getSquare().getPozY()))
         {//out of bounds protection
 
             //capture

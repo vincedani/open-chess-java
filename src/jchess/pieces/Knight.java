@@ -51,7 +51,6 @@ public class Knight extends Piece
      *  Annotation to superclass Piece changing pawns location
      * @return  ArrayList with new possition of pawn
      */
-    @Override
     public ArrayList<Square> allMoves()
     {
         ArrayList<Square> list = new ArrayList<Square>();
@@ -75,7 +74,7 @@ public class Knight extends Piece
         newX = this.getSquare().getPozX() - 2;
         newY = this.getSquare().getPozY() + 1;
 
-        if (!isout(newX, newY) && checkPiece(newX, newY))
+        if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
         {
             if (this.getPlayer().getColor() == Player.colors.white) //white
             {
@@ -97,7 +96,7 @@ public class Knight extends Piece
         newX = this.getSquare().getPozX() - 1;
         newY = this.getSquare().getPozY() + 2;
 
-        if (!isout(newX, newY) && checkPiece(newX, newY))
+        if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
         {
             if (this.getPlayer().getColor() == Player.colors.white) //white
             {
@@ -119,7 +118,7 @@ public class Knight extends Piece
         newX = this.getSquare().getPozX() + 1;
         newY = this.getSquare().getPozY() + 2;
 
-        if (!isout(newX, newY) && checkPiece(newX, newY))
+        if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
         {
             if (this.getPlayer().getColor() == Player.colors.white) //white
             {
@@ -141,7 +140,7 @@ public class Knight extends Piece
         newX = this.getSquare().getPozX() + 2;
         newY = this.getSquare().getPozY() + 1;
 
-        if (!isout(newX, newY) && checkPiece(newX, newY))
+        if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
         {
             if (this.getPlayer().getColor() == Player.colors.white) //white
             {
@@ -163,7 +162,7 @@ public class Knight extends Piece
         newX = this.getSquare().getPozX() + 2;
         newY = this.getSquare().getPozY() - 1;
 
-        if (!isout(newX, newY) && checkPiece(newX, newY))
+        if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
         {
             if (this.getPlayer().getColor() == Player.colors.white) //white
             {
@@ -185,7 +184,7 @@ public class Knight extends Piece
         newX = this.getSquare().getPozX() + 1;
         newY = this.getSquare().getPozY() - 2;
 
-        if (!isout(newX, newY) && checkPiece(newX, newY))
+        if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
         {
             if (this.getPlayer().getColor() == Player.colors.white) //white
             {
@@ -207,7 +206,7 @@ public class Knight extends Piece
         newX = this.getSquare().getPozX() - 1;
         newY = this.getSquare().getPozY() - 2;
 
-        if (!isout(newX, newY) && checkPiece(newX, newY))
+        if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
         {
             if (this.getPlayer().getColor() == Player.colors.white) //white
             {
@@ -229,7 +228,7 @@ public class Knight extends Piece
         newX = this.getSquare().getPozX() - 2;
         newY = this.getSquare().getPozY() - 1;
 
-        if (!isout(newX, newY) && checkPiece(newX, newY))
+        if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
         {
             if (this.getPlayer().getColor() == Player.colors.white) //white
             {
