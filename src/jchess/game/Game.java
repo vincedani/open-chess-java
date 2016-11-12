@@ -31,7 +31,6 @@ import jchess.board.Square;
 import jchess.game.Player.playerTypes;
 import jchess.game.Settings.gameModes;
 import jchess.game.Settings.gameTypes;
-import jchess.gui.Chat;
 import jchess.pieces.King;
 
 import java.awt.*;
