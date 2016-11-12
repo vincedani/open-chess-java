@@ -65,7 +65,7 @@ public class Rook extends Piece
      *  Annotation to superclass Piece changing pawns location
      * @return  ArrayList with new possition of piece
      */
-    @Override
+    
     public ArrayList<Square> allMoves()
     {
         ArrayList<Square> list = new ArrayList<Square>();
@@ -73,7 +73,7 @@ public class Rook extends Piece
         for (int i = this.getSquare().getPozY() + 1; i <= 7; ++i)
         {//up
 
-            if (this.checkPiece(this.getSquare().getPozX(), i))
+            if (this.pieceBehaviour.checkPiece(this.getSquare().getPozX(), i))
             {//if on this sqhuare isn't piece
 
                 if (this.getPlayer().getColor() == Player.colors.white)
@@ -93,7 +93,7 @@ public class Rook extends Piece
                     }
                 }
 
-                if (this.otherOwner(this.getSquare().getPozX(), i))
+                if (this.pieceBehaviour.otherOwner(this.getSquare().getPozX(), i))
                 {
                     break;
                 }
@@ -108,7 +108,7 @@ public class Rook extends Piece
         for (int i = this.getSquare().getPozY() - 1; i >= 0; --i)
         {//down
 
-            if (this.checkPiece(this.getSquare().getPozX(), i))
+            if (this.pieceBehaviour.checkPiece(this.getSquare().getPozX(), i))
             {//if on this sqhuare isn't piece
 
                 if (this.getPlayer().getColor() == Player.colors.white)
@@ -128,7 +128,7 @@ public class Rook extends Piece
                     }
                 }
 
-                if (this.otherOwner(this.getSquare().getPozX(), i))
+                if (this.pieceBehaviour.otherOwner(this.getSquare().getPozX(), i))
                 {
                     break;
                 }
@@ -142,7 +142,7 @@ public class Rook extends Piece
         for (int i = this.getSquare().getPozX() - 1; i >= 0; --i)
         {//left
 
-            if (this.checkPiece(i, this.getSquare().getPozY()))
+            if (this.pieceBehaviour.checkPiece(i, this.getSquare().getPozY()))
             {//if on this sqhuare isn't piece
 
                 if (this.getPlayer().getColor() == Player.colors.white)
@@ -162,7 +162,7 @@ public class Rook extends Piece
                     }
                 }
 
-                if (this.otherOwner(i, this.getSquare().getPozY()))
+                if (this.pieceBehaviour.otherOwner(i, this.getSquare().getPozY()))
                 {
                     break;
                 }
@@ -176,7 +176,7 @@ public class Rook extends Piece
         for (int i = this.getSquare().getPozX() + 1; i <= 7; ++i)
         {//right
 
-            if (this.checkPiece(i, this.getSquare().getPozY()))
+            if (this.pieceBehaviour.checkPiece(i, this.getSquare().getPozY()))
             {//if on this sqhuare isn't piece
 
                 if (this.getPlayer().getColor() == Player.colors.white)
@@ -196,7 +196,7 @@ public class Rook extends Piece
                     }
                 }
 
-                if (this.otherOwner(i, this.getSquare().getPozY()))
+                if (this.pieceBehaviour.otherOwner(i, this.getSquare().getPozY()))
                 {
                     break;
                 }

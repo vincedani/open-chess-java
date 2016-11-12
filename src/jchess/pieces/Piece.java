@@ -42,6 +42,7 @@ public abstract class Piece {
 
 	private Chessboard chessboard; // <-- this relations isn't in class diagram,
 									// but it's necessary :/
+	public PieceBehaviour pieceBehaviour;
 	private Square square;
 	private Player player;
 	private String name;
@@ -55,6 +56,7 @@ public abstract class Piece {
 		this.setChessboard(chessboard);
 		this.setPlayer(player);
 		this.setName(this.getClass().getSimpleName());
+		this.pieceBehaviour = new PieceBehaviour(chessboard, player);
 
 	}
 	/*
@@ -62,7 +64,8 @@ public abstract class Piece {
 	 * 
 	 * @graph : where to draw
 	 */
-
+	
+	
 	public final void draw(Graphics g) {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
@@ -94,84 +97,9 @@ public abstract class Piece {
 	void clean() {
 	}
 
-	/**
-	 * method check if Piece can move to given square
-	 * 
-	 * @param square
-	 *            square where piece want to move (Square object)
-	 * @param allmoves
-	 *            all moves which can piece do
-	 */
-	boolean canMove(Square square, ArrayList<Square> allmoves) {
-		// throw new UnsupportedOperationException("Not supported yet.");
-		ArrayList<Square> moves = allmoves;
-		for (Iterator<Square> it = moves.iterator(); it.hasNext();) {
-			Square sq = it.next();// get next from iterator
-			if (sq == square) {// if address is the same
-				return true; // piece canMove
-			}
-		}
-		return false;// if not, piece cannot move
-	}
-
-	abstract public ArrayList<Square> allMoves();
-
-	/**
-	 * Method is useful for out of bounds protection
-	 * 
-	 * @param x
-	 *            x position on chessboard
-	 * @param y
-	 *            y position on chessboard
-	 * @return true if parameters are out of bounds (array)
-	 */
-	protected boolean isout(int x, int y) {
-		if (x < 0 || x > 7 || y < 0 || y > 7) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * @param x
-	 *            y position on chessboard
-	 * @param y
-	 *            y position on chessboard
-	 * @return true if can move, false otherwise
-	 */
-	protected boolean checkPiece(int x, int y) {
-		if (getChessboard().squares[x][y].piece != null
-				&& getChessboard().squares[x][y].piece.getName().equals("King")) {
-			return false;
-		}
-		Piece piece = getChessboard().squares[x][y].piece;
-		if (piece == null || // if this sqhuare is empty
-				piece.getPlayer() != this.getPlayer()) // or piece is another
-														// player
-		{
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Method check if piece has other owner than calling piece
-	 * 
-	 * @param x
-	 *            x position on chessboard
-	 * @param y
-	 *            y position on chessboard
-	 * @return true if owner(player) is different
-	 */
-	protected boolean otherOwner(int x, int y) {
-		Square sq = getChessboard().squares[x][y];
-		if (sq.piece == null) {
-			return false;
-		}
-		if (this.getPlayer() != sq.piece.getPlayer()) {
-			return true;
-		}
-		return false;
+	public ArrayList<Square> allMoves() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public String getSymbol() {

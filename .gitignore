@@ -2,3 +2,5 @@
 # Package Files #
 *.jar
 config.txt
+/bin/
+/lib/

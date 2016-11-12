@@ -60,16 +60,16 @@ public class Bishop extends Piece
 
     /**
      * Annotation to superclass Piece changing pawns location
-     * @return  ArrayList with new possition of piece
+     * @return  ArrayList with new position of piece
      */
-    @Override
+    
     public ArrayList<Square> allMoves()
     {
         ArrayList<Square> list = new ArrayList<Square>();
 
-        for (int h = this.getSquare().getPozX() - 1, i = this.getSquare().getPozY() + 1; !isout(h, i); --h, ++i) //left-up
+        for (int h = this.getSquare().getPozX() - 1, i = this.getSquare().getPozY() + 1; !pieceBehaviour.isout(h, i); --h, ++i) //left-up
         {
-            if (this.checkPiece(h, i)) //if on this sqhuare isn't piece
+            if (this.pieceBehaviour.checkPiece(h, i)) //if on this square isn't piece
             {
                 if (this.getPlayer().getColor() == Player.colors.white) //white
                 {
@@ -86,7 +86,7 @@ public class Bishop extends Piece
                     }
                 }
 
-                if (this.otherOwner(h, i))
+                if (this.pieceBehaviour.otherOwner(h, i))
                 {
                     break;
                 }
@@ -97,9 +97,9 @@ public class Bishop extends Piece
             }
         }
 
-        for (int h = this.getSquare().getPozX() - 1, i = this.getSquare().getPozY() - 1; !isout(h, i); --h, --i) //left-down
+        for (int h = this.getSquare().getPozX() - 1, i = this.getSquare().getPozY() - 1; !pieceBehaviour.isout(h, i); --h, --i) //left-down
         {
-            if (this.checkPiece(h, i)) //if on this sqhuare isn't piece
+            if (this.pieceBehaviour.checkPiece(h, i)) //if on this sqhuare isn't piece
             {
                 if (this.getPlayer().getColor() == Player.colors.white) //white
                 {
@@ -116,7 +116,7 @@ public class Bishop extends Piece
                     }
                 }
 
-                if (this.otherOwner(h, i))
+                if (this.pieceBehaviour.otherOwner(h, i))
                 {
                     break;
                 }
@@ -127,9 +127,9 @@ public class Bishop extends Piece
             }
         }
 
-        for (int h = this.getSquare().getPozX() + 1, i = this.getSquare().getPozY() + 1; !isout(h, i); ++h, ++i) //right-up
+        for (int h = this.getSquare().getPozX() + 1, i = this.getSquare().getPozY() + 1; !pieceBehaviour.isout(h, i); ++h, ++i) //right-up
         {
-            if (this.checkPiece(h, i)) //if on this sqhuare isn't piece
+            if (this.pieceBehaviour.checkPiece(h, i)) //if on this square isn't piece
             {
                 if (this.getPlayer().getColor() == Player.colors.white) //white
                 {
@@ -146,7 +146,7 @@ public class Bishop extends Piece
                     }
                 }
 
-                if (this.otherOwner(h, i))
+                if (this.pieceBehaviour.otherOwner(h, i))
                 {
                     break;
                 }
@@ -157,9 +157,9 @@ public class Bishop extends Piece
             }
         }
 
-        for (int h = this.getSquare().getPozX() + 1, i = this.getSquare().getPozY() - 1; !isout(h, i); ++h, --i) //right-down
+        for (int h = this.getSquare().getPozX() + 1, i = this.getSquare().getPozY() - 1; !pieceBehaviour.isout(h, i); ++h, --i) //right-down
         {
-            if (this.checkPiece(h, i)) //if on this sqhuare isn't piece
+            if (this.pieceBehaviour.checkPiece(h, i)) //if on this sqhuare isn't piece
             {
                 if (this.getPlayer().getColor() == Player.colors.white) //white
                 {
@@ -176,14 +176,14 @@ public class Bishop extends Piece
                     }
                 }
 
-                if (this.otherOwner(h, i))
+                if (this.pieceBehaviour.otherOwner(h, i))
                 {
                     break;
                 }
             }
             else
             {
-                break;//we've to break becouse we cannot go beside other piece!!
+                break;//we've to break because we cannot go beside other piece!!
             }
         }
 
