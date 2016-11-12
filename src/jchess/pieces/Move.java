@@ -20,7 +20,7 @@ package jchess.pieces;
 
 import jchess.board.Chessboard;
 import jchess.board.Square;
-import jchess.game.Moves.castling;
+import jchess.game.MovesTable.castling;
 
 public class Move
 {

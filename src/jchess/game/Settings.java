@@ -26,16 +26,20 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-/** Class representings game settings available for the current player
+/** Class representing game settings available for the current player
  */
 public class Settings implements Serializable
 {
 
-    private static ResourceBundle loc = null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static ResourceBundle loc = null;
     public int timeForGame;
     public boolean runningChat;
     public boolean runningGameClock;
-    public boolean timeLimitSet;//tel us if player choose time 4 game or it's infinity
+    public boolean timeLimitSet;
     public boolean upsideDown;
 
     public enum gameModes
@@ -43,7 +47,9 @@ public class Settings implements Serializable
 
         newGame, loadGame
     }
+    
     public gameModes gameMode;
+    
     public Player playerWhite;
     public Player playerBlack;
 
@@ -53,6 +59,7 @@ public class Settings implements Serializable
         local, network
     }
     public gameTypes gameType;
+    
     public boolean renderLabels = true;
 
     public Settings()
@@ -61,7 +68,6 @@ public class Settings implements Serializable
         this.playerWhite = new Player("", "white");
         this.playerBlack = new Player("", "black");
         this.timeLimitSet = false;
-
         gameMode = gameModes.newGame;
     }
 

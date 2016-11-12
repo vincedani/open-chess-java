@@ -37,19 +37,18 @@ public class GameClock extends JPanel implements Runnable
     private Settings settings;
     private Thread thread;
     private Game game;
-    private Graphics g;
     private String white_clock, black_clock;
     private BufferedImage background;
-    private Graphics bufferedGraphics;
-
-    GameClock(Game game)
+    public GameClock(Game game)
     {
         super();
         this.clock1 = new Clock();//white player clock
         this.clock2 = new Clock();//black player clock
         this.runningClock = this.clock1;//running/active clock
+        
         this.game = game;
-        this.settings = game.settings;
+        this.settings = game.getSettings();
+        
         this.background = new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB);
 
         int time = this.settings.getTimeForGame();
@@ -116,7 +115,7 @@ public class GameClock extends JPanel implements Runnable
         g2d.drawString(settings.playerWhite.getName(), 10, 50);
         g2d.setColor(Color.WHITE);
         g2d.drawString(settings.playerBlack.getName(), 100, 50);
-        this.bufferedGraphics = this.background.getGraphics();
+        this.background.getGraphics();
     }
 
     /**
@@ -126,7 +125,7 @@ public class GameClock extends JPanel implements Runnable
     @Override
     public void paint(Graphics g)
     {
-        //System.out.println("rysuje zegary");
+        
         super.paint(g);
         white_clock = this.clock1.prepareString();
         black_clock = this.clock2.prepareString();

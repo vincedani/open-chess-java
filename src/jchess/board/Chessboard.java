@@ -30,10 +30,10 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 
 import jchess.JChessApp;
-import jchess.game.Moves;
+import jchess.game.MovesTable;
 import jchess.game.Player;
 import jchess.game.Settings;
-import jchess.game.Moves.castling;
+import jchess.game.MovesTable.castling;
 import jchess.game.Player.colors;
 import jchess.game.Settings.gameTypes;
 import jchess.gui.GUI;
@@ -91,13 +91,13 @@ public class Chessboard extends JPanel
     //|-> Pawn whose in last turn moved two square
     public Pawn twoSquareMovedPawn = null;
     public Pawn twoSquareMovedPawn2 = null;
-    private Moves moves_history;
+    private MovesTable moves_history;
 
     /** Chessboard class constructor
      * @param settings reference to Settings class object for this chessboard
      * @param moves_history reference to Moves class object for this chessboard 
      */
-    public Chessboard(Settings settings, Moves moves_history)
+    public Chessboard(Settings settings, MovesTable moves_history)
     {
         this.settings = settings;
         this.activeSquare = null;
@@ -378,7 +378,7 @@ public class Chessboard extends JPanel
     public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory)
     {
 
-        castling wasCastling = Moves.castling.none;
+        castling wasCastling = MovesTable.castling.none;
         Piece promotedPiece = null;
         boolean wasEnPassant = false;
         if (end.piece != null)
@@ -417,7 +417,7 @@ public class Chessboard extends JPanel
             {
                 move(squares[7][begin.getPozY()], squares[end.getPozX() - 1][begin.getPozY()], false, false);
                 ifWasCastling = end.piece;  //for undo
-                wasCastling = Moves.castling.shortCastling;
+                wasCastling = MovesTable.castling.shortCastling;
                 //this.moves_history.addMove(tempBegin, tempEnd, clearForwardHistory, wasCastling, wasEnPassant);
                 //return;
             }
@@ -425,7 +425,7 @@ public class Chessboard extends JPanel
             {
                 move(squares[0][begin.getPozY()], squares[end.getPozX() + 1][begin.getPozY()], false, false);
                 ifWasCastling = end.piece;  // for undo
-                wasCastling = Moves.castling.longCastling;
+                wasCastling = MovesTable.castling.longCastling;
                 //this.moves_history.addMove(tempBegin, tempEnd, clearForwardHistory, wasCastling, wasEnPassant);
                 //return;
             }

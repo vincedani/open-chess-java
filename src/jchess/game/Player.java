@@ -29,13 +29,19 @@ import java.io.Serializable;
 public class Player implements Serializable
 {
 
-    String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	String name;
 
     public enum colors
     {
 
         white, black
     }
+    
     private colors color;
 
     public enum playerTypes
@@ -44,12 +50,10 @@ public class Player implements Serializable
         localUser, networkUser, computer
     }
     public playerTypes playerType;
+    
     private boolean goDown;
 
-    public Player()
-    {
-    }
-
+    
     public Player(String name, String color)
     {
         this.name = name;
