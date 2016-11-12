@@ -30,163 +30,118 @@ import jchess.gui.GUI;
 import java.awt.Image;
 
 /**
- * Class to represent a chess pawn bishop
- * Bishop can move across the chessboard
+ * Class to represent a chess pawn bishop Bishop can move across the chessboard
  *
-|_|_|_|_|_|_|_|X|7
-|X|_|_|_|_|_|X|_|6
-|_|X|_|_| |X|_|_|5
-|_|_|X|_|X|_|_|_|4
-|_|_|_|B|_|_|_|_|3
-|_| |X|_|X|_|_|_|2
-|_|X|_|_|_|X|_|_|1
-|X|_|_|_|_|_|X|_|0
-0 1 2 3 4 5 6 7
+ * |_|_|_|_|_|_|_|X|7 
+ * |X|_|_|_|_|_|X|_|6 
+ * |_|X|_|_| |X|_|_|5 
+ * |_|_|X|_|X|_|_|_|4
+ * |_|_|_|B|_|_|_|_|3 
+ * |_| |X|_|X|_|_|_|2 
+ * |_|X|_|_|_|X|_|_|1 
+ * |X|_|_|_|_|_|X|_|0 
+ *  0 1 2 3 4 5 6 7
  */
-public class Bishop extends Piece
-{
+public class Bishop extends Piece {
 
-    public static short value = 3;
-    protected static final Image imageWhite = GUI.loadImage("Bishop-W.png");
-    protected static final Image imageBlack = GUI.loadImage("Bishop-B.png");
+	public static short value = 3;
+	protected static final Image imageWhite = GUI.loadImage("Bishop-W.png");
+	protected static final Image imageBlack = GUI.loadImage("Bishop-B.png");
 
-    public Bishop(Chessboard chessboard, Player player)
-    {
-        super(chessboard, player);      //call initializer of super type: Piece
-        this.symbol = "B";
-        this.setImage(imageBlack, imageWhite);
-    }
+	public Bishop(Chessboard chessboard, Player player) {
+		super(chessboard, player); // call initializer of super type: Piece
+		this.symbol = "B";
+		this.setImage(imageBlack, imageWhite);
+	}
 
+	/**
+	 * Annotation to superclass Piece changing pawns location
+	 * 
+	 * @return ArrayList with new position of piece
+	 */
 
-    /**
-     * Annotation to superclass Piece changing pawns location
-     * @return  ArrayList with new position of piece
-     */
-    
-    public ArrayList<Square> allMoves()
-    {
-        ArrayList<Square> list = new ArrayList<Square>();
+	public ArrayList<Square> allMoves(Chessboard chessboard) {
+		ArrayList<Square> list = new ArrayList<Square>();
+		King myKing = myKing(chessboard);
+		int x = this.getSquare().getPozX();
+		int y = this.getSquare().getPozY();
 
-        for (int h = this.getSquare().getPozX() - 1, i = this.getSquare().getPozY() + 1; !pieceBehaviour.isout(h, i); --h, ++i) //left-up
-        {
-            if (this.pieceBehaviour.checkPiece(h, i)) //if on this square isn't piece
-            {
-                if (this.getPlayer().getColor() == Player.colors.white) //white
-                {
-                    if (this.getChessboard().kingWhite.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i]))
-                    {
-                        list.add(getChessboard().squares[h][i]);
-                    }
-                }
-                else //or black
-                {
-                    if (this.getChessboard().kingBlack.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i]))
-                    {
-                        list.add(getChessboard().squares[h][i]);
-                    }
-                }
+		for (int h = x - 1, i = y + 1; !pieceBehaviour.isout(h, i); --h, ++i) // left-up
+		{
+			if (this.pieceBehaviour.checkPiece(h, i)) // if on this square isn't
+														// piece
+			{
+				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
+						getChessboard().squares[h][i])) {
+					list.add(getChessboard().squares[h][i]);
+				}
 
-                if (this.pieceBehaviour.otherOwner(h, i))
-                {
-                    break;
-                }
-            }
-            else
-            {
-                break;//we've to break becouse we cannot go beside other piece!!
-            }
-        }
+				if (this.pieceBehaviour.otherOwner(h, i)) {
+					break;
+				}
+			} else {
+				break;// we've to break because we cannot go beside other
+						// piece!!
+			}
+		}
 
-        for (int h = this.getSquare().getPozX() - 1, i = this.getSquare().getPozY() - 1; !pieceBehaviour.isout(h, i); --h, --i) //left-down
-        {
-            if (this.pieceBehaviour.checkPiece(h, i)) //if on this sqhuare isn't piece
-            {
-                if (this.getPlayer().getColor() == Player.colors.white) //white
-                {
-                    if (this.getChessboard().kingWhite.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i]))
-                    {
-                        list.add(getChessboard().squares[h][i]);
-                    }
-                }
-                else //or black
-                {
-                    if (this.getChessboard().kingBlack.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i]))
-                    {
-                        list.add(getChessboard().squares[h][i]);
-                    }
-                }
+		for (int h = x - 1, i = y - 1; !pieceBehaviour.isout(h, i); --h, --i) // left-down
+		{
+			if (this.pieceBehaviour.checkPiece(h, i)) // if on this square
+														// isn't piece
+			{
+				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
+						getChessboard().squares[h][i])) {
+					list.add(getChessboard().squares[h][i]);
+				}
 
-                if (this.pieceBehaviour.otherOwner(h, i))
-                {
-                    break;
-                }
-            }
-            else
-            {
-                break;//we've to break becouse we cannot go beside other piece!!
-            }
-        }
+				if (this.pieceBehaviour.otherOwner(h, i)) {
+					break;
+				}
+			} else {
+				break;// we've to break because we cannot go beside other
+						// piece!!
+			}
+		}
 
-        for (int h = this.getSquare().getPozX() + 1, i = this.getSquare().getPozY() + 1; !pieceBehaviour.isout(h, i); ++h, ++i) //right-up
-        {
-            if (this.pieceBehaviour.checkPiece(h, i)) //if on this square isn't piece
-            {
-                if (this.getPlayer().getColor() == Player.colors.white) //white
-                {
-                    if (this.getChessboard().kingWhite.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i]))
-                    {
-                        list.add(getChessboard().squares[h][i]);
-                    }
-                }
-                else //or black
-                {
-                    if (this.getChessboard().kingBlack.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i]))
-                    {
-                        list.add(getChessboard().squares[h][i]);
-                    }
-                }
+		for (int h = x + 1, i = y + 1; !pieceBehaviour.isout(h, i); ++h, ++i) // right-up
+		{
+			if (this.pieceBehaviour.checkPiece(h, i)) // if on this square isn't
+														// piece
+			{
+				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
+						getChessboard().squares[h][i])) {
+					list.add(getChessboard().squares[h][i]);
+				}
 
-                if (this.pieceBehaviour.otherOwner(h, i))
-                {
-                    break;
-                }
-            }
-            else
-            {
-                break;//we've to break becouse we cannot go beside other piece!!
-            }
-        }
+				if (this.pieceBehaviour.otherOwner(h, i)) {
+					break;
+				}
+			} else {
+				break;// we've to break because we cannot go beside other
+						// piece!!
+			}
+		}
 
-        for (int h = this.getSquare().getPozX() + 1, i = this.getSquare().getPozY() - 1; !pieceBehaviour.isout(h, i); ++h, --i) //right-down
-        {
-            if (this.pieceBehaviour.checkPiece(h, i)) //if on this sqhuare isn't piece
-            {
-                if (this.getPlayer().getColor() == Player.colors.white) //white
-                {
-                    if (this.getChessboard().kingWhite.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i]))
-                    {
-                        list.add(getChessboard().squares[h][i]);
-                    }
-                }
-                else //or black
-                {
-                    if (this.getChessboard().kingBlack.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i]))
-                    {
-                        list.add(getChessboard().squares[h][i]);
-                    }
-                }
+		for (int h = x + 1, i = y - 1; !pieceBehaviour.isout(h, i); ++h, --i) // right-down
+		{
+			if (this.pieceBehaviour.checkPiece(h, i)) // if on this square
+														// isn't piece
+			{
+				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
+						getChessboard().squares[h][i])) {
+					list.add(getChessboard().squares[h][i]);
+				}
 
-                if (this.pieceBehaviour.otherOwner(h, i))
-                {
-                    break;
-                }
-            }
-            else
-            {
-                break;//we've to break because we cannot go beside other piece!!
-            }
-        }
+				if (this.pieceBehaviour.otherOwner(h, i)) {
+					break;
+				}
+			} else {
+				break;// we've to break because we cannot go beside other
+						// piece!!
+			}
+		}
 
-        return list;
-    }
+		return list;
+	}
 }

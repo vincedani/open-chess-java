@@ -47,8 +47,6 @@ public abstract class Piece {
 	private Player player;
 	private String name;
 	protected String symbol;
-	protected static Image imageBlack;// = null;
-	protected static Image imageWhite;// = null;
 	private Image orgImage;
 	private Image image;
 
@@ -97,10 +95,16 @@ public abstract class Piece {
 	void clean() {
 	}
 
-	public ArrayList<Square> allMoves() {
-		// TODO Auto-generated method stub
+	public King myKing(Chessboard chessboard) {
+		if (getPlayer().getColor().equals(Player.colors.white)) {
+			return chessboard.kingWhite;
+		} else if (getPlayer().getColor().equals(Player.colors.black)) {
+			return chessboard.kingBlack;
+		}
 		return null;
 	}
+	
+	public abstract ArrayList<Square> allMoves(Chessboard chessboard);
 
 	public String getSymbol() {
 		return this.symbol;

@@ -550,7 +550,7 @@ public class MovesTable extends AbstractTableModel {
 								.getPlayer().getColor()) {
 							continue;
 						}
-						ArrayList<Square> pieceMoves = squares[i][j].piece.allMoves();
+						ArrayList<Square> pieceMoves = squares[i][j].piece.allMoves(this.getChessboard());
 						for (Object square : pieceMoves) {
 							Square currSquare = (Square) square;
 							if (currSquare.getPozX() == xTo && currSquare.getPozY() == yTo) {
@@ -577,6 +577,11 @@ public class MovesTable extends AbstractTableModel {
 				return;// finish reading game and show message
 			}
 		}
+	}
+
+	private Chessboard getChessboard() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 /*

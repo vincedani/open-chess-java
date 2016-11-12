@@ -89,8 +89,8 @@ public class Chessboard extends JPanel
     //----------------------------
     //For En passant:
     //|-> Pawn whose in last turn moved two square
-    public Pawn twoSquareMovedPawn = null;
-    public Pawn twoSquareMovedPawn2 = null;
+    public static Pawn twoSquareMovedPawn = null;
+    public static Pawn twoSquareMovedPawn2 = null;
     private MovesTable moves_history;
 
     /** Chessboard class constructor
@@ -433,7 +433,7 @@ public class Chessboard extends JPanel
         }
         else if (end.piece.getName().equals("Rook"))
         {
-            if (!((Rook) end.piece).isWasMotion())
+            if (!((Rook) end.piece).wasMotion())
             {
                 breakCastling = true;
                 ((Rook) end.piece).setWasMotion(true);
@@ -745,7 +745,7 @@ public class Chessboard extends JPanel
             Square tmpSquare = this.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)];
             if (tmpSquare.piece != null)
             {
-                this.moves = this.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)].piece.allMoves();
+                this.moves = this.squares[(int) (this.active_x_square - 1)][(int) (this.active_y_square - 1)].piece.allMoves(this);
             }
 
             for (Iterator it = moves.iterator(); moves != null && it.hasNext();)
