@@ -62,8 +62,7 @@ public abstract class Piece {
 	 * 
 	 * @graph : where to draw
 	 */
-	
-	
+
 	public final void draw(Graphics g) {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
