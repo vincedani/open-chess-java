@@ -145,7 +145,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
     }
 
  
-    ///--endOf- don't delete, becouse they're interfaces for MouseEvent
+    ///--endOf- don't delete, because they're interfaces for MouseEvent
         
 
     public JChessView(SingleFrameApplication app) {
