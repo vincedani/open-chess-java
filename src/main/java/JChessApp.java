@@ -13,7 +13,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jchess;
+package main.java;
 
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;

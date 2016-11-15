@@ -18,13 +18,13 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.server;
+package main.java.server;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jchess.MD5;
+import main.java.MD5;
 
 public class Console
 {

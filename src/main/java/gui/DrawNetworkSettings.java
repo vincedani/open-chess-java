@@ -17,7 +17,7 @@
  * Authors:
  * Mateusz Sławomir Lach ( matlak, msl )
  */
-package jchess.gui;
+package main.java.gui;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -37,12 +37,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import jchess.JChessApp;
-import jchess.MD5;
-import jchess.game.Client;
-import jchess.game.Game;
-import jchess.game.Settings;
-import jchess.server.Server;
+import main.java.JChessApp;
+import main.java.MD5;
+import main.java.game.Client;
+import main.java.game.Game;
+import main.java.game.Settings;
+import main.java.server.Server;
 
 /**
  * Class responible for drawing Network Settings, when player want to start

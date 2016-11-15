@@ -1,11 +1,11 @@
-package jchess.pieces;
+package main.java.pieces;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import jchess.board.Chessboard;
-import jchess.board.Square;
-import jchess.game.Player;
+import main.java.board.Chessboard;
+import main.java.board.Square;
+import main.java.game.Player;
 
 public class PieceBehaviour {
 

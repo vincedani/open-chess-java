@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.server;
+package main.java.server;
 
 public enum Connection_info
 {

@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.board;
+package main.java.board;
 
 import java.awt.*;
 import java.awt.Graphics;
@@ -29,22 +29,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JPanel;
 
-import jchess.JChessApp;
-import jchess.game.MovesTable;
-import jchess.game.Player;
-import jchess.game.Settings;
-import jchess.game.MovesTable.castling;
-import jchess.game.Player.colors;
-import jchess.game.Settings.gameTypes;
-import jchess.gui.GUI;
-import jchess.pieces.Bishop;
-import jchess.pieces.King;
-import jchess.pieces.Knight;
-import jchess.pieces.Move;
-import jchess.pieces.Pawn;
-import jchess.pieces.Piece;
-import jchess.pieces.Queen;
-import jchess.pieces.Rook;
+import main.java.JChessApp;
+import main.java.game.MovesTable;
+import main.java.game.Player;
+import main.java.game.Settings;
+import main.java.game.MovesTable.castling;
+import main.java.game.Player.colors;
+import main.java.game.Settings.gameTypes;
+import main.java.gui.GUI;
+import main.java.pieces.Bishop;
+import main.java.pieces.King;
+import main.java.pieces.Knight;
+import main.java.pieces.Move;
+import main.java.pieces.Pawn;
+import main.java.pieces.Piece;
+import main.java.pieces.Queen;
+import main.java.pieces.Rook;
 
 /** Class to represent chessboard. Chessboard is made from squares.
  * It is setting the squers of chessboard and sets the pieces(pawns)

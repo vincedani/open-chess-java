@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.game;
+package main.java.game;
 
 import java.io.Serializable;
 import java.util.Locale;
@@ -83,7 +83,7 @@ public class Settings implements Serializable
     {
         if (Settings.loc == null)
         {
-            Settings.loc = PropertyResourceBundle.getBundle("jchess.resources.i18n.main_en");
+            Settings.loc = PropertyResourceBundle.getBundle("main.java.resources.i18n.main_en");
             Locale.setDefault(Locale.ENGLISH);
         }
         String result = "";

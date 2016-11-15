@@ -18,13 +18,13 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.server;
+package main.java.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import jchess.game.Player;
-import jchess.game.Settings;
+import main.java.game.Player;
+import main.java.game.Settings;
 
 public class Table
 {//Table: {two player, one chessboard and x observers}

@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.game;
+package main.java.game;
 
 /** Class to represent seperate wall-clock for one player.
  *  Full ChessClock is represented by GameClock object (two clock - one for each player)

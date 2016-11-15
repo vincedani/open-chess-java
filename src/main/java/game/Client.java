@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.game;
+package main.java.game;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,7 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-import jchess.server.Connection_info;
+import main.java.server.Connection_info;
 
 /**
  * Class responsible for clients references:

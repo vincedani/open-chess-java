@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.gui;
+package main.java.gui;
 
 import java.awt.*;
 import java.net.*;
@@ -27,8 +27,8 @@ import java.io.*;
 import javax.swing.*;
 import javax.swing.JPanel;
 
-import jchess.JChessApp;
-import jchess.game.Game;
+import main.java.JChessApp;
+import main.java.game.Game;
 
 import java.util.Properties;
 import java.util.logging.Logger;

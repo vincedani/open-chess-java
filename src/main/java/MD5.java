@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess;
+package main.java;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

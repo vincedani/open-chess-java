@@ -18,20 +18,20 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.game;
+package main.java.game;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
 
-import jchess.JChessApp;
-import jchess.board.Chessboard;
-import jchess.board.Square;
-import jchess.game.Player.playerTypes;
-import jchess.game.Settings.gameModes;
-import jchess.game.Settings.gameTypes;
-import jchess.pieces.King;
+import main.java.JChessApp;
+import main.java.board.Chessboard;
+import main.java.board.Square;
+import main.java.game.Player.playerTypes;
+import main.java.game.Settings.gameModes;
+import main.java.game.Settings.gameTypes;
+import main.java.pieces.King;
 
 import java.awt.*;
 import java.io.File;

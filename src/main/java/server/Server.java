@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.server;
+package main.java.server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -113,9 +113,9 @@ public class Server implements Runnable
                 }
                 Table table = tables.get(tableID);
 
-                if (!jchess.MD5.encrypt(table.password).equals(password))
+                if (!main.java.MD5.encrypt(table.password).equals(password))
                 {
-                    print("bad password: " + jchess.MD5.encrypt(table.password) + " != " + password);
+                    print("bad password: " + main.java.MD5.encrypt(table.password) + " != " + password);
                     output.writeInt(Connection_info.err_bad_password.getValue());
                     output.flush();
                     continue;

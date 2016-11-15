@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.game;
+package main.java.game;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -27,10 +27,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.*;
 
-import jchess.board.Chessboard;
-import jchess.board.Square;
-import jchess.pieces.Move;
-import jchess.pieces.Piece;
+import main.java.board.Chessboard;
+import main.java.board.Square;
+import main.java.pieces.Move;
+import main.java.pieces.Piece;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;

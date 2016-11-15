@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.gui;
+package main.java.gui;
 
 import java.awt.*;
 import javax.swing.*;
@@ -26,8 +26,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import jchess.JChessApp;
-import jchess.game.Settings;
+import main.java.JChessApp;
+import main.java.game.Settings;
 
 import javax.swing.event.ListSelectionEvent;
 import java.io.File;
@@ -50,7 +50,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
     {
         super(parent);
 
-        File dir = new File(GUI.getJarPath() +File.separator +  "jchess"+File.separator+ "theme"+File.separator);
+        File dir = new File(GUI.getJarPath() +File.separator +  "main" + File.separator+ "java" + File.separator+ "theme"+File.separator);
         
         System.out.println("Theme path: "+dir.getPath());
 

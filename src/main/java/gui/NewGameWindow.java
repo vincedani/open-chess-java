@@ -18,11 +18,11 @@
  *
  * Created on 2009-10-20, 15:11:49
  */
-package jchess.gui;
+package main.java.gui;
 
 import javax.swing.*;
 
-import jchess.game.Settings;
+import main.java.game.Settings;
 
 /**
  *

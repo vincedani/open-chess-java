@@ -18,7 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package jchess.pieces;
+package main.java.pieces;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,9 +26,9 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import jchess.board.Chessboard;
-import jchess.board.Square;
-import jchess.game.Player;
+import main.java.board.Chessboard;
+import main.java.board.Square;
+import main.java.game.Player;
 
 import java.awt.Point;
 import java.awt.RenderingHints;

@@ -13,7 +13,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jchess;
+package main.java;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
@@ -21,14 +21,14 @@ import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 
-import jchess.game.Game;
-import jchess.game.Settings;
-import jchess.gui.GUI;
-import jchess.gui.JChessAboutBox;
-import jchess.gui.JChessTabbedPane;
-import jchess.gui.NewGameWindow;
-import jchess.gui.PawnPromotionWindow;
-import jchess.gui.ThemeChooseWindow;
+import main.java.game.Game;
+import main.java.game.Settings;
+import main.java.gui.GUI;
+import main.java.gui.JChessAboutBox;
+import main.java.gui.JChessTabbedPane;
+import main.java.gui.NewGameWindow;
+import main.java.gui.PawnPromotionWindow;
+import main.java.gui.ThemeChooseWindow;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -249,7 +249,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        gamesPane = new jchess.gui.JChessTabbedPane();
+        gamesPane = new main.java.gui.JChessTabbedPane();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         newGameItem = new javax.swing.JMenuItem();
@@ -296,7 +296,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
         menuBar.setName("menuBar"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext().getResourceMap(JChessView.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(main.java.JChessApp.class).getContext().getResourceMap(JChessView.class);
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
@@ -318,7 +318,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
         fileMenu.add(saveGameItem);
         saveGameItem.addActionListener(this);
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jchess.JChessApp.class).getContext().getActionMap(JChessView.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(main.java.JChessApp.class).getContext().getActionMap(JChessView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);

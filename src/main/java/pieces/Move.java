@@ -16,11 +16,11 @@
 /*
  * Author: Mateusz Sławomir Lach ( matlak, msl )
  */
-package jchess.pieces;
+package main.java.pieces;
 
-import jchess.board.Chessboard;
-import jchess.board.Square;
-import jchess.game.MovesTable.castling;
+import main.java.board.Chessboard;
+import main.java.board.Square;
+import main.java.game.MovesTable.castling;
 
 public class Move
 {
