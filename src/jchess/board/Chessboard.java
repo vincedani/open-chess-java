@@ -47,7 +47,7 @@ import jchess.pieces.Queen;
 import jchess.pieces.Rook;
 
 /** Class to represent chessboard. Chessboard is made from squares.
- * It is setting the squers of chessboard and sets the pieces(pawns)
+ * It is setting the squars of chessboard and sets the pieces(pawns)
  * witch the owner is current player on it.
  */
 public class Chessboard extends JPanel

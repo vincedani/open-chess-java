@@ -100,7 +100,6 @@ public class Pawn extends Piece {
 			Square moveSq = chessboard.squares[newX][newY];
 		if (moveSq.piece != null) {// check if can hit left
 			if (this.getPlayer() != moveSq.piece.getPlayer() && !moveSq.piece.getName().equals("King")) {
-				//Why it can't be the king
 					if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), moveSq)) {
 						list.add(moveSq);
 					}
@@ -118,7 +117,6 @@ public class Pawn extends Piece {
 					&& attSq == Chessboard.twoSquareMovedPawn.getSquare()) {
 				// check if can hit left
 				if (this.getPlayer() != attSq.piece.getPlayer() && !attSq.piece.getName().equals("King")) {
-					// Why it can't be the king
 					if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), moveSq)) {
 						list.add(moveSq);
 

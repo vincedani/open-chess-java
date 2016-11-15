@@ -28,8 +28,8 @@ import jchess.pieces.Piece;
 public class Square
 {
 
-    private int pozX; // 0-7, becouse 8 squares for row/column
-    private int pozY; // 0-7, becouse 8 squares for row/column
+    private int pozX; // 0-7, because 8 squares for row/column
+    private int pozY; // 0-7, because 8 squares for row/column
     public Piece piece = null;//object Piece on square (and extending Piecie)
 
     Square(int pozX, int pozY, Piece piece)

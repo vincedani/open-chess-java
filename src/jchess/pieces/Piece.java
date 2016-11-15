@@ -63,7 +63,6 @@ public abstract class Piece {
 	 * @graph : where to draw
 	 */
 	
-	
 	public final void draw(Graphics g) {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
@@ -74,6 +73,33 @@ public abstract class Piece {
 			int y = (this.getSquare().getPozY() * height) + topLeft.y;
 			float addX = (height - getImage().getWidth(null)) / 2;
 			float addY = (height - getImage().getHeight(null)) / 2;
+			if (getImage() != null && g != null) {
+				Image tempImage = orgImage;
+				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
+				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
+				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				imageGr.drawImage(tempImage, 0, 0, height, height, null);
+				imageGr.dispose();
+				setImage(resized.getScaledInstance(height, height, 0));
+				g2d.drawImage(getImage(), x, y, null);
+			} else {
+				System.out.println("image is null!");
+			}
+
+		} catch (java.lang.NullPointerException exc) {
+			System.out.println("Something wrong when painting piece: " + exc.getMessage());
+		}
+	}
+
+	public final void drawCircle(Graphics g) {
+		try {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			Point topLeft = this.getChessboard().getTopLeftPoint();
+			int height = this.getChessboard().get_square_height();
+			int x = (this.getSquare().getPozX() * height) + topLeft.x;
+			int y = (this.getSquare().getPozY() * height) + topLeft.y;
+			
 			if (getImage() != null && g != null) {
 				Image tempImage = orgImage;
 				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
