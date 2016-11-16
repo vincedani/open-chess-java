@@ -116,6 +116,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				JOptionPane.showMessageDialog(JChessApp.getApplication().getMainFrame(), exc.getMessage());
 				// System.out.println("Something wrong creating window - perhaps
 				// themeList is null");
+				
+				
 				LogToFile.log(exc, "Error", "Something wrong creating window - perhaps themeList is null");
 				exc.printStackTrace();
 			}
