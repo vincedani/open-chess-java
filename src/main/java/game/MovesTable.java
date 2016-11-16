@@ -27,6 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.*;
 
+import main.java.LogToFile;
 import main.java.board.Chessboard;
 import main.java.board.Square;
 import main.java.pieces.Move;
@@ -462,7 +463,8 @@ public class MovesTable extends AbstractTableModel {
 			try {
 				tempArray.add(moves.substring(from + 1, to).trim());
 			} catch (java.lang.StringIndexOutOfBoundsException exc) {
-				System.out.println("error parsing file to load: " + exc);
+				//System.out.println("error parsing file to load: " + exc);
+				LogToFile.log(exc, "Error", "error parsing file to load: " + exc.getMessage());
 				break;
 			}
 			if (n % 2 == 0) {

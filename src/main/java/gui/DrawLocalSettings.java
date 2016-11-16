@@ -28,6 +28,7 @@ import java.awt.*;
 import javax.swing.text.BadLocationException;
 
 import main.java.JChessApp;
+import main.java.LogToFile;
 import main.java.game.Game;
 import main.java.game.Player;
 import main.java.game.Settings;
@@ -99,7 +100,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
                 }
                 catch (BadLocationException exc)
                 {
-                    System.out.println("Something wrong in editables: \n" + exc);
+                    //System.out.println("Something wrong in editables: \n" + exc);
+                	LogToFile.log(exc, "Error", "Something wrong in editables: \n" + exc.getMessage());
                 }
             }
         }
@@ -183,11 +185,15 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
                 newGUI.getGameClock().setTimes(sett.timeForGame, sett.timeForGame);
                 newGUI.getGameClock().start();
             }
-            System.out.println(this.time4Game.getActionCommand());
+            //System.out.println(this.time4Game.getActionCommand());
+            LogToFile.log(null, "INFO", this.time4Game.getActionCommand());
             //this.time4Game.getComponent(this.time4Game.getSelectedIndex());
-            System.out.println("****************\nStarting new game: " + pl1.getName() + " vs. " + pl2.getName()
+            /*System.out.println("****************\nStarting new game: " + pl1.getName() + " vs. " + pl2.getName()
                     + "\ntime 4 game: " + sett.timeForGame + "\ntime limit set: " + sett.timeLimitSet
-                    + "\nwhite on top?: " + sett.upsideDown + "\n****************");//4test
+                    + "\nwhite on top?: " + sett.upsideDown + "\n****************");//4test*/
+            LogToFile.log(null, "INFO","****************\nStarting new game: " + pl1.getName() + " vs. " + pl2.getName()
+            + "\ntime 4 game: " + sett.timeForGame + "\ntime limit set: " + sett.timeLimitSet
+            + "\nwhite on top?: " + sett.upsideDown + "\n****************");
             newGUI.newGame();//start new Game
             this.parent.setVisible(false);//hide parent
             newGUI.getChessboard().repaint();
@@ -306,7 +312,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
         }
         catch (BadLocationException exc)
         {
-            System.out.println("Something wrong in editables: \n" + exc);
+           // System.out.println("Something wrong in editables: \n" + exc);
+        	  LogToFile.log(exc, "Error","Something wrong in editables: \n" + exc.getMessage());
         }
         return result;
     }

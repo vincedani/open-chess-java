@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import main.java.JChessApp;
+import main.java.LogToFile;
 import main.java.game.Settings;
 
 import javax.swing.event.ListSelectionEvent;
@@ -116,7 +117,8 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 
         String path = GUI.getJarPath() +File.separator +  "jchess"+ File.separator + "theme/";
 
-        System.out.println(path + element + "/images/Preview.png");
+        //System.out.println(path + element + "/images/Preview.png");
+        LogToFile.log(null,"INFO", path + element + "/images/Preview.png");
         this.themePreview = new ImageIcon(path + element + "/images/Preview.png");
         this.themePreviewButton.setIcon(this.themePreview);
     }
@@ -150,7 +152,8 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
                 this.setVisible(false);
 
             }
-            System.out.print(prp.getProperty("THEME"));
+           // System.out.print(prp.getProperty("THEME"));
+            LogToFile.log(null,"INFO", prp.getProperty("THEME"));
         }
     }
 }

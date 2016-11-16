@@ -26,6 +26,8 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import main.java.LogToFile;
+
 /** Class representing game settings available for the current player
  */
 public class Settings implements Serializable
@@ -41,7 +43,8 @@ public class Settings implements Serializable
     public boolean runningGameClock;
     public boolean timeLimitSet;
     public boolean upsideDown;
-
+    public LogToFile logToFile = new LogToFile();
+    
     public enum gameModes
     {
 
@@ -95,7 +98,8 @@ public class Settings implements Serializable
         {
             result = key;
         }
-        System.out.println(Settings.loc.getLocale().toString());
+       // System.out.println(Settings.loc.getLocale().toString());
+         LogToFile.log(null, "INFO", Settings.loc.getLocale().toString());
         return result;
     }
 }

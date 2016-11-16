@@ -25,6 +25,8 @@ import java.awt.image.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import main.java.LogToFile;
+
 /** Class to representing the full game time
  * @param game The current game
  */
@@ -84,11 +86,13 @@ public class GameClock extends JPanel implements Runnable
         }
         catch (java.lang.InterruptedException exc)
         {
-            System.out.println("Error blocking thread: " + exc);
+           // System.out.println("Error blocking thread: " + exc);
+        	LogToFile.log(exc, "Error", "Error blocking thread: "   + exc.getMessage());
         }
         catch (java.lang.IllegalMonitorStateException exc1)
         {
-            System.out.println("Error blocking thread: " + exc1);
+           // System.out.println("Error blocking thread: " + exc1);
+            LogToFile.log(exc1, "Error", "Error blocking thread: "  + exc1.getMessage());
         }
     }
 
@@ -232,7 +236,8 @@ public class GameClock extends JPanel implements Runnable
                     }
                     catch (InterruptedException e)
                     {
-                        System.out.println("Some error in gameClock thread: " + e);
+                       // System.out.println("Some error in gameClock thread: " + e);
+                    	LogToFile.log(null, "INFO", "Some error in gameClock thread: " + e.getMessage());
                     }
                     //if(this.game.blockedChessboard)
                     //  this.game.blockedChessboard = false;
@@ -260,7 +265,8 @@ public class GameClock extends JPanel implements Runnable
         }
         else
         {//if called in wrong moment
-            System.out.println("Time over called when player got time 2 play");
+           // System.out.println("Time over called when player got time 2 play");
+        	 LogToFile.log(null, "INFO", "Time over called when player got time 2 play");
         }
         this.game.endGame("Time is over! " + color + " player win the game.");
         this.stop();

@@ -38,6 +38,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import main.java.JChessApp;
+import main.java.LogToFile;
 import main.java.MD5;
 import main.java.game.Client;
 import main.java.game.Game;
@@ -251,7 +252,8 @@ public class DrawNetworkSettings extends JPanel implements ActionListener
 
                 if (isJoining) //Client connection: succesful
                 {
-                    System.out.println("Client connection: succesful");
+                    //System.out.println("Client connection: succesful");
+                	LogToFile.log(null,"INFO", "Client connection: succesful");
                     //create new game and draw chessboard
                     Game newGUI = JChessApp.getJcv().addNewTab("Network game, table: " + textGameID.getText()/*client.sett.playerWhite.getName()+" vs "+client.sett.playerBlack.getName()*/);
                     client.setGame(newGUI);
@@ -271,7 +273,8 @@ public class DrawNetworkSettings extends JPanel implements ActionListener
             }
             catch (Error err)
             {
-                System.out.println("Client connection: failure");
+                //System.out.println("Client connection: failure");
+            	LogToFile.log(null,"INFO", "Client connection: failure");
                 JOptionPane.showMessageDialog(this, err);
             }
         }

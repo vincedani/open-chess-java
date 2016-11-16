@@ -26,6 +26,7 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 
 import main.java.JChessApp;
+import main.java.LogToFile;
 import main.java.board.Chessboard;
 import main.java.board.Square;
 import main.java.game.Player.playerTypes;
@@ -108,7 +109,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener
         }
         catch (java.io.IOException exc)
         {
-            System.err.println("error creating fileWriter: " + exc);
+            //System.err.println("error creating fileWriter: " + exc);
+        	LogToFile.log(exc, "Error", "error creating fileWriter: " + exc.getMessage());
             JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file")+": " + exc);
             return;
         }
@@ -126,7 +128,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener
         }
         catch (java.io.IOException exc)
         {
-            System.out.println("error writing to file: " + exc);
+            //System.out.println("error writing to file: " + exc);
+        	LogToFile.log(exc, "Error", "error writing to file: "  + exc.getMessage());
             JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file")+": " + exc);
             return;
         }
@@ -147,7 +150,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener
         }
         catch (java.io.IOException exc)
         {
-            System.out.println("Something wrong reading file: " + exc);
+            //System.out.println("Something wrong reading file: " + exc);
+        	LogToFile.log(exc, "Error", "Something wrong reading file: "  + exc.getMessage());
             return;
         }
         BufferedReader br = new BufferedReader(fileR);
@@ -163,7 +167,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener
         }
         catch (ReadGameError err)
         {
-            System.out.println("Error reading file: " + err);
+            //System.out.println("Error reading file: " + err);
+        	LogToFile.log(err, "Error", "Error reading file: "  + err.getMessage());
             return;
         }
         Game newGUI = JChessApp.getJcv().addNewTab(whiteName + " vs. " + blackName);
@@ -199,7 +204,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener
             }
             catch (java.io.IOException exc)
             {
-                System.out.println("Something wrong reading file: " + exc);
+                //System.out.println("Something wrong reading file: " + exc);
+            	LogToFile.log(exc, "Error", "Something wrong reading file: "  + exc.getMessage());
             }
             if (str == null)
             {
@@ -234,7 +240,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener
         }
         catch (java.lang.StringIndexOutOfBoundsException exc)
         {
-            System.out.println("error getting value: " + exc);
+            //System.out.println("error getting value: " + exc);
+        	LogToFile.log(exc, "Error", "error getting value: "   + exc.getMessage());
             return "none";
         }
         return result;
@@ -533,14 +540,16 @@ public class Game extends JPanel implements MouseListener, ComponentListener
                 } 
                 catch(NullPointerException exc)
                 {
-                    System.err.println(exc.getMessage());
+                   // System.err.println(exc.getMessage());
+                	LogToFile.log(exc, "Error", "NullPointerException "   + exc.getMessage());
                     getChessboard().repaint();
                     return;
                 }
             }
             else if (blockedChessboard)
             {
-                System.out.println("Chessboard is blocked");
+               // System.out.println("Chessboard is blocked");
+            	LogToFile.log(null, "INFO", "Chessboard is blocked");
             }
         }
         //chessboard.repaint();

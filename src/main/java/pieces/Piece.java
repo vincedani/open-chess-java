@@ -26,6 +26,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import main.java.LogToFile;
 import main.java.board.Chessboard;
 import main.java.board.Square;
 import main.java.game.Player;
@@ -83,11 +84,13 @@ public abstract class Piece {
 				setImage(resized.getScaledInstance(height, height, 0));
 				g2d.drawImage(getImage(), x, y, null);
 			} else {
-				System.out.println("image is null!");
+				//System.out.println("image is null!");
+				LogToFile.log(null, "Debug", "image is null!");
 			}
 
 		} catch (java.lang.NullPointerException exc) {
-			System.out.println("Something wrong when painting piece: " + exc.getMessage());
+			//System.out.println("Something wrong when painting piece: " + exc.getMessage());
+			LogToFile.log(exc, "Error", "Something wrong when painting piece: " + exc.getMessage());
 		}
 	}
 
@@ -110,11 +113,13 @@ public abstract class Piece {
 				setImage(resized.getScaledInstance(height, height, 0));
 				g2d.drawImage(getImage(), x, y, null);
 			} else {
-				System.out.println("image is null!");
+				//System.out.println("image is null!");
+				LogToFile.log(null, "Debug", "image is null!");
 			}
 
 		} catch (java.lang.NullPointerException exc) {
-			System.out.println("Something wrong when painting piece: " + exc.getMessage());
+			//System.out.println("Something wrong when painting piece: " + exc.getMessage());
+			LogToFile.log(exc, "Error", "Something wrong when painting piece: " + exc.getMessage());
 		}
 	}
 
