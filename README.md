@@ -24,5 +24,5 @@ Goal is to learn and implement Chess board which is suitable for 3 person game. 
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Jitendra Rai
+* jitendra.rai@st.ovgu.de
