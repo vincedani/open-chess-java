@@ -2,9 +2,7 @@ package jchess.board;
 
 import java.awt.Image;
 
-import jchess.game.MovesTable;
-import jchess.gui.GUI;
-import jchess.pieces.Piece;
+import main.java.gui.GUI;
 
 public class ChessboardLayout {
 	public Image orgImage;

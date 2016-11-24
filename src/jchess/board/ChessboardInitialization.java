@@ -1,12 +1,12 @@
 package jchess.board;
 
-import jchess.game.Player;
-import jchess.pieces.Bishop;
-import jchess.pieces.King;
-import jchess.pieces.Knight;
-import jchess.pieces.Pawn;
-import jchess.pieces.Queen;
-import jchess.pieces.Rook;
+import main.java.game.Player;
+import main.java.pieces.Bishop;
+import main.java.pieces.King;
+import main.java.pieces.Knight;
+import main.java.pieces.Pawn;
+import main.java.pieces.Queen;
+import main.java.pieces.Rook;
 
 public class ChessboardInitialization {
 	public Square[][] squares;
