@@ -23,6 +23,7 @@ package jchess.pieces;
 import java.util.ArrayList;
 
 import jchess.board.Chessboard;
+import jchess.board.IChessboard;
 import jchess.board.Square;
 import jchess.game.Player;
 import jchess.gui.GUI;
@@ -48,7 +49,7 @@ public class Bishop extends Piece {
 	protected static final Image imageWhite = GUI.loadImage("Bishop-W.png");
 	protected static final Image imageBlack = GUI.loadImage("Bishop-B.png");
 
-	public Bishop(Chessboard chessboard, Player player) {
+	public Bishop(IChessboard chessboard, Player player) {
 		super(chessboard, player); // call initializer of super type: Piece
 		this.symbol = "B";
 		this.setImage(imageBlack, imageWhite);
@@ -60,7 +61,7 @@ public class Bishop extends Piece {
 	 * @return ArrayList with new position of piece
 	 */
 
-	public ArrayList<Square> allMoves(Chessboard chessboard) {
+	public ArrayList<Square> allMoves(IChessboard chessboard) {
 		ArrayList<Square> list = new ArrayList<Square>();
 		King myKing = myKing(chessboard);
 		int x = this.getSquare().getPozX();
@@ -72,8 +73,8 @@ public class Bishop extends Piece {
 														// piece
 			{
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
-						getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+						getChessboard().getSquares()[h][i])) {
+					list.add(getChessboard().getSquares()[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {
@@ -91,8 +92,8 @@ public class Bishop extends Piece {
 														// isn't piece
 			{
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
-						getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+						getChessboard().getSquares()[h][i])) {
+					list.add(getChessboard().getSquares()[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {
@@ -110,8 +111,8 @@ public class Bishop extends Piece {
 														// piece
 			{
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
-						getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+						getChessboard().getSquares()[h][i])) {
+					list.add(getChessboard().getSquares()[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {
@@ -129,8 +130,8 @@ public class Bishop extends Piece {
 														// isn't piece
 			{
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
-						getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+						getChessboard().getSquares()[h][i])) {
+					list.add(getChessboard().getSquares()[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {

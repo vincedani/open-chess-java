@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jchess.board.Chessboard;
+import jchess.board.IChessboard;
 import jchess.board.Square;
 import jchess.game.Player;
 
@@ -40,7 +41,7 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Piece {
 
-	private Chessboard chessboard; // <-- this relations isn't in class diagram,
+	private IChessboard chessboard; // <-- this relations isn't in class diagram,
 									// but it's necessary :/
 	public PieceBehaviour pieceBehaviour;
 	private Square square;
@@ -50,7 +51,7 @@ public abstract class Piece {
 	private Image orgImage;
 	private Image image;
 
-	public Piece(Chessboard chessboard, Player player) {
+	public Piece(IChessboard chessboard, Player player) {
 		this.setChessboard(chessboard);
 		this.setPlayer(player);
 		this.setName(this.getClass().getSimpleName());
@@ -63,12 +64,13 @@ public abstract class Piece {
 	 * @graph : where to draw
 	 */
 
-	public final void draw(Graphics g) {
+	public final void draw2(Graphics g) {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			Point topLeft = this.getChessboard().getTopLeftPoint();
-			int height = this.getChessboard().get_square_height();
+			Point topLeft = this.getChessboard().getBoardDisplay2().getTopLeftPoint();
+			int height = this.getChessboard().getBoardDisplay2().getSquareHeight();
+			System.out.println(height);
 			int x = (this.getSquare().getPozX() * height) + topLeft.x;
 			int y = (this.getSquare().getPozY() * height) + topLeft.y;
 			float addX = (height - getImage().getWidth(null)) / 2;
@@ -91,46 +93,59 @@ public abstract class Piece {
 		}
 	}
 
-	public final void drawCircle(Graphics g) {
+	public final void draw(Graphics g) {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			Point topLeft = this.getChessboard().getTopLeftPoint();
-			int height = this.getChessboard().get_square_height();
-			int x = (this.getSquare().getPozX() * height) + topLeft.x;
-			int y = (this.getSquare().getPozY() * height) + topLeft.y;
+
+			Point topLeft = this.getChessboard().getBoardDisplay2().getTopLeftPoint();
+			int r = this.getChessboard().getBoardDisplay2().getWidth() / 2, cx = r, cy = r;
+
+			int hi = (r - r / 3) / 6;
+			int ri = r - (this.getSquare().getPozY() + 1) * hi;
+			int rs = ri + hi;
+
+			int a1 = (6 - this.getSquare().getPozX()) * 15;
+			int a2 = (6 - this.getSquare().getPozX() - 1) * 15;
+			int rm = (rs + ri) / 2;
+			int am = (a1 + a2) / 2;
 			
+			int xm = topLeft.x + cx + (int) (rm * Math.cos(Math.toRadians(am))) - hi / 2;
+			int ym = topLeft.y + cy - (int) (rm * Math.sin(Math.toRadians(am))) - hi / 2;
+
 			if (getImage() != null && g != null) {
 				Image tempImage = orgImage;
-				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
+				BufferedImage resized = new BufferedImage(hi, hi, BufferedImage.TYPE_INT_ARGB_PRE);
 				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
 				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				imageGr.drawImage(tempImage, 0, 0, height, height, null);
+				imageGr.drawImage(tempImage, 0, 0, hi, hi, null);
 				imageGr.dispose();
-				setImage(resized.getScaledInstance(height, height, 0));
-				g2d.drawImage(getImage(), x, y, null);
+				setImage(resized.getScaledInstance(hi, hi, 0));
+				g2d.drawImage(getImage(), xm, ym, null);
 			} else {
 				System.out.println("image is null!");
 			}
 
 		} catch (java.lang.NullPointerException exc) {
 			System.out.println("Something wrong when painting piece: " + exc.getMessage());
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 
 	void clean() {
 	}
 
-	public King myKing(Chessboard chessboard) {
+	public King myKing(IChessboard chessboard) {
 		if (getPlayer().getColor().equals(Player.colors.white)) {
-			return chessboard.kingWhite;
+			return null;
 		} else if (getPlayer().getColor().equals(Player.colors.black)) {
-			return chessboard.kingBlack;
+			return null;
 		}
 		return null;
 	}
-	
-	public abstract ArrayList<Square> allMoves(Chessboard chessboard);
+
+	public abstract ArrayList<Square> allMoves(IChessboard chessboard);
 
 	public String getSymbol() {
 		return this.symbol;
@@ -144,12 +159,12 @@ public abstract class Piece {
 		this.name = name;
 	}
 
-	public Chessboard getChessboard() {
+	public IChessboard getChessboard() {
 		return chessboard;
 	}
 
-	public void setChessboard(Chessboard chessboard) {
-		this.chessboard = chessboard;
+	public void setChessboard(IChessboard chessboard2) {
+		this.chessboard = chessboard2;
 	}
 
 	public Player getPlayer() {
@@ -165,7 +180,7 @@ public abstract class Piece {
 	}
 
 	public void setImage(Image imageBlack, Image imageWhite) {
-		//Set the image according to the color
+		// Set the image according to the color
 		if (this.getPlayer().getColor() == this.getPlayer().getColor().black) {
 			image = imageBlack;
 		} else {
@@ -175,7 +190,7 @@ public abstract class Piece {
 	}
 
 	public void setImage(Image image) {
-		//Set the image when resizing
+		// Set the image when resizing
 		this.image = image;
 	}
 

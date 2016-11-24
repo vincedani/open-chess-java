@@ -143,7 +143,7 @@ public class Client implements Runnable
                     int endX = input.readInt();
                     int endY = input.readInt();
 
-                    getGame().simulateMove(beginX, beginY, endX, endY);
+                    //getGame().simulateMove(beginX, beginY, endX, endY);
                 }
                 else if (in.equals("#message")) //getting message from server
                 {
@@ -166,7 +166,7 @@ public class Client implements Runnable
                     getGame().setClient(this);
                     getGame().getChat().client = this;
                     getGame().newGame();//start new Game
-                    getGame().getChessboard().draw();
+                    //getGame().getChessboard().draw();
                 }
                 else if (in.equals("#errorConnection"))
                 {
@@ -183,7 +183,7 @@ public class Client implements Runnable
                     
                     if( result == JOptionPane.YES_OPTION )
                     {
-                        getGame().getChessboard().undo();
+                        //getGame().getChessboard().undo();
                         getGame().switchActive();
                         this.sendUndoAnswerPositive();
                     }
@@ -195,9 +195,9 @@ public class Client implements Runnable
                 else if(in.equals("#undoAnswerPositive") && ( this.wait4undoAnswer || this.isObserver ) )
                 {
                     this.wait4undoAnswer = false;
-                    String lastMove = getGame().getMoves().getMoves().get( getGame().getMoves().getMoves().size() -1 );
-                    getGame().getChat().addMessage("** "+Settings.lang("permision_ok_4_undo_move")+": "+lastMove+"**");
-                    getGame().getChessboard().undo();
+                    //String lastMove = getGame().getMoves().getMoves().get( getGame().getMoves().getMoves().size() -1 );
+                    //getGame().getChat().addMessage("** "+Settings.lang("permision_ok_4_undo_move")+": "+lastMove+"**");
+                    //getGame().getChessboard().undo();
                 }
                 else if(in.equals("#undoAnswerNegative") && this.wait4undoAnswer)
                 {

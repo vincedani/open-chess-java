@@ -24,6 +24,7 @@ package jchess.pieces;
 import java.util.ArrayList;
 
 import jchess.board.Chessboard;
+import jchess.board.IChessboard;
 import jchess.board.Square;
 import jchess.game.Player;
 import jchess.gui.GUI;
@@ -53,7 +54,7 @@ public class Rook extends Piece
     protected static final Image imageBlack = GUI.loadImage("Rook-B.png");
     public static short value = 5;
 
-    public Rook(Chessboard chessboard, Player player)
+    public Rook(IChessboard chessboard, Player player)
     {
         super(chessboard, player);//call initializer of super type: Piece
         //this.setImages("Rook-W.png", "Rook-B.png");
@@ -66,7 +67,7 @@ public class Rook extends Piece
      * @return  ArrayList with new position of piece
      */
     
-    public ArrayList<Square> allMoves(Chessboard chessboard)
+    public ArrayList<Square> allMoves(IChessboard chessboard)
     {
         ArrayList<Square> list = new ArrayList<Square>();
         int x= this.getSquare().getPozX(), y=this.getSquare().getPozY();
@@ -76,7 +77,7 @@ public class Rook extends Piece
 
             if (this.pieceBehaviour.checkPiece(x, i))
             {//if on this square isn't piece
-            	Square newMove= chessboard.squares[x][i];
+            	Square newMove= chessboard.getSquares()[x][i];
                 
                     if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                     {
@@ -101,7 +102,7 @@ public class Rook extends Piece
             if (this.pieceBehaviour.checkPiece(this.getSquare().getPozX(), i))
             {//if on this square isn't piece
 
-            	Square newMove= chessboard.squares[x][i];
+            	Square newMove= chessboard.getSquares()[x][i];
                 
                 if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                 {
@@ -124,7 +125,7 @@ public class Rook extends Piece
 
             if (this.pieceBehaviour.checkPiece(i, this.getSquare().getPozY()))
             {//if on this square isn't piece
-            	Square newMove= chessboard.squares[i][y];
+            	Square newMove= chessboard.getSquares()[i][y];
                 
                 if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                 {
@@ -148,7 +149,7 @@ public class Rook extends Piece
             if (this.pieceBehaviour.checkPiece(i, this.getSquare().getPozY()))
             {//if on this square isn't piece
 
-Square newMove= chessboard.squares[i][y];
+Square newMove= chessboard.getSquares()[i][y];
                 
                 if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                 {

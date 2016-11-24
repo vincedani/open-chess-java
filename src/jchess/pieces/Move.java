@@ -49,7 +49,7 @@ public class Move
         {
             this.wasPawnTwoFieldsMove = true;
         }
-        else if (movedPiece.getName().equals("Pawn") && to.getPozY() == Chessboard.bottom || to.getPozY() == Chessboard.top && promotedPiece != null)
+        //else if (movedPiece.getName().equals("Pawn") && to.getPozY() == Chessboard.bottom || to.getPozY() == Chessboard.top && promotedPiece != null)
         {
             this.promotedTo = promotedPiece;
         }

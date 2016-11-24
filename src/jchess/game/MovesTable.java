@@ -163,7 +163,7 @@ public class MovesTable extends AbstractTableModel {
 		}
 
 	}
-
+	/*
 	public void addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove,
 			boolean wasEnPassant, Piece promotedPiece) {
 
@@ -269,11 +269,11 @@ public class MovesTable extends AbstractTableModel {
 	public void clearMoveForwardStack() {
 		this.moveForwardStack.clear();
 	}
-
+*/
 	public JScrollPane getScrollPane() {
 		return this.scrollPane;
 	}
-
+/*
 	public ArrayList<String> getMoves() {
 		return this.move;
 	}
@@ -358,6 +358,7 @@ public class MovesTable extends AbstractTableModel {
 	 *            String which in is capt player move
 	 * @return boolean 1 if the move is correct, else 0
 	 */
+	
 	static public boolean isMoveCorrect(String move) {
 		if (move.equals("O-O") || move.equals("O-O-O")) {
 			return true;
@@ -427,6 +428,7 @@ public class MovesTable extends AbstractTableModel {
 	 * 
 	 * @return str String which in is capt player move
 	 */
+	/*
 	public String getMovesInString() {
 		int n = 1;
 		int i = 0;
@@ -441,7 +443,7 @@ public class MovesTable extends AbstractTableModel {
 		}
 		return str;
 	}
-
+/*
 	/**
 	 * Method to set all moves from String with validation test (useful for
 	 * network game)
@@ -449,6 +451,7 @@ public class MovesTable extends AbstractTableModel {
 	 * @param moves
 	 *            String to set in String like PGN with full-notation format
 	 */
+	/*
 	public void setMoves(String moves) {
 		int from = 0;
 		int to = 0;
@@ -599,4 +602,4 @@ class MyDefaultTableModel extends DefaultTableModel {
 	public boolean isCellEditable(int a, int b) {
 		return false;
 	}
-}
+}}

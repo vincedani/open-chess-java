@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jchess.board.Chessboard;
+import jchess.board.IChessboard;
 import jchess.board.Square;
 import jchess.game.Player;
 
 public class PieceBehaviour {
 
-	private Chessboard chessboard; 
+	private IChessboard chessboard; 
 	private Square square;
 	private Player player;
 	private String name;
 	protected String symbol;
 	
 	
-	
-	public PieceBehaviour(Chessboard chessboard, Player player) {
+	public PieceBehaviour(IChessboard chessboard, Player player) {
 	this.setChessboard(chessboard);
 	this.setPlayer(player);
 	this.setName(this.getClass().getSimpleName());	
@@ -51,11 +51,11 @@ public class PieceBehaviour {
 	 * @return true if can move, false otherwise
 	 */
 	protected boolean checkPiece(int x, int y) {
-		if (getChessboard().squares[x][y].piece != null
-				&& getChessboard().squares[x][y].piece.getName().equals("King")) {
+		if (getChessboard().getSquares()[x][y].piece != null
+				&& getChessboard().getSquares()[x][y].piece.getName().equals("King")) {
 			return false;
 		}
-		Piece piece = getChessboard().squares[x][y].piece;
+		Piece piece = getChessboard().getSquares()[x][y].piece;
 		if (piece == null || // if this square is empty
 				piece.getPlayer() != this.getPlayer()) // or piece is another
 														// player
@@ -75,7 +75,7 @@ public class PieceBehaviour {
 	 * @return true if owner(player) is different
 	 */
 	protected boolean otherOwner(int x, int y) {
-		Square sq = getChessboard().squares[x][y];
+		Square sq = getChessboard().getSquares()[x][y];
 		if (sq.piece == null) {
 			return false;
 		}
@@ -110,12 +110,12 @@ public class PieceBehaviour {
 		this.name = name;
 	}
 
-	public Chessboard getChessboard() {
+	public IChessboard getChessboard() {
 		return chessboard;
 	}
 
-	public void setChessboard(Chessboard chessboard) {
-		this.chessboard = chessboard;
+	public void setChessboard(IChessboard chessboard2) {
+		this.chessboard = chessboard2;
 	}
 	
 }
