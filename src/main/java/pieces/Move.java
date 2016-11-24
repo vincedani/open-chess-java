@@ -18,7 +18,7 @@
  */
 package main.java.pieces;
 
-import jchess.board.Chessboard;
+import jchess.board.SquareBoard;
 import jchess.board.Square;
 import main.java.game.MovesTable.castling;
 
@@ -49,7 +49,7 @@ public class Move
         {
             this.wasPawnTwoFieldsMove = true;
         }
-        else if (movedPiece.getName().equals("Pawn") && to.getPozY() == Chessboard.bottom || to.getPozY() == Chessboard.top && promotedPiece != null)
+        else if (movedPiece.getName().equals("Pawn") && to.getPozY() == SquareBoard.bottom || to.getPozY() == SquareBoard.top && promotedPiece != null)
         {
             this.promotedTo = promotedPiece;
         }

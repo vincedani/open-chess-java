@@ -40,7 +40,8 @@ import java.awt.Image;
  */
 import java.util.ArrayList;
 
-import jchess.board.Chessboard;
+import jchess.board.SquareBoard;
+import jchess.board.IChessboard;
 import jchess.board.Square;
 import main.java.game.Player;
 import main.java.gui.GUI;
@@ -53,19 +54,19 @@ public class King extends Piece {
 	private static final Image imageWhite = GUI.loadImage("King-W.png");
 	private static final Image imageBlack = GUI.loadImage("King-B.png");
 
-	public King(Chessboard chessboard, Player player) {
+	public King(SquareBoard chessboard, Player player) {
 		super(chessboard, player);
 		this.symbol = "K";
 		this.setImage(imageBlack, imageWhite);
 	}
 
 	
-	public void regularMove(Chessboard chessboard, int x, int y, ArrayList<Square> list){
+	public void regularMove(IChessboard chessboard, int x, int y, ArrayList<Square> list){
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
 				if (!this.pieceBehaviour.isout(i, j)) {// out of bounds
 														// protection
-					Square sq = chessboard.initial.squares[i][j];
+					Square sq = chessboard.getSquares()[i][j];
 					if (this.getSquare() == sq) {// if we're checking square on
 													// which is King
 						continue;
@@ -83,22 +84,22 @@ public class King extends Piece {
 
 	}
 	
-	public void castlingLeftMove(Chessboard chessboard, int x, int y, ArrayList<Square> list){
+	public void castlingLeftMove(IChessboard chessboard, int x, int y, ArrayList<Square> list){
 
 			boolean canCastling = true;
 
-			Rook rook = (Rook) chessboard.initial.squares[0][y].piece;
+			Rook rook = (Rook) chessboard.getSquares()[0][y].piece;
 			if (!rook.wasMotion()) {
 				for (int i = x - 1; i > 0; i--) {// go
 																			// left
-					if (chessboard.initial.squares[i][y].piece != null) {
+					if (chessboard.getSquares()[i][y].piece != null) {
 						canCastling = false;
 						break;
 					}
 				}
 				
-				Square sq = chessboard.initial.squares[x - 2][y];
-				Square sq1 = chessboard.initial.squares[x - 1][y];
+				Square sq = chessboard.getSquares()[x - 2][y];
+				Square sq1 = chessboard.getSquares()[x - 1][y];
 				if (canCastling && this.isSafe(sq) && this.isSafe(sq1)) { 
 					// can do castling when neither sq nor sq1 is checked
 					list.add(sq);
@@ -106,22 +107,22 @@ public class King extends Piece {
 			}
 		}
 	
-	public void castlingRightMove(Chessboard chessboard, int x, int y, ArrayList<Square> list){
+	public void castlingRightMove(IChessboard chessboard, int x, int y, ArrayList<Square> list){
 
 		boolean canCastling = true;
 
-		Rook rook = (Rook) chessboard.initial.squares[7][y].piece;
+		Rook rook = (Rook) chessboard.getSquares()[7][y].piece;
 		if (!rook.wasMotion()) {
 			for (int i = x + 1; i < 7; i++) {// go
 																		// left
-				if (chessboard.initial.squares[i][y].piece != null) {
+				if (chessboard.getSquares()[i][y].piece != null) {
 					canCastling = false;
 					break;
 				}
 			}
 			
-			Square sq = chessboard.initial.squares[x + 2][y];
-			Square sq1 = chessboard.initial.squares[x + 1][y];
+			Square sq = chessboard.getSquares()[x + 2][y];
+			Square sq1 = chessboard.getSquares()[x + 1][y];
 			if (canCastling && this.isSafe(sq) && this.isSafe(sq1)) { 
 				// can do castling when neither sq nor sq1 is checked
 				list.add(sq);
@@ -134,7 +135,7 @@ public class King extends Piece {
 	 * 
 	 * @return ArrayList with new position of piece
 	 */
-	public ArrayList<Square> allMoves(Chessboard chessboard) {
+	public ArrayList<Square> allMoves(IChessboard chessboard) {
 		ArrayList<Square> list = new ArrayList<Square>();
 
 		int x = this.getSquare().getPozX(), y = this.getSquare().getPozY();
@@ -143,12 +144,12 @@ public class King extends Piece {
 		if (!this.wasMotion && !this.isChecked()) {
 			// check if king was not moved before
 
-			if (chessboard.initial.squares[0][y].piece != null
-					&& getChessboard().initial.squares[0][y].piece.getName().equals("Rook")) {
+			if (chessboard.getSquares()[0][y].piece != null
+					&& getChessboard().getSquares()[0][y].piece.getName().equals("Rook")) {
 				castlingLeftMove(chessboard, x, y, list);
 			}
-			if (chessboard.initial.squares[7][y].piece != null
-					&& chessboard.initial.squares[7][y].piece.getName().equals("Rook")) {
+			if (chessboard.getSquares()[7][y].piece != null
+					&& chessboard.getSquares()[7][y].piece.getName().equals("Rook")) {
 				castlingRightMove(chessboard, x, y, list);
 			}
 		}
@@ -176,9 +177,9 @@ public class King extends Piece {
 		if (this.allMoves(this.getChessboard()).size() == 0) {
 			for (int i = 0; i < 8; ++i) {
 				for (int j = 0; j < 8; ++j) {
-					if (getChessboard().initial.squares[i][j].piece != null
-							&& getChessboard().initial.squares[i][j].piece.getPlayer() == this.getPlayer()
-							&& getChessboard().initial.squares[i][j].piece.allMoves(this.getChessboard()).size() != 0) {
+					if (getChessboard().getSquares()[i][j].piece != null
+							&& getChessboard().getSquares()[i][j].piece.getPlayer() == this.getPlayer()
+							&& getChessboard().getSquares()[i][j].piece.allMoves(this.getChessboard()).size() != 0) {
 						return 0;
 					}
 				}
@@ -206,8 +207,8 @@ public class King extends Piece {
 		// Rook & Queen
 		for (int i = s.getPozY() + 1; i <= 7; ++i) // up
 		{
-			if (this.getChessboard().initial.squares[s.getPozX()][i].piece == null
-					|| this.getChessboard().initial.squares[s.getPozX()][i].piece == this) // if
+			if (this.getChessboard().getSquares()[s.getPozX()][i].piece == null
+					|| this.getChessboard().getSquares()[s.getPozX()][i].piece == this) // if
 																					// on
 																					// this
 																					// sqhuare
@@ -215,13 +216,13 @@ public class King extends Piece {
 																					// piece
 			{
 				continue;
-			} else if (this.getChessboard().initial.squares[s.getPozX()][i].piece.getPlayer() != this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[s.getPozX()][i].piece.getPlayer() != this.getPlayer()) // if
 																											// isn't
 																											// our
 																											// piece
 			{
-				if (this.getChessboard().initial.squares[s.getPozX()][i].piece.getName().equals("Rook")
-						|| this.getChessboard().initial.squares[s.getPozX()][i].piece.getName().equals("Queen")) {
+				if (this.getChessboard().getSquares()[s.getPozX()][i].piece.getName().equals("Rook")
+						|| this.getChessboard().getSquares()[s.getPozX()][i].piece.getName().equals("Queen")) {
 					return false;
 				} else {
 					break;
@@ -233,8 +234,8 @@ public class King extends Piece {
 
 		for (int i = s.getPozY() - 1; i >= 0; --i) // down
 		{
-			if (this.getChessboard().initial.squares[s.getPozX()][i].piece == null
-					|| this.getChessboard().initial.squares[s.getPozX()][i].piece == this) // if
+			if (this.getChessboard().getSquares()[s.getPozX()][i].piece == null
+					|| this.getChessboard().getSquares()[s.getPozX()][i].piece == this) // if
 																					// on
 																					// this
 																					// sqhuare
@@ -242,13 +243,13 @@ public class King extends Piece {
 																					// piece
 			{
 				continue;
-			} else if (this.getChessboard().initial.squares[s.getPozX()][i].piece.getPlayer() != this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[s.getPozX()][i].piece.getPlayer() != this.getPlayer()) // if
 																											// isn't
 																											// our
 																											// piece
 			{
-				if (this.getChessboard().initial.squares[s.getPozX()][i].piece.getName().equals("Rook")
-						|| this.getChessboard().initial.squares[s.getPozX()][i].piece.getName().equals("Queen")) {
+				if (this.getChessboard().getSquares()[s.getPozX()][i].piece.getName().equals("Rook")
+						|| this.getChessboard().getSquares()[s.getPozX()][i].piece.getName().equals("Queen")) {
 					return false;
 				} else {
 					break;
@@ -260,8 +261,8 @@ public class King extends Piece {
 
 		for (int i = s.getPozX() - 1; i >= 0; --i) // left
 		{
-			if (this.getChessboard().initial.squares[i][s.getPozY()].piece == null
-					|| this.getChessboard().initial.squares[i][s.getPozY()].piece == this) // if
+			if (this.getChessboard().getSquares()[i][s.getPozY()].piece == null
+					|| this.getChessboard().getSquares()[i][s.getPozY()].piece == this) // if
 																					// on
 																					// this
 																					// sqhuare
@@ -269,13 +270,13 @@ public class King extends Piece {
 																					// piece
 			{
 				continue;
-			} else if (this.getChessboard().initial.squares[i][s.getPozY()].piece.getPlayer() != this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[i][s.getPozY()].piece.getPlayer() != this.getPlayer()) // if
 																											// isn't
 																											// our
 																											// piece
 			{
-				if (this.getChessboard().initial.squares[i][s.getPozY()].piece.getName().equals("Rook")
-						|| this.getChessboard().initial.squares[i][s.getPozY()].piece.getName().equals("Queen")) {
+				if (this.getChessboard().getSquares()[i][s.getPozY()].piece.getName().equals("Rook")
+						|| this.getChessboard().getSquares()[i][s.getPozY()].piece.getName().equals("Queen")) {
 					return false;
 				} else {
 					break;
@@ -287,8 +288,8 @@ public class King extends Piece {
 
 		for (int i = s.getPozX() + 1; i <= 7; ++i) // right
 		{
-			if (this.getChessboard().initial.squares[i][s.getPozY()].piece == null
-					|| this.getChessboard().initial.squares[i][s.getPozY()].piece == this) // if
+			if (this.getChessboard().getSquares()[i][s.getPozY()].piece == null
+					|| this.getChessboard().getSquares()[i][s.getPozY()].piece == this) // if
 																					// on
 																					// this
 																					// sqhuare
@@ -296,13 +297,13 @@ public class King extends Piece {
 																					// piece
 			{
 				continue;
-			} else if (this.getChessboard().initial.squares[i][s.getPozY()].piece.getPlayer() != this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[i][s.getPozY()].piece.getPlayer() != this.getPlayer()) // if
 																											// isn't
 																											// our
 																											// piece
 			{
-				if (this.getChessboard().initial.squares[i][s.getPozY()].piece.getName().equals("Rook")
-						|| this.getChessboard().initial.squares[i][s.getPozY()].piece.getName().equals("Queen")) {
+				if (this.getChessboard().getSquares()[i][s.getPozY()].piece.getName().equals("Rook")
+						|| this.getChessboard().getSquares()[i][s.getPozY()].piece.getName().equals("Queen")) {
 					return false;
 				} else {
 					break;
@@ -315,7 +316,7 @@ public class King extends Piece {
 		// Bishop & Queen
 		for (int h = s.getPozX() - 1, i = s.getPozY() + 1; !pieceBehaviour.isout(h, i); --h, ++i) // left-up
 		{
-			if (this.getChessboard().initial.squares[h][i].piece == null || this.getChessboard().initial.squares[h][i].piece == this) // if
+			if (this.getChessboard().getSquares()[h][i].piece == null || this.getChessboard().getSquares()[h][i].piece == this) // if
 																														// on
 																														// this
 																														// sqhuare
@@ -323,13 +324,13 @@ public class King extends Piece {
 																														// piece
 			{
 				continue;
-			} else if (this.getChessboard().initial.squares[h][i].piece.getPlayer() != this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[h][i].piece.getPlayer() != this.getPlayer()) // if
 																									// isn't
 																									// our
 																									// piece
 			{
-				if (this.getChessboard().initial.squares[h][i].piece.getName().equals("Bishop")
-						|| this.getChessboard().initial.squares[h][i].piece.getName().equals("Queen")) {
+				if (this.getChessboard().getSquares()[h][i].piece.getName().equals("Bishop")
+						|| this.getChessboard().getSquares()[h][i].piece.getName().equals("Queen")) {
 					return false;
 				} else {
 					break;
@@ -341,7 +342,7 @@ public class King extends Piece {
 
 		for (int h = s.getPozX() - 1, i = s.getPozY() - 1; !pieceBehaviour.isout(h, i); --h, --i) // left-down
 		{
-			if (this.getChessboard().initial.squares[h][i].piece == null || this.getChessboard().initial.squares[h][i].piece == this) // if
+			if (this.getChessboard().getSquares()[h][i].piece == null || this.getChessboard().getSquares()[h][i].piece == this) // if
 																														// on
 																														// this
 																														// sqhuare
@@ -349,13 +350,13 @@ public class King extends Piece {
 																														// piece
 			{
 				continue;
-			} else if (this.getChessboard().initial.squares[h][i].piece.getPlayer() != this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[h][i].piece.getPlayer() != this.getPlayer()) // if
 																									// isn't
 																									// our
 																									// piece
 			{
-				if (this.getChessboard().initial.squares[h][i].piece.getName().equals("Bishop")
-						|| this.getChessboard().initial.squares[h][i].piece.getName().equals("Queen")) {
+				if (this.getChessboard().getSquares()[h][i].piece.getName().equals("Bishop")
+						|| this.getChessboard().getSquares()[h][i].piece.getName().equals("Queen")) {
 					return false;
 				} else {
 					break;
@@ -367,7 +368,7 @@ public class King extends Piece {
 
 		for (int h = s.getPozX() + 1, i = s.getPozY() + 1; !pieceBehaviour.isout(h, i); ++h, ++i) // right-up
 		{
-			if (this.getChessboard().initial.squares[h][i].piece == null || this.getChessboard().initial.squares[h][i].piece == this) // if
+			if (this.getChessboard().getSquares()[h][i].piece == null || this.getChessboard().getSquares()[h][i].piece == this) // if
 																														// on
 																														// this
 																														// sqhuare
@@ -375,13 +376,13 @@ public class King extends Piece {
 																														// piece
 			{
 				continue;
-			} else if (this.getChessboard().initial.squares[h][i].piece.getPlayer() != this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[h][i].piece.getPlayer() != this.getPlayer()) // if
 																									// isn't
 																									// our
 																									// piece
 			{
-				if (this.getChessboard().initial.squares[h][i].piece.getName().equals("Bishop")
-						|| this.getChessboard().initial.squares[h][i].piece.getName().equals("Queen")) {
+				if (this.getChessboard().getSquares()[h][i].piece.getName().equals("Bishop")
+						|| this.getChessboard().getSquares()[h][i].piece.getName().equals("Queen")) {
 					return false;
 				} else {
 					break;
@@ -393,7 +394,7 @@ public class King extends Piece {
 
 		for (int h = s.getPozX() + 1, i = s.getPozY() - 1; !pieceBehaviour.isout(h, i); ++h, --i) // right-down
 		{
-			if (this.getChessboard().initial.squares[h][i].piece == null || this.getChessboard().initial.squares[h][i].piece == this) // if
+			if (this.getChessboard().getSquares()[h][i].piece == null || this.getChessboard().getSquares()[h][i].piece == this) // if
 																														// on
 																														// this
 																														// sqhuare
@@ -401,13 +402,13 @@ public class King extends Piece {
 																														// piece
 			{
 				continue;
-			} else if (this.getChessboard().initial.squares[h][i].piece.getPlayer() != this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[h][i].piece.getPlayer() != this.getPlayer()) // if
 																									// isn't
 																									// our
 																									// piece
 			{
-				if (this.getChessboard().initial.squares[h][i].piece.getName().equals("Bishop")
-						|| this.getChessboard().initial.squares[h][i].piece.getName().equals("Queen")) {
+				if (this.getChessboard().getSquares()[h][i].piece.getName().equals("Bishop")
+						|| this.getChessboard().getSquares()[h][i].piece.getName().equals("Queen")) {
 					return false;
 				} else {
 					break;
@@ -425,18 +426,18 @@ public class King extends Piece {
 		newY = s.getPozY() + 1;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (this.getChessboard().initial.squares[newX][newY].piece == null) // if on
+			if (this.getChessboard().getSquares()[newX][newY].piece == null) // if on
 																		// this
 																		// sqhuare
 																		// isn't
 																		// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																										// is
 																										// our
 																										// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Knight")) {
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Knight")) {
 				return false;
 			}
 		}
@@ -446,18 +447,18 @@ public class King extends Piece {
 		newY = s.getPozY() + 2;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (this.getChessboard().initial.squares[newX][newY].piece == null) // if on
+			if (this.getChessboard().getSquares()[newX][newY].piece == null) // if on
 																		// this
 																		// sqhuare
 																		// isn't
 																		// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																										// is
 																										// our
 																										// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Knight")) {
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Knight")) {
 				return false;
 			}
 		}
@@ -467,18 +468,18 @@ public class King extends Piece {
 		newY = s.getPozY() + 2;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (this.getChessboard().initial.squares[newX][newY].piece == null) // if on
+			if (this.getChessboard().getSquares()[newX][newY].piece == null) // if on
 																		// this
 																		// sqhuare
 																		// isn't
 																		// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																										// is
 																										// our
 																										// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Knight")) {
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Knight")) {
 				return false;
 			}
 		}
@@ -488,18 +489,18 @@ public class King extends Piece {
 		newY = s.getPozY() + 1;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (this.getChessboard().initial.squares[newX][newY].piece == null) // if on
+			if (this.getChessboard().getSquares()[newX][newY].piece == null) // if on
 																		// this
 																		// sqhuare
 																		// isn't
 																		// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																										// is
 																										// our
 																										// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Knight")) {
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Knight")) {
 				return false;
 			}
 		}
@@ -509,18 +510,18 @@ public class King extends Piece {
 		newY = s.getPozY() - 1;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (this.getChessboard().initial.squares[newX][newY].piece == null) // if on
+			if (this.getChessboard().getSquares()[newX][newY].piece == null) // if on
 																		// this
 																		// sqhuare
 																		// isn't
 																		// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																										// is
 																										// our
 																										// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Knight")) {
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Knight")) {
 				return false;
 			}
 		}
@@ -530,18 +531,18 @@ public class King extends Piece {
 		newY = s.getPozY() - 2;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (this.getChessboard().initial.squares[newX][newY].piece == null) // if on
+			if (this.getChessboard().getSquares()[newX][newY].piece == null) // if on
 																		// this
 																		// sqhuare
 																		// isn't
 																		// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																										// is
 																										// our
 																										// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Knight")) {
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Knight")) {
 				return false;
 			}
 		}
@@ -551,18 +552,18 @@ public class King extends Piece {
 		newY = s.getPozY() - 2;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (this.getChessboard().initial.squares[newX][newY].piece == null) // if on
+			if (this.getChessboard().getSquares()[newX][newY].piece == null) // if on
 																		// this
 																		// sqhuare
 																		// isn't
 																		// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																										// is
 																										// our
 																										// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Knight")) {
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Knight")) {
 				return false;
 			}
 		}
@@ -572,18 +573,18 @@ public class King extends Piece {
 		newY = s.getPozY() - 1;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (this.getChessboard().initial.squares[newX][newY].piece == null) // if on
+			if (this.getChessboard().getSquares()[newX][newY].piece == null) // if on
 																		// this
 																		// sqhuare
 																		// isn't
 																		// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																										// is
 																										// our
 																										// piece
 			{
-			} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Knight")) {
+			} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Knight")) {
 				return false;
 			}
 		}
@@ -608,37 +609,37 @@ public class King extends Piece {
 			newX = s.getPozX() - 1;
 			newY = s.getPozY() + 1;
 			if (!pieceBehaviour.isout(newX, newY)) {
-				if (this.getChessboard().initial.squares[newX][newY].piece == null) // if
+				if (this.getChessboard().getSquares()[newX][newY].piece == null) // if
 																			// on
 																			// this
 																			// sqhuare
 																			// isn't
 																			// piece
 				{
-				} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+				} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																											// is
 																											// our
 																											// piece
 				{
-				} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Pawn")) {
+				} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Pawn")) {
 					return false;
 				}
 			}
 			newX = s.getPozX() + 1;
 			if (!pieceBehaviour.isout(newX, newY)) {
-				if (this.getChessboard().initial.squares[newX][newY].piece == null) // if
+				if (this.getChessboard().getSquares()[newX][newY].piece == null) // if
 																			// on
 																			// this
 																			// sqhuare
 																			// isn't
 																			// piece
 				{
-				} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+				} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																											// is
 																											// our
 																											// piece
 				{
-				} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Pawn")) {
+				} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Pawn")) {
 					return false;
 				}
 			}
@@ -646,37 +647,37 @@ public class King extends Piece {
 			newX = s.getPozX() - 1;
 			newY = s.getPozY() - 1;
 			if (!pieceBehaviour.isout(newX, newY)) {
-				if (this.getChessboard().initial.squares[newX][newY].piece == null) // if
+				if (this.getChessboard().getSquares()[newX][newY].piece == null) // if
 																			// on
 																			// this
 																			// sqhuare
 																			// isn't
 																			// piece
 				{
-				} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+				} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																											// is
 																											// our
 																											// piece
 				{
-				} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Pawn")) {
+				} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Pawn")) {
 					return false;
 				}
 			}
 			newX = s.getPozX() + 1;
 			if (!pieceBehaviour.isout(newX, newY)) {
-				if (this.getChessboard().initial.squares[newX][newY].piece == null) // if
+				if (this.getChessboard().getSquares()[newX][newY].piece == null) // if
 																			// on
 																			// this
 																			// sqhuare
 																			// isn't
 																			// piece
 				{
-				} else if (this.getChessboard().initial.squares[newX][newY].piece.getPlayer() == this.getPlayer()) // if
+				} else if (this.getChessboard().getSquares()[newX][newY].piece.getPlayer() == this.getPlayer()) // if
 																											// is
 																											// our
 																											// piece
 				{
-				} else if (this.getChessboard().initial.squares[newX][newY].piece.getName().equals("Pawn")) {
+				} else if (this.getChessboard().getSquares()[newX][newY].piece.getName().equals("Pawn")) {
 					return false;
 				}
 			}

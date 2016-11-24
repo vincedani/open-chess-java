@@ -28,7 +28,8 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import jchess.board.Chessboard;
+import jchess.board.SquareBoard;
+import jchess.board.IChessboard;
 import jchess.board.Square;
 import main.java.LogToFile;
 import main.java.game.Player;
@@ -39,7 +40,7 @@ import main.java.game.Player;
  */
 public abstract class Piece {
 
-	private Chessboard chessboard; // <-- this relations isn't in class diagram,
+	private SquareBoard chessboard; // <-- this relations isn't in class diagram,
 									// but it's necessary :/
 	public PieceBehaviour pieceBehaviour;
 	private Square square;
@@ -49,7 +50,7 @@ public abstract class Piece {
 	private Image orgImage;
 	private Image image;
 
-	public Piece(Chessboard chessboard, Player player) {
+	public Piece(SquareBoard chessboard, Player player) {
 		this.setChessboard(chessboard);
 		this.setPlayer(player);
 		this.setName(this.getClass().getSimpleName());
@@ -66,7 +67,7 @@ public abstract class Piece {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			Point topLeft = this.getChessboard().display.getTopLeftPoint();
+			Point topLeft = this.getChessboard().getDisplay().getTopLeftPoint();
 			int height = this.getChessboard().get_square_height();
 			int x = (this.getSquare().getPozX() * height) + topLeft.x;
 			int y = (this.getSquare().getPozY() * height) + topLeft.y;
@@ -96,7 +97,7 @@ public abstract class Piece {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			Point topLeft = this.getChessboard().display.getTopLeftPoint();
+			Point topLeft = this.getChessboard().getDisplay().getTopLeftPoint();
 			int height = this.getChessboard().get_square_height();
 			int x = (this.getSquare().getPozX() * height) + topLeft.x;
 			int y = (this.getSquare().getPozY() * height) + topLeft.y;
@@ -124,16 +125,16 @@ public abstract class Piece {
 	void clean() {
 	}
 
-	public King myKing(Chessboard chessboard) {
+	public King myKing(IChessboard chessboard2) {
 		if (getPlayer().getColor().equals(Player.colors.white)) {
-			return chessboard.initial.kingWhite;
+			return chessboard2.getInitial().kingWhite;
 		} else if (getPlayer().getColor().equals(Player.colors.black)) {
-			return chessboard.initial.kingBlack;
+			return chessboard2.getInitial().kingBlack;
 		}
 		return null;
 	}
 	
-	public abstract ArrayList<Square> allMoves(Chessboard chessboard);
+	public abstract ArrayList<Square> allMoves(IChessboard chessboard2);
 
 	public String getSymbol() {
 		return this.symbol;
@@ -147,11 +148,11 @@ public abstract class Piece {
 		this.name = name;
 	}
 
-	public Chessboard getChessboard() {
+	public SquareBoard getChessboard() {
 		return chessboard;
 	}
 
-	public void setChessboard(Chessboard chessboard) {
+	public void setChessboard(SquareBoard chessboard) {
 		this.chessboard = chessboard;
 	}
 

@@ -8,24 +8,24 @@ import main.java.pieces.Pawn;
 import main.java.pieces.Queen;
 import main.java.pieces.Rook;
 
-public class ChessboardInitialization {
-	public Square[][] squares;
+public class SquareBoardInitialization {
+	private Square[][] squares;
 	boolean upsideDown;
-	Chessboard board;
+	SquareBoard board;
 	public King kingWhite;
 	public King kingBlack;
 
-	public ChessboardInitialization(boolean upsideDown, Chessboard board) {
+	public SquareBoardInitialization(boolean upsideDown, SquareBoard board) {
 		this.upsideDown = upsideDown;
 		this.board=board;
-		squares = new Square[8][8];//initalization of 8x8 chessboard
+		setSquares(new Square[8][8]);//initalization of 8x8 chessboard
 		createSquares();
 	}
 
 	private void createSquares() {
 		for (int i = 0; i < 8; i++) {// create object for each square
 			for (int y = 0; y < 8; y++) {
-				squares[i][y] = new Square(i, y, null);
+				getSquares()[i][y] = new Square(i, y, null);
 			}
 		} // --endOf--create object for each square
 	}
@@ -94,25 +94,25 @@ public class ChessboardInitialization {
 			player.setGoDown(true);
 		}
 
-		squares[0][i].setPiece(new Rook(board, player));
-		squares[7][i].setPiece(new Rook(board, player));
-		squares[1][i].setPiece(new Knight(board, player));
-		squares[6][i].setPiece(new Knight(board, player));
-		squares[2][i].setPiece(new Bishop(board, player));
-		squares[5][i].setPiece(new Bishop(board, player));
+		getSquares()[0][i].setPiece(new Rook(board, player));
+		getSquares()[7][i].setPiece(new Rook(board, player));
+		getSquares()[1][i].setPiece(new Knight(board, player));
+		getSquares()[6][i].setPiece(new Knight(board, player));
+		getSquares()[2][i].setPiece(new Bishop(board, player));
+		getSquares()[5][i].setPiece(new Bishop(board, player));
 		if (upsideDown) {
-		squares[4][i].setPiece(new Queen(board, player));
+		getSquares()[4][i].setPiece(new Queen(board, player));
 			if (player.getColor() == Player.colors.white) {
-				squares[3][i].setPiece(kingWhite = new King(board, player));
+				getSquares()[3][i].setPiece(kingWhite = new King(board, player));
 			} else {
-				squares[3][i].setPiece(kingBlack = new King(board, player));
+				getSquares()[3][i].setPiece(kingBlack = new King(board, player));
 			}
 		} else {
-			squares[3][i].setPiece(new Queen(board,player));
+			getSquares()[3][i].setPiece(new Queen(board,player));
 			if (player.getColor() == Player.colors.white) {
-				squares[4][i].setPiece(kingWhite = new King(board, player));
+				getSquares()[4][i].setPiece(kingWhite = new King(board, player));
 			} else {
-				squares[4][i].setPiece(kingBlack = new King(board, player));
+				getSquares()[4][i].setPiece(kingBlack = new King(board, player));
 			}
 		}
 	}
@@ -131,8 +131,16 @@ public class ChessboardInitialization {
 			return;
 		}
 		for (int x = 0; x < 8; x++) {
-			squares[x][i].setPiece(new Pawn(board, player));
+			getSquares()[x][i].setPiece(new Pawn(board, player));
 		}
+	}
+
+	public Square[][] getSquares() {
+		return squares;
+	}
+
+	public void setSquares(Square[][] squares) {
+		this.squares = squares;
 	}
 
 }

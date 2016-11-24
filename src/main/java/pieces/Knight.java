@@ -23,7 +23,8 @@ package main.java.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.board.Chessboard;
+import jchess.board.SquareBoard;
+import jchess.board.IChessboard;
 import jchess.board.Square;
 import main.java.game.Player;
 import main.java.gui.GUI;
@@ -38,17 +39,17 @@ public class Knight extends Piece
     protected static final Image imageWhite = GUI.loadImage("Knight-W.png");
     protected static final Image imageBlack = GUI.loadImage("Knight-B.png");
 
-    public Knight(Chessboard chessboard, Player player)
+    public Knight(SquareBoard chessboard, Player player)
     {
         super(chessboard, player);//call initializer of super type: Piece
         this.symbol = "N";
         this.setImage(imageBlack, imageWhite);
     }
 
-    public void regularMove(Chessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list){
+    public void regularMove(IChessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list){
     	
     	if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
-        {		Square newMove= chessboard.initial.squares[newX][newY];
+        {		Square newMove= chessboard.getSquares()[newX][newY];
                 if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                 {
                     list.add(newMove);
@@ -59,7 +60,7 @@ public class Knight extends Piece
      *  Annotation to superclass Piece changing pawns location
      * @return  ArrayList with new position of pawn
      */
-    public ArrayList<Square> allMoves(Chessboard chessboard)
+    public ArrayList<Square> allMoves(IChessboard chessboard)
     {
         ArrayList<Square> list = new ArrayList<Square>();
         King myKing = myKing(chessboard);

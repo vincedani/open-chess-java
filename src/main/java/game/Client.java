@@ -166,7 +166,7 @@ public class Client implements Runnable
                     getGame().setClient(this);
                     getGame().getChat().client = this;
                     getGame().newGame();//start new Game
-                    getGame().getChessboard().display.draw();
+                    getGame().getChessboard().getDisplay().draw();
                 }
                 else if (in.equals("#errorConnection"))
                 {

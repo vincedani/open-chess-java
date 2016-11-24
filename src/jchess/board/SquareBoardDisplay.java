@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class ChessboardDisplay extends JPanel {
+public class SquareBoardDisplay extends JPanel {
 	public Square activeSquare;
 	public Image upDownLabel;
 	public Image LeftRightLabel;
@@ -26,16 +26,16 @@ public class ChessboardDisplay extends JPanel {
 	private ChessboardLayout board_layout;
 	boolean renderLabels, upsideDown;
 	Square[][] squares;
-	Chessboard board;
+	SquareBoard board;
 
-	public ChessboardDisplay(Image upDownLabel, Image leftRightLabel, Point topLeft, boolean renderLabels, boolean upsideDown, Chessboard board) {
+	public SquareBoardDisplay(Image upDownLabel, Image leftRightLabel, Point topLeft, boolean renderLabels, boolean upsideDown, SquareBoard board) {
 		this.upDownLabel = upDownLabel;
 		LeftRightLabel = leftRightLabel;
 		this.topLeft = topLeft;
 		this.board_layout=board.board_layout;
 		this.renderLabels= renderLabels;
 		this.upsideDown= upsideDown;
-		this.squares= board.initial.squares;
+		this.squares= board.initial.getSquares();
 		this.board= board;
 	}
 	
