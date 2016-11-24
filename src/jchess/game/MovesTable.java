@@ -237,12 +237,12 @@ public class MovesTable extends AbstractTableModel {
 			locMove += "(e.p)";// pawn take down opponent en passant
 			wasEnPassant = true;
 		}
-		if ((!this.enterBlack && this.game.getChessboard().kingBlack.isChecked())
-				|| (this.enterBlack && this.game.getChessboard().kingWhite.isChecked())) {// if
+		if ((!this.enterBlack && this.game.getChessboard().initial.kingBlack.isChecked())
+				|| (this.enterBlack && this.game.getChessboard().initial.kingWhite.isChecked())) {// if
 																							// checked
 
-			if ((!this.enterBlack && this.game.getChessboard().kingBlack.isCheckmatedOrStalemated() == 1)
-					|| (this.enterBlack && this.game.getChessboard().kingWhite.isCheckmatedOrStalemated() == 1)) {// check
+			if ((!this.enterBlack && this.game.getChessboard().initial.kingBlack.isCheckmatedOrStalemated() == 1)
+					|| (this.enterBlack && this.game.getChessboard().initial.kingWhite.isCheckmatedOrStalemated() == 1)) {// check
 																													// if
 																													// checkmated
 				locMove += "#";// check mate
@@ -540,7 +540,7 @@ public class MovesTable extends AbstractTableModel {
 			int yTo = 9;
 			boolean pieceFound = false;
 			if (locMove.length() <= 3) {
-				Square[][] squares = this.game.getChessboard().squares;
+				Square[][] squares = this.game.getChessboard().initial.squares;
 				xTo = locMove.charAt(from) - 97;// from ASCII
 				yTo = Chessboard.bottom - (locMove.charAt(from + 1) - 49);// from
 																			// ASCII

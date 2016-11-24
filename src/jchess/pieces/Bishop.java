@@ -72,8 +72,8 @@ public class Bishop extends Piece {
 														// piece
 			{
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
-						getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+						getChessboard().initial.squares[h][i])) {
+					list.add(getChessboard().initial.squares[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {
@@ -91,8 +91,8 @@ public class Bishop extends Piece {
 														// isn't piece
 			{
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
-						getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+						getChessboard().initial.squares[h][i])) {
+					list.add(getChessboard().initial.squares[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {
@@ -110,8 +110,8 @@ public class Bishop extends Piece {
 														// piece
 			{
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
-						getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+						getChessboard().initial.squares[h][i])) {
+					list.add(getChessboard().initial.squares[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {
@@ -129,8 +129,8 @@ public class Bishop extends Piece {
 														// isn't piece
 			{
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(),
-						getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+						getChessboard().initial.squares[h][i])) {
+					list.add(getChessboard().initial.squares[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {

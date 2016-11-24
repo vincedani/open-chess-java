@@ -123,9 +123,9 @@ public abstract class Piece {
 
 	public King myKing(Chessboard chessboard) {
 		if (getPlayer().getColor().equals(Player.colors.white)) {
-			return chessboard.kingWhite;
+			return chessboard.initial.kingWhite;
 		} else if (getPlayer().getColor().equals(Player.colors.black)) {
-			return chessboard.kingBlack;
+			return chessboard.initial.kingBlack;
 		}
 		return null;
 	}

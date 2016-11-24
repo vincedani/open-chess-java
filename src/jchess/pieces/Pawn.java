@@ -86,7 +86,7 @@ public class Pawn extends Piece {
 
 	public void regularMove(Chessboard chessboard, King myKing, int newY, ArrayList<Square> list) {
 		if (!this.pieceBehaviour.isout(this.getSquare().getPozX(), newY)) {
-			Square moveSq = chessboard.squares[this.getSquare().getPozX()][newY];
+			Square moveSq = chessboard.initial.squares[this.getSquare().getPozX()][newY];
 
 			if (moveSq.piece == null && myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), moveSq)) {
 				list.add(moveSq);
@@ -97,7 +97,7 @@ public class Pawn extends Piece {
 	
 	public void captureMove(Chessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list){
 		if (!this.pieceBehaviour.isout(newX, newY)) {
-			Square moveSq = chessboard.squares[newX][newY];
+			Square moveSq = chessboard.initial.squares[newX][newY];
 		if (moveSq.piece != null) {// check if can hit left
 			if (this.getPlayer() != moveSq.piece.getPlayer() && !moveSq.piece.getName().equals("King")) {
 					if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), moveSq)) {
@@ -111,8 +111,8 @@ public class Pawn extends Piece {
 	
 	public void enPassantMove(Chessboard chessboard, King myKing, int newX, int newY, int i ,ArrayList<Square> list){
 		if (!this.pieceBehaviour.isout(newX, newY + i)) {
-			Square attSq = getChessboard().squares[newX][newY];
-			Square moveSq = getChessboard().squares[newX][newY + i];
+			Square attSq = getChessboard().initial.squares[newX][newY];
+			Square moveSq = getChessboard().initial.squares[newX][newY + i];
 			if (attSq.piece != null && Chessboard.twoSquareMovedPawn != null
 					&& attSq == Chessboard.twoSquareMovedPawn.getSquare()) {
 				// check if can hit left

@@ -245,7 +245,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener
      */
     public void newGame()
     {
-        getChessboard().setPieces("", getSettings().playerWhite, getSettings().playerBlack);
+        getChessboard().initial.setPieces("", getSettings().playerWhite, getSettings().playerBlack);
 
         //System.out.println("new game, game type: "+settings.gameType.name());
 
@@ -334,10 +334,10 @@ public class Game extends JPanel implements MouseListener, ComponentListener
     {
         try 
         {
-            getChessboard().select(getChessboard().squares[beginX][beginY]);
-            if (getChessboard().activeSquare.piece.allMoves(this.chessboard).indexOf(getChessboard().squares[endX][endY]) != -1) //move
+            getChessboard().select(getChessboard().initial.squares[beginX][beginY]);
+            if (getChessboard().activeSquare.piece.allMoves(this.chessboard).indexOf(getChessboard().initial.squares[endX][endY]) != -1) //move
             {
-                getChessboard().move(getChessboard().squares[beginX][beginY], getChessboard().squares[endX][endY]);
+                getChessboard().move(getChessboard().initial.squares[beginX][beginY], getChessboard().initial.squares[endX][endY]);
             }
             else
             {
@@ -512,11 +512,11 @@ public class Game extends JPanel implements MouseListener, ComponentListener
                         King king;
                         if (this.activePlayer == getSettings().playerWhite)
                         {
-                            king = getChessboard().kingWhite;
+                            king = getChessboard().initial.kingWhite;
                         }
                         else
                         {
-                            king = getChessboard().kingBlack;
+                            king = getChessboard().initial.kingBlack;
                         }
 
                         switch (king.isCheckmatedOrStalemated())

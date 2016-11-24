@@ -70,7 +70,7 @@ public class Queen extends Piece {
 
 			if (this.pieceBehaviour.checkPiece(x, i)) {
 				// if on this square isn't piece
-				Square newMove = chessboard.squares[x][i];
+				Square newMove = chessboard.initial.squares[x][i];
 
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove)) {
 					list.add(newMove);
@@ -90,7 +90,7 @@ public class Queen extends Piece {
 
 			if (this.pieceBehaviour.checkPiece(this.getSquare().getPozX(), i)) {
 				// if on this square isn't piece
-				Square newMove = chessboard.squares[x][i];
+				Square newMove = chessboard.initial.squares[x][i];
 
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove)) {
 					list.add(newMove);
@@ -109,7 +109,7 @@ public class Queen extends Piece {
 
 			if (this.pieceBehaviour.checkPiece(i, this.getSquare().getPozY())) {
 				// if on this square isn't piece
-				Square newMove = chessboard.squares[i][y];
+				Square newMove = chessboard.initial.squares[i][y];
 
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove)) {
 					list.add(newMove);
@@ -128,7 +128,7 @@ public class Queen extends Piece {
 
 			if (this.pieceBehaviour.checkPiece(i, this.getSquare().getPozY())) {
 				// if on this square isn't piece
-				Square newMove = chessboard.squares[i][y];
+				Square newMove = chessboard.initial.squares[i][y];
 
 				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove)) {
 					list.add(newMove);
@@ -149,8 +149,8 @@ public class Queen extends Piece {
 			if (this.pieceBehaviour.checkPiece(h, i)) // if on this square isn't
 														// piece
 			{
-				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().initial.squares[h][i])) {
+					list.add(getChessboard().initial.squares[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {
@@ -167,8 +167,8 @@ public class Queen extends Piece {
 			if (this.pieceBehaviour.checkPiece(h, i)) // if on this square
 														// isn't piece
 			{
-				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().initial.squares[h][i])) {
+					list.add(getChessboard().initial.squares[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {
@@ -185,8 +185,8 @@ public class Queen extends Piece {
 			if (this.pieceBehaviour.checkPiece(h, i)) // if on this square isn't
 														// piece
 			{
-				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().initial.squares[h][i])) {
+					list.add(getChessboard().initial.squares[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {
@@ -203,8 +203,8 @@ public class Queen extends Piece {
 			if (this.pieceBehaviour.checkPiece(h, i)) // if on this square
 														// isn't piece
 			{
-				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().squares[h][i])) {
-					list.add(getChessboard().squares[h][i]);
+				if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), getChessboard().initial.squares[h][i])) {
+					list.add(getChessboard().initial.squares[h][i]);
 				}
 
 				if (this.pieceBehaviour.otherOwner(h, i)) {

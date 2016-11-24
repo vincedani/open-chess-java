@@ -49,7 +49,7 @@ public class Knight extends Piece
     public void regularMove(Chessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list){
     	
     	if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
-        {		Square newMove= chessboard.squares[newX][newY];
+        {		Square newMove= chessboard.initial.squares[newX][newY];
                 if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                 {
                     list.add(newMove);

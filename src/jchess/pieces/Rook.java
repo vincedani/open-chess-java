@@ -76,7 +76,7 @@ public class Rook extends Piece
 
             if (this.pieceBehaviour.checkPiece(x, i))
             {//if on this square isn't piece
-            	Square newMove= chessboard.squares[x][i];
+            	Square newMove= chessboard.initial.squares[x][i];
                 
                     if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                     {
@@ -101,7 +101,7 @@ public class Rook extends Piece
             if (this.pieceBehaviour.checkPiece(this.getSquare().getPozX(), i))
             {//if on this square isn't piece
 
-            	Square newMove= chessboard.squares[x][i];
+            	Square newMove= chessboard.initial.squares[x][i];
                 
                 if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                 {
@@ -124,7 +124,7 @@ public class Rook extends Piece
 
             if (this.pieceBehaviour.checkPiece(i, this.getSquare().getPozY()))
             {//if on this square isn't piece
-            	Square newMove= chessboard.squares[i][y];
+            	Square newMove= chessboard.initial.squares[i][y];
                 
                 if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                 {
@@ -148,7 +148,7 @@ public class Rook extends Piece
             if (this.pieceBehaviour.checkPiece(i, this.getSquare().getPozY()))
             {//if on this square isn't piece
 
-Square newMove= chessboard.squares[i][y];
+Square newMove= chessboard.initial.squares[i][y];
                 
                 if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
                 {

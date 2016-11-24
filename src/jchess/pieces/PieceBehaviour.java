@@ -51,11 +51,11 @@ public class PieceBehaviour {
 	 * @return true if can move, false otherwise
 	 */
 	protected boolean checkPiece(int x, int y) {
-		if (getChessboard().squares[x][y].piece != null
-				&& getChessboard().squares[x][y].piece.getName().equals("King")) {
+		if (getChessboard().initial.squares[x][y].piece != null
+				&& getChessboard().initial.squares[x][y].piece.getName().equals("King")) {
 			return false;
 		}
-		Piece piece = getChessboard().squares[x][y].piece;
+		Piece piece = getChessboard().initial.squares[x][y].piece;
 		if (piece == null || // if this square is empty
 				piece.getPlayer() != this.getPlayer()) // or piece is another
 														// player
@@ -75,7 +75,7 @@ public class PieceBehaviour {
 	 * @return true if owner(player) is different
 	 */
 	protected boolean otherOwner(int x, int y) {
-		Square sq = getChessboard().squares[x][y];
+		Square sq = getChessboard().initial.squares[x][y];
 		if (sq.piece == null) {
 			return false;
 		}
