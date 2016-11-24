@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class SquareBoardDisplay extends JPanel {
+public class SquareBoardDisplay extends JPanel implements IChessboardDisplay {
 	public Square activeSquare;
 	public Image upDownLabel;
 	public Image LeftRightLabel;

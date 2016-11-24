@@ -23,6 +23,8 @@ package jchess.board;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
+
 import main.java.JChessApp;
 import main.java.game.MovesTable;
 import main.java.game.MovesTable.castling;
@@ -558,5 +560,28 @@ public class SquareBoard implements IChessboard
 
 	public SquareBoardInitialization getInitial() {
 		return initial;
+	}
+
+	public Square getActiveSquare() {
+		// TODO Auto-generated method stub
+		return display.activeSquare;
+	}
+
+
+
+
+	@Override
+	public void setActiveSquare(Square sq) {
+		// TODO Auto-generated method stub
+		display.activeSquare= sq;
+	}
+
+
+
+
+	@Override
+	public JPanel getDisplayPanel() {
+		// TODO Auto-generated method stub
+		return display;
 	}
 }

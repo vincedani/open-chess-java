@@ -1,5 +1,7 @@
 package circleBoard;
 
+import javax.swing.JPanel;
+
 import jchess.board.IChessboard;
 import jchess.board.Square;
 import jchess.board.SquareBoardDisplay;
@@ -72,6 +74,24 @@ public class CircleBoard implements IChessboard {
 	public SquareBoardInitialization getInitial() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public JPanel getDisplayPanel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Square getActiveSquare() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setActiveSquare(Square sq) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

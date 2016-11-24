@@ -196,7 +196,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
             + "\nwhite on top?: " + sett.upsideDown + "\n****************");
             newGUI.newGame();//start new Game
             this.parent.setVisible(false);//hide parent
-            newGUI.getChessboard().getDisplay().repaint();
+            newGUI.getChessboard().getDisplayPanel().repaint();
             //newGUI.getChessboard().display.showMessageDialog(this,"test");
             newGUI.getChessboard().getDisplay().draw();
         }

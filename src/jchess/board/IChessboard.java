@@ -1,5 +1,7 @@
 package jchess.board;
 
+import javax.swing.JPanel;
+
 import main.java.game.Player;
 
 public interface IChessboard {
@@ -10,7 +12,9 @@ public interface IChessboard {
 
 	public void unselect();
 	
-	public SquareBoardDisplay getDisplay();
+	public IChessboardDisplay getDisplay();
+	
+	public JPanel getDisplayPanel();
 	
 	public void setPieces(String places, Player plWhite, Player plBlack);
 
@@ -25,6 +29,10 @@ public interface IChessboard {
 	public boolean redo();
 
 	public SquareBoardInitialization getInitial();
+
+	public Square getActiveSquare();
+
+	public void setActiveSquare(Square sq);
 	
 	
 
