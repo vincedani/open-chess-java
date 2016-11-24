@@ -4,3 +4,4 @@
 config.txt
 /bin/
 /lib/
+*.LOG

@@ -66,7 +66,7 @@ public abstract class Piece {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			Point topLeft = this.getChessboard().getTopLeftPoint();
+			Point topLeft = this.getChessboard().display.getTopLeftPoint();
 			int height = this.getChessboard().get_square_height();
 			int x = (this.getSquare().getPozX() * height) + topLeft.x;
 			int y = (this.getSquare().getPozY() * height) + topLeft.y;
@@ -96,7 +96,7 @@ public abstract class Piece {
 		try {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			Point topLeft = this.getChessboard().getTopLeftPoint();
+			Point topLeft = this.getChessboard().display.getTopLeftPoint();
 			int height = this.getChessboard().get_square_height();
 			int x = (this.getSquare().getPozX() * height) + topLeft.x;
 			int y = (this.getSquare().getPozY() * height) + topLeft.y;
