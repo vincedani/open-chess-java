@@ -18,9 +18,9 @@
  */
 package main.java.pieces;
 
-import jchess.board.SquareBoard;
 import jchess.board.Square;
 import main.java.game.MovesTable.castling;
+import squareBoard.SquareBoard;
 
 public class Move
 {

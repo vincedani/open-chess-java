@@ -1,4 +1,4 @@
-package jchess.board;
+package squareBoard;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,6 +14,10 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import jchess.board.ChessboardLayout;
+import jchess.board.IChessboardDisplay;
+import jchess.board.Square;
+
 @SuppressWarnings("serial")
 public class SquareBoardDisplay extends JPanel implements IChessboardDisplay {
 	public Square activeSquare;
@@ -23,6 +27,12 @@ public class SquareBoardDisplay extends JPanel implements IChessboardDisplay {
 	public int active_x_square;
 	public int active_y_square;
 	public float square_height;
+	
+	public static final int img_x = 5;//image x position (used in JChessView class!)
+    public static final int img_y = img_x;//image y position (used in JChessView class!)
+    public static final int img_widht = 480;//image width
+    public static final int img_height = img_widht;//image height
+    
 	private ChessboardLayout board_layout;
 	boolean renderLabels, upsideDown;
 	Square[][] squares;
@@ -37,6 +47,14 @@ public class SquareBoardDisplay extends JPanel implements IChessboardDisplay {
 		this.upsideDown= upsideDown;
 		this.squares= board.initial.getSquares();
 		this.board= board;
+		
+		activeSquare = null;
+        square_height = img_height / 8;//we need to divide to know height of field
+        active_x_square = 0;
+        active_y_square = 0;
+        
+        this.setDoubleBuffered(true);
+        drawLabels((int) square_height);
 	}
 	
 	/**

@@ -21,6 +21,7 @@
 package main.java.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
@@ -56,6 +57,7 @@ public class Settings implements Serializable
     public Player playerWhite;
     public Player playerBlack;
 
+    public ArrayList<Player> players = new ArrayList<>() ;
     public enum gameTypes
     {
 

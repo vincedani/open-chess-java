@@ -28,11 +28,11 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import jchess.board.SquareBoard;
 import jchess.board.IChessboard;
 import jchess.board.Square;
 import main.java.LogToFile;
 import main.java.game.Player;
+import squareBoard.SquareBoard;
 
 /**
  * Class to represent a piece (any kind) - this class should be extended to
@@ -126,12 +126,7 @@ public abstract class Piece {
 	}
 
 	public King myKing(IChessboard chessboard2) {
-		if (getPlayer().getColor().equals(Player.colors.white)) {
-			return chessboard2.getInitial().kingWhite;
-		} else if (getPlayer().getColor().equals(Player.colors.black)) {
-			return chessboard2.getInitial().kingBlack;
-		}
-		return null;
+		return chessboard2.getKing(player);
 	}
 	
 	public abstract ArrayList<Square> allMoves(IChessboard chessboard2);

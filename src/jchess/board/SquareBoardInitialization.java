@@ -7,6 +7,7 @@ import main.java.pieces.Knight;
 import main.java.pieces.Pawn;
 import main.java.pieces.Queen;
 import main.java.pieces.Rook;
+import squareBoard.SquareBoard;
 
 public class SquareBoardInitialization {
 	private Square[][] squares;

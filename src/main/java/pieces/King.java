@@ -40,11 +40,11 @@ import java.awt.Image;
  */
 import java.util.ArrayList;
 
-import jchess.board.SquareBoard;
 import jchess.board.IChessboard;
 import jchess.board.Square;
 import main.java.game.Player;
 import main.java.gui.GUI;
+import squareBoard.SquareBoard;
 
 public class King extends Piece {
 

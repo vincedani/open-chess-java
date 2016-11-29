@@ -31,11 +31,11 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
-import jchess.board.SquareBoard;
 import jchess.board.Square;
 import main.java.LogToFile;
 import main.java.pieces.Move;
 import main.java.pieces.Piece;
+import squareBoard.SquareBoard;
 
 /**
  * Class representing the players moves, it's also checking that the moves taken
@@ -238,12 +238,12 @@ public class MovesTable extends AbstractTableModel {
 			locMove += "(e.p)";// pawn take down opponent en passant
 			wasEnPassant = true;
 		}
-		if ((!this.enterBlack && this.game.getChessboard().getInitial().kingBlack.isChecked())
-				|| (this.enterBlack && this.game.getChessboard().getInitial().kingWhite.isChecked())) {// if
+		if ((!this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerBlack).isChecked())
+				|| (this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerWhite).isChecked())) {// if
 																							// checked
 
-			if ((!this.enterBlack && this.game.getChessboard().getInitial().kingBlack.isCheckmatedOrStalemated() == 1)
-					|| (this.enterBlack && this.game.getChessboard().getInitial().kingWhite.isCheckmatedOrStalemated() == 1)) {// check
+			if ((!this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerBlack).isCheckmatedOrStalemated() == 1)
+					|| (this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerWhite).isCheckmatedOrStalemated() == 1)) {// check
 																													// if
 																													// checkmated
 				locMove += "#";// check mate

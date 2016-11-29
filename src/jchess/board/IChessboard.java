@@ -3,6 +3,7 @@ package jchess.board;
 import javax.swing.JPanel;
 
 import main.java.game.Player;
+import main.java.pieces.King;
 
 public interface IChessboard {
 
@@ -28,12 +29,10 @@ public interface IChessboard {
 
 	public boolean redo();
 
-	public SquareBoardInitialization getInitial();
-
 	public Square getActiveSquare();
 
 	public void setActiveSquare(Square sq);
 	
-	
+	public King getKing(Player player);
 
 }

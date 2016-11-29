@@ -23,11 +23,11 @@ package main.java.pieces;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import jchess.board.SquareBoard;
 import jchess.board.IChessboard;
 import jchess.board.Square;
 import main.java.game.Player;
 import main.java.gui.GUI;
+import squareBoard.SquareBoard;
 
 /**
  * Class to represent a pawn piece Pawn can move only forward and can beat only
