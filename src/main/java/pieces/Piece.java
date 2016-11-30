@@ -28,11 +28,10 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import jchess.board.IChessboard;
-import jchess.board.Square;
 import main.java.LogToFile;
+import main.java.board.IChessboard;
+import main.java.board.Square;
 import main.java.game.Player;
-import squareBoard.SquareBoard;
 
 /**
  * Class to represent a piece (any kind) - this class should be extended to

@@ -39,11 +39,11 @@ import java.awt.Image;
         0 1 2 3 4 5 6 7
  */
 import java.util.ArrayList;
-import jchess.board.IChessboard;
-import jchess.board.Square;
+
+import main.java.board.IChessboard;
+import main.java.board.Square;
 import main.java.game.Player;
 import main.java.gui.GUI;
-import squareBoard.SquareBoard;
 
 public class King extends Piece {
 

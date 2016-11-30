@@ -18,18 +18,18 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
-package squareBoard;
+package main.java.squareBoard;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import jchess.board.ChessboardDisplay;
-import jchess.board.ChessboardLayout;
-import jchess.board.IChessboard;
-import jchess.board.Square;
 import main.java.JChessApp;
+import main.java.board.ChessboardDisplay;
+import main.java.board.ChessboardLayout;
+import main.java.board.IChessboard;
+import main.java.board.Square;
 import main.java.game.MovesTable;
 import main.java.game.MovesTable.castling;
 import main.java.game.Player;

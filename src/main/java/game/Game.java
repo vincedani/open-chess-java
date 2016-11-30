@@ -38,12 +38,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import jchess.board.IChessboard;
-import jchess.board.Square;
 import main.java.JChessApp;
 import main.java.LogToFile;
+import main.java.board.IChessboard;
+import main.java.board.Square;
 import main.java.pieces.King;
-import squareBoard.SquareBoard;
+import main.java.squareBoard.SquareBoard;
 
 /**
  * Class responsible for the starts of new games, loading games, saving it, and

@@ -31,11 +31,11 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
-import jchess.board.Square;
 import main.java.LogToFile;
+import main.java.board.Square;
 import main.java.pieces.Move;
 import main.java.pieces.Piece;
-import squareBoard.SquareBoard;
+import main.java.squareBoard.SquareBoard;
 
 /**
  * Class representing the players moves, it's also checking that the moves taken

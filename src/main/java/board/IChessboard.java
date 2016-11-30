@@ -1,4 +1,4 @@
-package jchess.board;
+package main.java.board;
 
 import javax.swing.JPanel;
 

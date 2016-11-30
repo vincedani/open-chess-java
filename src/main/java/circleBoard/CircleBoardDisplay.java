@@ -1,4 +1,4 @@
-package circleBoard;
+package main.java.circleBoard;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,10 +11,9 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import jchess.board.ChessboardLayout;
-import jchess.board.IChessboardDisplay;
-import jchess.board.Square;
-import squareBoard.SquareBoard;
+import main.java.board.ChessboardLayout;
+import main.java.board.IChessboardDisplay;
+import main.java.board.Square;
 
 public class CircleBoardDisplay extends JPanel implements IChessboardDisplay {
 

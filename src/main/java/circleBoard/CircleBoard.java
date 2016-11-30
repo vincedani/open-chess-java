@@ -1,23 +1,18 @@
-package circleBoard;
+package main.java.circleBoard;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
-
-import jchess.board.ChessboardDisplay;
-import jchess.board.ChessboardLayout;
-import jchess.board.IChessboard;
-import jchess.board.IChessboardDisplay;
-import jchess.board.Square;
+import main.java.board.ChessboardDisplay;
+import main.java.board.ChessboardLayout;
+import main.java.board.IChessboard;
+import main.java.board.Square;
 import main.java.game.MovesTable;
 import main.java.game.Player;
 import main.java.game.Settings;
 import main.java.pieces.King;
 import main.java.pieces.Pawn;
 import main.java.pieces.Piece;
-import squareBoard.SquareBoardDisplay;
-import squareBoard.SquareBoardInitialization;
 
 public class CircleBoard implements IChessboard {
 

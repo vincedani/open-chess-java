@@ -1,4 +1,4 @@
-package squareBoard;
+package main.java.squareBoard;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,13 +11,9 @@ import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import jchess.board.ChessboardDisplay;
-import jchess.board.ChessboardLayout;
-import jchess.board.IChessboardDisplay;
-import jchess.board.Square;
+import main.java.board.ChessboardDisplay;
+import main.java.board.ChessboardLayout;
+import main.java.board.Square;
 
 @SuppressWarnings("serial")
 public class SquareBoardDisplay extends ChessboardDisplay {

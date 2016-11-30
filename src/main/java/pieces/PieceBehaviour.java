@@ -3,9 +3,8 @@ package main.java.pieces;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
-import jchess.board.IChessboard;
-import jchess.board.Square;
+import main.java.board.IChessboard;
+import main.java.board.Square;
 import main.java.game.Player;
 
 public class PieceBehaviour {

@@ -1,6 +1,6 @@
-package circleBoard;
+package main.java.circleBoard;
 
-import jchess.board.Square;
+import main.java.board.Square;
 import main.java.game.Player;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
