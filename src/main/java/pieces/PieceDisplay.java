@@ -32,11 +32,12 @@ public class PieceDisplay {
 		CircleBoard board;
 		Square square;
 		private PieceLayout layout;
+		Piece piece;
 		
 		public CirclePieceDisplay(Piece piece){
 			board = (CircleBoard) piece.getChessboard();
-			square = piece.getSquare();
 			layout = piece.getLayout();
+			this.piece = piece;
 			
 		}
 		
@@ -44,7 +45,9 @@ public class PieceDisplay {
 			try {
 				Graphics2D g2d = (Graphics2D) g;
 				g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
+				
+				square = piece.getSquare();
+				
 				Point topLeft = board.getDisplay().getTopLeftPoint();
 				//int r = this.getChessboard().getDisplay().getWidth() / 2, cx = r, cy = r;
 
@@ -79,7 +82,7 @@ public class PieceDisplay {
 				}
 
 			} catch (java.lang.NullPointerException exc) {
-				//System.out.println("Something wrong when painting piece: " + exc.getMessage());
+				System.out.println("Something wrong when painting piece: " + exc.getMessage());
 				LogToFile.log(exc, "Error", "Something wrong when painting piece: " + exc.getMessage());
 			}
 		}
@@ -89,10 +92,11 @@ public class PieceDisplay {
 		SquareBoard board;
 		Square square;
 		private PieceLayout layout;
+		Piece piece;
 		
 		public SquarePieceDisplay(Piece piece){
 			board = (SquareBoard) piece.getChessboard();
-			square = piece.getSquare();
+			this.piece = piece;
 			layout = piece.getLayout();
 			
 		}
@@ -106,7 +110,7 @@ public class PieceDisplay {
 			try {
 				Graphics2D g2d = (Graphics2D) g;
 				g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
+				square= piece.getSquare();
 				Point topLeft = board.getDisplay().getTopLeftPoint();
 				int height = board.get_square_height();
 
@@ -130,7 +134,7 @@ public class PieceDisplay {
 				}
 
 			} catch (java.lang.NullPointerException exc) {
-				//System.out.println("Something wrong when painting piece: " + exc.getMessage());
+				System.out.println("Something wrong when painting piece: " + exc.getMessage());
 				LogToFile.log(exc, "Error", "Something wrong when painting piece: " + exc.getMessage());
 			}
 		}
