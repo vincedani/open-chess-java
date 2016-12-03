@@ -39,7 +39,7 @@ public class Player implements Serializable
     public enum colors
     {
 
-        white, black
+        white, black, red, blue, green;
     }
     
     private colors color;

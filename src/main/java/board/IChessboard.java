@@ -1,7 +1,5 @@
 package main.java.board;
 
-import javax.swing.JPanel;
-
 import main.java.game.Player;
 import main.java.pieces.King;
 import main.java.pieces.Piece;

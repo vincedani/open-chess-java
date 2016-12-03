@@ -20,7 +20,6 @@
  */
 package main.java.pieces;
 
-import java.awt.Image;
 /**
  * Class to represent a chess pawn king. King is the most important
  * piece for the game. Lose of king is the end of game.
@@ -43,21 +42,17 @@ import java.util.ArrayList;
 import main.java.board.IChessboard;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.gui.GUI;
 
 public class King extends Piece {
 
 	public boolean wasMotion = false;// maybe change to: 'wasMotioned'
 	// public boolean checked = false;
 	public static short value = 99;
-	private static final Image imageWhite = GUI.loadImage("King-W.png");
-	private static final Image imageBlack = GUI.loadImage("King-B.png");
 
 	public King(IChessboard chessboard, Player player) {
 
-		super(chessboard, player);
+		super(chessboard, player, "King"); // call initializer of super type: Piece 
 		this.symbol = "K";
-		this.setImage(imageBlack, imageWhite);
 	}
 
 	

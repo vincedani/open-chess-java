@@ -35,14 +35,13 @@ public class Knight extends Piece
 {
 
     public static short value = 3;
-    protected static final Image imageWhite = GUI.loadImage("Knight-W.png");
-    protected static final Image imageBlack = GUI.loadImage("Knight-B.png");
+//    protected static final Image imageWhite = GUI.loadImage("Knight-W.png");
+//    protected static final Image imageBlack = GUI.loadImage("Knight-B.png");
 
     public Knight(IChessboard chessboard, Player player)
     {
-        super(chessboard, player);//call initializer of super type: Piece
-        this.symbol = "N";
-        this.setImage(imageBlack, imageWhite);
+    	super(chessboard, player, "Knight"); // call initializer of super type: Piece 
+		this.symbol = "N";
     }
 
     public void regularMove(IChessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list){

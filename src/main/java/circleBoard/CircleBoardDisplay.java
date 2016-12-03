@@ -11,11 +11,12 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.IChessboardDisplay;
 import main.java.board.Square;
 
-public class CircleBoardDisplay extends JPanel implements IChessboardDisplay {
+public class CircleBoardDisplay extends ChessboardDisplay {
 
 	public Square activeSquare;
 	public Image upDownLabel;

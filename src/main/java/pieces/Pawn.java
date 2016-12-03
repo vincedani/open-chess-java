@@ -68,14 +68,13 @@ import main.java.gui.GUI;
 public class Pawn extends Piece {
 
 	boolean down;
-	protected static final Image imageWhite = GUI.loadImage("Pawn-W.png");
-	protected static final Image imageBlack = GUI.loadImage("Pawn-B.png");
+//	protected static final Image imageWhite = GUI.loadImage("Pawn-W.png");
+//	protected static final Image imageBlack = GUI.loadImage("Pawn-B.png");
 	public static short value = 1;
 
 	public Pawn(IChessboard chessboard, Player player) {
-		super(chessboard, player);
+		super(chessboard, player, "Pawn"); // call initializer of super type: Piece 
 		this.symbol = "";
-		this.setImage(imageBlack, imageWhite);
 	}
 
 	/**

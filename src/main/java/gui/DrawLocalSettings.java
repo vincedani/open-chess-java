@@ -49,6 +49,8 @@ import main.java.LogToFile;
 import main.java.game.Game;
 import main.java.game.Player;
 import main.java.game.Settings;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Class responsible for drawing the fold with local game settings
@@ -65,10 +67,12 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 	JSlider computerLevel;// slider to choose jChess Engine level
 	JTextField firstName;// editable field 4 nickname
 	JTextField secondName;// editable field 4 nickname
+	JTextField thirdName;
 	JLabel firstNameLab;
 	JLabel secondNameLab;
+	JLabel thirdNameLab;
 	JCheckBox upsideDown;// if true draw chessboard upsideDown(white on top)
-	JCheckBox threePlayer;
+	JCheckBox threePlayers;
 	GridBagLayout gbl;
 	GridBagConstraints gbc;
 	Container cont;
@@ -76,7 +80,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 	JButton okButton;
 	JCheckBox timeGame;
 	JComboBox time4Game;
-	String colors[] = { Settings.lang("white"), Settings.lang("black") };
+	String colors[] = { Settings.lang("White"), Settings.lang("Black"),  Settings.lang("Blue"),  Settings.lang("Red"),  Settings.lang("Green") };
 	String times[] = { "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120" };
 
 	;
@@ -244,12 +248,27 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		this.firstName.setSize(new Dimension(200, 50));
 		this.secondName = new JTextField("", 10);
 		this.secondName.setSize(new Dimension(200, 50));
+		this.thirdName = new JTextField("", 10);
+		this.thirdName.setSize(new Dimension(200, 50));
+		
 		this.firstNameLab = new JLabel(Settings.lang("first_player_name") + ": ");
 		this.secondNameLab = new JLabel(Settings.lang("second_player_name") + ": ");
+		this.thirdNameLab = new JLabel("3rd player name: ");
+		
 		this.oponentChoos = new ButtonGroup();
 		this.computerLevel = new JSlider();
 		this.upsideDown = new JCheckBox(Settings.lang("upside_down"));
-		this.threePlayer = new JCheckBox(Settings.lang("tree_player"));
+		this.threePlayers = new JCheckBox("Three Players", true);
+		threePlayers.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (thirdName.isEnabled()==true){
+					thirdName.setEnabled(false);
+				}else {
+					thirdName.setEnabled(true);
+				}
+			}
+		});
 		this.timeGame = new JCheckBox(Settings.lang("time_game_min"));
 		this.time4Game = new JComboBox(times);
 
@@ -269,57 +288,88 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		this.computerLevel.setMaximum(3);
 		this.computerLevel.setMinimum(1);
 
-		this.gbc.gridx = 0;
+		// Row 0
+		this.gbc.gridx = 1;
 		this.gbc.gridy = 0;
-		this.gbc.insets = new Insets(3, 3, 3, 3);
-		this.gbl.setConstraints(oponentComp, gbc);
-		this.add(oponentComp);
+		this.gbl.setConstraints(threePlayers, gbc);
+		this.add(threePlayers);
+		
+		// Row 1
+//		this.gbc.gridx = 0;
+		this.gbc.gridy = 1;
+//		this.gbc.insets = new Insets(3, 3, 3, 3);
+//		this.gbl.setConstraints(oponentComp, gbc);
+//		this.add(oponentComp);
 		this.gbc.gridx = 1;
 		this.gbl.setConstraints(oponentHuman, gbc);
 		this.add(oponentHuman);
-		this.gbc.gridx = 0;
-		this.gbc.gridy = 1;
-		this.gbl.setConstraints(firstNameLab, gbc);
-		this.add(firstNameLab);
+		
+		// Row 2
 		this.gbc.gridx = 0;
 		this.gbc.gridy = 2;
+		this.gbl.setConstraints(firstNameLab, gbc);
+		this.add(firstNameLab);
+		
+		// Row 3
+		this.gbc.gridx = 0;
+		this.gbc.gridy = 3;
 		this.gbl.setConstraints(firstName, gbc);
 		this.add(firstName);
 		this.gbc.gridx = 1;
-		this.gbc.gridy = 2;
+		this.gbc.gridy = 3;
 		this.gbl.setConstraints(color, gbc);
 		this.add(color);
+		
+		// Row 4
 		this.gbc.gridx = 0;
-		this.gbc.gridy = 3;
+		this.gbc.gridy = 4;
 		this.gbl.setConstraints(secondNameLab, gbc);
 		this.add(secondNameLab);
-		this.gbc.gridy = 4;
+		
+		// Row 5
+		this.gbc.gridy = 5;
 		this.gbl.setConstraints(secondName, gbc);
 		this.add(secondName);
-		this.gbc.gridy = 5;
-		this.gbc.insets = new Insets(0, 0, 0, 0);
-		this.gbl.setConstraints(compLevLab, gbc);
-		this.add(compLevLab);
+		
+		// Row 6
 		this.gbc.gridy = 6;
-		this.gbl.setConstraints(computerLevel, gbc);
-		this.add(computerLevel);
+		this.gbl.setConstraints(thirdNameLab, gbc);
+		this.add(thirdNameLab);
+		
+//		this.gbc.insets = new Insets(0, 0, 0, 0);
+//		this.gbl.setConstraints(compLevLab, gbc);
+//		this.add(compLevLab);
+		
+		// Row 7
 		this.gbc.gridy = 7;
+		this.gbl.setConstraints(thirdName, gbc);
+		this.add(thirdName);
+//		this.gbl.setConstraints(computerLevel, gbc);
+//		this.add(computerLevel);
+		
+		// Row 8
+		this.gbc.gridy = 8;
 		this.gbl.setConstraints(upsideDown, gbc);
 		this.add(upsideDown);
-		this.gbc.gridy = 8;
-		this.gbc.gridwidth = 1;
-		this.gbl.setConstraints(timeGame, gbc);
-		this.add(timeGame);
+		
+		// Row 9
+//		this.gbc.gridy = 9;
+//		this.gbc.gridwidth = 1;
+//		this.gbl.setConstraints(timeGame, gbc);
+//		this.add(timeGame);
+//		this.gbc.gridx = 1;
+//		this.gbc.gridy = 8;
+//		this.gbc.gridwidth = 1;
+//		this.gbl.setConstraints(time4Game, gbc);
+//		this.add(time4Game);
+		
+		// Row 10
 		this.gbc.gridx = 1;
-		this.gbc.gridy = 8;
-		this.gbc.gridwidth = 1;
-		this.gbl.setConstraints(time4Game, gbc);
-		this.add(time4Game);
-		this.gbc.gridx = 1;
-		this.gbc.gridy = 9;
+		this.gbc.gridy = 10;
 		this.gbc.gridwidth = 0;
 		this.gbl.setConstraints(okButton, gbc);
 		this.add(okButton);
+		
 		this.oponentComp.setEnabled(false);// for now, becouse not implemented!
 
 	}

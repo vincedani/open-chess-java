@@ -20,13 +20,11 @@
  */
 package main.java.pieces;
 
-import java.awt.Image;
 import java.util.ArrayList;
 
 import main.java.board.IChessboard;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.gui.GUI;
 
 /**
  * Class to represent a chess pawn bishop Bishop can move across the chessboard
@@ -44,14 +42,14 @@ import main.java.gui.GUI;
 public class Bishop extends Piece {
 
 	public static short value = 3;
-	protected static final Image imageWhite = GUI.loadImage("Bishop-W.png");
-	protected static final Image imageBlack = GUI.loadImage("Bishop-B.png");
+	
+//	protected static final Image imageWhite = GUI.loadImage("Bishop-W.png");
+//	protected static final Image imageBlack = GUI.loadImage("Bishop-B.png");
 
 	public Bishop(IChessboard chessboard, Player player) {
-
-		super(chessboard, player); // call initializer of super type: Piece
+		
+		super(chessboard, player, "Bishop"); // call initializer of super type: Piece 
 		this.symbol = "B";
-		this.setImage(imageBlack, imageWhite);
 	}
 
 	/**

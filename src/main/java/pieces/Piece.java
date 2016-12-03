@@ -21,17 +21,12 @@
 package main.java.pieces;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import main.java.LogToFile;
 import main.java.board.IChessboard;
 import main.java.board.Square;
 import main.java.game.Player;
+import main.java.game.Player.colors;
 
 /**
  * Class to represent a piece (any kind) - this class should be extended to
@@ -47,103 +42,38 @@ public abstract class Piece {
 	private Player player;
 	private String name;
 	protected String symbol;
-	private Image orgImage;
-	private Image image;
+	private PieceLayout layout;
+	private PieceDisplay display;
 
-	public Piece(IChessboard chessboard, Player player) {
+	public Piece(IChessboard chessboard, Player player, String imagePath) {
 
 		this.setChessboard(chessboard);
 		this.setPlayer(player);
+		
+		colors color = player.getColor();
+		String imageColorPath = "";
+		switch (color) {
+			case black:	imageColorPath ="-Black.png";
+						break;
+			case white:	imageColorPath ="-White.png";
+						break;
+			case blue:	imageColorPath ="-Blue.png";
+						break;
+			case red:	imageColorPath ="-Red.png";
+						break;
+			case green:	imageColorPath ="-Green.png";
+						break;
+		}
+		//System.out.println("Color escogido: " + color);
+		imagePath += imageColorPath;
+		System.out.println("Image: " + imagePath);
+		
 		this.setName(this.getClass().getSimpleName());
+		this.setLayout(new PieceLayout(imagePath));
 		this.pieceBehaviour = new PieceBehaviour(chessboard, player);
-
+		this.display = new PieceDisplay(this);
 	}
-	/*
-	 * Method to draw piece on chessboard
-	 * 
-	 * @graph : where to draw
-	 */
-
-	public final void draw(Graphics g) {
-		try {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			Point topLeft = this.getChessboard().getDisplay().getTopLeftPoint();
-			int height = this.getChessboard().get_square_height();
-
-			int x = (this.getSquare().getPozX() * height) + topLeft.x;
-			int y = (this.getSquare().getPozY() * height) + topLeft.y;
-			float addX = (height - getImage().getWidth(null)) / 2;
-			float addY = (height - getImage().getHeight(null)) / 2;
-			if (getImage() != null && g != null) {
-				Image tempImage = orgImage;
-				BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
-				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
-				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				imageGr.drawImage(tempImage, 0, 0, height, height, null);
-				imageGr.dispose();
-				setImage(resized.getScaledInstance(height, height, 0));
-				g2d.drawImage(getImage(), x, y, null);
-			} else {
-				//System.out.println("image is null!");
-				LogToFile.log(null, "Debug", "image is null!");
-			}
-
-		} catch (java.lang.NullPointerException exc) {
-			//System.out.println("Something wrong when painting piece: " + exc.getMessage());
-			LogToFile.log(exc, "Error", "Something wrong when painting piece: " + exc.getMessage());
-		}
-	}
-
-	public final void draw2(Graphics g) {
-		try {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			Point topLeft = this.getChessboard().getDisplay().getTopLeftPoint();
-			int r = this.getChessboard().getDisplay().getWidth() / 2, cx = r, cy = r;
-
-			int hi = (r - r / 3) / 6;
-			int ri = r - (this.getSquare().getPozY() + 1) * hi;
-			int rs = ri + hi;
-
-			int a1 = (6 - this.getSquare().getPozX()) * 15;
-			int a2 = (6 - this.getSquare().getPozX() - 1) * 15;
-			int rm = (rs + ri) / 2;
-			int am = (a1 + a2) / 2;
-
-			int height = this.getChessboard().get_square_height();
-			int x = (this.getSquare().getPozX() * height) + topLeft.x;
-			int y = (this.getSquare().getPozY() * height) + topLeft.y;
-
-			
-			int xm = topLeft.x + cx + (int) (rm * Math.cos(Math.toRadians(am))) - hi / 2;
-			int ym = topLeft.y + cy - (int) (rm * Math.sin(Math.toRadians(am))) - hi / 2;
-
-			if (getImage() != null && g != null) {
-				Image tempImage = orgImage;
-				BufferedImage resized = new BufferedImage(hi, hi, BufferedImage.TYPE_INT_ARGB_PRE);
-				Graphics2D imageGr = (Graphics2D) resized.createGraphics();
-				imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				imageGr.drawImage(tempImage, 0, 0, hi, hi, null);
-				imageGr.dispose();
-				setImage(resized.getScaledInstance(hi, hi, 0));
-				g2d.drawImage(getImage(), xm, ym, null);
-			} else {
-				//System.out.println("image is null!");
-				LogToFile.log(null, "Debug", "image is null!");
-			}
-
-		} catch (java.lang.NullPointerException exc) {
-			//System.out.println("Something wrong when painting piece: " + exc.getMessage());
-			LogToFile.log(exc, "Error", "Something wrong when painting piece: " + exc.getMessage());
-		}
-	}
-
-	void clean() {
-	}
-
+	
 
 	public King myKing(IChessboard chessboard2) {
 		return chessboard2.getKing(player);
@@ -191,25 +121,7 @@ public abstract class Piece {
 		this.player = player;
 	}
 
-	public Image getImage() {
-		return image;
-	}
-
-	public void setImage(Image imageBlack, Image imageWhite) {
-		// Set the image according to the color
-		if (this.getPlayer().getColor() == this.getPlayer().getColor().black) {
-			image = imageBlack;
-		} else {
-			image = imageWhite;
-		}
-		orgImage = image;
-	}
-
-	public void setImage(Image image) {
-		// Set the image when resizing
-		this.image = image;
-	}
-
+	
 	public Square getSquare() {
 		return square;
 	}
@@ -218,11 +130,20 @@ public abstract class Piece {
 		this.square = square;
 	}
 
-	public Image getOrgImage() {
-		return orgImage;
+	
+
+	public PieceLayout getLayout() {
+		return layout;
 	}
 
-	public void setOrgImage(Image orgImage) {
-		this.orgImage = orgImage;
+
+	public void setLayout(PieceLayout layout) {
+		this.layout = layout;
+	}
+
+
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		display.draw(g);
 	}
 }

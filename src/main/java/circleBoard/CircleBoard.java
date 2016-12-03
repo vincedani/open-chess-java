@@ -182,4 +182,9 @@ public class CircleBoard implements IChessboard {
 		return 0;
 	}
 
+	public int getRadius() {
+		// TODO Auto-generated method stub
+		return display.getWidth()/2;
+	}
+
 }

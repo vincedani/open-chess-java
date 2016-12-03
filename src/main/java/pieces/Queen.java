@@ -43,16 +43,14 @@ import main.java.gui.GUI;
 public class Queen extends Piece {
 
 	public static short value = 9;
-	protected static final Image imageWhite = GUI.loadImage("Queen-W.png");
-	protected static final Image imageBlack = GUI.loadImage("Queen-B.png");
+//	protected static final Image imageWhite = GUI.loadImage("Queen-W.png");
+//	protected static final Image imageBlack = GUI.loadImage("Queen-B.png");
 
 
 	public Queen(IChessboard chessboard, Player player) {
 
-		super(chessboard, player);// call initializer of super type: Piece
-		// this.setImages("Queen-W.png", "Queen-B.png");
+		super(chessboard, player, "Queen"); // call initializer of super type: Piece 
 		this.symbol = "Q";
-		this.setImage(imageBlack, imageWhite);
 	}
 
 	/**

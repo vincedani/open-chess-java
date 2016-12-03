@@ -48,17 +48,15 @@ public class Rook extends Piece
 {
 
     private boolean wasMotion = false;
-    protected static final Image imageWhite = GUI.loadImage("Rook-W.png");
-    protected static final Image imageBlack = GUI.loadImage("Rook-B.png");
+//    protected static final Image imageWhite = GUI.loadImage("Rook-W.png");
+//    protected static final Image imageBlack = GUI.loadImage("Rook-B.png");
     public static short value = 5;
 
 
     public Rook(IChessboard chessboard, Player player)
    {
-        super(chessboard, player);//call initializer of super type: Piece
-        //this.setImages("Rook-W.png", "Rook-B.png");
-        this.symbol = "R";
-        this.setImage(imageBlack, imageWhite);
+    	super(chessboard, player, "Rook"); // call initializer of super type: Piece 
+		this.symbol = "R";
     }
 
     /**
