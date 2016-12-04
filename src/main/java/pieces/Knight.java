@@ -20,13 +20,12 @@
  */
 package main.java.pieces;
 
-import java.awt.Image;
 import java.util.ArrayList;
 
 import main.java.board.IChessboard;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.gui.GUI;
+import main.java.movesInSquareBoard.KnightMoves;
 
 /**
  * Class to represent a chess pawn knight
@@ -60,9 +59,7 @@ public class Knight extends Piece
      */
     public ArrayList<Square> allMoves(IChessboard chessboard)
     {
-        ArrayList<Square> list = new ArrayList<Square>();
-        King myKing = myKing(chessboard);
-
+        
         // knight all moves
         //  _______________ Y:
         // |_|_|_|_|_|_|_|_|7
@@ -75,57 +72,7 @@ public class Knight extends Piece
         // |_|_|_|_|_|_|_|_|0
         //X:0 1 2 3 4 5 6 7
         //
-
-        int newX, newY;
-
-        //1
-        newX = this.getSquare().getPozX() - 2;
-        newY = this.getSquare().getPozY() + 1;
-
-       regularMove(chessboard,myKing, newX, newY, list);
-
-        //2
-        newX = this.getSquare().getPozX() - 1;
-        newY = this.getSquare().getPozY() + 2;
-
-        regularMove(chessboard, myKing,newX, newY, list);
-
-        //3
-        newX = this.getSquare().getPozX() + 1;
-        newY = this.getSquare().getPozY() + 2;
-
-        regularMove(chessboard, myKing,newX, newY, list);
-
-        //4
-        newX = this.getSquare().getPozX() + 2;
-        newY = this.getSquare().getPozY() + 1;
-
-        regularMove(chessboard, myKing,newX, newY, list);
-
-        //5
-        newX = this.getSquare().getPozX() + 2;
-        newY = this.getSquare().getPozY() - 1;
-
-        regularMove(chessboard, myKing,newX, newY, list);
-
-        //6
-        newX = this.getSquare().getPozX() + 1;
-        newY = this.getSquare().getPozY() - 2;
-
-        regularMove(chessboard, myKing,newX, newY, list);
-
-        //7
-        newX = this.getSquare().getPozX() - 1;
-        newY = this.getSquare().getPozY() - 2;
-
-        regularMove(chessboard, myKing,newX, newY, list);
-
-        //8
-        newX = this.getSquare().getPozX() - 2;
-        newY = this.getSquare().getPozY() - 1;
-
-        regularMove(chessboard, myKing,newX, newY, list);
-
-        return list;
+        
+        return KnightMoves.getMoves(this);
     }
 }

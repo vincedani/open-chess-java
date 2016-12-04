@@ -112,11 +112,11 @@ public class SquareBoard implements IChessboard {
 			x -= this.display.upDownLabel.getHeight(null);
 			y -= this.display.upDownLabel.getHeight(null);
 		}
-		double square_x = x / display.square_height;// count which field in X
+		double square_x = (int) (x / display.square_height);// count which field in X
 													// was clicked
-		double square_y = y / display.square_height;// count which field in Y
+		double square_y = (int) (y / display.square_height);// count which field in Y
 													// was clicked
-
+		/**
 		if (square_x > (int) square_x) // if X is more than X parsed to Integer
 		{
 			square_x = (int) square_x + 1;// parse to integer and increment
@@ -125,12 +125,13 @@ public class SquareBoard implements IChessboard {
 		{
 			square_y = (int) square_y + 1;// parse to integer and increment
 		}
+		**/
 		// Square newActiveSquare =
 		// this.squares[(int)square_x-1][(int)square_y-1];//4test
 		System.out.println("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
 
 		try {
-			return this.initial.getSquares()[(int) square_x - 1][(int) square_y - 1];
+			return initial.getSquares()[(int) square_x][(int) square_y];
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 			System.out.println("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : " + exc);
 			return null;
@@ -145,8 +146,8 @@ public class SquareBoard implements IChessboard {
 	 */
 	public void select(Square sq) {
 		this.display.activeSquare = sq;
-		this.display.active_x_square = sq.getPozX() + 1;
-		this.display.active_y_square = sq.getPozY() + 1;
+		this.display.active_x_square = sq.getPozX();
+		this.display.active_y_square = sq.getPozY();
 
 		// this.draw();//redraw
 		System.out.println("active_x: " + this.display.active_x_square + " active_y: " + this.display.active_y_square);// 4tests
@@ -158,8 +159,8 @@ public class SquareBoard implements IChessboard {
 	 * Method set variables active_x_square & active_y_square to 0 values.
 	 */
 	public void unselect() {
-		this.display.active_x_square = 0;
-		this.display.active_y_square = 0;
+		this.display.active_x_square = -1;
+		this.display.active_y_square = -1;
 		this.display.activeSquare = null;
 		// this.draw();//redraw
 		display.repaint();
@@ -531,10 +532,6 @@ public class SquareBoard implements IChessboard {
 
 	public void setActiveSquare(Square sq) {
 		display.activeSquare = sq;
-	}
-
-	public JPanel getDisplayPanel() {
-		return display;
 	}
 
 	public King getKing(Player player) {

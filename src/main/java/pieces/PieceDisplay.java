@@ -49,8 +49,7 @@ public class PieceDisplay {
 				square = piece.getSquare();
 				
 				Point topLeft = board.getDisplay().getTopLeftPoint();
-				//int r = this.getChessboard().getDisplay().getWidth() / 2, cx = r, cy = r;
-
+				
 				int r = board.getRadius();
 				int hi = board.get_square_height();
 				

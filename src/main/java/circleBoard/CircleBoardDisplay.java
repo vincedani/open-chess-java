@@ -8,12 +8,10 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-
-import javax.swing.JPanel;
+import java.util.Iterator;
 
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
-import main.java.board.IChessboardDisplay;
 import main.java.board.Square;
 
 public class CircleBoardDisplay extends ChessboardDisplay {
@@ -24,8 +22,6 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 	public Point topLeftPoint;
 	public int active_x_square;
 	public int active_y_square;
-	public float square_height;
-	int radius;
 	
 	public static final int img_x = 5;//image x position (used in JChessView class!)
     public static final int img_y = img_x;//image y position (used in JChessView class!)
@@ -47,13 +43,11 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		this.squares= board.initial.getSquares();
 		this.board= board;
 		activeSquare = null;
-		radius = img_widht/2;
-        square_height = img_height / 8;//we need to divide to know height of field
-        active_x_square = 0;
-        active_y_square = 0;
+		active_x_square = -1;
+        active_y_square = -1;
         
         this.setDoubleBuffered(true);
-        drawLabels((int) square_height);
+        drawLabels(get_square_height());
 	}
 	
 	
@@ -63,7 +57,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		
 		if (renderLabels) {
 			if (topLeftPoint.x <= 0 && topLeftPoint.y <= 0) {
-				drawLabels(square_height);
+				drawLabels(get_square_height());
 			}
 
 			g2d.drawImage(this.upDownLabel, 0, 0, null);
@@ -74,7 +68,12 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);
 		drawPieces(g);
 		drawHighlightedSquares(g2d);
-
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}/*--endOf-paint--*/ 
 	
 
@@ -89,59 +88,81 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		} // --endOf--drawPiecesOnSquares
 	}
 
+	public Point indexToCartesian(Point p1){
+		int xi = p1.x;
+		int yi = p1.y;
+		
+		int ri = (int) (getRadius() - (yi + 1) * get_square_height());
+		int rs = (int) (ri + get_square_height());
+
+		int a1 = (6 - xi) * 15;
+		int a2 = a1 - 15;
+		int rm = (rs + ri) / 2;
+		int am = (a1 + a2) / 2;
+
+		int xm = (int) (topLeftPoint.x + getRadius() + (int) (rm * Math.cos(Math.toRadians(am))) - get_square_height() / 2);
+		int ym = (int) (topLeftPoint.y + getRadius() - (int) (rm * Math.sin(Math.toRadians(am))) - get_square_height() / 2);
+		
+		return new Point(xm, ym);
+
+	}
+	
 	public void drawHighlightedSquares(Graphics2D g2d) {
 
 		if (activeSquare != null) {
 			int xi = activeSquare.getPozX();
 			int yi = activeSquare.getPozY();
+			
+			Point pm = indexToCartesian(new Point(xi, yi));
 
-			int ri = (int) (radius - (yi + 1) * square_height);
-			int rs = (int) (ri + square_height);
-
-			int a1 = (6 - xi) * 15;
-			int a2 = a1 - 15;
-			int rm = (rs + ri) / 2;
-			int am = (a1 + a2) / 2;
-
-			int xm = (int) (topLeftPoint.x + radius + (int) (rm * Math.cos(Math.toRadians(am))) - square_height / 2);
-			int ym = (int) (topLeftPoint.y + radius - (int) (rm * Math.sin(Math.toRadians(am))) - square_height / 2);
-
+			int xm = pm.x;
+			int ym = pm.y;
+			
 			Image tempImage = board_layout.orgSelSquare;
-			BufferedImage resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
-			Graphics2D imageGr = (Graphics2D) resized.createGraphics();
-			imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			imageGr.drawImage(tempImage, 0, 0, (int) square_height, (int) square_height, null);
-			imageGr.dispose();
-			board_layout.selSquare = resized.getScaledInstance((int)square_height, (int)square_height, 0);
+			BufferedImage resized = resizeImage(tempImage, get_square_height());
+			board_layout.selSquare = resized.getScaledInstance(get_square_height(), get_square_height(), 0);
 			g2d.drawImage(board_layout.selSquare, xm, ym, null);
+			
+			if (activeSquare.piece != null)
+            {
+                board.moves = activeSquare.piece.allMoves(board);
+                for (Iterator<Square> it = board.moves.iterator(); board.moves != null && it.hasNext();)
+                {
+                    Square sq = (Square) it.next();
+                    Point p_sq = indexToCartesian(new Point(sq.getPozX(),sq.getPozY()));
+                    
+                    tempImage = board_layout.orgAbleSquare;
+                    resized = resizeImage(tempImage,get_square_height());
+        			board_layout.ableSquare = resized.getScaledInstance(get_square_height(), get_square_height(), 0);
+        			
+                    g2d.drawImage(board_layout.ableSquare, p_sq.x, p_sq.y, null);
+                }
+            }
 
 		}
 	}
 
-	public void resizeChessboard(int height) {
+
+	private BufferedImage resizeImage(Image tempImage, int height) {
 		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
-		Graphics g = resized.createGraphics();
-		g.drawImage(board_layout.orgImage, 0, 0, height, height, null);
-		g.dispose();
+		Graphics2D imageGr = (Graphics2D) resized.createGraphics();
+		imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		imageGr.drawImage(tempImage, 0, 0, height, height, null);
+		imageGr.dispose();
+		return resized;
+	}
+
+	public void resizeChessboard(int height) {
+		BufferedImage resized = resizeImage(board_layout.orgImage, height);
 		board_layout.image = resized.getScaledInstance(height, height, 0);
-		square_height = (height - height / 3) / 6;
-		;
+		
+		int square_height = (height - height / 3) / 6;
+
 		if (renderLabels) {
 			height += 2 * (this.upDownLabel.getHeight(null));
 		}
+		
 		this.setSize(height, height);
-
-		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
-		g = resized.createGraphics();
-		g.drawImage(board_layout.orgAbleSquare, 0, 0, (int) square_height, (int) square_height, null);
-		//g.dispose();
-		board_layout.ableSquare = resized.getScaledInstance((int) square_height, (int) square_height, 0);
-
-		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
-		g = resized.createGraphics();
-		g.drawImage(board_layout.orgSelSquare, 0, 0, (int) square_height, (int) square_height, null);
-		g.dispose();
-		board_layout.selSquare = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 		this.drawLabels(square_height);
 	}
 
@@ -195,15 +216,9 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 
 
 	public int getUpDownLabelHeight() {
-		// TODO Auto-generated method stub
 		return upDownLabel.getHeight(null);
 	}
 
-
-	public int getSquareHeight() {
-		// TODO Auto-generated method stub
-		return (int) square_height;
-	}
 
 	public int getHeight()
     {
@@ -216,12 +231,22 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public int get_square_height() {
+		return (getRadius()-getRadius()/3)/6;
+	}
 
+	public int getRadius() {
+		return board_layout.image.getHeight(null)/2;
+	}
 
 	@Override
 	public Point getTopLeftPoint() {
-		// TODO Auto-generated method stub
-		return null;
+		if (renderLabels)
+        {
+            return new Point(topLeftPoint.x + upDownLabel.getHeight(null), topLeftPoint.y + upDownLabel.getHeight(null));
+        }
+		return topLeftPoint;
 	}
 
 }

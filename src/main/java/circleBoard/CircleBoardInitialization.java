@@ -72,12 +72,17 @@ public class CircleBoardInitialization {
 		squares[i][j].setPiece(new Rook(board, player));
 		squares[i + 1][j].setPiece(new Bishop(board, player));
 		squares[i + 2][j].setPiece(new Knight(board, player));
-		squares[i + 3][j].setPiece(new King(board, player));
+		if (player.getColor().equals(Player.colors.white)) {
+			squares[i + 3][j].setPiece(kingWhite=new King(board, player));
+		} else if (player.getColor().equals(Player.colors.black)) {
+			squares[i + 3][j].setPiece(kingBlack=new King(board, player));
+		}
 		squares[i + 4][j].setPiece(new Queen(board, player));
 		squares[i + 5][j].setPiece(new Knight(board, player));
 		squares[i + 6][j].setPiece(new Bishop(board, player));
 		squares[i + 7][j].setPiece(new Rook(board, player));
-
+		
+		
 	}
 
 	/**

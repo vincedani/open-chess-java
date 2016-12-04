@@ -40,10 +40,11 @@ public class CircleBoard implements IChessboard {
 	ChessboardLayout board_layout = new ChessboardLayout("circle_chessboard.png", "sel_circle.png", "able_circle.png");
 	public CircleBoardInitialization initial;
 	private CircleBoardDisplay display;
-	
+
 	public CircleBoard(Settings settings, MovesTable moves_history) {
-		
+
 		this.settings = settings;
+		settings.renderLabels = false;
 		initial = new CircleBoardInitialization(this);
 		display = new CircleBoardDisplay(null, null, new Point(0, 0), settings.renderLabels, settings.upsideDown, this);
 		this.moves_history = moves_history;
@@ -51,31 +52,48 @@ public class CircleBoard implements IChessboard {
 
 	@Override
 	public Square getSquare(int x, int y) {
+
 		if (display.renderLabels) {
 			x -= display.getUpDownLabelHeight();
 			y -= display.getUpDownLabelHeight();
 		}
 
-		if (x > 2 * display.radius || y > 2 * display.radius) // test if click is out of chessboard
+		if (x > 2 * getRadius() || y > 2 * getRadius()) // test if click is out
+														// of chessboard
 		{
 			System.out.println("click out of chessboard.");
 			return null;
 		}
-		
-		int cx= display.radius, cy= display.radius;
-		
+
+		int cx = getRadius(), cy = getRadius();
 		double ri = Math.sqrt(Math.pow((cx - x), 2) + Math.pow((cy - y), 2));
-		double xi = (double) (x - cx);
+
+		double xi;
+		if (x > cx) {
+			xi = (double) (x - cx);
+		} else {
+			xi = (double) x;
+		}
 
 		double ai = Math.toDegrees(Math.acos(xi / ri));
-
+		/**
+		if (x > cx && y > cy) {
+			ai += 90;
+		} else if (x < cx && y > cy) {
+			ai += 180;
+		} else if (x < cx && y < cy) {
+			ai += 270;
+		}
+		 **/
 		double square_x = 6 - (ai / 15);// count which field in X was
 										// clicked
-
-		double square_y = (display.radius - ri) / display.square_height;// count which field in Y was
-										// clicked
-
 		
+		
+		double square_y = (cy - ri) / get_square_height();// count which field
+															// in Y
+															// was
+		// clicked
+
 		if (square_x > (int) square_x) // if X is more than X parsed to Integer
 		{
 			square_x = (int) square_x + 1;// parse to integer and increment
@@ -90,7 +108,7 @@ public class CircleBoard implements IChessboard {
 			result = initial.squares[(int) square_x - 1][(int) square_y - 1];
 			System.out.println("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
 			return result;
-			
+
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 			System.out.println("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : " + exc);
 			return null;
@@ -99,39 +117,45 @@ public class CircleBoard implements IChessboard {
 
 	@Override
 	public void select(Square sq) {
-		// TODO Auto-generated method stub
-		
+		this.display.activeSquare = sq;
+		this.display.active_x_square = sq.getPozX();
+		this.display.active_y_square = sq.getPozY();
+		System.out.println("active_x: " + this.display.active_x_square + " active_y: " + this.display.active_y_square);// 4tests
+		display.repaint();
 	}
 
 	@Override
 	public void unselect() {
-		// TODO Auto-generated method stub
-		
+		this.display.active_x_square = -1;
+		this.display.active_y_square = -1;
+		this.display.activeSquare = null;
+		display.repaint();
 	}
 
-	
 	@Override
 	public void setPieces(String places, Player plWhite, Player plBlack) {
-		// TODO Auto-generated method stub
-		
+		plWhite.setGoDown(true);
+		initial.setPieces(places, new Player[] { plWhite, plBlack, plBlack });
+
 	}
 
 	@Override
 	public int get_height(boolean b) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (this.settings.renderLabels) {
+			return board_layout.image.getHeight(null) + display.upDownLabel.getHeight(null);
+		}
+		return board_layout.image.getHeight(null);
 	}
 
 	@Override
 	public Square[][] getSquares() {
-		// TODO Auto-generated method stub
-		return null;
+		return initial.squares;
 	}
 
 	@Override
 	public void move(Square square, Square square2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -149,18 +173,22 @@ public class CircleBoard implements IChessboard {
 	@Override
 	public Square getActiveSquare() {
 		// TODO Auto-generated method stub
-		return null;
+		return display.activeSquare;
 	}
 
 	@Override
 	public void setActiveSquare(Square sq) {
 		// TODO Auto-generated method stub
-		
+		display.activeSquare = sq;
 	}
 
 	@Override
 	public King getKing(Player player) {
-		// TODO Auto-generated method stub
+		if (player.getColor().equals(Player.colors.white)) {
+			return initial.kingWhite;
+		} else if (player.getColor().equals(Player.colors.black)) {
+			return initial.kingBlack;
+		}
 		return null;
 	}
 
@@ -172,19 +200,16 @@ public class CircleBoard implements IChessboard {
 
 	@Override
 	public ChessboardDisplay getDisplay() {
-		// TODO Auto-generated method stub
-		return null;
+		return display;
 	}
 
 	@Override
 	public int get_square_height() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (getRadius() - getRadius() / 3) / 6;
 	}
 
 	public int getRadius() {
-		// TODO Auto-generated method stub
-		return display.getWidth()/2;
+		return board_layout.image.getHeight(null) / 2;
 	}
 
 }

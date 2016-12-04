@@ -75,8 +75,8 @@ public abstract class Piece {
 	}
 	
 
-	public King myKing(IChessboard chessboard2) {
-		return chessboard2.getKing(player);
+	public King myKing() {
+		return chessboard.getKing(player);
 	}
 	
 	public abstract ArrayList<Square> allMoves(IChessboard chessboard2);

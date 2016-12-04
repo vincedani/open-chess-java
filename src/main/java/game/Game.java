@@ -42,6 +42,7 @@ import main.java.JChessApp;
 import main.java.LogToFile;
 import main.java.board.IChessboard;
 import main.java.board.Square;
+import main.java.circleBoard.CircleBoard;
 import main.java.pieces.King;
 import main.java.squareBoard.SquareBoard;
 
@@ -65,7 +66,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 		moves = new MovesTable(this);
 		settings = new Settings();
-		chessboard = new SquareBoard(this.getSettings(), this.getMoves());
+		chessboard = new CircleBoard(this.getSettings(), this.getMoves());
 
 		initializeChessboardPanel();
 		initializeClock();
@@ -442,7 +443,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					int y = event.getY();// get Y position of mouse
 
 					Square sq = chessboard.getSquare(x, y);
-					if ((sq == null && sq.piece == null && chessboard.getActiveSquare() == null)
+					if ((sq == null && chessboard.getActiveSquare() == null)
 							|| (this.chessboard.getActiveSquare() == null && sq.piece != null
 									&& sq.piece.getPlayer() != this.activePlayer)) {
 						return;

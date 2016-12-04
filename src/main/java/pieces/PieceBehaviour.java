@@ -9,24 +9,20 @@ import main.java.game.Player;
 
 public class PieceBehaviour {
 
-
-	private IChessboard chessboard; 
+	private IChessboard chessboard;
 
 	private Square square;
 	private Player player;
 	private String name;
 	protected String symbol;
-	
-	
 
 	public PieceBehaviour(IChessboard chessboard, Player player) {
 
-	this.setChessboard(chessboard);
-	this.setPlayer(player);
-	this.setName(this.getClass().getSimpleName());	
+		this.setChessboard(chessboard);
+		this.setPlayer(player);
+		this.setName(this.getClass().getSimpleName());
 	}
 
-	
 	boolean canMove(Square square, ArrayList<Square> allmoves) {
 		// throw new UnsupportedOperationException("Not supported yet.");
 		ArrayList<Square> moves = allmoves;
@@ -38,14 +34,14 @@ public class PieceBehaviour {
 		}
 		return false;// if not, piece cannot move
 	}
-	
-	protected boolean isout(int x, int y) {
+
+	public boolean isout(int x, int y) {
 		if (x < 0 || x > 7 || y < 0 || y > 7) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @param x
 	 *            y position on chessboard
@@ -53,7 +49,7 @@ public class PieceBehaviour {
 	 *            y position on chessboard
 	 * @return true if can move, false otherwise
 	 */
-	protected boolean checkPiece(int x, int y) {
+	public boolean checkPiece(int x, int y) {
 		if (getChessboard().getSquares()[x][y].piece != null
 				&& getChessboard().getSquares()[x][y].piece.getName().equals("King")) {
 			return false;
@@ -67,7 +63,7 @@ public class PieceBehaviour {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Method check if piece has other owner than calling piece
 	 * 
@@ -77,7 +73,7 @@ public class PieceBehaviour {
 	 *            y position on chessboard
 	 * @return true if owner(player) is different
 	 */
-	protected boolean otherOwner(int x, int y) {
+	public boolean otherOwner(int x, int y) {
 		Square sq = getChessboard().getSquares()[x][y];
 		if (sq.piece == null) {
 			return false;
@@ -87,8 +83,7 @@ public class PieceBehaviour {
 		}
 		return false;
 	}
-	
-	
+
 	public Square getSquare() {
 		return square;
 	}
@@ -113,7 +108,6 @@ public class PieceBehaviour {
 		this.name = name;
 	}
 
-
 	public IChessboard getChessboard() {
 		return chessboard;
 	}
@@ -121,5 +115,5 @@ public class PieceBehaviour {
 	public void setChessboard(IChessboard chessboard2) {
 		this.chessboard = chessboard2;
 	}
-	
+
 }

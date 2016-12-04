@@ -20,13 +20,11 @@
  */
 package main.java.pieces;
 
-import java.awt.Image;
 import java.util.ArrayList;
 
 import main.java.board.IChessboard;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.gui.GUI;
 
 /**
  * Class to represent a pawn piece Pawn can move only forward and can beat only
@@ -54,6 +52,7 @@ import main.java.gui.GUI;
  * |_|_|_|_|_|_|_|_|1 
  * |_|_|_|_|_|_|_|_|0 
  *  0 1 2 3 4 5 6 7 
+ *  
  *  Beats with can take pawn: 
  * |_|_|_|_|_|_|_|_|7 
  * |_|_|_|_|_|_|_|_|6
@@ -134,7 +133,7 @@ public class Pawn extends Piece {
 	public ArrayList<Square> allMoves(IChessboard chessboard) {
 		ArrayList<Square> list = new ArrayList<Square>();
 		int first, second;
-		King myKing = myKing(chessboard);
+		King myKing = myKing();
 		int x= this.getSquare().getPozX(), y= this.getSquare().getPozY();
 
 		if (this.getPlayer().isGoDown()) {// check if player "go" down or up

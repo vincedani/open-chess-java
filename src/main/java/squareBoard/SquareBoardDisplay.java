@@ -46,9 +46,9 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 		this.board= board;
 		
 		activeSquare = null;
-        square_height = img_height / 8;//we need to divide to know height of field
-        active_x_square = 0;
-        active_y_square = 0;
+        square_height = img_height / 8;
+        active_x_square = -1;
+        active_y_square = -1;
         
         this.setDoubleBuffered(true);
         drawLabels((int) square_height);
@@ -103,7 +103,31 @@ public class SquareBoardDisplay extends ChessboardDisplay {
             g2d.drawImage(LeftRightLabel, board_layout.image.getHeight(null) + topLeftPoint.x, 0, null);
         }
         g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);//draw an Image of chessboard
-        for (int i = 0; i < 8; i++) //drawPiecesOnSquares
+        drawPieces(g);
+        if ((active_x_square != -1) && (active_y_square != -1)) //if some square is active
+        {
+            g2d.drawImage(board_layout.selSquare, 
+                            (active_x_square * (int) square_height) + topLeftPoint.x,
+                            (active_y_square * (int) square_height) + topLeftPoint.y, null);//draw image of selected square
+            Square tmpSquare = squares[active_x_square][active_y_square];
+            if (tmpSquare.piece != null)
+            {
+                board.moves = squares[active_x_square][active_y_square].piece.allMoves(board);
+                for (Iterator it = board.moves.iterator(); board.moves != null && it.hasNext();)
+                {
+                    Square sq = (Square) it.next();
+                    g2d.drawImage(board_layout.ableSquare, 
+                            (sq.getPozX() * (int) square_height) + topLeftPoint.x,
+                            (sq.getPozY() * (int) square_height) + topLeftPoint.y, null);
+                }
+            }
+
+            
+        }
+    }/*--endOf-paint--*/
+
+	private void drawPieces(Graphics g) {
+		for (int i = 0; i < 8; i++) //drawPiecesOnSquares
         {
             for (int y = 0; y < 8; y++)
             {
@@ -113,26 +137,7 @@ public class SquareBoardDisplay extends ChessboardDisplay {
                 }
             }
         }//--endOf--drawPiecesOnSquares
-        if ((active_x_square != 0) && (active_y_square != 0)) //if some square is active
-        {
-            g2d.drawImage(board_layout.selSquare, 
-                            ((active_x_square - 1) * (int) square_height) + topLeftPoint.x,
-                            ((active_y_square - 1) * (int) square_height) + topLeftPoint.y, null);//draw image of selected square
-            Square tmpSquare = squares[(int) (active_x_square - 1)][(int) (active_y_square - 1)];
-            if (tmpSquare.piece != null)
-            {
-                board.moves = squares[(int) (active_x_square - 1)][(int) (active_y_square - 1)].piece.allMoves(board);
-            }
-
-            for (Iterator it = board.moves.iterator(); board.moves != null && it.hasNext();)
-            {
-                Square sq = (Square) it.next();
-                g2d.drawImage(board_layout.ableSquare, 
-                        (sq.getPozX() * (int) square_height) + topLeftPoint.x,
-                        (sq.getPozY() * (int) square_height) + topLeftPoint.y, null);
-            }
-        }
-    }/*--endOf-paint--*/
+	}
 
 
     public void resizeChessboard(int height)
