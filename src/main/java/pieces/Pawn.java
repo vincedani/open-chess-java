@@ -21,8 +21,10 @@
 package main.java.pieces;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import main.java.board.IChessboard;
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
 
@@ -70,10 +72,12 @@ public class Pawn extends Piece {
 //	protected static final Image imageWhite = GUI.loadImage("Pawn-W.png");
 //	protected static final Image imageBlack = GUI.loadImage("Pawn-B.png");
 	public static short value = 1;
-
-	public Pawn(IChessboard chessboard, Player player) {
+	ArrayList<IMove> moveBehaviour;
+	
+	public Pawn(IChessboard chessboard, Player player,ArrayList<IMove> moveBehaviour ) {
 		super(chessboard, player, "Pawn"); // call initializer of super type: Piece 
 		this.symbol = "";
+		this.moveBehaviour = moveBehaviour;
 	}
 
 	/**
@@ -81,48 +85,7 @@ public class Pawn extends Piece {
 	 * newY is currentY+1 or currentY+2 when is the first movement
 	 */
 
-	public void regularMove(IChessboard chessboard, King myKing, int newY, ArrayList<Square> list) {
-		if (!this.pieceBehaviour.isout(this.getSquare().getPozX(), newY)) {
-			Square moveSq = chessboard.getSquares()[this.getSquare().getPozX()][newY];
-
-			if (moveSq.piece == null && myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), moveSq)) {
-				list.add(moveSq);
-
-			}
-		}
-	}
 	
-	public void captureMove(IChessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list){
-		if (!this.pieceBehaviour.isout(newX, newY)) {
-			Square moveSq = chessboard.getSquares()[newX][newY];
-		if (moveSq.piece != null) {// check if can hit left
-			if (this.getPlayer() != moveSq.piece.getPlayer() && !moveSq.piece.getName().equals("King")) {
-					if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), moveSq)) {
-						list.add(moveSq);
-					}
-				}
-			}
-		}
-		
-	}
-	
-	public void enPassantMove(IChessboard chessboard, King myKing, int newX, int newY, int i ,ArrayList<Square> list){
-		if (!this.pieceBehaviour.isout(newX, newY + i)) {
-			Square attSq = getChessboard().getSquares()[newX][newY];
-			Square moveSq = getChessboard().getSquares()[newX][newY + i];
-
-			if (attSq.piece != null && chessboard.getTwoSquareMovedPawn() != null
-					&& attSq == chessboard.getTwoSquareMovedPawn().getSquare()) {
-				// check if can hit left
-				if (this.getPlayer() != attSq.piece.getPlayer() && !attSq.piece.getName().equals("King")) {
-					if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), moveSq)) {
-						list.add(moveSq);
-
-					}
-				}
-			}
-		}
-	}
 
 	/**
 	 * Annotation to superclass Piece changing pawns location
@@ -131,6 +94,8 @@ public class Pawn extends Piece {
 	 */
 
 	public ArrayList<Square> allMoves(IChessboard chessboard) {
+		ArrayList<Square> list = new ArrayList<Square>();
+		/*
 		ArrayList<Square> list = new ArrayList<Square>();
 		int first, second;
 		King myKing = myKing();
@@ -161,7 +126,10 @@ public class Pawn extends Piece {
 			enPassantMove(chessboard, myKing, x + 1, y, 1, list);
 			
 		}
-	
+	*/
+		for (IMove iMove : moveBehaviour) {
+			list.addAll(iMove.getMoves(this));
+		}
 		return list;
 	}
 

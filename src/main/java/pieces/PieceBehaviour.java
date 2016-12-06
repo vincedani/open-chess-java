@@ -5,7 +5,9 @@ import java.util.Iterator;
 
 import main.java.board.IChessboard;
 import main.java.board.Square;
+import main.java.circleBoard.CircleBoard;
 import main.java.game.Player;
+import main.java.squareBoard.SquareBoard;
 
 public class PieceBehaviour {
 
@@ -36,8 +38,14 @@ public class PieceBehaviour {
 	}
 
 	public boolean isout(int x, int y) {
-		if (x < 0 || x > 7 || y < 0 || y > 7) {
-			return true;
+		if (chessboard instanceof SquareBoard) {
+			if (x < 0 || x > 7 || y < 0 || y > 7) {
+				return true;
+			}
+		} else if (chessboard instanceof CircleBoard) {
+			if (x < 0 || x > 23 || y < 0 || y > 5) {
+				return true;
+			}
 		}
 		return false;
 	}

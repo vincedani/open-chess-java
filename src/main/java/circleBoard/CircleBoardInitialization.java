@@ -1,7 +1,11 @@
 package main.java.circleBoard;
 
+import java.util.ArrayList;
+
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
+import main.java.movesInCircleBoard.PawnMove;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
 import main.java.pieces.Knight;
@@ -96,8 +100,10 @@ public class CircleBoardInitialization {
 	 *            player which is owner of pawns
 	 */
 	private void setPawns4NewGame(int i, int j, Player player) {
+		ArrayList <IMove> pawnMoves = new ArrayList<>();
+		pawnMoves.add(new PawnMove());
 		for (int k = 0; k < 8; k++) {
-			squares[i + k][j].setPiece(new Pawn(board, player));
+			squares[i + k][j].setPiece(new Pawn(board, player, pawnMoves));
 		}
 	}
 

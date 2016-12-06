@@ -235,6 +235,7 @@ public class SquareBoard implements IChessboard {
 		castling wasCastling = MovesTable.castling.none;
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
+		
 		if (end.piece != null) {
 			end.piece.setSquare(null);
 		}
@@ -242,6 +243,7 @@ public class SquareBoard implements IChessboard {
 		Square tempBegin = new Square(begin);// 4 moves history
 		Square tempEnd = new Square(end); // 4 moves history
 		// for undo
+		
 		undo1_piece_begin = begin.piece;
 		undo1_sq_begin = begin;
 		undo1_piece_end = end.piece;

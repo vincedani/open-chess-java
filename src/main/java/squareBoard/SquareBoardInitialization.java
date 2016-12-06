@@ -1,7 +1,11 @@
 package main.java.squareBoard;
 
+import java.util.ArrayList;
+
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
+import main.java.movesInSquareBoard.PawnMove;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
 import main.java.pieces.Knight;
@@ -24,6 +28,7 @@ public class SquareBoardInitialization {
 	}
 
 	private void createSquares() {
+		
 		for (int i = 0; i < 8; i++) {// create object for each square
 			for (int y = 0; y < 8; y++) {
 				getSquares()[i][y] = new Square(i, y, null);
@@ -131,8 +136,12 @@ public class SquareBoardInitialization {
 			System.out.println("error setting pawns etc.");
 			return;
 		}
+		
+		ArrayList <IMove> pawnMoves = new ArrayList<>();
+		pawnMoves.add(new PawnMove());
+		
 		for (int x = 0; x < 8; x++) {
-			getSquares()[x][i].setPiece(new Pawn(board, player));
+			getSquares()[x][i].setPiece(new Pawn(board, player, pawnMoves));
 		}
 	}
 

@@ -10,6 +10,7 @@ import main.java.board.Square;
 import main.java.game.MovesTable;
 import main.java.game.Player;
 import main.java.game.Settings;
+import main.java.game.MovesTable.castling;
 import main.java.pieces.King;
 import main.java.pieces.Pawn;
 import main.java.pieces.Piece;
@@ -65,48 +66,33 @@ public class CircleBoard implements IChessboard {
 			return null;
 		}
 
-		int cx = getRadius(), cy = getRadius();
+		int cx = getRadius(), cy = getRadius(), hi = get_square_height();
 		double ri = Math.sqrt(Math.pow((cx - x), 2) + Math.pow((cy - y), 2));
 
-		double xi;
-		if (x > cx) {
-			xi = (double) (x - cx);
-		} else {
-			xi = (double) x;
-		}
 
-		double ai = Math.toDegrees(Math.acos(xi / ri));
-		/**
-		if (x > cx && y > cy) {
-			ai += 90;
+		double ai = 0;
+		if (x > cx && y < cy) {
+
+			ai = Math.toDegrees(Math.asin((x - cx) / ri));
+		} else if (x > cx && y > cy) {
+			ai = 90 + Math.toDegrees(Math.acos((x - cx) / ri));
 		} else if (x < cx && y > cy) {
-			ai += 180;
+			ai = 180 + Math.toDegrees(Math.asin((cx - x) / ri));
 		} else if (x < cx && y < cy) {
-			ai += 270;
-		}
-		 **/
-		double square_x = 6 - (ai / 15);// count which field in X was
-										// clicked
-		
-		
-		double square_y = (cy - ri) / get_square_height();// count which field
-															// in Y
-															// was
-		// clicked
-
-		if (square_x > (int) square_x) // if X is more than X parsed to Integer
-		{
-			square_x = (int) square_x + 1;// parse to integer and increment
-		}
-		if (square_y > (int) square_y) // if X is more than X parsed to Integer
-		{
-			square_y = (int) square_y + 1;// parse to integer and increment
+			ai = 270 + Math.toDegrees(Math.acos((cx - x) / ri));
 		}
 
+		double square_x = (ai / 15);// count which field in X was
+									// clicked
+
+		double square_y = (cy - ri) / hi;// count which field
+											// in Y
+											// was
 		Square result;
 		try {
-			result = initial.squares[(int) square_x - 1][(int) square_y - 1];
-			System.out.println("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
+			result = initial.squares[(int) square_x][(int) square_y];
+			System.out.println("square_x: " + square_x + " square_y: " +
+			 square_y + " \n"); // 4tests
 			return result;
 
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
@@ -153,8 +139,16 @@ public class CircleBoard implements IChessboard {
 	}
 
 	@Override
-	public void move(Square square, Square square2) {
+	public void move(Square begin, Square end) {
 		// TODO Auto-generated method stub
+
+		begin.piece.setSquare(end);// set square of piece to ending
+		end.piece = begin.piece;// for ending square set piece from beginin
+								// square
+		begin.piece = null;// make null piece for begining square
+
+		this.unselect();// unselect square
+		display.repaint();
 
 	}
 

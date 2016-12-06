@@ -14,69 +14,72 @@ import main.java.squareBoard.SquareBoard;
 
 public class PieceDisplay {
 	IPieceDisplay display;
+
 	public PieceDisplay(Piece piece) {
-		
-		if(piece.getChessboard() instanceof CircleBoard)
+
+		if (piece.getChessboard() instanceof CircleBoard)
 			display = new CirclePieceDisplay(piece);
-		else if(piece.getChessboard() instanceof SquareBoard)
+		else if (piece.getChessboard() instanceof SquareBoard)
 			display = new SquarePieceDisplay(piece);
 	}
-	public void draw(Graphics g){
+
+	public void draw(Graphics g) {
 		display.draw(g);
 	}
-	
-	public interface IPieceDisplay{
+
+	public interface IPieceDisplay {
 		public void draw(Graphics g);
 	}
+
 	private class CirclePieceDisplay implements IPieceDisplay {
 		CircleBoard board;
 		Square square;
 		private PieceLayout layout;
 		Piece piece;
-		
-		public CirclePieceDisplay(Piece piece){
+
+		public CirclePieceDisplay(Piece piece) {
 			board = (CircleBoard) piece.getChessboard();
 			layout = piece.getLayout();
 			this.piece = piece;
-			
+
 		}
-		
+
 		public final void draw(Graphics g) {
 			try {
 				Graphics2D g2d = (Graphics2D) g;
 				g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				
+
 				square = piece.getSquare();
-				
+
 				Point topLeft = board.getDisplay().getTopLeftPoint();
-				
+
 				int r = board.getRadius();
 				int hi = board.get_square_height();
-				
-				int ri = r - (square.getPozY() + 1) * hi;
-				int rs = ri + hi;
+
+				int rs = r - square.getPozY() * hi;
+				int ri = rs - hi;
 				int rm = (rs + ri) / 2;
-				
-				int ai = (6 - square.getPozX()) * 15;
-				int as = (6 - square.getPozX() - 1) * 15;
+
+				int ai = square.getPozX() * 15;
+				int as = ai + 15;
 				int am = (as + ai) / 2;
-				
-				int x = topLeft.x + r + (int) (rm * Math.cos(Math.toRadians(am))) - hi / 2;
-				int y = topLeft.y + r - (int) (rm * Math.sin(Math.toRadians(am))) - hi / 2;
+
+				int x = r + (int) (rm * Math.sin(Math.toRadians(am))) - hi / 2;
+				int y = r - (int) (rm * Math.cos(Math.toRadians(am))) - hi / 2;
 
 				if (layout.image != null && g != null) {
 					Image tempImage = layout.orgImage;
-					
+
 					BufferedImage resized = new BufferedImage(hi, hi, BufferedImage.TYPE_INT_ARGB_PRE);
 					Graphics2D imageGr = (Graphics2D) resized.createGraphics();
 					imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 					imageGr.drawImage(tempImage, 0, 0, hi, hi, null);
 					imageGr.dispose();
-					
+
 					layout.setImage(resized.getScaledInstance(hi, hi, 0));
 					g2d.drawImage(layout.image, x, y, null);
 				} else {
-					//System.out.println("image is null!");
+					// System.out.println("image is null!");
 					LogToFile.log(null, "Debug", "image is null!");
 				}
 
@@ -86,18 +89,19 @@ public class PieceDisplay {
 			}
 		}
 	}
+
 	private class SquarePieceDisplay implements IPieceDisplay {
-		
+
 		SquareBoard board;
 		Square square;
 		private PieceLayout layout;
 		Piece piece;
-		
-		public SquarePieceDisplay(Piece piece){
+
+		public SquarePieceDisplay(Piece piece) {
 			board = (SquareBoard) piece.getChessboard();
 			this.piece = piece;
 			layout = piece.getLayout();
-			
+
 		}
 		/*
 		 * Method to draw piece on chessboard
@@ -109,26 +113,26 @@ public class PieceDisplay {
 			try {
 				Graphics2D g2d = (Graphics2D) g;
 				g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				square= piece.getSquare();
+				square = piece.getSquare();
 				Point topLeft = board.getDisplay().getTopLeftPoint();
 				int height = board.get_square_height();
 
 				int x = (square.getPozX() * height) + topLeft.x;
 				int y = (square.getPozY() * height) + topLeft.y;
-				
+
 				if (layout.image != null && g != null) {
 					Image tempImage = layout.orgImage;
-					
+
 					BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
 					Graphics2D imageGr = (Graphics2D) resized.createGraphics();
 					imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 					imageGr.drawImage(tempImage, 0, 0, height, height, null);
 					imageGr.dispose();
-					
+
 					layout.setImage(resized.getScaledInstance(height, height, 0));
 					g2d.drawImage(layout.image, x, y, null);
 				} else {
-					//System.out.println("image is null!");
+					// System.out.println("image is null!");
 					LogToFile.log(null, "Debug", "image is null!");
 				}
 
@@ -139,5 +143,3 @@ public class PieceDisplay {
 		}
 	}
 }
-
-
