@@ -100,9 +100,10 @@ public class CircleBoardInitialization {
 	 *            player which is owner of pawns
 	 */
 	private void setPawns4NewGame(int i, int j, Player player) {
-		ArrayList <IMove> pawnMoves = new ArrayList<>();
-		pawnMoves.add(new PawnMove());
+		
 		for (int k = 0; k < 8; k++) {
+			ArrayList <IMove> pawnMoves = new ArrayList<>();
+			pawnMoves.add(new PawnMove());
 			squares[i + k][j].setPiece(new Pawn(board, player, pawnMoves));
 		}
 	}

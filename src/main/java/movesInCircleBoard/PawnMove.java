@@ -4,11 +4,10 @@ import java.util.ArrayList;
 
 import main.java.board.IMove;
 import main.java.board.Square;
+import main.java.pieces.Pawn;
 import main.java.pieces.Piece;
 
 public class PawnMove implements IMove {
-	boolean passedCenter = false;
-
 	public void regularMoveBeforeCenter(Piece piece, ArrayList<Square> list) {
 		int newY = piece.getSquare().getPozY() + 1;
 		if (!piece.pieceBehaviour.isout(piece.getSquare().getPozX(), newY)) {
@@ -45,15 +44,23 @@ public class PawnMove implements IMove {
 		}
 	}
 
-	public ArrayList<Square> getMoves(Piece piece) {
+	public ArrayList<Square> getMoves(Piece piece1) {
+		Pawn piece = (Pawn) piece1;
 		ArrayList<Square> list = new ArrayList<>();
 		if (piece.getSquare().getPozY() < 5) {
-			regularMoveBeforeCenter(piece, list);
-		} else if(piece.getSquare().getPozY() == 5) {
-			passCenter(piece, list);
-			regularMoveAfterCenter(piece, list);
-		} else{
-			regularMoveAfterCenter(piece, list);
+			if (!piece.passedCenter) {
+				regularMoveBeforeCenter(piece, list);
+			} else {
+				regularMoveAfterCenter(piece, list);
+			}
+		} else if (piece.getSquare().getPozY() == 5) {
+			if (!piece.passedCenter) {
+				passCenter(piece, list);
+			} else {
+				passCenter(piece, list);
+				regularMoveAfterCenter(piece, list);
+			}
+
 		}
 
 		return list;

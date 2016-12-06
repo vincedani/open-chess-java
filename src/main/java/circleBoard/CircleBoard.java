@@ -69,7 +69,6 @@ public class CircleBoard implements IChessboard {
 		int cx = getRadius(), cy = getRadius(), hi = get_square_height();
 		double ri = Math.sqrt(Math.pow((cx - x), 2) + Math.pow((cy - y), 2));
 
-
 		double ai = 0;
 		if (x > cx && y < cy) {
 
@@ -91,8 +90,7 @@ public class CircleBoard implements IChessboard {
 		Square result;
 		try {
 			result = initial.squares[(int) square_x][(int) square_y];
-			System.out.println("square_x: " + square_x + " square_y: " +
-			 square_y + " \n"); // 4tests
+			System.out.println("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
 			return result;
 
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
@@ -142,11 +140,18 @@ public class CircleBoard implements IChessboard {
 	public void move(Square begin, Square end) {
 		// TODO Auto-generated method stub
 
+		if (begin.piece instanceof Pawn) {
+			Pawn movedPawn = (Pawn) begin.piece;
+			if (movedPawn.getSquare().getPozY() == 5 && end.getPozY()==5)
+				movedPawn.passedCenter = true;
+		}
+		
 		begin.piece.setSquare(end);// set square of piece to ending
-		end.piece = begin.piece;// for ending square set piece from beginin
+		end.piece = begin.piece;// for ending square set piece from beginning
 								// square
+		// Check if pawn passed square
+		
 		begin.piece = null;// make null piece for begining square
-
 		this.unselect();// unselect square
 		display.repaint();
 

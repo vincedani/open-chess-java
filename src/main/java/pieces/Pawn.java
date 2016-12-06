@@ -21,8 +21,6 @@
 package main.java.pieces;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.board.Square;
@@ -69,6 +67,7 @@ import main.java.game.Player;
 public class Pawn extends Piece {
 
 	boolean down;
+	public boolean passedCenter;
 //	protected static final Image imageWhite = GUI.loadImage("Pawn-W.png");
 //	protected static final Image imageBlack = GUI.loadImage("Pawn-B.png");
 	public static short value = 1;
