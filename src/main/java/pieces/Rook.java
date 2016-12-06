@@ -24,9 +24,9 @@ package main.java.pieces;
 import java.util.ArrayList;
 
 import main.java.board.IChessboard;
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.movesInSquareBoard.RookMoves;
 
 
 /**
@@ -50,12 +50,14 @@ public class Rook extends Piece
 //    protected static final Image imageWhite = GUI.loadImage("Rook-W.png");
 //    protected static final Image imageBlack = GUI.loadImage("Rook-B.png");
     public static short value = 5;
+	ArrayList<IMove> moveBehaviour;
 
 
-    public Rook(IChessboard chessboard, Player player)
+    public Rook(IChessboard chessboard, Player player, ArrayList<IMove> moveBehaviour)
    {
     	super(chessboard, player, "Rook"); // call initializer of super type: Piece 
 		this.symbol = "R";
+		this.moveBehaviour = moveBehaviour;
     }
 
     /**
@@ -64,8 +66,12 @@ public class Rook extends Piece
      */
     
     public ArrayList<Square> allMoves(IChessboard chessboard)
-    {	
-        return RookMoves.getMoves(this);
+    {	ArrayList<Square> list = new ArrayList<Square>();
+        //return RookMoves.getMoves(this);
+    	for (IMove iMove : moveBehaviour) {
+			list.addAll(iMove.getMoves(this));
+		}
+		return list;
     }
 
 	public boolean wasMotion() {

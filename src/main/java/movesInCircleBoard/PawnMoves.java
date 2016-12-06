@@ -7,7 +7,7 @@ import main.java.board.Square;
 import main.java.pieces.Pawn;
 import main.java.pieces.Piece;
 
-public class PawnMove implements IMove {
+public class PawnMoves implements IMove {
 	public void regularMoveBeforeCenter(Piece piece, ArrayList<Square> list) {
 		int newY = piece.getSquare().getPozY() + 1;
 		if (!piece.pieceBehaviour.isout(piece.getSquare().getPozX(), newY)) {

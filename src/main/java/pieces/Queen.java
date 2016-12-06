@@ -23,6 +23,7 @@ package main.java.pieces;
 import java.util.ArrayList;
 
 import main.java.board.IChessboard;
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.movesInSquareBoard.BishopMoves;
@@ -45,12 +46,13 @@ public class Queen extends Piece {
 	public static short value = 9;
 //	protected static final Image imageWhite = GUI.loadImage("Queen-W.png");
 //	protected static final Image imageBlack = GUI.loadImage("Queen-B.png");
+	ArrayList<IMove> moveBehaviour;
 
-
-	public Queen(IChessboard chessboard, Player player) {
+	public Queen(IChessboard chessboard, Player player, ArrayList<IMove> moveBehaviour) {
 
 		super(chessboard, player, "Queen"); // call initializer of super type: Piece 
 		this.symbol = "Q";
+		this.moveBehaviour = moveBehaviour;
 	}
 
 	/**
@@ -62,8 +64,11 @@ public class Queen extends Piece {
 	public ArrayList<Square> allMoves(IChessboard chessboard) {
 		ArrayList<Square> list = new ArrayList<Square>();
 		
-		list.addAll(RookMoves.getMoves(this));
-		list.addAll(BishopMoves.getMoves(this));
+		for (IMove iMove : moveBehaviour) {
+			list.addAll(iMove.getMoves(this));
+		}
+		
 		return list;
+		
 	}
 }

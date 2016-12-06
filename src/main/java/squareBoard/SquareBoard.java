@@ -23,17 +23,19 @@ package main.java.squareBoard;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
-
 import main.java.JChessApp;
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.IChessboard;
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.MovesTable;
 import main.java.game.MovesTable.castling;
+import main.java.movesInCircleBoard.KnightMoves;
 import main.java.game.Player;
 import main.java.game.Settings;
+import main.java.movesInSquareBoard.BishopMoves;
+import main.java.movesInSquareBoard.RookMoves;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
 import main.java.pieces.Knight;
@@ -347,7 +349,11 @@ public class SquareBoard implements IChessboard {
 
 					if (newPiece.equals("Queen")) // transform pawn to queen
 					{
-						Queen queen = new Queen(this, end.piece.getPlayer());
+						ArrayList <IMove> queenMoves = new ArrayList<>();
+						queenMoves.add(new RookMoves());
+						queenMoves.add(new BishopMoves());
+						
+						Queen queen = new Queen(this, end.piece.getPlayer(),queenMoves);
 						queen.setChessboard(end.piece.getChessboard());
 						queen.setPlayer(end.piece.getPlayer());
 						queen.setSquare(end.piece.getSquare());
@@ -355,22 +361,26 @@ public class SquareBoard implements IChessboard {
 					} else if (newPiece.equals("Rook")) // transform pawn to
 														// rook
 					{
-						Rook rook = new Rook(this, end.piece.getPlayer());
+						ArrayList <IMove> rookMoves = new ArrayList<>();
+						rookMoves.add(new RookMoves());
+						Rook rook = new Rook(this, end.piece.getPlayer(), rookMoves);
 						rook.setChessboard(end.piece.getChessboard());
 						rook.setPlayer(end.piece.getPlayer());
 						rook.setSquare(end.piece.getSquare());
 						end.piece = rook;
 					} else if (newPiece.equals("Bishop")) // transform pawn to
 															// bishop
-					{
-						Bishop bishop = new Bishop(this, end.piece.getPlayer());
+					{	ArrayList <IMove> bishopMoves = new ArrayList<>();
+						bishopMoves.add(new BishopMoves());
+						Bishop bishop = new Bishop(this, end.piece.getPlayer(), bishopMoves);
 						bishop.setChessboard(end.piece.getChessboard());
 						bishop.setPlayer(end.piece.getPlayer());
 						bishop.setSquare(end.piece.getSquare());
 						end.piece = bishop;
 					} else // transform pawn to knight
-					{
-						Knight knight = new Knight(this, end.piece.getPlayer());
+					{	ArrayList <IMove> knightMoves = new ArrayList<>();
+						knightMoves.add(new KnightMoves());
+						Knight knight = new Knight(this, end.piece.getPlayer(), knightMoves);
 						knight.setChessboard(end.piece.getChessboard());
 						knight.setPlayer(end.piece.getPlayer());
 						knight.setSquare(end.piece.getSquare());

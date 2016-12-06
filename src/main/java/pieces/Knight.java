@@ -23,6 +23,7 @@ package main.java.pieces;
 import java.util.ArrayList;
 
 import main.java.board.IChessboard;
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.movesInSquareBoard.KnightMoves;
@@ -36,11 +37,15 @@ public class Knight extends Piece
     public static short value = 3;
 //    protected static final Image imageWhite = GUI.loadImage("Knight-W.png");
 //    protected static final Image imageBlack = GUI.loadImage("Knight-B.png");
+	ArrayList<IMove> moveBehaviour;
 
-    public Knight(IChessboard chessboard, Player player)
+    
+    public Knight(IChessboard chessboard, Player player, ArrayList<IMove> moveBehaviour)
     {
     	super(chessboard, player, "Knight"); // call initializer of super type: Piece 
 		this.symbol = "N";
+		this.moveBehaviour = moveBehaviour;
+
     }
 
     public void regularMove(IChessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list){
@@ -59,20 +64,11 @@ public class Knight extends Piece
      */
     public ArrayList<Square> allMoves(IChessboard chessboard)
     {
-        
-        // knight all moves
-        //  _______________ Y:
-        // |_|_|_|_|_|_|_|_|7
-        // |_|_|_|_|_|_|_|_|6
-        // |_|_|2|_|3|_|_|_|5
-        // |_|1|_|_|_|4|_|_|4
-        // |_|_|_|K|_|_|_|_|3
-        // |_|8|_|_|_|5|_|_|2
-        // |_|_|7|_|6|_|_|_|1
-        // |_|_|_|_|_|_|_|_|0
-        //X:0 1 2 3 4 5 6 7
-        //
-        
-        return KnightMoves.getMoves(this);
+    	ArrayList<Square> list = new ArrayList<Square>();
+    	for (IMove iMove : moveBehaviour) {
+			list.addAll(iMove.getMoves(this));
+		}
+		return list;
+        //return KnightMoves.getMoves(this);
     }
 }

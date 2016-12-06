@@ -1,4 +1,4 @@
-package main.java.movesInSquareBoard;
+package main.java.movesInCircleBoard;
 
 import java.util.ArrayList;
 

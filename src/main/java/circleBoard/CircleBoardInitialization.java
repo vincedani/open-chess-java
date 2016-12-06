@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.movesInCircleBoard.PawnMove;
+import main.java.movesInCircleBoard.KnightMoves;
+import main.java.movesInCircleBoard.PawnMoves;
+import main.java.movesInCircleBoard.RookMoves;
+import main.java.movesInCircleBoard.BishopMoves;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
 import main.java.pieces.Knight;
@@ -21,7 +24,7 @@ public class CircleBoardInitialization {
 
 	public CircleBoardInitialization(CircleBoard board) {
 		this.board=board;
-		setSquares(new Square[24][6]);//initalization of 8x8 board
+		setSquares(new Square[24][6]);// Initialization of 8x8 board
 		createSquares();
 	}
 
@@ -73,18 +76,38 @@ public class CircleBoardInitialization {
 	 */
 	private void setFigures4NewGame(int i, int j, Player player) {
 
-		squares[i][j].setPiece(new Rook(board, player));
-		squares[i + 1][j].setPiece(new Bishop(board, player));
-		squares[i + 2][j].setPiece(new Knight(board, player));
+		//Rooks
+		ArrayList <IMove> rookMoves = new ArrayList<>();
+		rookMoves.add(new RookMoves());
+		squares[i][j].setPiece(new Rook(board, player, rookMoves));
+		squares[i + 7][j].setPiece(new Rook(board, player, rookMoves));
+		
+		//Knight
+		ArrayList <IMove> knightMoves = new ArrayList<>();
+		knightMoves.add(new KnightMoves());
+		squares[i + 2][j].setPiece(new Knight(board, player, knightMoves));
+		squares[i + 5][j].setPiece(new Knight(board, player, knightMoves));
+
+		//Bishop
+		ArrayList <IMove> bishopMoves = new ArrayList<>();
+		bishopMoves.add(new BishopMoves());
+		squares[i + 1][j].setPiece(new Bishop(board, player, bishopMoves));
+		squares[i + 6][j].setPiece(new Bishop(board, player, bishopMoves));
+		
+		//THE QUEEN MOTHER OF DRAGONS
+		ArrayList <IMove> queenMoves = new ArrayList<>();
+		queenMoves.add(new RookMoves());
+		queenMoves.add(new BishopMoves());
+		squares[i + 4][j].setPiece(new Queen(board, player, queenMoves));
+		
 		if (player.getColor().equals(Player.colors.white)) {
 			squares[i + 3][j].setPiece(kingWhite=new King(board, player));
 		} else if (player.getColor().equals(Player.colors.black)) {
 			squares[i + 3][j].setPiece(kingBlack=new King(board, player));
 		}
-		squares[i + 4][j].setPiece(new Queen(board, player));
-		squares[i + 5][j].setPiece(new Knight(board, player));
-		squares[i + 6][j].setPiece(new Bishop(board, player));
-		squares[i + 7][j].setPiece(new Rook(board, player));
+		
+		
+		
 		
 		
 	}
@@ -103,7 +126,7 @@ public class CircleBoardInitialization {
 		
 		for (int k = 0; k < 8; k++) {
 			ArrayList <IMove> pawnMoves = new ArrayList<>();
-			pawnMoves.add(new PawnMove());
+			pawnMoves.add(new PawnMoves());
 			squares[i + k][j].setPiece(new Pawn(board, player, pawnMoves));
 		}
 	}

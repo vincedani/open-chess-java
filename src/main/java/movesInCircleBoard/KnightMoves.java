@@ -1,4 +1,4 @@
-package main.java.movesInSquareBoard;
+package main.java.movesInCircleBoard;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.Piece;
 
-public class KnightMoves implements IMove{
+public class KnightMoves implements IMove {
 	public static void LMove(Piece piece, int newX, int newY, ArrayList<Square> list) {
 
 		if (!piece.pieceBehaviour.isout(newX, newY) && piece.pieceBehaviour.checkPiece(newX, newY)) {

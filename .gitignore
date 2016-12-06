@@ -2,6 +2,5 @@
 # Package Files #
 *.jar
 config.txt
-/bin/
 *.LOG
 *.LOG.lck
