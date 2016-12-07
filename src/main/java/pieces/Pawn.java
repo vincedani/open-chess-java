@@ -80,13 +80,6 @@ public class Pawn extends Piece {
 	}
 
 	/**
-	 * Check if the normal movement of a pawn is valid, return null when not
-	 * newY is currentY+1 or currentY+2 when is the first movement
-	 */
-
-	
-
-	/**
 	 * Annotation to superclass Piece changing pawns location
 	 * 
 	 * @return ArrayList with new position of piece

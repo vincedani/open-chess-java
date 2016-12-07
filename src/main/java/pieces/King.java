@@ -40,6 +40,7 @@ package main.java.pieces;
 import java.util.ArrayList;
 
 import main.java.board.IChessboard;
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
 
@@ -48,11 +49,14 @@ public class King extends Piece {
 	public boolean wasMotion = false;// maybe change to: 'wasMotioned'
 	// public boolean checked = false;
 	public static short value = 99;
+	ArrayList<IMove> moveBehaviour;
 
 	public King(IChessboard chessboard, Player player) {
 
 		super(chessboard, player, "King"); // call initializer of super type: Piece 
 		this.symbol = "K";
+		this.moveBehaviour = moveBehaviour;
+
 	}
 
 	

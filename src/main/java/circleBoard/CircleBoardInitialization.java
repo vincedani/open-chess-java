@@ -85,14 +85,14 @@ public class CircleBoardInitialization {
 		//Knight
 		ArrayList <IMove> knightMoves = new ArrayList<>();
 		knightMoves.add(new KnightMoves());
-		squares[i + 2][j].setPiece(new Knight(board, player, knightMoves));
-		squares[i + 5][j].setPiece(new Knight(board, player, knightMoves));
-
+		squares[i + 1][j].setPiece(new Knight(board, player, knightMoves));
+		squares[i + 6][j].setPiece(new Knight(board, player, knightMoves));
+		
 		//Bishop
 		ArrayList <IMove> bishopMoves = new ArrayList<>();
 		bishopMoves.add(new BishopMoves());
-		squares[i + 1][j].setPiece(new Bishop(board, player, bishopMoves));
-		squares[i + 6][j].setPiece(new Bishop(board, player, bishopMoves));
+		squares[i + 2][j].setPiece(new Bishop(board, player, bishopMoves));
+		squares[i + 5][j].setPiece(new Bishop(board, player, bishopMoves));
 		
 		//THE QUEEN MOTHER OF DRAGONS
 		ArrayList <IMove> queenMoves = new ArrayList<>();

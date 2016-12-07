@@ -7,64 +7,75 @@ import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
+import main.java.pieces.Rook;
 
 public class KingMoves implements IMove {
 	
-	public void regularMove(Piece piece, ArrayList<Square> list, int i) {
-		int newY=0;
-		if (piece.getPlayer().isGoDown()) {// check if player "go" down or up
-			newY = piece.getSquare().getPozY() + i;// if yes, change value
-		} else {
-			newY = piece.getSquare().getPozY() -i;
-													// (only in first move)
-		}
-		
-		if (!piece.pieceBehaviour.isout(piece.getSquare().getPozX(), newY )) {
-			Square moveSq = piece.getChessboard().getSquares()[piece.getSquare().getPozX()][newY];
-
-			if (moveSq.piece == null && piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
-				list.add(moveSq);
-
-			}
-		}
-	}
-	
-	public void captureMove(Piece piece, ArrayList<Square> list, int newX){
-		int newY=0;
-		if (piece.getPlayer().isGoDown()) {// check if player "go" down or up
-			newY = piece.getSquare().getPozY() + 1;// if yes, change value
-		} else {
-			newY = piece.getSquare().getPozY() -1;
-													// (only in first move)
-		}
-		if (!piece.pieceBehaviour.isout(newX, newY)) {
-			Square moveSq = piece.getChessboard().getSquares()[newX][newY];
-		if (moveSq.piece != null) {// check if can hit left
-			if (piece.getPlayer() != moveSq.piece.getPlayer() && !moveSq.piece.getName().equals("King")) {
-					if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
-						list.add(moveSq);
+	public void regularMove(Piece piece, int x, int y, ArrayList<Square> list){
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				if (!piece.pieceBehaviour.isout(i, j)) {// out of bounds
+														// protection
+					Square sq = piece.getSquare()[i][j]; //esto era de chessboard
+					if (piece.getSquare() == sq) {// if we're checking square on
+													// which is King
+						continue;
+					} else {
+						if (piece.pieceBehaviour.checkPiece(i, j)) {// if square
+																	// is empty
+							if (isSafe(sq)) {
+								list.add(sq);
+							}
+						}
 					}
 				}
 			}
 		}
-		
+
 	}
 	
-	public void enPassantMove(Piece piece, ArrayList<Square> list, int newX, int i){
-		int newY= piece.getSquare().getPozY();
-		if (!piece.pieceBehaviour.isout(newX, newY + i)) {
-			Square attSq = piece.getChessboard().getSquares()[newX][newY];
-			Square moveSq = piece.getChessboard().getSquares()[newX][newY + i];
+	public void castlingLeftMove(IChessboard chessboard, int x, int y, ArrayList<Square> list){
 
-			if (attSq.piece != null && piece.getChessboard().getTwoSquareMovedPawn() != null
-					&& attSq == piece.getChessboard().getTwoSquareMovedPawn().getSquare()) {
-				// check if can hit left
-				if (piece.getPlayer() != attSq.piece.getPlayer() && !attSq.piece.getName().equals("King")) {
-					if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
-						list.add(moveSq);
+			boolean canCastling = true;
 
+			Rook rook = (Rook) chessboard.getSquares()[0][y].piece;
+			if (!rook.wasMotion()) {
+				for (int i = x - 1; i > 0; i--) {// go
+																			// left
+					if (chessboard.getSquares()[i][y].piece != null) {
+						canCastling = false;
+						break;
 					}
 				}
+				
+				Square sq = chessboard.getSquares()[x - 2][y];
+				Square sq1 = chessboard.getSquares()[x - 1][y];
+				if (canCastling && this.isSafe(sq) && this.isSafe(sq1)) { 
+					// can do castling when neither sq nor sq1 is checked
+					list.add(sq);
+				}
+			}
+		}
+	
+	public void castlingRightMove(IChessboard chessboard, int x, int y, ArrayList<Square> list){
+
+		boolean canCastling = true;
+
+		Rook rook = (Rook) chessboard.getSquares()[7][y].piece;
+		if (!rook.wasMotion()) {
+			for (int i = x + 1; i < 7; i++) {// go
+																		// left
+				if (chessboard.getSquares()[i][y].piece != null) {
+					canCastling = false;
+					break;
+				}
+			}
+			
+			Square sq = chessboard.getSquares()[x + 2][y];
+			Square sq1 = chessboard.getSquares()[x + 1][y];
+			if (canCastling && this.isSafe(sq) && this.isSafe(sq1)) { 
+				// can do castling when neither sq nor sq1 is checked
+				list.add(sq);
 			}
 		}
 	}
