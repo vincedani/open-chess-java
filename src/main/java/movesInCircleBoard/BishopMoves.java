@@ -10,6 +10,9 @@ public class BishopMoves implements IMove{
 
 	private static void backwardRightMoves(Piece piece, ArrayList<Square> list) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
+		if (x == 0) {
+			x = 24;
+		}
 		for (int h = x - 1, i = y + 1; !piece.pieceBehaviour.isout(h, i); --h, ++i) // left-up
 		{
 			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
@@ -28,11 +31,18 @@ public class BishopMoves implements IMove{
 				break;// we've to break because we cannot go beside other
 						// piece!!
 			}
+			
+			if (h == 0) {
+				h = 24;
+			}
 		}
 	}
 
 	private static void backwardLeftMoves(Piece piece, ArrayList<Square> list) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
+		if (x == 0) {
+			x = 24;
+		}
 		for (int h = x - 1, i = y - 1; !piece.pieceBehaviour.isout(h, i); --h, --i) // left-down
 		{
 			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
@@ -49,10 +59,16 @@ public class BishopMoves implements IMove{
 				break;// we've to break because we cannot go beside other
 						// piece!!
 			}
+			if (h == 0) {
+				h = 24;
+			}
 		}
 	}
 	private static void forwardRightMoves(Piece piece, ArrayList<Square> list) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
+		if (x == 23) {
+			x = -1;
+		}
 		for (int h = x + 1, i = y + 1; !piece.pieceBehaviour.isout(h, i); ++h, ++i) // right-up
 		{
 			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
@@ -70,11 +86,18 @@ public class BishopMoves implements IMove{
 				break;// we've to break because we cannot go beside other
 						// piece!!
 			}
+			
+			if (h == 23) {
+				h = -1;
+			}
 		}
 	}
 	
 	private static void forwardLeftMoves(Piece piece, ArrayList<Square> list) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
+		if (x == 23) {
+			x = -1;
+		}
 		for (int h = x + 1, i = y - 1; !piece.pieceBehaviour.isout(h, i); ++h, --i) // right-down
 		{
 			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
@@ -90,6 +113,10 @@ public class BishopMoves implements IMove{
 			} else {
 				break;// we've to break because we cannot go beside other
 						// piece!!
+			}
+			
+			if (h == 23) {
+				h = -1;
 			}
 		}
 	}
