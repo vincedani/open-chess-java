@@ -8,7 +8,11 @@ import main.java.pieces.Piece;
 
 public class KnightMoves implements IMove {
 	public static void LMove(Piece piece, int newX, int newY, ArrayList<Square> list) {
-
+		if(newX <0){
+			newX+= 24;
+		}else if(newX >24){
+			newX-= 24;
+		}
 		if (!piece.pieceBehaviour.isout(newX, newY) && piece.pieceBehaviour.checkPiece(newX, newY)) {
 			Square newMove = piece.getChessboard().getSquares()[newX][newY];
 			if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
@@ -21,7 +25,8 @@ public class KnightMoves implements IMove {
 		int newX, newY;
 		
 		ArrayList<Square> list = new ArrayList<>();
-        //1
+        
+		//1
         newX = piece.getSquare().getPozX() - 2;
         newY = piece.getSquare().getPozY() + 1;
 
