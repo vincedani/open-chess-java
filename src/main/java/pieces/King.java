@@ -51,7 +51,7 @@ public class King extends Piece {
 	public static short value = 99;
 	ArrayList<IMove> moveBehaviour;
 
-	public King(IChessboard chessboard, Player player) {
+	public King(IChessboard chessboard, Player player, ArrayList<IMove> moveBehaviour) {
 
 		super(chessboard, player, "King"); // call initializer of super type: Piece 
 		this.symbol = "K";
@@ -60,74 +60,7 @@ public class King extends Piece {
 	}
 
 	
-	public void regularMove(IChessboard chessboard, int x, int y, ArrayList<Square> list){
-		for (int i = x - 1; i <= x + 1; i++) {
-			for (int j = y - 1; j <= y + 1; j++) {
-				if (!this.pieceBehaviour.isout(i, j)) {// out of bounds
-														// protection
-					Square sq = chessboard.getSquares()[i][j];
-					if (this.getSquare() == sq) {// if we're checking square on
-													// which is King
-						continue;
-					} else {
-						if (this.pieceBehaviour.checkPiece(i, j)) {// if square
-																	// is empty
-							if (isSafe(sq)) {
-								list.add(sq);
-							}
-						}
-					}
-				}
-			}
-		}
-
-	}
 	
-	public void castlingLeftMove(IChessboard chessboard, int x, int y, ArrayList<Square> list){
-
-			boolean canCastling = true;
-
-			Rook rook = (Rook) chessboard.getSquares()[0][y].piece;
-			if (!rook.wasMotion()) {
-				for (int i = x - 1; i > 0; i--) {// go
-																			// left
-					if (chessboard.getSquares()[i][y].piece != null) {
-						canCastling = false;
-						break;
-					}
-				}
-				
-				Square sq = chessboard.getSquares()[x - 2][y];
-				Square sq1 = chessboard.getSquares()[x - 1][y];
-				if (canCastling && this.isSafe(sq) && this.isSafe(sq1)) { 
-					// can do castling when neither sq nor sq1 is checked
-					list.add(sq);
-				}
-			}
-		}
-	
-	public void castlingRightMove(IChessboard chessboard, int x, int y, ArrayList<Square> list){
-
-		boolean canCastling = true;
-
-		Rook rook = (Rook) chessboard.getSquares()[7][y].piece;
-		if (!rook.wasMotion()) {
-			for (int i = x + 1; i < 7; i++) {// go
-																		// left
-				if (chessboard.getSquares()[i][y].piece != null) {
-					canCastling = false;
-					break;
-				}
-			}
-			
-			Square sq = chessboard.getSquares()[x + 2][y];
-			Square sq1 = chessboard.getSquares()[x + 1][y];
-			if (canCastling && this.isSafe(sq) && this.isSafe(sq1)) { 
-				// can do castling when neither sq nor sq1 is checked
-				list.add(sq);
-			}
-		}
-	}
 
 	/**
 	 * Annotation to superclass Piece changing pawns location
@@ -136,21 +69,8 @@ public class King extends Piece {
 	 */
 	public ArrayList<Square> allMoves(IChessboard chessboard) {
 		ArrayList<Square> list = new ArrayList<Square>();
-
-		int x = this.getSquare().getPozX(), y = this.getSquare().getPozY();
-		regularMove(chessboard, x, y, list);
-		
-		if (!this.wasMotion && !this.isChecked()) {
-			// check if king was not moved before
-
-			if (chessboard.getSquares()[0][y].piece != null
-					&& getChessboard().getSquares()[0][y].piece.getName().equals("Rook")) {
-				castlingLeftMove(chessboard, x, y, list);
-			}
-			if (chessboard.getSquares()[7][y].piece != null
-					&& chessboard.getSquares()[7][y].piece.getName().equals("Rook")) {
-				castlingRightMove(chessboard, x, y, list);
-			}
+		for (IMove iMove : moveBehaviour) {
+			list.addAll(iMove.getMoves(this));
 		}
 		return list;
 	}
@@ -201,7 +121,7 @@ public class King extends Piece {
 	 *            Squere where is a king
 	 * @return bool true if king is save, else returns false
 	 */
-	private boolean isSafe(Square s) // A bit confusing code.
+	public boolean isSafe(Square s) // A bit confusing code.
 	{
 		// Rook & Queen
 		for (int i = s.getPozY() + 1; i <= 7; ++i) // up

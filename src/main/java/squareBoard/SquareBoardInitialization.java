@@ -8,6 +8,7 @@ import main.java.game.Player;
 import main.java.movesInCircleBoard.KnightMoves;
 import main.java.movesInSquareBoard.RookMoves;
 import main.java.movesInSquareBoard.BishopMoves;
+import main.java.movesInSquareBoard.KingMoves;
 import main.java.movesInSquareBoard.PawnMoves;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
@@ -126,19 +127,25 @@ public class SquareBoardInitialization {
 		queenMoves.add(new RookMoves());
 		queenMoves.add(new BishopMoves());
 
+		ArrayList <IMove> kingMoves = new ArrayList<>();
+		kingMoves.add(new KingMoves());
+		
 		if (upsideDown) {
 		getSquares()[4][i].setPiece(new Queen(board, player, queenMoves));
+		
 			if (player.getColor() == Player.colors.white) {
-				getSquares()[3][i].setPiece(kingWhite = new King(board, player));
+				
+				getSquares()[3][i].setPiece(kingWhite = new King(board, player, kingMoves));
 			} else {
-				getSquares()[3][i].setPiece(kingBlack = new King(board, player));
+				getSquares()[3][i].setPiece(kingBlack = new King(board, player, kingMoves));
 			}
 		} else {
 			getSquares()[3][i].setPiece(new Queen(board,player, queenMoves));
+			
 			if (player.getColor() == Player.colors.white) {
-				getSquares()[4][i].setPiece(kingWhite = new King(board, player));
+				getSquares()[4][i].setPiece(kingWhite = new King(board, player, kingMoves));
 			} else {
-				getSquares()[4][i].setPiece(kingBlack = new King(board, player));
+				getSquares()[4][i].setPiece(kingBlack = new King(board, player, kingMoves));
 			}
 		}
 	}

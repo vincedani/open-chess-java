@@ -10,80 +10,34 @@ import main.java.pieces.Piece;
 
 public class KingMoves implements IMove {
 	
-	public void regularMove(Piece piece, ArrayList<Square> list, int i) {
-		int newY=0;
-		if (piece.getPlayer().isGoDown()) {// check if player "go" down or up
-			newY = piece.getSquare().getPozY() + i;// if yes, change value
-		} else {
-			newY = piece.getSquare().getPozY() -i;
-													// (only in first move)
-		}
-		
-		if (!piece.pieceBehaviour.isout(piece.getSquare().getPozX(), newY )) {
-			Square moveSq = piece.getChessboard().getSquares()[piece.getSquare().getPozX()][newY];
-
-			if (moveSq.piece == null && piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
-				list.add(moveSq);
-
-			}
-		}
-	}
-	
-	public void captureMove(Piece piece, ArrayList<Square> list, int newX){
-		int newY=0;
-		if (piece.getPlayer().isGoDown()) {// check if player "go" down or up
-			newY = piece.getSquare().getPozY() + 1;// if yes, change value
-		} else {
-			newY = piece.getSquare().getPozY() -1;
-													// (only in first move)
-		}
-		if (!piece.pieceBehaviour.isout(newX, newY)) {
-			Square moveSq = piece.getChessboard().getSquares()[newX][newY];
-		if (moveSq.piece != null) {// check if can hit left
-			if (piece.getPlayer() != moveSq.piece.getPlayer() && !moveSq.piece.getName().equals("King")) {
-					if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
-						list.add(moveSq);
+	public void regularMove(Piece piece1,  ArrayList<Square> list, int x, int y){
+		King piece = (King) piece1;
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				if (!piece.pieceBehaviour.isout(i, j)) {// out of bounds
+														// protection
+					Square sq = piece.getChessboard().getSquares()[i][j];
+					if (piece.getSquare() == sq) {// if we're checking square on
+													// which is King
+						continue;
+					} else {
+						if (piece.pieceBehaviour.checkPiece(i, j)) {// if square
+																	// is empty
+							if (piece.isSafe(sq)) {
+								list.add(sq);
+							}
+						}
 					}
 				}
 			}
 		}
-		
-	}
-	
-	public void enPassantMove(Piece piece, ArrayList<Square> list, int newX, int i){
-		int newY= piece.getSquare().getPozY();
-		if (!piece.pieceBehaviour.isout(newX, newY + i)) {
-			Square attSq = piece.getChessboard().getSquares()[newX][newY];
-			Square moveSq = piece.getChessboard().getSquares()[newX][newY + i];
 
-			if (attSq.piece != null && piece.getChessboard().getTwoSquareMovedPawn() != null
-					&& attSq == piece.getChessboard().getTwoSquareMovedPawn().getSquare()) {
-				// check if can hit left
-				if (piece.getPlayer() != attSq.piece.getPlayer() && !attSq.piece.getName().equals("King")) {
-					if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
-						list.add(moveSq);
-
-					}
-				}
-			}
-		}
 	}
 	
 	public ArrayList<Square> getMoves(Piece piece){
 		ArrayList<Square> list = new ArrayList<>();
-		regularMove(piece, list, 1);
-		if ((piece.getPlayer().isGoDown() && piece.getSquare().getPozY() == 1)
-				|| (!piece.getPlayer().isGoDown() && piece.getSquare().getPozY() == 6)) {
-			regularMove(piece, list, 2);
-		}
-		
-		captureMove(piece, list, piece.getSquare().getPozX()-1);
-		enPassantMove(piece, list, piece.getSquare().getPozX()-1, -1);
-		
-		//right
-		captureMove(piece, list, piece.getSquare().getPozX()+1);
-		enPassantMove(piece, list, piece.getSquare().getPozX()+1, 1);
-		
+		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
+		regularMove(piece, list, x, y);
 		return list;
 	}
 	
