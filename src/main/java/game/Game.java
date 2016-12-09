@@ -124,11 +124,10 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file") + ": " + exc);
 			return;
 		}
-		Calendar cal = Calendar.getInstance();
 		String str = new String("");
-		String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(cal.YEAR) + "." + (cal.get(cal.MONTH) + 1) + "."
-				+ cal.get(cal.DAY_OF_MONTH) + "\"]\n" + "[White \"" + this.getSettings().playerWhite.name
-				+ "\"]\n[Black \"" + this.getSettings().playerBlack.name + "\"]\n\n");
+		String info = new String("[Event \"Game\"]\n[Date \"" + Calendar.YEAR + "." + Calendar.MONTH + 1 + "."
+				+ Calendar.DAY_OF_MONTH + "\"]\n" + "[White \"" + this.getSettings().playerWhite.name + "\"]\n[Black \""
+				+ this.getSettings().playerBlack.name + "\"]\n\n");
 		str += info;
 		str += this.getMoves().getMovesInString();
 		try {
@@ -182,11 +181,10 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		locSetts.playerWhite.name = whiteName;
 		locSetts.playerBlue.name = blueName;
 
-		
 		locSetts.playerBlack.setType(Player.playerTypes.localUser);
 		locSetts.playerWhite.setType(Player.playerTypes.localUser);
 		locSetts.playerBlue.setType(Player.playerTypes.localUser);
-		
+
 		locSetts.gameMode = Settings.gameModes.loadGame;
 		locSetts.gameType = Settings.gameTypes.local;
 
@@ -260,7 +258,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *
 	 */
 	public void newGame() {
-		chessboard.setPieces("", new Player[]{getSettings().playerWhite, getSettings().playerBlack, getSettings().playerBlue});
+		chessboard.setPieces("",
+				new Player[] { getSettings().playerWhite, getSettings().playerBlack, getSettings().playerBlue });
 
 		// System.out.println("new game, game type: "+settings.gameType.name());
 
@@ -268,8 +267,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		if (activePlayer.playerType != Player.playerTypes.localUser) {
 			this.blockedChessboard = true;
 		}
-		// dirty hacks starts over here :)
-		// to fix rendering artifacts on first run
 		Game activeGame = JChessApp.getJcv().getActiveTabGame();
 		if (activeGame != null && JChessApp.getJcv().getNumberOfOpenedTabs() == 1) {
 			activeGame.chessboard.getDisplay().resizeChessboard(activeGame.chessboard.get_height(false));
@@ -278,10 +275,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		}
 
 		chessboard.getDisplay().repaint();
-		// chessboard.getDisplay().showMessageDialog(this,"test");
-
 		this.repaint();
-		// dirty hacks ends over here :)
 	}
 
 	/**
@@ -298,14 +292,14 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	}
 
 	/**
-	 * Method to swich active players after move
+	 * Method to switch active players after move
 	 */
 	public void switchActive() {
 		if (activePlayer == getSettings().playerWhite) {
 			activePlayer = getSettings().playerBlack;
-		} else if (activePlayer == getSettings().playerBlack){
+		} else if (activePlayer == getSettings().playerBlack) {
 			activePlayer = getSettings().playerBlue;
-		} else if (activePlayer == getSettings().playerBlue){
+		} else if (activePlayer == getSettings().playerBlue) {
 			activePlayer = getSettings().playerWhite;
 		}
 
@@ -354,8 +348,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public boolean simulateMove(int beginX, int beginY, int endX, int endY) {
 		try {
 			chessboard.select(chessboard.getSquares()[beginX][beginY]);
-			if (chessboard.getActiveSquare().piece.allMoves(false)
-					.indexOf(chessboard.getSquares()[endX][endY]) != -1) // move
+			if (chessboard.getActiveSquare().piece.allMoves(false).indexOf(chessboard.getSquares()[endX][endY]) != -1) // move
 			{
 				chessboard.move(chessboard.getSquares()[beginX][beginY], chessboard.getSquares()[endX][endY]);
 			} else {

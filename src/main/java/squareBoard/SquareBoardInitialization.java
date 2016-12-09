@@ -1,5 +1,9 @@
 package main.java.squareBoard;
 
+/**
+ * Class to initialize the pieces in a SquareChessboard for a two person chess game. 
+ */
+
 import java.util.ArrayList;
 
 import main.java.board.IMove;
@@ -30,7 +34,10 @@ public class SquareBoardInitialization {
 		setSquares(new Square[8][8]);//initalization of 8x8 chessboard
 		createSquares();
 	}
-
+	/**
+	 * Method createSquares creates an array of 8x8 Squares
+	 * 
+	 */
 	private void createSquares() {
 		
 		for (int i = 0; i < 8; i++) {// create object for each square

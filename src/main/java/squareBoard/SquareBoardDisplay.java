@@ -1,5 +1,9 @@
 package main.java.squareBoard;
 
+/**
+ * Class to manage the displaying of a SquareChessboard. 
+ */
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

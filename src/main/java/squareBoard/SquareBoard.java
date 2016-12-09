@@ -46,9 +46,7 @@ import main.java.pieces.Queen;
 import main.java.pieces.Rook;
 
 /**
- * Class to represent chessboard. Chessboard is made from squares. It is setting
- * the squars of chessboard and sets the pieces(pawns) witch the owner is
- * current player on it.
+ * Class to represent a SquareChessboard from 8x8 Squares for a two player Chess game. 
  */
 public class SquareBoard implements IChessboard {
 
@@ -83,7 +81,7 @@ public class SquareBoard implements IChessboard {
 	 * @param settings
 	 *            reference to Settings class object for this chessboard
 	 * @param moves_history
-	 *            reference to Moves class object for this chessboard
+	 *            reference to MovesTable class object for this chessboard
 	 */
 	public SquareBoard(Settings settings, MovesTable moves_history) {
 		this.settings = settings;
@@ -557,7 +555,6 @@ public class SquareBoard implements IChessboard {
 
 	@Override
 	public Piece getTwoSquareMovedPawn() {
-		// TODO Auto-generated method stub
 		return twoSquareMovedPawn;
 	}
 }
