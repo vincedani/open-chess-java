@@ -206,7 +206,7 @@ public class DrawNetworkSettings extends JPanel implements ActionListener
             {
                 error += Settings.lang("fill_name") + "\n";
             }
-            if (this.textPassword.getText().length() <= 4)
+            if (this.textPassword.getPassword().length <= 4)
             {
                 error += Settings.lang("fill_pass_with_more_than_4_signs") + "\n";
             }
@@ -227,7 +227,7 @@ public class DrawNetworkSettings extends JPanel implements ActionListener
                 JOptionPane.showMessageDialog(this, error);
                 return;
             }
-            String pass = this.textPassword.getText().toString();
+            String pass = this.textPassword.getPassword().toString();
             if (this.radioServer.isSelected())
             {
                 Server server = new Server(); //create server
@@ -248,7 +248,7 @@ public class DrawNetworkSettings extends JPanel implements ActionListener
             try
             {
                 client = new Client(clientOptions.textServIP.getText(), Server.port);//create client
-                boolean isJoining = client.join(Integer.parseInt(textGameID.getText()), !clientOptions.checkOnlyWatch.isSelected(), textNick.getText(), MD5.encrypt(textPassword.getText()));//join and wait for all players
+                boolean isJoining = client.join(Integer.parseInt(textGameID.getText()), !clientOptions.checkOnlyWatch.isSelected(), textNick.getText(), MD5.encrypt(textPassword.getPassword().toString()));//join and wait for all players
 
                 if (isJoining) //Client connection: succesful
                 {
