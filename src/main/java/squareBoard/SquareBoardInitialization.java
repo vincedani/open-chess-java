@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.movesInCircleBoard.KnightMoves;
+import main.java.movesInSquareBoard.KnightMoves;
 import main.java.movesInSquareBoard.RookMoves;
 import main.java.movesInSquareBoard.BishopMoves;
 import main.java.movesInSquareBoard.KingMoves;
