@@ -117,7 +117,7 @@ public class CircleBoard implements IChessboard {
 	}
 
 	@Override
-	public void setPieces(String places, Player plWhite, Player plBlack) {
+	public void setPieces(String places, Player plWhite, Player plBlack, Player plBlue) {
 		plWhite.setGoDown(true);
 		initial.setPieces(places, new Player[] { plWhite, plBlack, plBlack });
 

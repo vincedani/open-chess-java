@@ -162,24 +162,31 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		}
 		BufferedReader br = new BufferedReader(fileR);
 		String tempStr = new String();
-		String blackName, whiteName;
+		String blackName, whiteName, blueName;
 		try {
 			tempStr = getLineWithVar(br, new String("[White"));
 			whiteName = getValue(tempStr);
 			tempStr = getLineWithVar(br, new String("[Black"));
 			blackName = getValue(tempStr);
+			tempStr = getLineWithVar(br, new String("[Blue"));
+			blueName = getValue(tempStr);
 			tempStr = getLineWithVar(br, new String("1."));
 		} catch (ReadGameError err) {
 			// System.out.println("Error reading file: " + err);
 			LogToFile.log(err, "Error", "Error reading file: " + err.getMessage());
 			return;
 		}
-		Game newGUI = JChessApp.getJcv().addNewTab(whiteName + " vs. " + blackName);
+		Game newGUI = JChessApp.getJcv().addNewTab(whiteName + " vs. " + blackName + " vs. " + blueName);
 		Settings locSetts = newGUI.getSettings();
 		locSetts.playerBlack.name = blackName;
 		locSetts.playerWhite.name = whiteName;
+		locSetts.playerBlue.name = blueName;
+
+		
 		locSetts.playerBlack.setType(Player.playerTypes.localUser);
 		locSetts.playerWhite.setType(Player.playerTypes.localUser);
+		locSetts.playerBlue.setType(Player.playerTypes.localUser);
+		
 		locSetts.gameMode = Settings.gameModes.loadGame;
 		locSetts.gameType = Settings.gameTypes.local;
 
@@ -253,7 +260,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *
 	 */
 	public void newGame() {
-		chessboard.setPieces("", getSettings().playerWhite, getSettings().playerBlack);
+		chessboard.setPieces("", getSettings().playerWhite, getSettings().playerBlack, getSettings().playerBlue);
 
 		// System.out.println("new game, game type: "+settings.gameType.name());
 
@@ -296,7 +303,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public void switchActive() {
 		if (activePlayer == getSettings().playerWhite) {
 			activePlayer = getSettings().playerBlack;
-		} else {
+		} else if (activePlayer == getSettings().playerBlack){
+			activePlayer = getSettings().playerBlue;
+		} else if (activePlayer == getSettings().playerWhite){
 			activePlayer = getSettings().playerWhite;
 		}
 
