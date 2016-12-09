@@ -117,9 +117,9 @@ public class CircleBoard implements IChessboard {
 	}
 
 	@Override
-	public void setPieces(String places, Player plWhite, Player plBlack, Player plBlue) {
-		plWhite.setGoDown(true);
-		initial.setPieces(places, new Player[] { plWhite, plBlack, plBlack });
+	public void setPieces(String places, Player[] players) {
+		// plWhite.setGoDown(true);
+		initial.setPieces(places, players);
 
 	}
 
@@ -142,15 +142,15 @@ public class CircleBoard implements IChessboard {
 
 		if (begin.piece instanceof Pawn) {
 			Pawn movedPawn = (Pawn) begin.piece;
-			if (movedPawn.getSquare().getPozY() == 5 && end.getPozY()==5)
+			if (movedPawn.getSquare().getPozY() == 5 && end.getPozY() == 5)
 				movedPawn.passedCenter = true;
 		}
-		
+
 		begin.piece.setSquare(end);// set square of piece to ending
 		end.piece = begin.piece;// for ending square set piece from beginning
 								// square
 		// Check if pawn passed square
-		
+
 		begin.piece = null;// make null piece for begining square
 		this.unselect();// unselect square
 		display.repaint();
@@ -187,6 +187,8 @@ public class CircleBoard implements IChessboard {
 			return initial.kingWhite;
 		} else if (player.getColor().equals(Player.colors.black)) {
 			return initial.kingBlack;
+		} else if (player.getColor().equals(Player.colors.blue)) {
+			return initial.kingBlue;
 		}
 		return null;
 	}

@@ -8,7 +8,7 @@ import main.java.game.Player;
 import main.java.movesInCircleBoard.KnightMoves;
 import main.java.movesInCircleBoard.PawnMoves;
 import main.java.movesInCircleBoard.RookMoves;
-import main.java.movesInSquareBoard.KingMoves;
+import main.java.movesInCircleBoard.KingMoves;
 import main.java.movesInCircleBoard.BishopMoves;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
@@ -22,6 +22,7 @@ public class CircleBoardInitialization {
 	CircleBoard board;
 	public King kingWhite;
 	public King kingBlack;
+	public King kingBlue;
 
 	public CircleBoardInitialization(CircleBoard board) {
 		this.board=board;
@@ -107,6 +108,8 @@ public class CircleBoardInitialization {
 			squares[i + 3][j].setPiece(kingWhite=new King(board, player, kingMoves));
 		} else if (player.getColor().equals(Player.colors.black)) {
 			squares[i + 3][j].setPiece(kingBlack=new King(board, player, kingMoves));
+		} else if (player.getColor().equals(Player.colors.blue)) {
+			squares[i + 3][j].setPiece(kingBlue=new King(board, player, kingMoves));
 		}
 			
 	}

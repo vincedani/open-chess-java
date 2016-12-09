@@ -17,7 +17,7 @@ public class KnightMoves implements IMove{
 		}
 	}
 	
-	public ArrayList<Square> getMoves(Piece piece){
+	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing){
 		int newX, newY;
 		
 		ArrayList<Square> list = new ArrayList<>();

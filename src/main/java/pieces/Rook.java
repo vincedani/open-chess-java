@@ -65,11 +65,11 @@ public class Rook extends Piece
      * @return  ArrayList with new position of piece
      */
     
-    public ArrayList<Square> allMoves(IChessboard chessboard)
+    public ArrayList<Square> allMoves(boolean ignoreKing)
     {	ArrayList<Square> list = new ArrayList<Square>();
         //return RookMoves.getMoves(this);
     	for (IMove iMove : moveBehaviour) {
-			list.addAll(iMove.getMoves(this));
+			list.addAll(iMove.getMoves(this, ignoreKing));
 		}
 		return list;
     }

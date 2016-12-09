@@ -125,7 +125,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 			
 			if (activeSquare.piece != null)
             {
-                board.moves = activeSquare.piece.allMoves(board);
+                board.moves = activeSquare.piece.allMoves(false);
                 for (Iterator<Square> it = board.moves.iterator(); board.moves != null && it.hasNext();)
                 {
                     Square sq = (Square) it.next();

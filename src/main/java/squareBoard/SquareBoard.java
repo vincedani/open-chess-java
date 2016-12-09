@@ -526,8 +526,8 @@ public class SquareBoard implements IChessboard {
 		return display;
 	}
 
-	public void setPieces(String places, Player plWhite, Player plBlack) {
-		initial.setPieces(places, plWhite, plBlack);
+	public void setPieces(String places, Player[] players) {
+		initial.setPieces(places, players[0], players[1]);
 	}
 
 	public Square[][] getSquares() {

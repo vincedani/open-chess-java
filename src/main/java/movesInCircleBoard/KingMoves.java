@@ -2,7 +2,6 @@ package main.java.movesInCircleBoard;
 
 import java.util.ArrayList;
 
-import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.King;
@@ -34,7 +33,7 @@ public class KingMoves implements IMove {
 
 	}
 	
-	public ArrayList<Square> getMoves(Piece piece){
+	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing){
 		ArrayList<Square> list = new ArrayList<>();
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
 		regularMove(piece, list, x, y);

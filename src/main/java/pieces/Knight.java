@@ -62,11 +62,11 @@ public class Knight extends Piece
      *  Annotation to superclass Piece changing pawns location
      * @return  ArrayList with new position of pawn
      */
-    public ArrayList<Square> allMoves(IChessboard chessboard)
+    public ArrayList<Square> allMoves(boolean ignoreKing)
     {
     	ArrayList<Square> list = new ArrayList<Square>();
     	for (IMove iMove : moveBehaviour) {
-			list.addAll(iMove.getMoves(this));
+			list.addAll(iMove.getMoves(this, ignoreKing));
 		}
 		return list;
         //return KnightMoves.getMoves(this);

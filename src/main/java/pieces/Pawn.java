@@ -85,7 +85,7 @@ public class Pawn extends Piece {
 	 * @return ArrayList with new position of piece
 	 */
 
-	public ArrayList<Square> allMoves(IChessboard chessboard) {
+	public ArrayList<Square> allMoves(boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<Square>();
 		/*
 		ArrayList<Square> list = new ArrayList<Square>();
@@ -120,7 +120,7 @@ public class Pawn extends Piece {
 		}
 	*/
 		for (IMove iMove : moveBehaviour) {
-			list.addAll(iMove.getMoves(this));
+			list.addAll(iMove.getMoves(this, ignoreKing));
 		}
 		return list;
 	}

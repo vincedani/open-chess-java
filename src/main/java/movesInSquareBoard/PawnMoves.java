@@ -69,7 +69,7 @@ public class PawnMoves implements IMove {
 		}
 	}
 	
-	public ArrayList<Square> getMoves(Piece piece){
+	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing){
 		ArrayList<Square> list = new ArrayList<>();
 		regularMove(piece, list, 1);
 		if ((piece.getPlayer().isGoDown() && piece.getSquare().getPozY() == 1)

@@ -14,7 +14,7 @@ public interface IChessboard {
 	
 	public ChessboardDisplay getDisplay();
 	
-	public void setPieces(String places, Player plWhite, Player plBlack, Player plBlue);
+	public void setPieces(String places, Player[] players);
 
 	public int get_height(boolean b);
 

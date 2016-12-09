@@ -8,14 +8,16 @@ import main.java.pieces.Piece;
 
 public class RookMoves implements IMove {
 
-	private static void forwardVerticalMoves(Piece piece, ArrayList<Square> list) {
+	private static void forwardVerticalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
 		for (int i = y + 1; i <= 5; i++) {// up
 
 			if (piece.pieceBehaviour.checkPiece(x, i)) {
 				Square newMove = piece.getChessboard().getSquares()[x][i];
 
-				if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
+				if(ignoreKing){
+					list.add(newMove);
+				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
 					list.add(newMove);
 				}
 
@@ -30,7 +32,7 @@ public class RookMoves implements IMove {
 		}
 	}
 
-	private static void backwardVerticalMoves(Piece piece, ArrayList<Square> list) {
+	private static void backwardVerticalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
 		for (int i = y - 1; i >= 0; i--) {// down
 
@@ -39,7 +41,9 @@ public class RookMoves implements IMove {
 
 				Square newMove = piece.getChessboard().getSquares()[x][i];
 
-				if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
+				if(ignoreKing){
+					list.add(newMove);
+				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
 					list.add(newMove);
 				}
 
@@ -53,7 +57,7 @@ public class RookMoves implements IMove {
 		}
 	}
 
-	private static void rightHorizontalMoves(Piece piece, ArrayList<Square> list) {
+	private static void rightHorizontalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
 		if (x == 23) {
 			x = -1;
@@ -65,7 +69,9 @@ public class RookMoves implements IMove {
 
 				Square newMove = piece.getChessboard().getSquares()[i][y];
 
-				if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
+				if(ignoreKing){
+					list.add(newMove);
+				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
 					if (!list.contains(newMove))
 						list.add(newMove);
 				}
@@ -84,7 +90,7 @@ public class RookMoves implements IMove {
 		}
 	}
 
-	private static void leftHorizontalMoves(Piece piece, ArrayList<Square> list) {
+	private static void leftHorizontalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
 		if (x == 0) {
 			x = 24;
@@ -99,7 +105,9 @@ public class RookMoves implements IMove {
 																					// piece
 				Square newMove = piece.getChessboard().getSquares()[i][y];
 
-				if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
+				if(ignoreKing){
+					list.add(newMove);
+				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
 					if (!list.contains(newMove))
 						list.add(newMove);
 				}
@@ -118,12 +126,12 @@ public class RookMoves implements IMove {
 		}
 	}
 
-	public ArrayList<Square> getMoves(Piece piece) {
+	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
-		forwardVerticalMoves(piece, list);
-		backwardVerticalMoves(piece, list);
-		leftHorizontalMoves(piece, list);
-		rightHorizontalMoves(piece, list);
+		forwardVerticalMoves(piece, list, ignoreKing);
+		backwardVerticalMoves(piece, list, ignoreKing);
+		leftHorizontalMoves(piece, list, ignoreKing);
+		rightHorizontalMoves(piece, list, ignoreKing);
 
 		return list;
 	}

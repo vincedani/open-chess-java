@@ -112,7 +112,7 @@ public class SquareBoardDisplay extends ChessboardDisplay {
             Square tmpSquare = squares[active_x_square][active_y_square];
             if (tmpSquare.piece != null)
             {
-                board.moves = squares[active_x_square][active_y_square].piece.allMoves(board);
+                board.moves = squares[active_x_square][active_y_square].piece.allMoves(false);
                 for (Iterator it = board.moves.iterator(); board.moves != null && it.hasNext();)
                 {
                     Square sq = (Square) it.next();

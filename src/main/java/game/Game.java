@@ -260,7 +260,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *
 	 */
 	public void newGame() {
-		chessboard.setPieces("", getSettings().playerWhite, getSettings().playerBlack, getSettings().playerBlue);
+		chessboard.setPieces("", new Player[]{getSettings().playerWhite, getSettings().playerBlack, getSettings().playerBlue});
 
 		// System.out.println("new game, game type: "+settings.gameType.name());
 
@@ -305,7 +305,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			activePlayer = getSettings().playerBlack;
 		} else if (activePlayer == getSettings().playerBlack){
 			activePlayer = getSettings().playerBlue;
-		} else if (activePlayer == getSettings().playerWhite){
+		} else if (activePlayer == getSettings().playerBlue){
 			activePlayer = getSettings().playerWhite;
 		}
 
@@ -354,7 +354,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	public boolean simulateMove(int beginX, int beginY, int endX, int endY) {
 		try {
 			chessboard.select(chessboard.getSquares()[beginX][beginY]);
-			if (chessboard.getActiveSquare().piece.allMoves(this.chessboard)
+			if (chessboard.getActiveSquare().piece.allMoves(false)
 					.indexOf(chessboard.getSquares()[endX][endY]) != -1) // move
 			{
 				chessboard.move(chessboard.getSquares()[beginX][beginY], chessboard.getSquares()[endX][endY]);
@@ -466,7 +466,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					{
 						chessboard.unselect();
 					} else if (chessboard.getActiveSquare() != null && chessboard.getActiveSquare().piece != null
-							&& chessboard.getActiveSquare().piece.allMoves(this.chessboard).indexOf(sq) != -1) // move
+							&& chessboard.getActiveSquare().piece.allMoves(false).indexOf(sq) != -1) // move
 					{
 						if (getSettings().gameType == Settings.gameTypes.local) {
 							chessboard.move(chessboard.getActiveSquare(), sq);

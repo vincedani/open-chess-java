@@ -111,7 +111,7 @@ public class RookMoves implements IMove {
         }
 	}
 	
-	public ArrayList<Square> getMoves(Piece piece){
+	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing){
 		ArrayList<Square> list = new ArrayList<>();
 		forwardVerticalMoves(piece, list);
 		backwardVerticalMoves(piece, list);

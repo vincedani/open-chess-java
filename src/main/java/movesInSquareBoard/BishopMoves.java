@@ -94,7 +94,7 @@ public class BishopMoves implements IMove{
 		}
 	}
 	
-	public ArrayList<Square> getMoves(Piece piece){
+	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing){
 		ArrayList<Square> list = new ArrayList<>();
 		forwardLeftMoves(piece, list);
 		forwardRightMoves(piece, list);

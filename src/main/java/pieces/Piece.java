@@ -79,7 +79,7 @@ public abstract class Piece {
 		return chessboard.getKing(player);
 	}
 	
-	public abstract ArrayList<Square> allMoves(IChessboard chessboard2);
+	public abstract ArrayList<Square> allMoves(boolean ignoreKing);
 
 	public IChessboard getChessboard() {
 		return chessboard;
