@@ -553,7 +553,6 @@ public class SquareBoard implements IChessboard {
 		return null;
 	}
 
-	@Override
 	public Piece getTwoSquareMovedPawn() {
 		return twoSquareMovedPawn;
 	}

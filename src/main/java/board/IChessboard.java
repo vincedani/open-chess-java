@@ -2,23 +2,23 @@ package main.java.board;
 
 import main.java.game.Player;
 import main.java.pieces.King;
-import main.java.pieces.Piece;
 
 public interface IChessboard {
 
 	/**
-	 * method to get reference to square from given x and y integers after click
+	 * Method to get reference to square from given x and y integers after click
 	 * 
 	 * @param x
-	 *            x position on chessboard
+	 *            x position on the window
 	 * @param y
-	 *            y position on chessboard
+	 *            y position on the window
+	 * 
 	 * @return reference to searched square
 	 */
 	public Square getSquare(int x, int y);
 	
 	/**
-	 * Method selecting piece in chessboard
+	 * Method selecting a Square in chessboard
 	 * 
 	 * @param sq
 	 *            square to select (when clicked))
@@ -26,17 +26,28 @@ public interface IChessboard {
 	public void select(Square sq);
 
 	/**
-	 * Method set variables active_x_square & active_y_square to default values (-1).
+	 * Method to set variables active_x_square & active_y_square to default values (-1).
 	 */
 	
 	public void unselect();
 	
+	/**
+	 * Method returning the Display Object of the Chessboard.
+	 */
 	public ChessboardDisplay getDisplay();
 	
+	/**
+	 * Method setting the pieces of the Chessboard for the given set of players.
+	 * 
+	 * @param players
+	 *            Array of Player for the game
+	 */
 	public void setPieces(String places, Player[] players);
 
-	public int get_height(boolean b);
-
+	/**
+	 * Method returning the Squares Array
+	 * 
+	 */
 	public Square[][] getSquares();
 	
 	/**
@@ -52,13 +63,15 @@ public interface IChessboard {
 	public boolean undo();
 
 	public boolean redo();
-
-	public Square getActiveSquare();
-
-	public void setActiveSquare(Square sq);
 	
 	/**
-	 * Method return the king of the given player
+	 * Method returning the selected square
+	 * 
+	 */
+	public Square getActiveSquare();
+	
+	/**
+	 * Method returning the king of the given player
 	 * 
 	 * @param plater
 	 *            square from which move piece
@@ -67,8 +80,5 @@ public interface IChessboard {
 	 */
 	public King getKing(Player player);
 
-	public Piece getTwoSquareMovedPawn();
-
-	public int get_square_height();
 
 }

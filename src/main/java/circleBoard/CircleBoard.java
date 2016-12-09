@@ -1,8 +1,6 @@
 package main.java.circleBoard;
 
 import java.awt.Point;
-import java.util.ArrayList;
-
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.IChessboard;
@@ -10,33 +8,19 @@ import main.java.board.Square;
 import main.java.game.MovesTable;
 import main.java.game.Player;
 import main.java.game.Settings;
-import main.java.game.MovesTable.castling;
 import main.java.pieces.King;
 import main.java.pieces.Pawn;
-import main.java.pieces.Piece;
+
+/**
+ * Class to represent a Circle Chessboard from 24x6 Squares for a three player Chess game. 
+ */
 
 public class CircleBoard implements IChessboard {
 
 	public static final int top = 0;
 	public static final int bottom = 7;
 
-	// public Graphics graph;
-	ArrayList<Square> moves;
-	private Settings settings;
-	// -------- for undo ----------
-	private Square undo1_sq_begin = null;
-	private Square undo1_sq_end = null;
-	private Piece undo1_piece_begin = null;
-	public Piece undo1_piece_end;
-	public Piece ifWasEnPassant;
-	public Piece ifWasCastling;
-	public boolean breakCastling;
 	public MovesTable moves_history;
-	// ----------------------------
-	// For En passant:
-	// |-> Pawn whose in last turn moved two square
-	public static Pawn twoSquareMovedPawn = null;
-	public static Pawn twoSquareMovedPawn2 = null;
 
 	ChessboardLayout board_layout = new ChessboardLayout("circle_chessboard.png", "sel_circle.png", "able_circle.png");
 	public CircleBoardInitialization initial;
@@ -44,20 +28,13 @@ public class CircleBoard implements IChessboard {
 
 	public CircleBoard(Settings settings, MovesTable moves_history) {
 
-		this.settings = settings;
 		settings.renderLabels = false;
 		initial = new CircleBoardInitialization(this);
 		display = new CircleBoardDisplay(null, null, new Point(0, 0), settings.renderLabels, settings.upsideDown, this);
 		this.moves_history = moves_history;
 	}
 
-	@Override
 	public Square getSquare(int x, int y) {
-
-		if (display.renderLabels) {
-			x -= display.getUpDownLabelHeight();
-			y -= display.getUpDownLabelHeight();
-		}
 
 		if (x > 2 * getRadius() || y > 2 * getRadius()) // test if click is out
 														// of chessboard
@@ -70,8 +47,8 @@ public class CircleBoard implements IChessboard {
 		double ri = Math.sqrt(Math.pow((cx - x), 2) + Math.pow((cy - y), 2));
 
 		double ai = 0;
+		// Calculate the angle depending on the quadrant
 		if (x > cx && y < cy) {
-
 			ai = Math.toDegrees(Math.asin((x - cx) / ri));
 		} else if (x > cx && y > cy) {
 			ai = 90 + Math.toDegrees(Math.acos((x - cx) / ri));
@@ -90,7 +67,6 @@ public class CircleBoard implements IChessboard {
 		Square result;
 		try {
 			result = initial.squares[(int) square_x][(int) square_y];
-			System.out.println("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
 			return result;
 
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
@@ -99,16 +75,14 @@ public class CircleBoard implements IChessboard {
 		}
 	}
 
-	@Override
 	public void select(Square sq) {
 		this.display.activeSquare = sq;
 		this.display.active_x_square = sq.getPozX();
 		this.display.active_y_square = sq.getPozY();
-		System.out.println("active_x: " + this.display.active_x_square + " active_y: " + this.display.active_y_square);// 4tests
+		System.out.println("active_x: " + this.display.active_x_square + " active_y: " + this.display.active_y_square);
 		display.repaint();
 	}
 
-	@Override
 	public void unselect() {
 		this.display.active_x_square = -1;
 		this.display.active_y_square = -1;
@@ -116,30 +90,23 @@ public class CircleBoard implements IChessboard {
 		display.repaint();
 	}
 
-	@Override
 	public void setPieces(String places, Player[] players) {
-		// plWhite.setGoDown(true);
+
 		initial.setPieces(places, players);
 
 	}
 
-	@Override
-	public int get_height(boolean b) {
-		if (this.settings.renderLabels) {
-			return board_layout.image.getHeight(null) + display.upDownLabel.getHeight(null);
-		}
+	public int get_height() {
+
 		return board_layout.image.getHeight(null);
 	}
 
-	@Override
 	public Square[][] getSquares() {
 		return initial.squares;
 	}
 
-	@Override
 	public void move(Square begin, Square end) {
-		// TODO Auto-generated method stub
-
+		// Check if pawn passed the center
 		if (begin.piece instanceof Pawn) {
 			Pawn movedPawn = (Pawn) begin.piece;
 			if (movedPawn.getSquare().getPozY() == 5 && end.getPozY() == 5)
@@ -149,9 +116,8 @@ public class CircleBoard implements IChessboard {
 		begin.piece.setSquare(end);// set square of piece to ending
 		end.piece = begin.piece;// for ending square set piece from beginning
 								// square
-		// Check if pawn passed square
 
-		begin.piece = null;// make null piece for begining square
+		begin.piece = null;// make null piece for beginning square
 		this.unselect();// unselect square
 		display.repaint();
 
@@ -169,19 +135,10 @@ public class CircleBoard implements IChessboard {
 		return false;
 	}
 
-	@Override
 	public Square getActiveSquare() {
-		// TODO Auto-generated method stub
 		return display.activeSquare;
 	}
 
-	@Override
-	public void setActiveSquare(Square sq) {
-		// TODO Auto-generated method stub
-		display.activeSquare = sq;
-	}
-
-	@Override
 	public King getKing(Player player) {
 		if (player.getColor().equals(Player.colors.white)) {
 			return initial.kingWhite;
@@ -193,18 +150,10 @@ public class CircleBoard implements IChessboard {
 		return null;
 	}
 
-	@Override
-	public Piece getTwoSquareMovedPawn() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public ChessboardDisplay getDisplay() {
 		return display;
 	}
 
-	@Override
 	public int get_square_height() {
 		return (getRadius() - getRadius() / 3) / 6;
 	}

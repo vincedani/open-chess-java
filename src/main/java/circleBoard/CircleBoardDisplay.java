@@ -8,7 +8,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.util.Iterator;
+import java.util.ArrayList;
 
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
@@ -68,12 +68,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);
 		drawPieces(g);
 		drawHighlightedSquares(g2d);
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}/*--endOf-paint--*/ 
 	
 
@@ -125,11 +120,10 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 			
 			if (activeSquare.piece != null)
             {
-                board.moves = activeSquare.piece.allMoves(false);
-                for (Iterator<Square> it = board.moves.iterator(); board.moves != null && it.hasNext();)
+                ArrayList<Square> moves = activeSquare.piece.allMoves(false);
+                for (Square sq : moves)
                 {
-                    Square sq = (Square) it.next();
-                    Point p_sq = indexToCartesian(new Point(sq.getPozX(),sq.getPozY()));
+                   Point p_sq = indexToCartesian(new Point(sq.getPozX(),sq.getPozY()));
                     
                     tempImage = board_layout.orgAbleSquare;
                     resized = resizeImage(tempImage,get_square_height());

@@ -7,6 +7,7 @@ import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
+import main.java.squareBoard.SquareBoard;
 
 public class PawnMoves implements IMove {
 	
@@ -55,9 +56,9 @@ public class PawnMoves implements IMove {
 		if (!piece.pieceBehaviour.isout(newX, newY + i)) {
 			Square attSq = piece.getChessboard().getSquares()[newX][newY];
 			Square moveSq = piece.getChessboard().getSquares()[newX][newY + i];
-
-			if (attSq.piece != null && piece.getChessboard().getTwoSquareMovedPawn() != null
-					&& attSq == piece.getChessboard().getTwoSquareMovedPawn().getSquare()) {
+			SquareBoard chessboard= (SquareBoard)piece.getChessboard();
+			if (attSq.piece != null && chessboard.getTwoSquareMovedPawn() != null
+					&& attSq == chessboard.getTwoSquareMovedPawn().getSquare()) {
 				// check if can hit left
 				if (piece.getPlayer() != attSq.piece.getPlayer() && !attSq.piece.getName().equals("King")) {
 					if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
