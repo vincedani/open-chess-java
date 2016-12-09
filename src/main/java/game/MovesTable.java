@@ -50,7 +50,7 @@ public class MovesTable extends AbstractTableModel {
 	private ArrayList<String> move = new ArrayList<String>();
 	private int columnsNum = 3;
 	private int rowsNum = 0;
-	private String[] names = new String[] { Settings.lang("white"), Settings.lang("black") };
+	private String[] names = new String[] { Settings.lang("white"), Settings.lang("black"), Settings.lang("blue") };
 	private MyDefaultTableModel tableModel;
 	private JScrollPane scrollPane;
 	private JTable table;

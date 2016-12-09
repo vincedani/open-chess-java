@@ -57,10 +57,10 @@ import java.awt.event.MouseEvent;
  */
 public class DrawLocalSettings extends JPanel implements ActionListener, TextListener {
 
-	JDialog parent;// needet to close newGame window
-	JComboBox color;// to choose color of player
-	JRadioButton oponentComp;// choose oponent
-	JRadioButton oponentHuman;// choose oponent (human)
+	JDialog parent;// Needed to close newGame window
+	JComboBox color;// To choose color of player
+	JRadioButton oponentComp;// Choose opponent
+	JRadioButton oponentHuman;// Choose opponent (human)
 	ButtonGroup oponentChoos;// group 4 radio buttons
 	JFrame localPanel;
 	JLabel compLevLab;
@@ -93,12 +93,14 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 	 */
 	public void textValueChanged(TextEvent e) {
 		Object target = e.getSource();
-		if (target == this.firstName || target == this.secondName) {
+		if (target == this.firstName || target == this.secondName || target == this.thirdName) {
 			JTextField temp = new JTextField();
 			if (target == this.firstName) {
 				temp = this.firstName;
 			} else if (target == this.secondName) {
 				temp = this.secondName;
+			} else if (target == this.thirdName) {
+				temp = this.thirdName;
 			}
 
 			int len = temp.getText().length();
@@ -106,8 +108,6 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				try {
 					temp.setText(temp.getText(0, 7));
 				} catch (BadLocationException exc) {
-					// System.out.println("Something wrong in editables: \n" +
-					// exc);
 					LogToFile.log(exc, "Error", "Something wrong in editables: \n" + exc.getMessage());
 				}
 			}
@@ -138,22 +138,26 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 													// abilities
 			this.secondName.setEnabled(true);// enable field with name of
 												// player2
+			this.thirdName.setEnabled(true);// enable field with name of
+
 		} else if (target == this.okButton) // if clicked OK button (on finish)
 		{
 			trimName(this.firstName);
 			trimName(this.secondName);
+			trimName(this.thirdName);
 
 			if (!this.oponentComp.isSelected()
-					&& (this.firstName.getText().length() == 0 || this.secondName.getText().length() == 0)) {
+					&& (this.firstName.getText().length() == 0 || this.secondName.getText().length() == 0 || this.thirdName.getText().length() == 0 )) {
 				JOptionPane.showMessageDialog(this, Settings.lang("fill_names"));
 				return;
 			}
+			// May be deleted since no computer-player is available
 			if ((this.oponentComp.isSelected() && this.firstName.getText().length() == 0)) {
 				JOptionPane.showMessageDialog(this, Settings.lang("fill_name"));
 				return;
 			}
 
-			Game newGUI = JChessApp.getJcv().addNewTab(this.firstName.getText() + " vs " + this.secondName.getText());
+			Game newGUI = JChessApp.getJcv().addNewTab(this.firstName.getText() + " vs. " + this.secondName.getText()+ " vs. " + this.thirdName.getText());
 			Settings sett = newGUI.getSettings();// sett local settings variable
 
 			sett.gameMode = Settings.gameModes.newGame;
@@ -161,6 +165,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 
 			Player pl1 = sett.playerWhite;// set local player variable
 			Player pl2 = sett.playerBlack;// set local player variable
+			Player pl3 = sett.playerBlue;
 
 			if (this.color.getActionCommand().equals("biały")) // if first
 																// player is
@@ -168,22 +173,29 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			{
 				pl1.setName(this.firstName.getText());// set name of player
 				pl2.setName(this.secondName.getText());// set name of player
+				pl3.setName(this.thirdName.getText());// set name of player
+
 			} else // else change names
 			{
 				pl2.setName(this.firstName.getText());// set name of player
 				pl1.setName(this.secondName.getText());// set name of player
+				pl3.setName(this.thirdName.getText());// set name of player
 			}
+			
 			pl1.setType(Player.playerTypes.localUser);// set type of player
-
+			pl2.setType(Player.playerTypes.localUser);// set type of player
+			
 			if (this.oponentComp.isSelected()) // if computer opponent is checked
 			{
-				pl2.setType(Player.playerTypes.computer);
+				pl3.setType(Player.playerTypes.computer);
 			} else {
-				pl2.setType(Player.playerTypes.localUser);// set type of player
+				pl3.setType(Player.playerTypes.localUser);// set type of player
 
 			}
 			sett.players.add(pl1);
 			sett.players.add(pl2);
+			sett.players.add(pl3);
+
 
 			if (this.upsideDown.isSelected()) // if upsideDown is checked
 			{
@@ -204,8 +216,10 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				newGUI.getGameClock().setTimes(sett.timeForGame, sett.timeForGame);
 				newGUI.getGameClock().start();
 			}
-			// System.out.println(this.time4Game.getActionCommand());
 			LogToFile.log(null, "INFO", this.time4Game.getActionCommand());
+			System.out.println("*** New Game: " + pl1.getName() + " vs. " + pl2.getName() + " vs. " + pl3.getName());
+			
+			// System.out.println(this.time4Game.getActionCommand());
 			// this.time4Game.getComponent(this.time4Game.getSelectedIndex());
 			/*
 			 * System.out.println("****************\nStarting new game: " +
@@ -215,7 +229,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			 * "\n****************");//4test
 			 */
 			LogToFile.log(null, "INFO",
-					"****************\nStarting new game: " + pl1.getName() + " vs. " + pl2.getName()
+					"****************\nStarting new game: " + pl1.getName() + " vs. " + pl2.getName() + " vs. "
+							+ pl2.getName()
 							+ "\ntime 4 game: " + sett.timeForGame + "\ntime limit set: " + sett.timeLimitSet
 							+ "\nwhite on top?: " + sett.upsideDown + "\n****************");
 			newGUI.newGame();// start new Game

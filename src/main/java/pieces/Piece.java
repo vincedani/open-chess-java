@@ -66,7 +66,7 @@ public abstract class Piece {
 		}
 		//System.out.println("Color escogido: " + color);
 		imagePath += imageColorPath;
-		System.out.println("Image: " + imagePath);
+		//System.out.println("Image: " + imagePath);
 		
 		this.setName(this.getClass().getSimpleName());
 		this.setLayout(new PieceLayout(imagePath));

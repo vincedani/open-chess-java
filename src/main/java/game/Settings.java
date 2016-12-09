@@ -56,7 +56,9 @@ public class Settings implements Serializable
     
     public Player playerWhite;
     public Player playerBlack;
-
+    public Player playerBlue;
+    
+    
     public ArrayList<Player> players = new ArrayList<>() ;
     public enum gameTypes
     {
@@ -72,12 +74,13 @@ public class Settings implements Serializable
         //temporally
         this.playerWhite = new Player("", "white");
         this.playerBlack = new Player("", "black");
+        this.playerBlue = new Player("", "blue");
         this.timeLimitSet = false;
         gameMode = gameModes.newGame;
     }
 
     /** Method to get game time set by player
-     *  @return timeFofGame int with how long the game will leasts
+     *  @return timeFofGame int with how long the game will last
      */
     public int getTimeForGame()
     {
