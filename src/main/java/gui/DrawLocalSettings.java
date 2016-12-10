@@ -289,7 +289,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		});
 		*/
 		this.timeGame = new JCheckBox(Settings.lang("time_game_min"));
-		this.time4Game = new JComboBox(times);
+		//this.time4Game = new JComboBox(times);
 
 		this.oponentComp = new JRadioButton(Settings.lang("against_computer"), false);
 		this.oponentHuman = new JRadioButton(Settings.lang("against_other_human"), true);

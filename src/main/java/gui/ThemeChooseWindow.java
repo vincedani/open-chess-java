@@ -71,7 +71,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
             {
                 dirNames[i] = files[i].getName();
             }
-            this.themesList = new JList(dirNames);
+            //this.themesList = new JList(dirNames);
             this.themesList.setLocation(new Point(10, 10));
             this.themesList.setSize(new Dimension(100, 120));
             this.add(this.themesList);
