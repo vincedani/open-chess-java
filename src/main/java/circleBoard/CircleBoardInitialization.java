@@ -41,24 +41,14 @@ public class CircleBoardInitialization {
 	/**
 	 * Method setPieces on begin of new game or loaded game
 	 * 
-	 * @param places
-	 *            string with pieces to set on board
 	 * @param plWhite
 	 *            reference to white player
 	 * @param plBlack
 	 *            reference to black player
 	 */
-	public void setPieces(String places, Player[] players) {
-
-		
-	this.setPieces4NewGame(players);
-			
-	}/*--endOf-setPieces--*/
-
-	/**
-	 *
-	 */
-	private void setPieces4NewGame(Player[] players) {
+	
+	
+	public void setPieces(Player[] players) {
 
 		for (int i = 0; i < players.length; i++) {
 			setFigures4NewGame( i * 8, 0, players[i]);

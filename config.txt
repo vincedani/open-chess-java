@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-#Thu Nov 24 01:44:04 CET 2016
-=======
-#Thu Nov 24 11:56:57 CET 2016
->>>>>>> code_refactoring
+#Sat Dec 10 00:55:19 CET 2016
+>>>>>>>=code_refactoring
 THEME=default
+<<<<<<<=HEAD
+=\=\=\=\=\=\=

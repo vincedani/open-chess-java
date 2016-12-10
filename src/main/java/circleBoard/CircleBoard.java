@@ -90,9 +90,9 @@ public class CircleBoard implements IChessboard {
 		display.repaint();
 	}
 
-	public void setPieces(String places, Player[] players) {
+	public void setPieces(Player[] players) {
 
-		initial.setPieces(places, players);
+		initial.setPieces(players);
 
 	}
 

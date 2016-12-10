@@ -58,7 +58,7 @@ import java.awt.event.MouseEvent;
 public class DrawLocalSettings extends JPanel implements ActionListener, TextListener {
 
 	JDialog parent;// Needed to close newGame window
-	JComboBox color;// To choose color of player
+	JComboBox<String> color;// To choose color of player
 	JRadioButton oponentComp;// Choose opponent
 	JRadioButton oponentHuman;// Choose opponent (human)
 	ButtonGroup oponentChoos;// group 4 radio buttons
@@ -72,7 +72,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 	JLabel secondNameLab;
 	JLabel thirdNameLab;
 	JCheckBox upsideDown;// if true draw chessboard upsideDown(white on top)
-	JCheckBox threePlayers;
+	//JCheckBox threePlayers;
 	GridBagLayout gbl;
 	GridBagConstraints gbc;
 	Container cont;
@@ -196,7 +196,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 			sett.players.add(pl2);
 			sett.players.add(pl3);
 
-
+			/*
 			if (this.upsideDown.isSelected()) // if upsideDown is checked
 			{
 				sett.upsideDown = true;
@@ -216,6 +216,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				newGUI.getGameClock().setTimes(sett.timeForGame, sett.timeForGame);
 				newGUI.getGameClock().start();
 			}
+			*/
 			LogToFile.log(null, "INFO", this.time4Game.getActionCommand());
 			System.out.println("*** New Game: " + pl1.getName() + " vs. " + pl2.getName() + " vs. " + pl3.getName());
 			
@@ -252,7 +253,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		super();
 		// this.setA//choose oponent
 		this.parent = parent;
-		this.color = new JComboBox(colors);
+		this.color = new JComboBox<String>(colors);
+		this.color.setEnabled(false);
 		this.gbl = new GridBagLayout();
 		this.gbc = new GridBagConstraints();
 		this.sep = new JSeparator();
@@ -273,7 +275,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		this.oponentChoos = new ButtonGroup();
 		this.computerLevel = new JSlider();
 		this.upsideDown = new JCheckBox(Settings.lang("upside_down"));
-		this.threePlayers = new JCheckBox("Three Players", true);
+		this.upsideDown.setEnabled(false);
+		/*this.threePlayers = new JCheckBox("Three Players", true);
 		threePlayers.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -284,6 +287,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				}
 			}
 		});
+		*/
 		this.timeGame = new JCheckBox(Settings.lang("time_game_min"));
 		this.time4Game = new JComboBox(times);
 
@@ -306,8 +310,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 		// Row 0
 		this.gbc.gridx = 1;
 		this.gbc.gridy = 0;
-		this.gbl.setConstraints(threePlayers, gbc);
-		this.add(threePlayers);
+		//this.gbl.setConstraints(threePlayers, gbc);
+		//this.add(threePlayers);
 		
 		// Row 1
 //		this.gbc.gridx = 0;

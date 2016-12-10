@@ -258,17 +258,15 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *
 	 */
 	public void newGame() {
-		chessboard.setPieces("",
+		chessboard.setPieces(
 				new Player[] { getSettings().playerWhite, getSettings().playerBlack, getSettings().playerBlue });
-
-		// System.out.println("new game, game type: "+settings.gameType.name());
 
 		activePlayer = getSettings().playerWhite;
 		if (activePlayer.playerType != Player.playerTypes.localUser) {
 			this.blockedChessboard = true;
 		}
 		Game activeGame = JChessApp.getJcv().getActiveTabGame();
-		
+
 		activeGame.chessboard.getDisplay().repaint();
 		activeGame.repaint();
 		chessboard.getDisplay().repaint();

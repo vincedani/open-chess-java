@@ -31,7 +31,7 @@ public class SquareBoardInitialization {
 	public SquareBoardInitialization(boolean upsideDown, SquareBoard board) {
 		this.upsideDown = upsideDown;
 		this.board=board;
-		setSquares(new Square[8][8]);//initalization of 8x8 chessboard
+		setSquares(new Square[8][8]);//Initialization of 8x8 chessboard
 		createSquares();
 	}
 	/**
@@ -57,21 +57,16 @@ public class SquareBoardInitialization {
 	 * @param plBlack
 	 *            reference to black player
 	 */
-	public void setPieces(String places, Player plWhite, Player plBlack) {
+	public void setPieces(Player plWhite, Player plBlack) {
 
-		if (places.equals("")) // if newGame
-		{
+		
 			if (upsideDown) {
 				this.setPieces4NewGame(true, plWhite, plBlack);
 			} else {
 				this.setPieces4NewGame(false, plWhite, plBlack);
 			}
 
-		} else // if loadedGame
-		{
-			return;
-		}
-	}/*--endOf-setPieces--*/
+		} 
 
 	/**
 	 *
