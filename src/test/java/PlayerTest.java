@@ -19,10 +19,6 @@ public class PlayerTest {
 		p = new Player("Player1", "red");
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public final void testGetName() {
 		String expected = "Player1";
