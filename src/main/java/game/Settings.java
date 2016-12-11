@@ -38,7 +38,7 @@ public class Settings implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static ResourceBundle loc = null;
+	public static ResourceBundle loc = null;
     public int timeForGame;
     public boolean runningChat;
     public boolean runningGameClock;
@@ -104,7 +104,7 @@ public class Settings implements Serializable
             result = key;
         }
        // System.out.println(Settings.loc.getLocale().toString());
-         LogToFile.log(null, "INFO", Settings.loc.getLocale().toString());
+        // LogToFile.log(null, "INFO", Settings.loc.getLocale().toString());
         return result;
     }
 }

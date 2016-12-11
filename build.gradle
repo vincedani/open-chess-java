@@ -54,7 +54,7 @@ apply plugin: 'eclipse'
 				srcDirs = ['src/main']
 			}
 			resources {
-				srcDirs = ['src/main']
+				srcDirs = ['src/main/resources']
 			}
 		}
 		test {
@@ -62,7 +62,7 @@ apply plugin: 'eclipse'
 				srcDirs = ['src/test']
 			}
 			resources {
-				srcDirs = ['src/main']
+				srcDirs = ['src/main/resources']
 			}
 		}	
 	}

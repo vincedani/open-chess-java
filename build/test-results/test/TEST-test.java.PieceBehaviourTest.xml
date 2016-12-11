@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test.java.PieceBehaviourTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2016-12-11T20:45:43" hostname="mateo" time="0.547">
+  <properties/>
+  <testcase name="testGetChessboard" classname="test.java.PieceBehaviourTest" time="0.459"/>
+  <testcase name="testSetChessboard" classname="test.java.PieceBehaviourTest" time="0.002"/>
+  <testcase name="testGetName" classname="test.java.PieceBehaviourTest" time="0.001"/>
+  <testcase name="testSetPlayer" classname="test.java.PieceBehaviourTest" time="0.001"/>
+  <testcase name="testGetPlayer" classname="test.java.PieceBehaviourTest" time="0.001"/>
+  <testcase name="testSetName" classname="test.java.PieceBehaviourTest" time="0.001"/>
+  <testcase name="testIsout_0" classname="test.java.PieceBehaviourTest" time="0.006"/>
+  <testcase name="testIsout_1" classname="test.java.PieceBehaviourTest" time="0.002"/>
+  <testcase name="testIsout_2" classname="test.java.PieceBehaviourTest" time="0.061"/>
+  <testcase name="testIsout_3" classname="test.java.PieceBehaviourTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
