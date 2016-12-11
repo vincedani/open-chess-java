@@ -48,8 +48,7 @@ public class Square {
 	}
 
 	/**
-	 * Set the given piece to this Square and set this Square to the
-	 * given piece
+	 * Set the given piece to this Square and set this Square to the given piece
 	 * 
 	 * @param piece
 	 *            Instance of piece to set

@@ -2,13 +2,15 @@ package main.java.board;
 
 import main.java.game.Player;
 import main.java.pieces.King;
+
 /**
- * Interface to manage the logical behaviors of any type of chessboard. 
+ * Interface to manage the logical behaviors of any type of chessboard.
  */
 public interface IChessboard {
 
 	/**
-	 * Get the reference to the square for the given x and y integers after click
+	 * Get the reference to the square for the given x and y integers after
+	 * click
 	 * 
 	 * @param x
 	 *            x position on the window
@@ -40,7 +42,8 @@ public interface IChessboard {
 	public ChessboardDisplay getDisplay();
 
 	/**
-	 * Set the initial configuration of the pieces before the game for the given set of players.
+	 * Set the initial configuration of the pieces before the game for the given
+	 * set of players.
 	 * 
 	 * @param players
 	 *            Array of players of the game
@@ -59,7 +62,7 @@ public interface IChessboard {
 	 * @param begin
 	 *            square from which move piece
 	 * @param end
-	 *            square where we want to move piece 
+	 *            square where we want to move piece
 	 */
 	public void move(Square begin, Square end);
 
@@ -78,7 +81,8 @@ public interface IChessboard {
 	 * @param player
 	 *            given player whose King is requested
 	 * 
-	 * @return King of the same color of the given player, null if the color is not found
+	 * @return King of the same color of the given player, null if the color is
+	 *         not found
 	 * 
 	 */
 	public King getKing(Player player);

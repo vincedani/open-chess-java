@@ -8,8 +8,8 @@ import main.java.pieces.King;
 import main.java.pieces.Piece;
 
 public class KingMoves implements IMove {
-	
-	public void regularMove(Piece piece1,  ArrayList<Square> list, int x, int y){
+
+	public void regularMove(Piece piece1, ArrayList<Square> list, int x, int y) {
 		King piece = (King) piece1;
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
@@ -32,12 +32,12 @@ public class KingMoves implements IMove {
 		}
 
 	}
-	
-	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing){
+
+	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
 		regularMove(piece, list, x, y);
 		return list;
 	}
-	
+
 }

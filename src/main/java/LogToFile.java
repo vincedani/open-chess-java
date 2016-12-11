@@ -31,9 +31,11 @@ public class LogToFile {
 
 	private static void initialize() {
 		try {
-			//Logger logger = Logger.getLogger(this.getClass().getName());
+			// Logger logger = Logger.getLogger(this.getClass().getName());
 			SimpleFormatter formatter = new SimpleFormatter();
-			//FileHandler fh = new FileHandler("main" + File.separator + "java" + File.separator + "Logs" + File.separator + logFile + "%g%u.LOG", 10000, 2, true);
+			// FileHandler fh = new FileHandler("main" + File.separator + "java"
+			// + File.separator + "Logs" + File.separator + logFile +
+			// "%g%u.LOG", 10000, 2, true);
 			FileHandler fh = new FileHandler(logFile + "%g%u.LOG", 100000, 2, true);
 			fh.setFormatter(formatter);
 			fh.setLevel(Level.ALL);
@@ -54,7 +56,7 @@ public class LogToFile {
 		Logger logger1;
 		if (!checkFileName(logFile)) {
 			createFileName();
-		   // System.out.println("FileName: " + logFile);
+			// System.out.println("FileName: " + logFile);
 			initialize();
 		}
 

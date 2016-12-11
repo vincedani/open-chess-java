@@ -27,15 +27,6 @@ package main.java.pieces;
  * no other escape then stay on a square "in danger" by the opponent
  * then it's a CheckedMate, and the game is over.
  *
- *      |_|_|_|_|_|_|_|_|7
-        |_|_|_|_|_|_|_|_|6
-        |_|_|_|_|_|_|_|_|5
-        |_|_|X|X|X|_|_|_|4
-        |_|_|X|K|X|_|_|_|3
-        |_|_|X|X|X|_|_|_|2
-        |_|_|_|_|_|_|_|_|1
-        |_|_|_|_|_|_|_|_|0
-        0 1 2 3 4 5 6 7
  */
 import java.util.ArrayList;
 
@@ -82,7 +73,6 @@ public class King extends Piece {
 		return !isSafe(this.getSquare());
 	}
 
-	
 	public int isCheckmatedOrStalematedOld() {
 		/*
 		 * returns: 0-nothing, 1-checkmate, 2-stalemate
@@ -138,7 +128,6 @@ public class King extends Piece {
 		}
 	}
 
-	
 	public boolean isSafeOld(Square s) // A bit confusing code.
 	{
 		// Rook & Queen
@@ -633,7 +622,7 @@ public class King extends Piece {
 
 		return true;
 	}
-	
+
 	/**
 	 * Method to check is the king is checked by an opponent
 	 * 
@@ -644,32 +633,34 @@ public class King extends Piece {
 	public boolean isSafe(Square s) // A bit confusing code.
 	{
 
-			for (int i = 0; i < 24; i++) {
-				for (int j = 0; j < 6; j++) {
-					if (getChessboard().getSquares()[i][j].piece != null) {
-						Piece piece = getChessboard().getSquares()[i][j].piece;
-						if (piece.getPlayer() != this.getPlayer()) {
-							ArrayList<Square> pieceMoves = piece.allMoves(true);
-							if (pieceMoves.contains(s)) {
-								return false;
-							}
+		for (int i = 0; i < 24; i++) {
+			for (int j = 0; j < 6; j++) {
+				if (getChessboard().getSquares()[i][j].piece != null) {
+					Piece piece = getChessboard().getSquares()[i][j].piece;
+					if (piece.getPlayer() != this.getPlayer()) {
+						ArrayList<Square> pieceMoves = piece.allMoves(true);
+						if (pieceMoves.contains(s)) {
+							return false;
 						}
 					}
 				}
 			}
-		
+		}
+
 		return true;
 	}
 
 	/**
-	 * Method to check will the king be safe after the move of the pieces in the given squares
+	 * Method to check will the king be safe after the move of the pieces in the
+	 * given squares
 	 * 
-	 * @param sqIsHere the original square of the piece
-	 * @param sqWillBeThere the future square of the piece 
+	 * @param sqIsHere
+	 *            the original square of the piece
+	 * @param sqWillBeThere
+	 *            the future square of the piece
 	 * @return boolean true if king is save, else returns false
 	 */
-	public boolean willBeSafeAfterMove(Square sqIsHere, Square sqWillBeThere) 
-	{
+	public boolean willBeSafeAfterMove(Square sqIsHere, Square sqWillBeThere) {
 		Piece tmp = sqWillBeThere.piece;
 		sqWillBeThere.piece = sqIsHere.piece; // move without redraw
 		sqIsHere.piece = null;

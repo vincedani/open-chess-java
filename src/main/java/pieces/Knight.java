@@ -30,44 +30,42 @@ import main.java.game.Player;
 /**
  * Class to represent a chess pawn knight
  */
-public class Knight extends Piece
-{
+public class Knight extends Piece {
 
-    public static short value = 3;
-//    protected static final Image imageWhite = GUI.loadImage("Knight-W.png");
-//    protected static final Image imageBlack = GUI.loadImage("Knight-B.png");
+	public static short value = 3;
+	// protected static final Image imageWhite = GUI.loadImage("Knight-W.png");
+	// protected static final Image imageBlack = GUI.loadImage("Knight-B.png");
 	ArrayList<IMove> moveBehaviour;
 
-    
-    public Knight(IChessboard chessboard, Player player, ArrayList<IMove> moveBehaviour)
-    {
-    	super(chessboard, player, "Knight"); // call initializer of super type: Piece 
+	public Knight(IChessboard chessboard, Player player, ArrayList<IMove> moveBehaviour) {
+		super(chessboard, player, "Knight"); // call initializer of super type:
+												// Piece
 		this.symbol = "N";
 		this.moveBehaviour = moveBehaviour;
 
-    }
+	}
 
-    public void regularMove(IChessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list){
-    	
-    	if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
-        {		Square newMove= chessboard.getSquares()[newX][newY];
-                if (myKing.willBeSafeAfterMove(this.getSquare(), newMove))
-                {
-                    list.add(newMove);
-                }   
-        }
-    }
-    /**
-     *  Annotation to superclass Piece changing pawns location
-     * @return  ArrayList with new position of pawn
-     */
-    public ArrayList<Square> allMoves(boolean ignoreKing)
-    {
-    	ArrayList<Square> list = new ArrayList<Square>();
-    	for (IMove iMove : moveBehaviour) {
+	public void regularMove(IChessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list) {
+
+		if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY)) {
+			Square newMove = chessboard.getSquares()[newX][newY];
+			if (myKing.willBeSafeAfterMove(this.getSquare(), newMove)) {
+				list.add(newMove);
+			}
+		}
+	}
+
+	/**
+	 * Annotation to superclass Piece changing pawns location
+	 * 
+	 * @return ArrayList with new position of pawn
+	 */
+	public ArrayList<Square> allMoves(boolean ignoreKing) {
+		ArrayList<Square> list = new ArrayList<Square>();
+		for (IMove iMove : moveBehaviour) {
 			list.addAll(iMove.getMoves(this, ignoreKing));
 		}
 		return list;
-        //return KnightMoves.getMoves(this);
-    }
+		// return KnightMoves.getMoves(this);
+	}
 }

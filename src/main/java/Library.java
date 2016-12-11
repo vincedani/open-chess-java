@@ -7,7 +7,7 @@ package main.java;
  * @author AndreaZ, @date 27/10/16 11:01 PM
  */
 public class Library {
-    public boolean someLibraryMethod() {
-        return true;
-    }
+	public boolean someLibraryMethod() {
+		return true;
+	}
 }

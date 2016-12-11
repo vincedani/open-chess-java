@@ -1,6 +1,7 @@
 package main.java.circleBoard;
 
 import java.awt.Point;
+
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.IChessboard;
@@ -12,8 +13,8 @@ import main.java.pieces.King;
 import main.java.pieces.Pawn;
 
 /**
- * Class to represent a Circle Chessboard for a three player Chess game.
- * It contains 24 x 6 Squares 
+ * Class to represent a Circle Chessboard for a three player Chess game. It
+ * contains 24 x 6 Squares
  */
 
 public class CircleBoard implements IChessboard {
@@ -38,10 +39,11 @@ public class CircleBoard implements IChessboard {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * Use transformation of x and y to polar coordinates to obtain the x and y index of the Square. 
-	 * The angle is calculated based on the corresponding quadrant
+	 * Use transformation of x and y to polar coordinates to obtain the x and y
+	 * index of the Square. The angle is calculated based on the corresponding
+	 * quadrant
 	 */
-	
+
 	public Square getSquare(int x, int y) {
 
 		if (x > 2 * getRadius() || y > 2 * getRadius()) // test if click is out
@@ -69,7 +71,7 @@ public class CircleBoard implements IChessboard {
 		double square_x = (ai / 15);
 
 		double square_y = (cy - ri) / hi;
-		
+
 		Square result;
 		try {
 			result = initial.squares[(int) square_x][(int) square_y];
@@ -114,7 +116,8 @@ public class CircleBoard implements IChessboard {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * If the piece is a pawn checks if it has passed the center so that the regular move is changed from forward to backward in the y axis. 
+	 * If the piece is a pawn checks if it has passed the center so that the
+	 * regular move is changed from forward to backward in the y axis.
 	 * 
 	 */
 	public void move(Square begin, Square end) {
@@ -134,10 +137,11 @@ public class CircleBoard implements IChessboard {
 		display.repaint();
 
 	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * Not implemented 
+	 * Not implemented
 	 * 
 	 */
 	@Override
@@ -145,11 +149,12 @@ public class CircleBoard implements IChessboard {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * Not implemented 
-	 *  
+	 * Not implemented
+	 * 
 	 */
 	@Override
 	public boolean redo() {
@@ -177,19 +182,22 @@ public class CircleBoard implements IChessboard {
 	}
 
 	/**
-	 * Method calculating the square height of the circle board, based on the actual radius.
+	 * Method calculating the square height of the circle board, based on the
+	 * actual radius.
 	 * 
 	 * @return the square height of the CircleBoard
-	 *  
+	 * 
 	 */
 	public int get_square_height() {
 		return (getRadius() - getRadius() / 3) / 6;
 	}
+
 	/**
-	 * Method calculating the radius of the circle board, based on the board layout height.
+	 * Method calculating the radius of the circle board, based on the board
+	 * layout height.
 	 * 
 	 * @return the radius of the CircleBoard
-	 *  
+	 * 
 	 */
 	public int getRadius() {
 		return board_layout.image.getHeight(null) / 2;

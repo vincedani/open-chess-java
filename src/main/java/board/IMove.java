@@ -3,8 +3,10 @@ package main.java.board;
 import java.util.ArrayList;
 
 import main.java.pieces.Piece;
+
 /**
- * Interface to manage the movement behaviors of a piece in any type of chessboard. 
+ * Interface to manage the movement behaviors of a piece in any type of
+ * chessboard.
  */
 public interface IMove {
 	/**
