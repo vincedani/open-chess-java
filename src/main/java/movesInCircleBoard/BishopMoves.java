@@ -7,7 +7,17 @@ import main.java.board.Square;
 import main.java.pieces.Piece;
 
 public class BishopMoves implements IMove{
-
+	
+	/**
+	 * Method returning the posible moves of the given piece
+	 * 
+	 * @param Piece the instance of the piece to extract the possible moves
+	 * 
+	 * @param ignoreKing if active, it will not be checked if the King is in Check or Stalemate
+	 * 
+	 * @return an ArrayList of Squares with the possible moves of the piece
+	 *             
+	 */
 	private static void backwardRightMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
 		if (x == 0) {
@@ -15,13 +25,11 @@ public class BishopMoves implements IMove{
 		}
 		for (int h = x - 1, i = y + 1; !piece.pieceBehaviour.isout(h, i); --h, ++i) // left-up
 		{
-			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
-														// isn't
-														// piece
+			if (piece.pieceBehaviour.checkPiece(h, i))
 			{
 				if(ignoreKing){
 					list.add(piece.getChessboard().getSquares()[h][i]);
-				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(),
+				}else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(),
 						piece.getChessboard().getSquares()[h][i])) {
 					list.add(piece.getChessboard().getSquares()[h][i]);
 				}
@@ -30,8 +38,7 @@ public class BishopMoves implements IMove{
 					break;
 				}
 			} else {
-				break;// we've to break because we cannot go beside other
-						// piece!!
+				break;
 			}
 			
 			if (h == 0) {
@@ -52,7 +59,7 @@ public class BishopMoves implements IMove{
 			{
 				if(ignoreKing){
 					list.add(piece.getChessboard().getSquares()[h][i]);
-				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
+				}else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
 					list.add(piece.getChessboard().getSquares()[h][i]);
 				}
 
@@ -81,7 +88,7 @@ public class BishopMoves implements IMove{
 			{
 				if(ignoreKing){
 					list.add(piece.getChessboard().getSquares()[h][i]);
-				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
+				}else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
 					list.add(piece.getChessboard().getSquares()[h][i]);
 				}
 
@@ -111,7 +118,7 @@ public class BishopMoves implements IMove{
 			{
 				if(ignoreKing){
 					list.add(piece.getChessboard().getSquares()[h][i]);
-				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
+				}else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
 					list.add(piece.getChessboard().getSquares()[h][i]);
 				}
 

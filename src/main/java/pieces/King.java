@@ -82,11 +82,7 @@ public class King extends Piece {
 		return !isSafe(this.getSquare());
 	}
 
-	/**
-	 * Method to check is the king is checked or stalemated
-	 * 
-	 * @return int 0 if nothing, 1 if checkmate, else returns 2
-	 */
+	
 	public int isCheckmatedOrStalematedOld() {
 		/*
 		 * returns: 0-nothing, 1-checkmate, 2-stalemate
@@ -112,6 +108,11 @@ public class King extends Piece {
 		}
 	}
 
+	/**
+	 * Method to check is the king is checked or stalemated
+	 * 
+	 * @return int 0 if nothing, 1 if checkmate, else returns 2
+	 */
 	public int isCheckmatedOrStalemated() {
 		/*
 		 * returns: 0-nothing, 1-checkmate, 2-stalemate
@@ -137,13 +138,7 @@ public class King extends Piece {
 		}
 	}
 
-	/**
-	 * Method to check is the king is checked by an opponent
-	 * 
-	 * @param s
-	 *            Square where is a king
-	 * @return bool true if king is save, else returns false
-	 */
+	
 	public boolean isSafeOld(Square s) // A bit confusing code.
 	{
 		// Rook & Queen
@@ -638,7 +633,14 @@ public class King extends Piece {
 
 		return true;
 	}
-
+	
+	/**
+	 * Method to check is the king is checked by an opponent
+	 * 
+	 * @param s
+	 *            Square where is a king
+	 * @return bool true if king is save, else returns false
+	 */
 	public boolean isSafe(Square s) // A bit confusing code.
 	{
 
@@ -660,13 +662,13 @@ public class King extends Piece {
 	}
 
 	/**
-	 * Method to check will the king be safe when move
+	 * Method to check will the king be safe after the move of the pieces in the given squares
 	 * 
-	 * @return bool true if king is save, else returns false
+	 * @param sqIsHere the original square of the piece
+	 * @param sqWillBeThere the future square of the piece 
+	 * @return boolean true if king is save, else returns false
 	 */
-	public boolean willBeSafeWhenMoveOtherPiece(Square sqIsHere, Square sqWillBeThere) // long
-																						// name
-																						// ;)
+	public boolean willBeSafeAfterMove(Square sqIsHere, Square sqWillBeThere) 
 	{
 		Piece tmp = sqWillBeThere.piece;
 		sqWillBeThere.piece = sqIsHere.piece; // move without redraw

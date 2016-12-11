@@ -23,7 +23,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.TextEvent;
@@ -49,8 +48,6 @@ import main.java.LogToFile;
 import main.java.game.Game;
 import main.java.game.Player;
 import main.java.game.Settings;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Class responsible for drawing the fold with local game settings
@@ -217,7 +214,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				newGUI.getGameClock().start();
 			}
 			*/
-			LogToFile.log(null, "INFO", this.time4Game.getActionCommand());
+			//LogToFile.log(null, "INFO", this.time4Game.getActionCommand());
 			System.out.println("*** New Game: " + pl1.getName() + " vs. " + pl2.getName() + " vs. " + pl3.getName());
 			
 			// System.out.println(this.time4Game.getActionCommand());

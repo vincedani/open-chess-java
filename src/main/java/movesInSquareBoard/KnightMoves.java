@@ -11,7 +11,7 @@ public class KnightMoves implements IMove{
 
 		if (!piece.pieceBehaviour.isout(newX, newY) && piece.pieceBehaviour.checkPiece(newX, newY)) {
 			Square newMove = piece.getChessboard().getSquares()[newX][newY];
-			if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
+			if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 				list.add(newMove);
 			}
 		}

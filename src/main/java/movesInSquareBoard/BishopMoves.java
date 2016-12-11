@@ -16,7 +16,7 @@ public class BishopMoves implements IMove{
 														// isn't
 														// piece
 			{
-				if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(),
+				if (piece.myKing().willBeSafeAfterMove(piece.getSquare(),
 						piece.getChessboard().getSquares()[h][i])) {
 					list.add(piece.getChessboard().getSquares()[h][i]);
 				}
@@ -38,7 +38,7 @@ public class BishopMoves implements IMove{
 			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
 														// isn't piece
 			{
-				if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
+				if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
 					list.add(piece.getChessboard().getSquares()[h][i]);
 				}
 
@@ -59,7 +59,7 @@ public class BishopMoves implements IMove{
 														// isn't
 														// piece
 			{
-				if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
+				if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
 					list.add(piece.getChessboard().getSquares()[h][i]);
 				}
 
@@ -80,7 +80,7 @@ public class BishopMoves implements IMove{
 			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
 														// isn't piece
 			{
-				if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
+				if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getChessboard().getSquares()[h][i])) {
 					list.add(piece.getChessboard().getSquares()[h][i]);
 				}
 

@@ -16,6 +16,10 @@ import main.java.board.Square;
 
 public class CircleBoardDisplay extends ChessboardDisplay {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5579307748341547598L;
 	public Square activeSquare;
 	public Image upDownLabel;
 	public Image LeftRightLabel;
@@ -220,10 +224,10 @@ public class CircleBoardDisplay extends ChessboardDisplay {
     }/*--endOf-get_height--*/
 
 
-	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
-		
+		this.getGraphics().drawImage(board_layout.image, this.getTopLeftPoint().x, this.getTopLeftPoint().y, null);//draw an Image of chessboard
+        //this.drawLabels();
+        this.repaint();		
 	}
 	
 	public int get_square_height() {

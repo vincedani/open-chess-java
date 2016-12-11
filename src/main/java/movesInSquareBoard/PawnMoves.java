@@ -23,7 +23,7 @@ public class PawnMoves implements IMove {
 		if (!piece.pieceBehaviour.isout(piece.getSquare().getPozX(), newY )) {
 			Square moveSq = piece.getChessboard().getSquares()[piece.getSquare().getPozX()][newY];
 
-			if (moveSq.piece == null && piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
+			if (moveSq.piece == null && piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
 				list.add(moveSq);
 
 			}
@@ -42,7 +42,7 @@ public class PawnMoves implements IMove {
 			Square moveSq = piece.getChessboard().getSquares()[newX][newY];
 		if (moveSq.piece != null) {// check if can hit left
 			if (piece.getPlayer() != moveSq.piece.getPlayer() && !moveSq.piece.getName().equals("King")) {
-					if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
+					if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
 						list.add(moveSq);
 					}
 				}
@@ -61,7 +61,7 @@ public class PawnMoves implements IMove {
 					&& attSq == chessboard.getTwoSquareMovedPawn().getSquare()) {
 				// check if can hit left
 				if (piece.getPlayer() != attSq.piece.getPlayer() && !attSq.piece.getName().equals("King")) {
-					if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
+					if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
 						list.add(moveSq);
 
 					}

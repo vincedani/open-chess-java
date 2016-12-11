@@ -50,8 +50,6 @@ public class SquareBoardInitialization {
 	/**
 	 * Method setPieces on begin of new game or loaded game
 	 * 
-	 * @param places
-	 *            string with pieces to set on chessboard
 	 * @param plWhite
 	 *            reference to white player
 	 * @param plBlack

@@ -26,8 +26,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import main.java.game.Settings;
 import main.java.game.Player.playerTypes;
+import main.java.game.Settings;
 
 /**
  * Class responsible for server references: For running the server,

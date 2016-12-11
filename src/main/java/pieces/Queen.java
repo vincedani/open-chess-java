@@ -26,8 +26,6 @@ import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.movesInSquareBoard.BishopMoves;
-import main.java.movesInSquareBoard.RookMoves;
 
 /**
  * Class to represent a queen piece Queen can move almost in every way:

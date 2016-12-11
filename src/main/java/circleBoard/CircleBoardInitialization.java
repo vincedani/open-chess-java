@@ -26,28 +26,28 @@ public class CircleBoardInitialization {
 
 	public CircleBoardInitialization(CircleBoard board) {
 		this.board=board;
-		setSquares(new Square[24][6]);// Initialization of 8x8 board
+		squares = new Square[24][6];// Initialization of 8x8 board
 		createSquares();
 	}
-
+	/**
+	 * Method createSquares creates an array of 24x6 Squares
+	 * 
+	 */
 	private void createSquares() {
-		for (int i = 0; i < 24; i++) {// create object for each square
+		for (int i = 0; i < 24; i++) {
 			for (int y = 0; y < 6; y++) {
 				getSquares()[i][y] = new Square(i, y, null);
 			}
-		} // --endOf--create object for each square
+		} 
 	}
 
 	/**
 	 * Method setPieces on begin of new game or loaded game
 	 * 
-	 * @param plWhite
-	 *            reference to white player
-	 * @param plBlack
-	 *            reference to black player
-	 */
-	
-	
+	 * @param players
+	 * 			array of the players of the game
+	 *            
+	 */	
 	public void setPieces(Player[] players) {
 
 		for (int i = 0; i < players.length; i++) {
@@ -57,12 +57,12 @@ public class CircleBoardInitialization {
 	}/*--endOf-setPieces(boolean upsideDown)--*/
 
 	/**
-	 * method set Figures in row (and set Queen and King to right position)
+	 * Method set Figures in row and store each King 
 	 * 
 	 * @param i
-	 *            column to start the positioning
+	 *            row to start the positioning
 	 * @param j
-	 *            row where to set figures (Rook, Knight etc.)
+	 *            column where to set figures (Rook, Knight etc.)
 	 * @param player
 	 *            which is owner of pawns
 	 */
@@ -108,9 +108,9 @@ public class CircleBoardInitialization {
 	 * method set Pawns in row
 	 * 
 	 * @param i
-	 *            column to start the positioning
+	 *            row to start the positioning
 	 * @param j
-	 *            row where to set pawns
+	 *            column where to set pawns
 	 * @param player
 	 *            player which is owner of pawns
 	 */
@@ -127,7 +127,4 @@ public class CircleBoardInitialization {
 		return squares;
 	}
 
-	public void setSquares(Square[][] squares) {
-		this.squares = squares;
-	}
 }

@@ -156,7 +156,7 @@ public class SquareBoard implements IChessboard {
 	}/*--endOf-select--*/
 
 	/**
-	 * Method set variables active_x_square & active_y_square to 0 values.
+	 * Method set variables active_x_square and active_y_square to default values (-1).
 	 */
 	public void unselect() {
 		this.display.active_x_square = -1;

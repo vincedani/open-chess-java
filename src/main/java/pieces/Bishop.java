@@ -26,7 +26,6 @@ import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.movesInSquareBoard.BishopMoves;
 
 /**
  * Class to represent a chess pawn bishop Bishop can move across the chessboard

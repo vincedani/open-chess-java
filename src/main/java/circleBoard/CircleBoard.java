@@ -12,7 +12,8 @@ import main.java.pieces.King;
 import main.java.pieces.Pawn;
 
 /**
- * Class to represent a Circle Chessboard from 24x6 Squares for a three player Chess game. 
+ * Class to represent a Circle Chessboard for a three player Chess game.
+ * It contains 24 x 6 Squares 
  */
 
 public class CircleBoard implements IChessboard {
@@ -34,6 +35,13 @@ public class CircleBoard implements IChessboard {
 		this.moves_history = moves_history;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Use transformation of x and y to polar coordinates to obtain the x and y index of the Square. 
+	 * The angle is calculated based on the corresponding quadrant
+	 */
+	
 	public Square getSquare(int x, int y) {
 
 		if (x > 2 * getRadius() || y > 2 * getRadius()) // test if click is out
@@ -58,12 +66,10 @@ public class CircleBoard implements IChessboard {
 			ai = 270 + Math.toDegrees(Math.acos((cx - x) / ri));
 		}
 
-		double square_x = (ai / 15);// count which field in X was
-									// clicked
+		double square_x = (ai / 15);
 
-		double square_y = (cy - ri) / hi;// count which field
-											// in Y
-											// was
+		double square_y = (cy - ri) / hi;
+		
 		Square result;
 		try {
 			result = initial.squares[(int) square_x][(int) square_y];
@@ -105,6 +111,12 @@ public class CircleBoard implements IChessboard {
 		return initial.squares;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * If the piece is a pawn checks if it has passed the center so that the regular move is changed from forward to backward in the y axis. 
+	 * 
+	 */
 	public void move(Square begin, Square end) {
 		// Check if pawn passed the center
 		if (begin.piece instanceof Pawn) {
@@ -122,13 +134,23 @@ public class CircleBoard implements IChessboard {
 		display.repaint();
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Not implemented 
+	 * 
+	 */
 	@Override
 	public boolean undo() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Not implemented 
+	 *  
+	 */
 	@Override
 	public boolean redo() {
 		// TODO Auto-generated method stub
@@ -154,10 +176,21 @@ public class CircleBoard implements IChessboard {
 		return display;
 	}
 
+	/**
+	 * Method calculating the square height of the circle board, based on the actual radius.
+	 * 
+	 * @return the square height of the CircleBoard
+	 *  
+	 */
 	public int get_square_height() {
 		return (getRadius() - getRadius() / 3) / 6;
 	}
-
+	/**
+	 * Method calculating the radius of the circle board, based on the board layout height.
+	 * 
+	 * @return the radius of the CircleBoard
+	 *  
+	 */
 	public int getRadius() {
 		return board_layout.image.getHeight(null) / 2;
 	}

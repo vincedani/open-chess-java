@@ -26,7 +26,6 @@ import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.movesInSquareBoard.KnightMoves;
 
 /**
  * Class to represent a chess pawn knight
@@ -52,7 +51,7 @@ public class Knight extends Piece
     	
     	if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY))
         {		Square newMove= chessboard.getSquares()[newX][newY];
-                if (myKing.willBeSafeWhenMoveOtherPiece(this.getSquare(), newMove))
+                if (myKing.willBeSafeAfterMove(this.getSquare(), newMove))
                 {
                     list.add(newMove);
                 }   
