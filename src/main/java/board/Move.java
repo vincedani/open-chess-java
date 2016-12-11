@@ -18,6 +18,7 @@
  */
 package main.java.board;
 
+import main.java.LogToFile;
 import main.java.game.MovesTable.castling;
 import main.java.pieces.Piece;
 
@@ -39,7 +40,6 @@ public class Move {
 
 		this.movedPiece = movedPiece;
 		this.takenPiece = takenPiece;
-
 		this.castlingMove = castlingMove;
 		this.wasEnPassant = wasEnPassant;
 

@@ -89,7 +89,7 @@ public class Player implements Serializable {
 		return color;
 	}
 
-	public void setColor(colors color) {
+	private void setColor(colors color) {
 		this.color = color;
 	}
 

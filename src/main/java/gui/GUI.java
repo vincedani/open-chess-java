@@ -68,14 +68,11 @@ public class GUI {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		try {
 			String imageLink = "theme/" + configFile.getProperty("THEME", "default") + "/images/" + name;
-			// System.out.println(configFile.getProperty("THEME"));
-			LogToFile.log(null, "INFO", configFile.getProperty("THEME"));
 			url = JChessApp.class.getResource(imageLink);
 			img = tk.getImage(url);
 
 		} catch (Exception e) {
-			// System.out.println("some error loading image!");
-			LogToFile.log(null, "INFO", "some error loading image!");
+			LogToFile.log(e, "ERROR", "some error loading image!");
 			e.printStackTrace();
 		}
 		return img;

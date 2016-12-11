@@ -77,10 +77,8 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 						try {
 							selFile.createNewFile();
 						} catch (java.io.IOException exc) {
-							// System.out.println("error creating file: " +
-							// exc);
-
-							LogToFile.log(exc, "Error", "error creating file: ");
+							
+							LogToFile.log(exc, "ERROR", "Error creating file: ");
 						}
 					} else if (selFile.exists()) {
 						int opt = JOptionPane.showConfirmDialog(tempGUI, Settings.lang("file_exists"),
@@ -533,7 +531,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 	public void componentResized(ComponentEvent e) {
 		// System.out.println("jchessView resized!!;");
-		LogToFile.log(new UnsupportedOperationException("Not supported yet."), "Error", "jchessView resized!!;");
+		LogToFile.log(new UnsupportedOperationException("Not supported yet."), "ERROR", "Nor supported operation");
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

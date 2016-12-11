@@ -2,6 +2,7 @@ package main.java.circleBoard;
 
 import java.awt.Point;
 
+import main.java.LogToFile;
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.IChessboard;
@@ -49,6 +50,7 @@ public class CircleBoard implements IChessboard {
 		if (x > 2 * getRadius() || y > 2 * getRadius()) // test if click is out
 														// of chessboard
 		{
+			LogToFile.log(null,"INFO", "click out of chessboard.");
 			System.out.println("click out of chessboard.");
 			return null;
 		}
@@ -78,7 +80,7 @@ public class CircleBoard implements IChessboard {
 			return result;
 
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
-			System.out.println("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : " + exc);
+			LogToFile.log(exc,"ERROR", "Array out of bounds when getting Square with Chessboard.getSquare(int,int)");
 			return null;
 		}
 	}
@@ -87,7 +89,7 @@ public class CircleBoard implements IChessboard {
 		this.display.activeSquare = sq;
 		this.display.active_x_square = sq.getPozX();
 		this.display.active_y_square = sq.getPozY();
-		System.out.println("active_x: " + this.display.active_x_square + " active_y: " + this.display.active_y_square);
+		LogToFile.log(null,"INFO", "active_x: " + this.display.active_x_square + " active_y: " + this.display.active_y_square);
 		display.repaint();
 	}
 
@@ -127,11 +129,16 @@ public class CircleBoard implements IChessboard {
 			if (movedPawn.getSquare().getPozY() == 5 && end.getPozY() == 5)
 				movedPawn.passedCenter = true;
 		}
-
+		LogToFile.log(null, "INFO", begin.piece.getName()+" moved from "+ begin.getPozX()+","+begin.getPozY()+" to "+end.getPozX()+" , "+ end.getPozY() );
+		if(end.piece !=null){
+			LogToFile.log(null, "INFO", begin.piece.getName()+" "+ begin.piece.getPlayer().getColor()+" taked "+ end.piece.getName()+" "+ end.piece.getPlayer().getColor());
+			
+		}
 		begin.piece.setSquare(end);// set square of piece to ending
 		end.piece = begin.piece;// for ending square set piece from beginning
 								// square
-
+		
+		
 		begin.piece = null;// make null piece for beginning square
 		this.unselect();// unselect square
 		display.repaint();

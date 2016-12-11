@@ -62,14 +62,17 @@ public class LogToFile {
 
 		if ((logger1 = lMgr.getLogger("MYLOG")) != null) {
 			switch (level) {
-			case "Error":
+			case "ERROR":
 				logger1.log(Level.SEVERE, msg, ex);
 				break;
+			case "Error":
+				logger1.log(Level.SEVERE, msg, ex);
+				break;	
 			case "Debug":
 				logger1.log(Level.FINE, msg, ex);
 				break;
 			case "INFO":
-				logger1.log(Level.INFO, msg, ex);
+				logger1.log(Level.INFO, msg);
 				break;
 			}
 

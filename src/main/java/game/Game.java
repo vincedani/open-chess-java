@@ -135,7 +135,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			fileW.flush();
 			fileW.close();
 		} catch (java.io.IOException exc) {
-			// System.out.println("error writing to file: " + exc);
 			LogToFile.log(exc, "Error", "error writing to file: " + exc.getMessage());
 			JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file") + ": " + exc);
 			return;
@@ -155,7 +154,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			fileR = new FileReader(file);
 		} catch (java.io.IOException exc) {
-			// System.out.println("Something wrong reading file: " + exc);
 			LogToFile.log(exc, "Error", "Something wrong reading file: " + exc.getMessage());
 			return;
 		}
@@ -171,7 +169,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			blueName = getValue(tempStr);
 			tempStr = getLineWithVar(br, new String("1."));
 		} catch (ReadGameError err) {
-			// System.out.println("Error reading file: " + err);
 			LogToFile.log(err, "Error", "Error reading file: " + err.getMessage());
 			return;
 		}
@@ -213,7 +210,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			try {
 				str = br.readLine();
 			} catch (java.io.IOException exc) {
-				// System.out.println("Something wrong reading file: " + exc);
 				LogToFile.log(exc, "Error", "Something wrong reading file: " + exc.getMessage());
 			}
 			if (str == null) {
@@ -235,7 +231,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *             object class when something goes wrong
 	 */
 	static public String getValue(String line) throws ReadGameError {
-		// System.out.println("getValue called with: "+line);
 		int from = line.indexOf("\"");
 		int to = line.lastIndexOf("\"");
 		int size = line.length() - 1;
@@ -246,7 +241,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			result = line.substring(from + 1, to);
 		} catch (java.lang.StringIndexOutOfBoundsException exc) {
-			// System.out.println("error getting value: " + exc);
 			LogToFile.log(exc, "Error", "error getting value: " + exc.getMessage());
 			return "none";
 		}
@@ -483,13 +477,11 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					}
 
 				} catch (NullPointerException exc) {
-					// System.err.println(exc.getMessage());
 					LogToFile.log(exc, "Error", "NullPointerException " + exc.getMessage());
 					chessboard.getDisplay().repaint();
 					return;
 				}
 			} else if (blockedChessboard) {
-				// System.out.println("Chessboard is blocked");
 				LogToFile.log(null, "INFO", "Chessboard is blocked");
 			}
 		}

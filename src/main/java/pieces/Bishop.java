@@ -28,20 +28,21 @@ import main.java.board.Square;
 import main.java.game.Player;
 
 /**
- * Class to represent a chess pawn bishop. It can move across the chessboard
+ * Class to represent a chess pawn bishop.
  *
  */
 public class Bishop extends Piece {
 
 	public static short value = 3;
-	
-//	protected static final Image imageWhite = GUI.loadImage("Bishop-W.png");
-//	protected static final Image imageBlack = GUI.loadImage("Bishop-B.png");
+
+	// protected static final Image imageWhite = GUI.loadImage("Bishop-W.png");
+	// protected static final Image imageBlack = GUI.loadImage("Bishop-B.png");
 	ArrayList<IMove> moveBehaviour;
 
 	public Bishop(IChessboard chessboard, Player player, ArrayList<IMove> moveBehaviour) {
-		
-		super(chessboard, player, "Bishop"); // call initializer of super type: Piece 
+
+		super(chessboard, player, "Bishop"); // call initializer of super type:
+												// Piece
 		this.symbol = "B";
 		this.moveBehaviour = moveBehaviour;
 
@@ -55,13 +56,12 @@ public class Bishop extends Piece {
 
 	public ArrayList<Square> allMoves(boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<Square>();
-    	for (IMove iMove : moveBehaviour) {
+		for (IMove iMove : moveBehaviour) {
 			list.addAll(iMove.getMoves(this, ignoreKing));
 		}
 		return list;
-		
-		//return BishopMoves.getMoves(this);
+
+		// return BishopMoves.getMoves(this);
 	}
-	
-	
+
 }

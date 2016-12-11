@@ -96,8 +96,6 @@ public class Settings implements Serializable {
 		} catch (java.util.MissingResourceException exc) {
 			result = key;
 		}
-		// System.out.println(Settings.loc.getLocale().toString());
-		LogToFile.log(null, "INFO", Settings.loc.getLocale().toString());
 		return result;
 	}
 }
