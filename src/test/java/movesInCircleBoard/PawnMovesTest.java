@@ -1,6 +1,6 @@
-package test.java;
+package test.java.movesInCircleBoard;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 
@@ -20,6 +20,7 @@ import main.java.game.Player;
 import main.java.game.Settings;
 import main.java.movesInCircleBoard.PawnMoves;
 import main.java.pieces.Pawn;
+import main.java.pieces.Piece;
 import main.java.pieces.PieceBehaviour;
 
 public class PawnMovesTest {
@@ -36,21 +37,16 @@ public class PawnMovesTest {
 	@Test
 	public final void testGetMoves_1() {
 		/*int x = 3;
-		int y = 4;
-		Settings settings = mock(Settings.class);
-		settings.upsideDown=false;
-		settings.renderLabels=false;
+		int y = 3;
 
-		MovesTable movesTable = mock(MovesTable.class);
-		CircleBoard board = new CircleBoard(settings,movesTable);
-
+		CircleBoard board = new CircleBoard(mock(Settings.class), mock(MovesTable.class));
 		Pawn pawn = new Pawn(board, p1, moveBehaviour);
 		board.getSquares()[x][y].setPiece(pawn);
 		PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
-		when(pieceBehaviour.isout(x, y + 1)).thenReturn(false);
+		when(pieceBehaviour.isout(x, y+1)).thenReturn(false);
 
-		Square expectedSq = board.getSquares()[x][y + 1];
 		ArrayList<Square> expected = new ArrayList<Square>();
+		Square expectedSq = board.getSquares()[x][y+1];
 		expected.add(expectedSq);
 
 		PawnMoves pm = new PawnMoves();
