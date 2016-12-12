@@ -22,74 +22,74 @@ package main.java.game;
 
 import java.io.Serializable;
 
-
 /**
  * Class representing the player in the game
  */
-public class Player implements Serializable
-{
+public class Player implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	String name;
 
-    public enum colors
-    {
+	public enum colors {
 
-        white, black, red, blue, green;
-    }
-    
-    private colors color;
+		white, black, red, blue, green;
+	}
 
-    public enum playerTypes
-    {
+	private colors color;
 
-        localUser, networkUser, computer
-    }
-    public playerTypes playerType;
-    
-    private boolean goDown;
+	public enum playerTypes {
 
-    
-    public Player(String name, String color)
-    {
-        this.name = name;
-        this.setColor(colors.valueOf(color));
-        this.setGoDown(false);
-    }
+		localUser, networkUser, computer
+	}
 
-    /** Method setting the players name
-     *  @param name name of player
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+	public playerTypes playerType;
 
-    /** Method getting the players name
-     *  @return name of player
-     */
-    public String getName()
-    {
-        return this.name;
-    }
+	private boolean goDown;
 
-    /** Method setting the players type
-     *  @param type type of player - enumerate
-     */
-    public void setType(playerTypes type)
-    {
-        this.playerType = type;
-    }
+	public Player(String name, String color) {
+		this.name = name;
+		this.setColor(colors.valueOf(color));
+		this.setGoDown(false);
+	}
+
+	/**
+	 * Method setting the players name
+	 * 
+	 * @param name
+	 *            name of player
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Method getting the players name
+	 * 
+	 * @return name of player
+	 */
+	public String getName() {
+		return this.name;
+	}
+
+	/**
+	 * Method setting the players type
+	 * 
+	 * @param type
+	 *            type of player - enumerate
+	 */
+	public void setType(playerTypes type) {
+		this.playerType = type;
+	}
 
 	public colors getColor() {
 		return color;
 	}
 
-	public void setColor(colors color) {
+	private void setColor(colors color) {
 		this.color = color;
 	}
 

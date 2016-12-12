@@ -34,8 +34,8 @@ import main.java.game.Player.colors;
  */
 public abstract class Piece {
 
-
-	private IChessboard chessboard; // <-- this relations isn't in class diagram,
+	private IChessboard chessboard; // <-- this relations isn't in class
+									// diagram,
 									// but it's necessary :/
 	public PieceBehaviour pieceBehaviour;
 	private Square square;
@@ -49,36 +49,40 @@ public abstract class Piece {
 
 		this.setChessboard(chessboard);
 		this.setPlayer(player);
-		
+
 		colors color = player.getColor();
 		String imageColorPath = "";
 		switch (color) {
-			case black:	imageColorPath ="-Black.png";
-						break;
-			case white:	imageColorPath ="-White.png";
-						break;
-			case blue:	imageColorPath ="-Blue.png";
-						break;
-			case red:	imageColorPath ="-Red.png";
-						break;
-			case green:	imageColorPath ="-Green.png";
-						break;
+		case black:
+			imageColorPath = "-Black.png";
+			break;
+		case white:
+			imageColorPath = "-White.png";
+			break;
+		case blue:
+			imageColorPath = "-Blue.png";
+			break;
+		case red:
+			imageColorPath = "-Red.png";
+			break;
+		case green:
+			imageColorPath = "-Green.png";
+			break;
 		}
-		//System.out.println("Color escogido: " + color);
+		// System.out.println("Color escogido: " + color);
 		imagePath += imageColorPath;
-		//System.out.println("Image: " + imagePath);
-		
+		// System.out.println("Image: " + imagePath);
+
 		this.setName(this.getClass().getSimpleName());
 		this.setLayout(new PieceLayout(imagePath));
 		this.pieceBehaviour = new PieceBehaviour(chessboard, player);
 		this.display = new PieceDisplay(this);
 	}
-	
 
 	public King myKing() {
 		return chessboard.getKing(player);
 	}
-	
+
 	public abstract ArrayList<Square> allMoves(boolean ignoreKing);
 
 	public IChessboard getChessboard() {
@@ -88,7 +92,7 @@ public abstract class Piece {
 	public void setChessboard(IChessboard chessboard2) {
 		this.chessboard = chessboard2;
 	}
-	
+
 	public PieceBehaviour getPieceBehaviour() {
 		return pieceBehaviour;
 	}
@@ -121,7 +125,6 @@ public abstract class Piece {
 		this.player = player;
 	}
 
-	
 	public Square getSquare() {
 		return square;
 	}
@@ -130,17 +133,13 @@ public abstract class Piece {
 		this.square = square;
 	}
 
-	
-
 	public PieceLayout getLayout() {
 		return layout;
 	}
 
-
 	public void setLayout(PieceLayout layout) {
 		this.layout = layout;
 	}
-
 
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub

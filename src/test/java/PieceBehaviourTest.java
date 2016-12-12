@@ -90,38 +90,5 @@ public class PieceBehaviourTest {
 		assertNotNull(pieceBehaviour.getPlayer());
 	}
 
-	@Test
-	public final void testGetName() {
-		PieceBehaviour pieceBehaviour = new PieceBehaviour(board, p1);
-		pieceBehaviour.setName("name");
-		assertEquals(pieceBehaviour.getName(), "name");
-	}
-
-	@Test
-	public final void testSetName() {
-		PieceBehaviour pieceBehaviour = new PieceBehaviour(board, p1);
-		pieceBehaviour.setName("name");
-		assertNotNull(pieceBehaviour.getName());
-	}
-
-	@Test
-	public final void testGetChessboard() {
-		Player p2 = new Player("Player2", "black");
-
-		CircleBoard boardBlack = mock(CircleBoard.class);
-		PieceBehaviour pieceBehaviour = new PieceBehaviour(board, p2);
-		pieceBehaviour.setChessboard(boardBlack);
-		assertEquals(pieceBehaviour.getChessboard(), boardBlack);
-	}
-
-	@Test
-	public final void testSetChessboard() {
-		Player p2 = new Player("Player2", "black");
-
-		CircleBoard boardBlack = mock(CircleBoard.class);
-		PieceBehaviour pieceBehaviour = new PieceBehaviour(board, p2);
-		pieceBehaviour.setChessboard(boardBlack);
-		assertNotNull(pieceBehaviour.getChessboard());
-	}
-
+	
 }

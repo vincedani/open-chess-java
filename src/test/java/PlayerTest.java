@@ -1,11 +1,11 @@
 package test.java;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import main.java.game.Player;
@@ -41,8 +41,8 @@ public class PlayerTest {
 		assertEquals(expected, obtained);
 	}
 
-	@Test 
-	public final void isGoDown(){
+	@Test
+	public final void isGoDown() {
 		assertFalse(p.isGoDown());
 	}
 }

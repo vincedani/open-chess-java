@@ -15,9 +15,9 @@ public class RookMoves implements IMove {
 			if (piece.pieceBehaviour.checkPiece(x, i)) {
 				Square newMove = piece.getChessboard().getSquares()[x][i];
 
-				if(ignoreKing){
+				if (ignoreKing) {
 					list.add(newMove);
-				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);
 				}
 
@@ -41,9 +41,9 @@ public class RookMoves implements IMove {
 
 				Square newMove = piece.getChessboard().getSquares()[x][i];
 
-				if(ignoreKing){
+				if (ignoreKing) {
 					list.add(newMove);
-				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);
 				}
 
@@ -69,9 +69,9 @@ public class RookMoves implements IMove {
 
 				Square newMove = piece.getChessboard().getSquares()[i][y];
 
-				if(ignoreKing){
+				if (ignoreKing) {
 					list.add(newMove);
-				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					if (!list.contains(newMove))
 						list.add(newMove);
 				}
@@ -105,9 +105,9 @@ public class RookMoves implements IMove {
 																					// piece
 				Square newMove = piece.getChessboard().getSquares()[i][y];
 
-				if(ignoreKing){
+				if (ignoreKing) {
 					list.add(newMove);
-				}else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), newMove)) {
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					if (!list.contains(newMove))
 						list.add(newMove);
 				}

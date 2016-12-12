@@ -14,7 +14,9 @@ public class PawnMoves implements IMove {
 			Square moveSq = piece.getChessboard().getSquares()[piece.getSquare().getPozX()][newY];
 			if (moveSq.piece == null && ignoreKing) {
 				list.add(moveSq);
-			} else if (moveSq.piece == null && piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
+
+			} else if (moveSq.piece == null && piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
+
 				list.add(moveSq);
 
 			}
@@ -31,7 +33,9 @@ public class PawnMoves implements IMove {
 
 			if (moveSq.piece == null && ignoreKing) {
 				list.add(moveSq);
-			} else if (moveSq.piece == null && piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
+
+			} else if (moveSq.piece == null && piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
+
 				list.add(moveSq);
 			}
 		}
@@ -45,7 +49,9 @@ public class PawnMoves implements IMove {
 
 			if (moveSq.piece == null && ignoreKing) {
 				list.add(moveSq);
-			} else if (moveSq.piece == null && piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
+
+			} else if (moveSq.piece == null && piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
+
 				list.add(moveSq);
 
 			}
@@ -60,7 +66,9 @@ public class PawnMoves implements IMove {
 				if (piece.getPlayer() != moveSq.piece.getPlayer() && !moveSq.piece.getName().equals("King")) {
 					if (ignoreKing) {
 						list.add(moveSq);
-					} else if (piece.myKing().willBeSafeWhenMoveOtherPiece(piece.getSquare(), moveSq)) {
+
+					} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
+
 						list.add(moveSq);
 					}
 				}

@@ -9,8 +9,8 @@ import main.java.pieces.Piece;
 import main.java.pieces.Rook;
 
 public class KingMoves implements IMove {
-	
-	public void regularMove(Piece piece1,  ArrayList<Square> list, int x, int y){
+
+	public void regularMove(Piece piece1, ArrayList<Square> list, int x, int y) {
 		King piece = (King) piece1;
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
@@ -33,54 +33,54 @@ public class KingMoves implements IMove {
 		}
 
 	}
-	
-	public void castlingLeftMove(Piece piece1, ArrayList<Square> list, int x, int y){
-			King piece = (King) piece1;
-			boolean canCastling = true;
 
-			Rook rook = (Rook) piece.getChessboard().getSquares()[0][y].piece;
-			if (!rook.wasMotion()) {
-				for (int i = x - 1; i > 0; i--) {// go
-																			// left
-					if (piece.getChessboard().getSquares()[i][y].piece != null) {
-						canCastling = false;
-						break;
-					}
-				}
-				
-				Square sq = piece.getChessboard().getSquares()[x - 2][y];
-				Square sq1 = piece.getChessboard().getSquares()[x - 1][y];
-				if (canCastling && piece.isSafe(sq) && piece.isSafe(sq1)) { 
-					// can do castling when neither sq nor sq1 is checked
-					list.add(sq);
+	public void castlingLeftMove(Piece piece1, ArrayList<Square> list, int x, int y) {
+		King piece = (King) piece1;
+		boolean canCastling = true;
+
+		Rook rook = (Rook) piece.getChessboard().getSquares()[0][y].piece;
+		if (!rook.wasMotion()) {
+			for (int i = x - 1; i > 0; i--) {// go
+												// left
+				if (piece.getChessboard().getSquares()[i][y].piece != null) {
+					canCastling = false;
+					break;
 				}
 			}
+
+			Square sq = piece.getChessboard().getSquares()[x - 2][y];
+			Square sq1 = piece.getChessboard().getSquares()[x - 1][y];
+			if (canCastling && piece.isSafe(sq) && piece.isSafe(sq1)) {
+				// can do castling when neither sq nor sq1 is checked
+				list.add(sq);
+			}
 		}
-	
-	public void castlingRightMove(Piece piece1, ArrayList<Square> list, int x, int y){
+	}
+
+	public void castlingRightMove(Piece piece1, ArrayList<Square> list, int x, int y) {
 		King piece = (King) piece1;
 		boolean canCastling = true;
 
 		Rook rook = (Rook) piece.getChessboard().getSquares()[7][y].piece;
 		if (!rook.wasMotion()) {
 			for (int i = x + 1; i < 7; i++) {// go
-																		// left
+												// left
 				if (piece.getChessboard().getSquares()[i][y].piece != null) {
 					canCastling = false;
 					break;
 				}
 			}
-			
+
 			Square sq = piece.getChessboard().getSquares()[x + 2][y];
 			Square sq1 = piece.getChessboard().getSquares()[x + 1][y];
-			if (canCastling && piece.isSafe(sq) && piece.isSafe(sq1)) { 
+			if (canCastling && piece.isSafe(sq) && piece.isSafe(sq1)) {
 				// can do castling when neither sq nor sq1 is checked
 				list.add(sq);
 			}
 		}
 	}
-	
-	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing){
+
+	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
 		regularMove(piece, list, x, y);
@@ -97,8 +97,7 @@ public class KingMoves implements IMove {
 				castlingLeftMove(king, list, x, y);
 			}
 		}
-		
-		
+
 		return list;
 	}
 }

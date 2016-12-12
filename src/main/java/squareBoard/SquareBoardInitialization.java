@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.movesInSquareBoard.KnightMoves;
-import main.java.movesInSquareBoard.RookMoves;
 import main.java.movesInSquareBoard.BishopMoves;
 import main.java.movesInSquareBoard.KingMoves;
+import main.java.movesInSquareBoard.KnightMoves;
 import main.java.movesInSquareBoard.PawnMoves;
+import main.java.movesInSquareBoard.RookMoves;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
 import main.java.pieces.Knight;
@@ -30,16 +30,17 @@ public class SquareBoardInitialization {
 
 	public SquareBoardInitialization(boolean upsideDown, SquareBoard board) {
 		this.upsideDown = upsideDown;
-		this.board=board;
-		setSquares(new Square[8][8]);//Initialization of 8x8 chessboard
+		this.board = board;
+		setSquares(new Square[8][8]);// Initialization of 8x8 chessboard
 		createSquares();
 	}
+
 	/**
 	 * Method createSquares creates an array of 8x8 Squares
 	 * 
 	 */
 	private void createSquares() {
-		
+
 		for (int i = 0; i < 8; i++) {// create object for each square
 			for (int y = 0; y < 8; y++) {
 				getSquares()[i][y] = new Square(i, y, null);
@@ -50,8 +51,6 @@ public class SquareBoardInitialization {
 	/**
 	 * Method setPieces on begin of new game or loaded game
 	 * 
-	 * @param places
-	 *            string with pieces to set on chessboard
 	 * @param plWhite
 	 *            reference to white player
 	 * @param plBlack
@@ -59,14 +58,13 @@ public class SquareBoardInitialization {
 	 */
 	public void setPieces(Player plWhite, Player plBlack) {
 
-		
-			if (upsideDown) {
-				this.setPieces4NewGame(true, plWhite, plBlack);
-			} else {
-				this.setPieces4NewGame(false, plWhite, plBlack);
-			}
+		if (upsideDown) {
+			this.setPieces4NewGame(true, plWhite, plBlack);
+		} else {
+			this.setPieces4NewGame(false, plWhite, plBlack);
+		}
 
-		} 
+	}
 
 	/**
 	 *
@@ -106,44 +104,44 @@ public class SquareBoardInitialization {
 			player.setGoDown(true);
 		}
 
-		//Rook
-		ArrayList <IMove> rookMoves = new ArrayList<>();
+		// Rook
+		ArrayList<IMove> rookMoves = new ArrayList<>();
 		rookMoves.add(new RookMoves());
 		getSquares()[0][i].setPiece(new Rook(board, player, rookMoves));
 		getSquares()[7][i].setPiece(new Rook(board, player, rookMoves));
-		
-		//Knight
-		ArrayList <IMove> knightMoves = new ArrayList<>();
+
+		// Knight
+		ArrayList<IMove> knightMoves = new ArrayList<>();
 		knightMoves.add(new KnightMoves());
 		getSquares()[1][i].setPiece(new Knight(board, player, knightMoves));
 		getSquares()[6][i].setPiece(new Knight(board, player, knightMoves));
-		
-		//Bishop
-		ArrayList <IMove> bishopMoves = new ArrayList<>();
+
+		// Bishop
+		ArrayList<IMove> bishopMoves = new ArrayList<>();
 		bishopMoves.add(new BishopMoves());
 		getSquares()[2][i].setPiece(new Bishop(board, player, bishopMoves));
 		getSquares()[5][i].setPiece(new Bishop(board, player, bishopMoves));
-		
-		//THE QUEEN MOTHER OF DRAGONS
-		ArrayList <IMove> queenMoves = new ArrayList<>();
+
+		// THE QUEEN MOTHER OF DRAGONS
+		ArrayList<IMove> queenMoves = new ArrayList<>();
 		queenMoves.add(new RookMoves());
 		queenMoves.add(new BishopMoves());
 
-		ArrayList <IMove> kingMoves = new ArrayList<>();
+		ArrayList<IMove> kingMoves = new ArrayList<>();
 		kingMoves.add(new KingMoves());
-		
+
 		if (upsideDown) {
-		getSquares()[4][i].setPiece(new Queen(board, player, queenMoves));
-		
+			getSquares()[4][i].setPiece(new Queen(board, player, queenMoves));
+
 			if (player.getColor() == Player.colors.white) {
-				
+
 				getSquares()[3][i].setPiece(kingWhite = new King(board, player, kingMoves));
 			} else {
 				getSquares()[3][i].setPiece(kingBlack = new King(board, player, kingMoves));
 			}
 		} else {
-			getSquares()[3][i].setPiece(new Queen(board,player, queenMoves));
-			
+			getSquares()[3][i].setPiece(new Queen(board, player, queenMoves));
+
 			if (player.getColor() == Player.colors.white) {
 				getSquares()[4][i].setPiece(kingWhite = new King(board, player, kingMoves));
 			} else {
@@ -165,10 +163,10 @@ public class SquareBoardInitialization {
 			System.out.println("error setting pawns etc.");
 			return;
 		}
-		
-		ArrayList <IMove> pawnMoves = new ArrayList<>();
+
+		ArrayList<IMove> pawnMoves = new ArrayList<>();
 		pawnMoves.add(new PawnMoves());
-		
+
 		for (int x = 0; x < 8; x++) {
 			getSquares()[x][i].setPiece(new Pawn(board, player, pawnMoves));
 		}

@@ -28,25 +28,26 @@ import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.IChessboard;
 import main.java.board.IMove;
+import main.java.board.Move;
 import main.java.board.Square;
 import main.java.game.MovesTable;
 import main.java.game.MovesTable.castling;
-import main.java.movesInSquareBoard.KnightMoves;
 import main.java.game.Player;
 import main.java.game.Settings;
 import main.java.movesInSquareBoard.BishopMoves;
+import main.java.movesInSquareBoard.KnightMoves;
 import main.java.movesInSquareBoard.RookMoves;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
 import main.java.pieces.Knight;
-import main.java.pieces.Move;
 import main.java.pieces.Pawn;
 import main.java.pieces.Piece;
 import main.java.pieces.Queen;
 import main.java.pieces.Rook;
 
 /**
- * Class to represent a SquareChessboard from 8x8 Squares for a two player Chess game. 
+ * Class to represent a SquareChessboard from 8x8 Squares for a two player Chess
+ * game.
  */
 public class SquareBoard implements IChessboard {
 
@@ -112,20 +113,19 @@ public class SquareBoard implements IChessboard {
 			x -= this.display.upDownLabel.getHeight(null);
 			y -= this.display.upDownLabel.getHeight(null);
 		}
-		double square_x = (int) (x / display.square_height);// count which field in X
-													// was clicked
-		double square_y = (int) (y / display.square_height);// count which field in Y
-													// was clicked
+		double square_x = (int) (x / display.square_height);// count which field
+															// in X
+		// was clicked
+		double square_y = (int) (y / display.square_height);// count which field
+															// in Y
+		// was clicked
 		/**
-		if (square_x > (int) square_x) // if X is more than X parsed to Integer
-		{
-			square_x = (int) square_x + 1;// parse to integer and increment
-		}
-		if (square_y > (int) square_y) // if X is more than X parsed to Integer
-		{
-			square_y = (int) square_y + 1;// parse to integer and increment
-		}
-		**/
+		 * if (square_x > (int) square_x) // if X is more than X parsed to
+		 * Integer { square_x = (int) square_x + 1;// parse to integer and
+		 * increment } if (square_y > (int) square_y) // if X is more than X
+		 * parsed to Integer { square_y = (int) square_y + 1;// parse to integer
+		 * and increment }
+		 **/
 		// Square newActiveSquare =
 		// this.squares[(int)square_x-1][(int)square_y-1];//4test
 		System.out.println("square_x: " + square_x + " square_y: " + square_y + " \n"); // 4tests
@@ -156,7 +156,8 @@ public class SquareBoard implements IChessboard {
 	}/*--endOf-select--*/
 
 	/**
-	 * Method set variables active_x_square & active_y_square to 0 values.
+	 * Method set variables active_x_square and active_y_square to default
+	 * values (-1).
 	 */
 	public void unselect() {
 		this.display.active_x_square = -1;
@@ -235,7 +236,7 @@ public class SquareBoard implements IChessboard {
 		castling wasCastling = MovesTable.castling.none;
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
-		
+
 		if (end.piece != null) {
 			end.piece.setSquare(null);
 		}
@@ -243,7 +244,7 @@ public class SquareBoard implements IChessboard {
 		Square tempBegin = new Square(begin);// 4 moves history
 		Square tempEnd = new Square(end); // 4 moves history
 		// for undo
-		
+
 		undo1_piece_begin = begin.piece;
 		undo1_sq_begin = begin;
 		undo1_piece_end = end.piece;
@@ -347,11 +348,11 @@ public class SquareBoard implements IChessboard {
 
 					if (newPiece.equals("Queen")) // transform pawn to queen
 					{
-						ArrayList <IMove> queenMoves = new ArrayList<>();
+						ArrayList<IMove> queenMoves = new ArrayList<>();
 						queenMoves.add(new RookMoves());
 						queenMoves.add(new BishopMoves());
-						
-						Queen queen = new Queen(this, end.piece.getPlayer(),queenMoves);
+
+						Queen queen = new Queen(this, end.piece.getPlayer(), queenMoves);
 						queen.setChessboard(end.piece.getChessboard());
 						queen.setPlayer(end.piece.getPlayer());
 						queen.setSquare(end.piece.getSquare());
@@ -359,7 +360,7 @@ public class SquareBoard implements IChessboard {
 					} else if (newPiece.equals("Rook")) // transform pawn to
 														// rook
 					{
-						ArrayList <IMove> rookMoves = new ArrayList<>();
+						ArrayList<IMove> rookMoves = new ArrayList<>();
 						rookMoves.add(new RookMoves());
 						Rook rook = new Rook(this, end.piece.getPlayer(), rookMoves);
 						rook.setChessboard(end.piece.getChessboard());
@@ -368,7 +369,8 @@ public class SquareBoard implements IChessboard {
 						end.piece = rook;
 					} else if (newPiece.equals("Bishop")) // transform pawn to
 															// bishop
-					{	ArrayList <IMove> bishopMoves = new ArrayList<>();
+					{
+						ArrayList<IMove> bishopMoves = new ArrayList<>();
 						bishopMoves.add(new BishopMoves());
 						Bishop bishop = new Bishop(this, end.piece.getPlayer(), bishopMoves);
 						bishop.setChessboard(end.piece.getChessboard());
@@ -376,7 +378,8 @@ public class SquareBoard implements IChessboard {
 						bishop.setSquare(end.piece.getSquare());
 						end.piece = bishop;
 					} else // transform pawn to knight
-					{	ArrayList <IMove> knightMoves = new ArrayList<>();
+					{
+						ArrayList<IMove> knightMoves = new ArrayList<>();
 						knightMoves.add(new KnightMoves());
 						Knight knight = new Knight(this, end.piece.getPlayer(), knightMoves);
 						knight.setChessboard(end.piece.getChessboard());
@@ -524,7 +527,7 @@ public class SquareBoard implements IChessboard {
 		return display;
 	}
 
-	public void setPieces( Player[] players) {
+	public void setPieces(Player[] players) {
 		initial.setPieces(players[0], players[1]);
 	}
 

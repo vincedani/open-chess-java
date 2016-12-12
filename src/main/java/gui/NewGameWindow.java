@@ -20,7 +20,8 @@
  */
 package main.java.gui;
 
-import javax.swing.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 import main.java.game.Settings;
 
@@ -29,7 +30,6 @@ import main.java.game.Settings;
  * @author donmateo
  */
 public class NewGameWindow extends JDialog {
-
 
 	/** Creates new form NewGameWindow */
 	public NewGameWindow() {
