@@ -1,6 +1,5 @@
 *.class
 # Package Files #
-*.jar
 config.txt
 *.LOG
 *.LOG.lck
