@@ -217,7 +217,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				newGUI.getGameClock().start();
 			}
 			*/
-			LogToFile.log(null, "INFO", this.time4Game.getActionCommand());
+			//LogToFile.log(null, "INFO", this.time4Game.getActionCommand());
 			System.out.println("*** New Game: " + pl1.getName() + " vs. " + pl2.getName() + " vs. " + pl3.getName());
 			
 			// System.out.println(this.time4Game.getActionCommand());
