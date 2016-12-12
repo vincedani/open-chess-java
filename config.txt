@@ -1,2 +1,5 @@
-#Thu Oct 27 02:07:07 CEST 2016
-THEME=matlak
+#Sat Dec 10 00:55:19 CET 2016
+>>>>>>>=code_refactoring
+THEME=default
+<<<<<<<=HEAD
+=\=\=\=\=\=\=
