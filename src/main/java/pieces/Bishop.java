@@ -35,8 +35,6 @@ public class Bishop extends Piece {
 
 	public static short value = 3;
 
-	// protected static final Image imageWhite = GUI.loadImage("Bishop-W.png");
-	// protected static final Image imageBlack = GUI.loadImage("Bishop-B.png");
 	ArrayList<IMove> moveBehaviour;
 
 	public Bishop(IChessboard chessboard, Player player, ArrayList<IMove> moveBehaviour) {
@@ -60,8 +58,6 @@ public class Bishop extends Piece {
 			list.addAll(iMove.getMoves(this, ignoreKing));
 		}
 		return list;
-
-		// return BishopMoves.getMoves(this);
 	}
 
 }

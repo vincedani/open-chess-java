@@ -24,6 +24,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import main.java.board.IChessboard;
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.game.Player.colors;
@@ -32,7 +33,7 @@ import main.java.game.Player.colors;
  * Class to represent a piece (any kind) - this class should be extended to
  * represent pawn, bishop etc.
  */
-public abstract class Piece {
+public class Piece {
 
 	private IChessboard chessboard; // <-- this relations isn't in class
 									// diagram,
@@ -44,7 +45,9 @@ public abstract class Piece {
 	protected String symbol;
 	private PieceLayout layout;
 	private PieceDisplay display;
+	ArrayList<IMove> moveBehaviour;
 
+	
 	public Piece(IChessboard chessboard, Player player, String imagePath) {
 
 		this.setChessboard(chessboard);
@@ -69,21 +72,25 @@ public abstract class Piece {
 			imageColorPath = "-Green.png";
 			break;
 		}
-		// System.out.println("Color escogido: " + color);
 		imagePath += imageColorPath;
-		// System.out.println("Image: " + imagePath);
-
+		
 		this.setName(this.getClass().getSimpleName());
 		this.setLayout(new PieceLayout(imagePath));
 		this.pieceBehaviour = new PieceBehaviour(chessboard, player);
 		this.display = new PieceDisplay(this);
 	}
 
+	public ArrayList<Square> allMoves(boolean ignoreKing) {
+		ArrayList<Square> list = new ArrayList<Square>();
+		for (IMove iMove : moveBehaviour) {
+			list.addAll(iMove.getMoves(this, ignoreKing));
+		}
+		return list;
+	}
+	
 	public King myKing() {
 		return chessboard.getKing(player);
 	}
-
-	public abstract ArrayList<Square> allMoves(boolean ignoreKing);
 
 	public IChessboard getChessboard() {
 		return chessboard;

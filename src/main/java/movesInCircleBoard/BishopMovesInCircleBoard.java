@@ -6,7 +6,7 @@ import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.Piece;
 
-public class BishopMoves implements IMove {
+public class BishopMovesInCircleBoard implements IMove {
 
 	/**
 	 * Method returning the posible moves of the given piece

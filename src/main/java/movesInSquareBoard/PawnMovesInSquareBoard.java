@@ -7,7 +7,7 @@ import main.java.board.Square;
 import main.java.pieces.Piece;
 import main.java.squareBoard.SquareBoard;
 
-public class PawnMoves implements IMove {
+public class PawnMovesInSquareBoard implements IMove {
 
 	public void regularMove(Piece piece, ArrayList<Square> list, int i) {
 		int newY = 0;

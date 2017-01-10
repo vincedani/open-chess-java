@@ -14,7 +14,7 @@ import main.java.circleBoard.CircleBoard;
 import main.java.game.MovesTable;
 import main.java.game.Player;
 import main.java.game.Settings;
-import main.java.movesInCircleBoard.BishopMoves;
+import main.java.movesInCircleBoard.BishopMovesInCircleBoard;
 import main.java.pieces.Bishop;
 
 public class BishopMovesTest {

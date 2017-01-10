@@ -14,7 +14,7 @@ import main.java.circleBoard.CircleBoard;
 import main.java.game.MovesTable;
 import main.java.game.Player;
 import main.java.game.Settings;
-import main.java.movesInCircleBoard.RookMoves;
+import main.java.movesInCircleBoard.RookMovesInCircleBoard;
 import main.java.pieces.Rook;
 
 public class RookMovesTest {

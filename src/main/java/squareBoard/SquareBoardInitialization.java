@@ -9,15 +9,16 @@ import java.util.ArrayList;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.movesInSquareBoard.BishopMoves;
-import main.java.movesInSquareBoard.KingMoves;
-import main.java.movesInSquareBoard.KnightMoves;
-import main.java.movesInSquareBoard.PawnMoves;
-import main.java.movesInSquareBoard.RookMoves;
+import main.java.movesInSquareBoard.BishopMovesInSquareBoard;
+import main.java.movesInSquareBoard.KingMovesInSquareBoard;
+import main.java.movesInSquareBoard.KnightMovesInSquareBoard;
+import main.java.movesInSquareBoard.PawnMovesInSquareBoard;
+import main.java.movesInSquareBoard.RookMovesInSquareBoard;
 import main.java.pieces.Bishop;
 import main.java.pieces.King;
 import main.java.pieces.Knight;
 import main.java.pieces.Pawn;
+import main.java.pieces.PieceFactory;
 import main.java.pieces.Queen;
 import main.java.pieces.Rook;
 
@@ -106,29 +107,27 @@ public class SquareBoardInitialization {
 
 		// Rook
 		ArrayList<IMove> rookMoves = new ArrayList<>();
-		rookMoves.add(new RookMoves());
+		rookMoves.add(new RookMovesInSquareBoard());
 		getSquares()[0][i].setPiece(new Rook(board, player, rookMoves));
 		getSquares()[7][i].setPiece(new Rook(board, player, rookMoves));
 
 		// Knight
 		ArrayList<IMove> knightMoves = new ArrayList<>();
-		knightMoves.add(new KnightMoves());
-		getSquares()[1][i].setPiece(new Knight(board, player, knightMoves));
-		getSquares()[6][i].setPiece(new Knight(board, player, knightMoves));
+		knightMoves.add(new KnightMovesInSquareBoard());
+		getSquares()[1][i].setPiece(PieceFactory.createKnightInSquareBoard(board, player));
+		getSquares()[6][i].setPiece(PieceFactory.createKnightInSquareBoard(board, player));
 
 		// Bishop
-		ArrayList<IMove> bishopMoves = new ArrayList<>();
-		bishopMoves.add(new BishopMoves());
-		getSquares()[2][i].setPiece(new Bishop(board, player, bishopMoves));
-		getSquares()[5][i].setPiece(new Bishop(board, player, bishopMoves));
+		getSquares()[2][i].setPiece(PieceFactory.createBishopInSquareBoard(board, player));
+		getSquares()[5][i].setPiece(PieceFactory.createBishopInSquareBoard(board, player));
 
 		// THE QUEEN MOTHER OF DRAGONS
 		ArrayList<IMove> queenMoves = new ArrayList<>();
-		queenMoves.add(new RookMoves());
-		queenMoves.add(new BishopMoves());
+		queenMoves.add(new RookMovesInSquareBoard());
+		queenMoves.add(new BishopMovesInSquareBoard());
 
 		ArrayList<IMove> kingMoves = new ArrayList<>();
-		kingMoves.add(new KingMoves());
+		kingMoves.add(new KingMovesInSquareBoard());
 
 		if (upsideDown) {
 			getSquares()[4][i].setPiece(new Queen(board, player, queenMoves));
@@ -165,7 +164,7 @@ public class SquareBoardInitialization {
 		}
 
 		ArrayList<IMove> pawnMoves = new ArrayList<>();
-		pawnMoves.add(new PawnMoves());
+		pawnMoves.add(new PawnMovesInSquareBoard());
 
 		for (int x = 0; x < 8; x++) {
 			getSquares()[x][i].setPiece(new Pawn(board, player, pawnMoves));

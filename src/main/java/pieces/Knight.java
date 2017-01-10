@@ -45,16 +45,6 @@ public class Knight extends Piece {
 
 	}
 
-	public void regularMove(IChessboard chessboard, King myKing, int newX, int newY, ArrayList<Square> list) {
-
-		if (!pieceBehaviour.isout(newX, newY) && pieceBehaviour.checkPiece(newX, newY)) {
-			Square newMove = chessboard.getSquares()[newX][newY];
-			if (myKing.willBeSafeAfterMove(this.getSquare(), newMove)) {
-				list.add(newMove);
-			}
-		}
-	}
-
 	/**
 	 * Annotation to superclass Piece changing pawns location
 	 * 

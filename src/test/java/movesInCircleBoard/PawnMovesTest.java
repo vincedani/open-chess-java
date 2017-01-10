@@ -18,7 +18,7 @@ import main.java.game.Game;
 import main.java.game.MovesTable;
 import main.java.game.Player;
 import main.java.game.Settings;
-import main.java.movesInCircleBoard.PawnMoves;
+import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
 import main.java.pieces.Pawn;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceBehaviour;

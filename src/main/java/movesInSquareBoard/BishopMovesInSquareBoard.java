@@ -6,7 +6,7 @@ import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.Piece;
 
-public class BishopMoves implements IMove {
+public class BishopMovesInSquareBoard implements IMove {
 
 	private static void backwardRightMoves(Piece piece, ArrayList<Square> list) {
 		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();

@@ -7,7 +7,7 @@ import main.java.board.Square;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
 
-public class KingMoves implements IMove {
+public class KingMovesInCircleBoard implements IMove {
 
 	public void regularMove(Piece piece1, ArrayList<Square> list, int x, int y) {
 		King piece = (King) piece1;
