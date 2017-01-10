@@ -1,6 +1,5 @@
 *.class
 # Package Files #
-/release
 config.txt
 *.LOG
 *.LOG.lck
