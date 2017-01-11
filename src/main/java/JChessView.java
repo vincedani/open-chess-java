@@ -39,6 +39,7 @@ import main.java.game.Settings;
 import main.java.gui.GUI;
 import main.java.gui.JChessAboutBox;
 import main.java.gui.NewGameWindow;
+import main.java.gui.NewGameWindowV2;
 import main.java.gui.PawnPromotionWindow;
 import main.java.gui.ThemeChooseWindow;
 
@@ -60,7 +61,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	public void actionPerformed(ActionEvent event) {
 		Object target = event.getSource();
 		if (target == newGameItem) {
-			this.newGameFrame = new NewGameWindow();
+			this.newGameFrame = new NewGameWindowV2();
 			JChessApp.getApplication().show(this.newGameFrame);
 		} else if (target == saveGameItem) { // saveGame
 			if (this.gamesPane.getTabCount() == 0) {
@@ -527,7 +528,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 
 	private JDialog aboutBox;
 	private PawnPromotionWindow promotionBox;
-	public JDialog newGameFrame;
+	public NewGameWindowV2 newGameFrame;
 
 	public void componentResized(ComponentEvent e) {
 		// System.out.println("jchessView resized!!;");
