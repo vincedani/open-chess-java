@@ -7,8 +7,10 @@ import main.java.board.IMove;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.BishopMovesInCircleBoard;
 import main.java.movesInCircleBoard.KnightMovesInCircleBoard;
+import main.java.movesInCircleBoard.RookMovesInCircleBoard;
 import main.java.movesInSquareBoard.BishopMovesInSquareBoard;
 import main.java.movesInSquareBoard.KnightMovesInSquareBoard;
+import main.java.movesInSquareBoard.RookMovesInSquareBoard;
 
 public class PieceFactory {
 
@@ -61,6 +63,32 @@ public class PieceFactory {
 		knight.moveBehaviour = knightMoves;
 		
 		return knight;
+	}
+	
+	public static Piece createQueenInCircleBoard(IChessboard chessboard, Player player) {
+		Piece queen = new Piece(chessboard, player, "Queen"); // call initializer of super type:
+												// Piece
+		queen.symbol = "Q";
+		ArrayList<IMove> queenMoves = new ArrayList<>();
+		queenMoves.add(new RookMovesInCircleBoard());
+		queenMoves.add(new BishopMovesInCircleBoard());
+		
+		queen.moveBehaviour = queenMoves;
+		
+		return queen;
+	}
+	
+	public static Piece createQueenInSquareBoard(IChessboard chessboard, Player player) {
+		Piece queen = new Piece(chessboard, player, "Queen"); // call initializer of super type:
+				// Piece
+		queen.symbol = "Q";
+		ArrayList<IMove> queenMoves = new ArrayList<>();
+		queenMoves.add(new RookMovesInSquareBoard());
+		queenMoves.add(new BishopMovesInSquareBoard());
+		
+		queen.moveBehaviour = queenMoves;
+		
+		return queen;
 	}
 
 }

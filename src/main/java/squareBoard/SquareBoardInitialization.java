@@ -130,7 +130,7 @@ public class SquareBoardInitialization {
 		kingMoves.add(new KingMovesInSquareBoard());
 
 		if (upsideDown) {
-			getSquares()[4][i].setPiece(new Queen(board, player, queenMoves));
+			getSquares()[4][i].setPiece(PieceFactory.createQueenInSquareBoard(board, player));
 
 			if (player.getColor() == Player.colors.white) {
 
@@ -139,7 +139,7 @@ public class SquareBoardInitialization {
 				getSquares()[3][i].setPiece(kingBlack = new King(board, player, kingMoves));
 			}
 		} else {
-			getSquares()[3][i].setPiece(new Queen(board, player, queenMoves));
+			getSquares()[3][i].setPiece(PieceFactory.createQueenInSquareBoard(board, player));
 
 			if (player.getColor() == Player.colors.white) {
 				getSquares()[4][i].setPiece(kingWhite = new King(board, player, kingMoves));

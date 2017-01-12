@@ -85,10 +85,7 @@ public class CircleBoardInitialization {
 		squares[i + 5][j].setPiece(PieceFactory.createBishopInCircleBoard(board, player));
 
 		// THE QUEEN MOTHER OF DRAGONS
-		ArrayList<IMove> queenMoves = new ArrayList<>();
-		queenMoves.add(new RookMovesInCircleBoard());
-		queenMoves.add(new BishopMovesInCircleBoard());
-		squares[i + 4][j].setPiece(new Queen(board, player, queenMoves));
+		squares[i + 4][j].setPiece(PieceFactory.createQueenInCircleBoard(board, player));
 
 		ArrayList<IMove> kingMoves = new ArrayList<>();
 		kingMoves.add(new KingMovesInCircleBoard());
