@@ -50,15 +50,11 @@ public class PieceBehaviour {
 	 *         or a King
 	 */
 	public boolean checkPiece(int x, int y) {
-		if (getChessboard().getSquares()[x][y].piece != null
-				&& getChessboard().getSquares()[x][y].piece.getName().equals("King")) {
+		Piece squarePiece = getSquares(x,y).piece;
+		if (squarePiece != null && squarePiece.getName().equals("King")) {
 			return false;
 		}
-		Piece piece = getChessboard().getSquares()[x][y].piece;
-		if (piece == null || // if this square is empty
-				piece.getPlayer() != this.getPlayer()) // or piece is another
-														// player
-		{
+		if (squarePiece == null || squarePiece.getPlayer() != this.getPlayer()){
 			return true;
 		}
 		return false;
@@ -94,6 +90,11 @@ public class PieceBehaviour {
 
 	private IChessboard getChessboard() {
 		return chessboard;
+	}
+
+	public Square getSquares(int i, int j) {
+		Square square = getChessboard().getSquares()[i][j];
+		return square;
 	}
 
 	private void setChessboard(IChessboard chessboard2) {

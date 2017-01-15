@@ -15,7 +15,7 @@ public class KingMoves implements IMove {
 			for (int j = y - 1; j <= y + 1; j++) {
 				if (!piece.pieceBehaviour.isout(i, j)) {// out of bounds
 														// protection
-					Square sq = piece.getChessboard().getSquares()[i][j];
+					Square sq = piece.getSquares(i,j);
 					if (piece.getSquare() == sq) {// if we're checking square on
 													// which is King
 						continue;
@@ -35,7 +35,7 @@ public class KingMoves implements IMove {
 
 	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
-		int x = piece.getSquare().getPozX(), y = piece.getSquare().getPozY();
+		int x = piece.getPozX(), y = piece.getPozY();
 		regularMove(piece, list, x, y);
 		return list;
 	}

@@ -94,6 +94,14 @@ public abstract class Piece {
 		return square;
 	}
 
+	public int getPozX(){
+		return getSquare().getPozX();
+	}
+	
+	public int getPozY(){
+		return getSquare().getPozY();
+	}
+	
 	public int allMovesSize (Piece boardPiece, boolean ignoreKing){
 		return boardPiece.allMoves(false).size();
 	}
