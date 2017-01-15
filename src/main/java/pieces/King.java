@@ -448,14 +448,12 @@ public class King extends Piece {
 	 *            Square where is a king
 	 * @return bool true if king is save, else returns false
 	 */
-	public boolean isSafe(Square s) // A bit confusing code.
+	public boolean isSafe(Square s) 
 	{
-
 		for (int i = 0; i < 24; i++) {
 			for (int j = 0; j < 6; j++) {
 				Piece boardPiece = this.getSquares(i, j).piece;
-				if (boardPiece != null) {
-					if (boardPiece.getPlayer() != this.getPlayer()) {
+				if (boardPiece != null && boardPiece.getPlayer() != this.getPlayer()) {
 						ArrayList<Square> pieceMoves = boardPiece.allMoves(true);
 						if (pieceMoves.contains(s)) {
 							return false;
@@ -463,7 +461,7 @@ public class King extends Piece {
 					}
 				}
 			}
-		}
+		
 
 		return true;
 	}
@@ -482,12 +480,15 @@ public class King extends Piece {
 		Piece tmp = sqWillBeThere.piece;
 		sqWillBeThere.piece = sqIsHere.piece; // move without redraw
 		sqIsHere.piece = null;
-
-		boolean ret = isSafe(this.getSquare());
-
+		boolean ret;
+		
+		ret = isSafe(this.getSquare());
+		
 		sqIsHere.piece = sqWillBeThere.piece;
 		sqWillBeThere.piece = tmp;
 
 		return ret;
 	}
+	
+	
 }
