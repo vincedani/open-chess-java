@@ -33,7 +33,7 @@ import main.java.game.Player;
  */
 public class Bishop extends Piece {
 
-	public static short value = 3;
+	public int value = 3;
 
 	// protected static final Image imageWhite = GUI.loadImage("Bishop-W.png");
 	// protected static final Image imageBlack = GUI.loadImage("Bishop-B.png");
