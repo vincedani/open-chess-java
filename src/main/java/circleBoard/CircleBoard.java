@@ -31,9 +31,8 @@ public class CircleBoard implements IChessboard {
 
 	public CircleBoard(Settings settings, MovesTable moves_history) {
 
-		settings.renderLabels = false;
 		initial = new CircleBoardInitialization(this);
-		display = new CircleBoardDisplay(null, null, new Point(0, 0), settings.renderLabels, settings.upsideDown, this);
+		display = new CircleBoardDisplay(null, null, new Point(0, 0), this);
 		this.moves_history = moves_history;
 	}
 

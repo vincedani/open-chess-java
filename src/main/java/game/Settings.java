@@ -21,7 +21,6 @@
 package main.java.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
@@ -44,20 +43,27 @@ public class Settings implements Serializable {
 	public boolean runningGameClock;
 	public boolean timeLimitSet;
 	public boolean upsideDown;
-	public LogToFile logToFile = new LogToFile();
+	public LogToFile logger = new LogToFile();
 
 	public enum gameModes {
 
-		newGame, loadGame
+		newGame, loadedGame
 	}
 
 	public gameModes gameMode;
+
+	public enum boardTypes {
+
+		squareBoard, circleBoard
+	}
+	
+	public boardTypes boardType;
 
 	public Player playerWhite;
 	public Player playerBlack;
 	public Player playerBlue;
 
-	public ArrayList<Player> players = new ArrayList<>();
+	public Player[] players ;
 
 	public enum gameTypes {
 
@@ -66,8 +72,7 @@ public class Settings implements Serializable {
 
 	public gameTypes gameType;
 
-	public boolean renderLabels = true;
-
+	
 	public Settings() {
 		// temporally
 		this.playerWhite = new Player("", "white");
@@ -75,6 +80,12 @@ public class Settings implements Serializable {
 		this.playerBlue = new Player("", "blue");
 		this.timeLimitSet = false;
 		gameMode = gameModes.newGame;
+	}
+	
+	public Settings(Player[] players, boardTypes boardType, gameTypes gameType){
+		this.players= players;
+		this.boardType = boardType;
+		this.gameType = gameType;
 	}
 
 	/**
@@ -100,4 +111,10 @@ public class Settings implements Serializable {
 		return result;
 	}
 
+	public Player nextPlayer(Player actualPlayer){
+		int actualIndex = java.util.Arrays.asList(players).indexOf(actualPlayer);
+		if(actualIndex== (players.length - 1))
+			return players[0];
+		return players[actualIndex+1];
+	}
 }

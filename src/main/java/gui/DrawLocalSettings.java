@@ -192,9 +192,9 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
 				pl3.setType(Player.playerTypes.localUser);// set type of player
 
 			}
-			sett.players.add(pl1);
-			sett.players.add(pl2);
-			sett.players.add(pl3);
+			//sett.players.add(pl1);
+			//sett.players.add(pl2);
+			//sett.players.add(pl3);
 
 			/*
 

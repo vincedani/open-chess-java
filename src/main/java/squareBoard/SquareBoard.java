@@ -87,7 +87,7 @@ public class SquareBoard implements IChessboard {
 	public SquareBoard(Settings settings, MovesTable moves_history) {
 		this.settings = settings;
 		initial = new SquareBoardInitialization(settings.upsideDown, this);
-		display = new SquareBoardDisplay(null, null, new Point(0, 0), settings.renderLabels, settings.upsideDown, this);
+		display = new SquareBoardDisplay(null, null, new Point(0, 0), this);
 		this.moves_history = moves_history;
 
 	}/*--endOf-Chessboard--*/
@@ -109,12 +109,11 @@ public class SquareBoard implements IChessboard {
 			System.out.println("click out of chessboard.");
 			return null;
 		}
-		if (this.settings.renderLabels) {
-			x -= this.display.upDownLabel.getHeight(null);
-			y -= this.display.upDownLabel.getHeight(null);
-		}
+		x -= this.display.upDownLabel.getHeight(null);
+		y -= this.display.upDownLabel.getHeight(null);
+
 		double square_x = (int) (x / display.square_height);// count which field
-															// in X
+		// in X
 		// was clicked
 		double square_y = (int) (y / display.square_height);// count which field
 															// in Y
@@ -180,10 +179,8 @@ public class SquareBoard implements IChessboard {
 	}/*--endOf-get_widht--*/
 
 	public int get_height(boolean includeLabels) {
-		if (this.settings.renderLabels) {
-			return board_layout.image.getHeight(null) + display.upDownLabel.getHeight(null);
-		}
-		return board_layout.image.getHeight(null);
+		return board_layout.image.getHeight(null) + display.upDownLabel.getHeight(null);
+
 	}/*--endOf-get_height--*/
 
 	public int get_square_height() {

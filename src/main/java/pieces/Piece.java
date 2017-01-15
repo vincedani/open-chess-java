@@ -65,12 +65,6 @@ public class Piece {
 		case blue:
 			imageColorPath = "-Blue.png";
 			break;
-		case red:
-			imageColorPath = "-Red.png";
-			break;
-		case green:
-			imageColorPath = "-Green.png";
-			break;
 		}
 		imagePath += imageColorPath;
 		

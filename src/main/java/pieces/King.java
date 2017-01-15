@@ -77,7 +77,7 @@ public class King extends Piece {
 		/*
 		 * returns: 0-nothing, 1-checkmate, 2-stalemate
 		 */
-		if (this.allMoves(false).size() == 0) {
+		if (this.allMoves(false).isEmpty()) {
 			for (int i = 0; i < 8; ++i) {
 				for (int j = 0; j < 8; ++j) {
 					if (getChessboard().getSquares()[i][j].piece != null

@@ -41,14 +41,13 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 	Square[][] squares;
 	SquareBoard board;
 
-	public SquareBoardDisplay(Image upDownLabel, Image leftRightLabel, Point topLeft, boolean renderLabels,
-			boolean upsideDown, SquareBoard board) {
+	public SquareBoardDisplay(Image upDownLabel, Image leftRightLabel, Point topLeft, SquareBoard board) {
 		this.upDownLabel = upDownLabel;
 		LeftRightLabel = leftRightLabel;
 		this.topLeft = topLeft;
 		this.board_layout = board.board_layout;
-		this.renderLabels = renderLabels;
-		this.upsideDown = upsideDown;
+		this.renderLabels = true;
+		this.upsideDown = false;
 		this.squares = board.initial.getSquares();
 		this.board = board;
 

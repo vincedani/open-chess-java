@@ -160,7 +160,7 @@ public class Client implements Runnable {
 
 					if (result == JOptionPane.YES_OPTION) {
 						// getGame().getChessboard().undo();
-						getGame().switchActive();
+						getGame().switchActivePlayer();
 						this.sendUndoAnswerPositive();
 					} else {
 						this.sendUndoAnswerNegative();

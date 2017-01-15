@@ -36,7 +36,7 @@ public class Player implements Serializable {
 
 	public enum colors {
 
-		white, black, red, blue, green;
+		white, black, blue;
 	}
 
 	private colors color;
@@ -52,7 +52,7 @@ public class Player implements Serializable {
 
 	public Player(String name, String color) {
 		this.name = name;
-		this.setColor(colors.valueOf(color));
+		this.setColor(colors.valueOf(color.toLowerCase()));
 		this.setGoDown(false);
 	}
 
@@ -72,7 +72,7 @@ public class Player implements Serializable {
 	 * @return name of player
 	 */
 	public String getName() {
-		return this.name;
+	return this.name;
 	}
 
 	/**

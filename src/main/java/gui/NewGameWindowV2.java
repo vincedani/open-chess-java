@@ -21,7 +21,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import main.java.JChessApp;
+import main.java.game.Game;
+import main.java.game.Player;
 import main.java.game.Settings;
+import java.awt.event.ActionListener;
 
 public class NewGameWindowV2 extends JFrame {
 
@@ -30,16 +34,14 @@ public class NewGameWindowV2 extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField player1;
-	private JTextField player2;
-	private JTextField player3;
+	private JTextField namePlayer1;
+	private JTextField namePlayer2;
+	private JTextField namePlayer3;
 	private JCheckBox threePlayerGame;
 	private JComboBox<String> player1Color;
 	private JComboBox<String> player2Color;
 	private JComboBox<String> player3Color;
-	private final Action threePersonGame = new SwingAction();
-	private final Action newGame = new SwingAction_1();
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -60,14 +62,14 @@ public class NewGameWindowV2 extends JFrame {
 	 * Create the frame.
 	 */
 	public NewGameWindowV2() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		player1 = new JTextField();
-		player1.setColumns(10);
+		namePlayer1 = new JTextField();
+		namePlayer1.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Player 1:");
 		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
@@ -95,7 +97,7 @@ public class NewGameWindowV2 extends JFrame {
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
-		contentPane.add(player1, "2, 4, left, top");
+		contentPane.add(namePlayer1, "2, 4, left, top");
 		contentPane.add(lblNewLabel, "2, 2, left, top");
 		
 		player1Color = new JComboBox<String>();
@@ -106,9 +108,9 @@ public class NewGameWindowV2 extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Player 2:");
 		contentPane.add(lblNewLabel_1, "2, 6");
 		
-		player2 = new JTextField();
-		contentPane.add(player2, "2, 8, left, default");
-		player2.setColumns(10);
+		namePlayer2 = new JTextField();
+		contentPane.add(namePlayer2, "2, 8, left, default");
+		namePlayer2.setColumns(10);
 		
 		player2Color = new JComboBox<String>();
 		player2Color.setModel(new DefaultComboBoxModel<String>(new String[] {"Black", "White", "Blue"}));
@@ -119,16 +121,21 @@ public class NewGameWindowV2 extends JFrame {
 		contentPane.add(lblThreePersonChess, "2, 10");
 		
 		threePlayerGame = new JCheckBox("");
-		threePlayerGame.setAction(threePersonGame);
+		threePlayerGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				namePlayer3.setEnabled(threePlayerGame.isSelected());
+				player3Color.setEnabled(threePlayerGame.isSelected());
+			}
+		});
 		threePlayerGame.setSelected(true);
 		contentPane.add(threePlayerGame, "4, 10");
 		
 		JLabel lblNewLabel_2 = new JLabel("Player 3:");
 		contentPane.add(lblNewLabel_2, "2, 12");
 		
-		player3 = new JTextField();
-		contentPane.add(player3, "2, 14, left, default");
-		player3.setColumns(10);
+		namePlayer3 = new JTextField();
+		contentPane.add(namePlayer3, "2, 14, left, default");
+		namePlayer3.setColumns(10);
 		
 		player3Color = new JComboBox<String>();
 		player3Color.setModel(new DefaultComboBoxModel<String>(new String[] {"Black", "White", "Blue"}));
@@ -136,44 +143,47 @@ public class NewGameWindowV2 extends JFrame {
 		contentPane.add(player3Color, "4, 14, left, default");
 		
 		JButton btnNewButton = new JButton("New Game");
-		btnNewButton.setAction(newGame);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(threePlayerGame.isSelected() && player1Color.getSelectedIndex() != player2Color.getSelectedIndex() && player1Color.getSelectedIndex() != player3Color.getSelectedIndex() && player2Color.getSelectedIndex() != player3Color.getSelectedIndex())
+				{
+					//Three player chess in a circle board
+					String name1 = namePlayer1.getText();
+					Player player1 = new Player(name1, (String) player1Color.getSelectedItem());
+					
+					String name2 = namePlayer2.getText();
+					Player player2 = new Player(name2, (String) player2Color.getSelectedItem());
+					
+					String name3 = namePlayer3.getText();
+					Player player3 = new Player(name3, (String) player3Color.getSelectedItem());
+					
+					Player[] players = {player1, player2, player3};
+					
+					Game newGUI = JChessApp.getJcv().addNewTab(name1 + " vs. " + name2 + " vs. " + name3);
+					Settings gameSettings= new Settings(players, Settings.boardTypes.circleBoard, Settings.gameTypes.local);
+					newGUI.newGameV2(gameSettings);
+				}
+				else if(!threePlayerGame.isSelected() && player1Color.getSelectedIndex() != player2Color.getSelectedIndex()){
+					//Two player chess in a square board
+					String name1 = namePlayer1.getText();
+					Player player1 = new Player(name1, (String) player1Color.getSelectedItem());
+					
+					String name2 = namePlayer2.getText();
+					Player player2 = new Player(name2, (String) player2Color.getSelectedItem());
+					
+					Player[] players = {player1, player2};
+					
+					Game newGUI = JChessApp.getJcv().addNewTab(name1 + " vs. " + name2 );
+					Settings gameSettings= new Settings(players, Settings.boardTypes.squareBoard, Settings.gameTypes.local);
+					newGUI.newGameV2(gameSettings);
+					newGUI.getChessboard().getDisplay().repaint();
+					
+				}else{
+					JOptionPane.showMessageDialog(null, "Select different colors for each player");
+				}
+			}
+		});
 		contentPane.add(btnNewButton, "4, 18, right, default");
 	}
-	private class SwingAction extends AbstractAction {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-			player3.setEnabled(threePlayerGame.isSelected());
-			player3Color.setEnabled(threePlayerGame.isSelected());
-		}
-	}
-	private class SwingAction_1 extends AbstractAction {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		public SwingAction_1() {
-			putValue(NAME, "SwingAction_1");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-			
-			if(threePlayerGame.isSelected() && player1Color.getSelectedIndex() != player2Color.getSelectedIndex() && player1Color.getSelectedIndex() != player3Color.getSelectedIndex() && player2Color.getSelectedIndex() != player3Color.getSelectedIndex())
-			{
-				
-			}
-			else if(!threePlayerGame.isSelected() && player1Color.getSelectedIndex() != player2Color.getSelectedIndex()){
-				
-				
-			}else{
-				JOptionPane.showMessageDialog(null, "Select different colors for each player");
-			}
-		}
-	}
+	
 }

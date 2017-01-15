@@ -39,8 +39,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 	Square[][] squares;
 	CircleBoard board;
 
-	public CircleBoardDisplay(Image upDownLabel, Image leftRightLabel, Point topLeft, boolean renderLabels,
-			boolean upsideDown, CircleBoard board) {
+	public CircleBoardDisplay(Image upDownLabel, Image leftRightLabel, Point topLeft, CircleBoard board) {
 		this.upDownLabel = upDownLabel;
 		LeftRightLabel = leftRightLabel;
 		this.topLeftPoint = topLeft;

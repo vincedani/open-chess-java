@@ -182,7 +182,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		locSetts.playerWhite.setType(Player.playerTypes.localUser);
 		locSetts.playerBlue.setType(Player.playerTypes.localUser);
 
-		locSetts.gameMode = Settings.gameModes.loadGame;
+		locSetts.gameMode = Settings.gameModes.loadedGame;
 		locSetts.gameType = Settings.gameTypes.local;
 
 		newGUI.newGame();
@@ -267,6 +267,34 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.repaint();
 	}
 
+	public void newGameV2(Settings gameSettings) {
+
+		switch (gameSettings.boardType) {
+		case circleBoard:
+			chessboard = new CircleBoard(gameSettings, this.getMoves());
+			break;
+		case squareBoard:
+			chessboard = new SquareBoard(gameSettings, this.getMoves());
+			break;
+		default:
+			break;
+		}
+		initializeChessboardPanel();
+		chessboard.setPieces(gameSettings.players);
+		activePlayer = gameSettings.players[0];
+		
+		if (activePlayer.playerType != Player.playerTypes.localUser) {
+			this.blockedChessboard = true;
+		}
+		Game activeGame = JChessApp.getJcv().getActiveTabGame();
+		this.settings = gameSettings;
+		this.blockedChessboard=false;
+		activeGame.chessboard.getDisplay().repaint();
+		activeGame.repaint();
+		chessboard.getDisplay().repaint();
+		this.repaint();
+	}
+
 	/**
 	 * Method to end game
 	 * 
@@ -283,16 +311,17 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	/**
 	 * Method to switch active players after move
 	 */
-	public void switchActive() {
-		if (activePlayer == getSettings().playerWhite) {
+	public void switchActivePlayer() {
+		/*if (activePlayer == getSettings().playerWhite) {
 			activePlayer = getSettings().playerBlack;
 		} else if (activePlayer == getSettings().playerBlack) {
 			activePlayer = getSettings().playerBlue;
 		} else if (activePlayer == getSettings().playerBlue) {
 			activePlayer = getSettings().playerWhite;
 		}
-
-		this.getGameClock().switch_clocks();
+*/
+		activePlayer = getSettings().nextPlayer(activePlayer);
+		//this.getGameClock().switch_clocks();
 	}
 
 	/**
@@ -308,7 +337,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * Method to go to next move (checks if game is local/network etc.)
 	 */
 	public void nextMove() {
-		switchActive();
+		switchActivePlayer();
 
 		System.out.println("next move, active player: " + activePlayer.name + ", color: "
 				+ activePlayer.getColor().name() + ", type: " + activePlayer.playerType.name());
@@ -366,7 +395,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		if (this.getSettings().gameType == Settings.gameTypes.local) {
 			status = chessboard.undo();
 			if (status) {
-				this.switchActive();
+				this.switchActivePlayer();
 			} else {
 				chessboard.getDisplay().repaint();// repaint for sure
 			}
