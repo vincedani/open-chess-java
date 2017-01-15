@@ -478,6 +478,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 				} catch (NullPointerException exc) {
 					LogToFile.log(exc, "Error", "NullPointerException " + exc.getMessage());
+					exc.printStackTrace();
 					chessboard.getDisplay().repaint();
 					return;
 				}
