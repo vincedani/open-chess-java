@@ -95,7 +95,7 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	}
 
 	/**
-	 * Method wich is changing a pawn into queen, rook, bishop or knight
+	 * Method which is changing a pawn into queen, rook, bishop or knight
 	 * 
 	 * @param arg0
 	 *            Capt information about performed action

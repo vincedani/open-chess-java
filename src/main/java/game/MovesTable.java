@@ -47,7 +47,7 @@ import main.java.squareBoard.SquareBoard;
  */
 public class MovesTable extends AbstractTableModel {
 
-	private ArrayList<String> move = new ArrayList<String>();
+	private ArrayList<String> move = new ArrayList<>();
 	private int columnsNum = 3;
 	private int rowsNum = 0;
 	private String[] names = new String[] { Settings.lang("white"), Settings.lang("black"), Settings.lang("blue") };
@@ -77,9 +77,7 @@ public class MovesTable extends AbstractTableModel {
 		this.tableModel.addTableModelListener(null);
 		this.scrollPane.setAutoscrolls(true);
 
-		this.game = game;// I think that this class should not have access to
-							// the game!
-
+		this.game = game;
 	}
 
 	@Override

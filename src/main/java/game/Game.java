@@ -58,10 +58,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	private IChessboard chessboard;
 	private Player activePlayer;
 	private GameClock gameClock;
-	private Client client;
 	private MovesTable moves;
-	private Chat chat;
-
+	
 	public Game() {
 
 		moves = new MovesTable(this);
@@ -71,20 +69,13 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		initializeChessboardPanel();
 		initializeClock();
 		initializeMovesHistory();
-		initializeChat();
-
+		
 		this.blockedChessboard = false;
 		this.setLayout(null);
 		this.addComponentListener(this);
 		this.setDoubleBuffered(true);
 	}
 
-	private void initializeChat() {
-		this.setChat(new Chat());
-		this.getChat().setSize(new Dimension(380, 100));
-		this.getChat().setLocation(new Point(0, 500));
-		this.getChat().setMinimumSize(new Dimension(400, 100));
-	}
 
 	private void initializeMovesHistory() {
 		JScrollPane movesHistory = this.getMoves().getScrollPane();
@@ -399,10 +390,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			} else {
 				chessboard.getDisplay().repaint();// repaint for sure
 			}
-		} else if (this.getSettings().gameType == Settings.gameTypes.network) {
-			this.getClient().sendUndoAsk();
-			status = true;
-		}
+		} 
 		return status;
 	}
 
@@ -481,11 +469,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					{
 						if (getSettings().gameType == Settings.gameTypes.local) {
 							chessboard.move(chessboard.getActiveSquare(), sq);
-						} else if (getSettings().gameType == Settings.gameTypes.network) {
-							getClient().sendMove(chessboard.getActiveSquare().getPozX(),
-									chessboard.getActiveSquare().getPozY(), sq.getPozX(), sq.getPozY());
-							chessboard.move(chessboard.getActiveSquare(), sq);
-						}
+						} 
 
 						chessboard.unselect();
 
@@ -525,10 +509,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.getMoves().getScrollPane().setLocation(new Point(chess_height + 5, 100));
 		this.getMoves().getScrollPane().setSize(this.getMoves().getScrollPane().getWidth(), chess_height - 100);
 		this.getGameClock().setLocation(new Point(chess_height + 5, 0));
-		if (this.getChat() != null) {
-			this.getChat().setLocation(new Point(0, chess_height + 5));
-			this.getChat().setSize(new Dimension(chess_height, this.getHeight() - (chess_height + 5)));
-		}
+		
 	}
 
 	public Settings getSettings() {
@@ -539,21 +520,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.settings = settings;
 	}
 
-	public Chat getChat() {
-		return chat;
-	}
-
-	public void setChat(Chat chat) {
-		this.chat = chat;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
 
 	public IChessboard getChessboard() {
 		return chessboard;
