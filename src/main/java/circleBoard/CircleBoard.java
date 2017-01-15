@@ -125,7 +125,7 @@ public class CircleBoard implements IChessboard {
 		// Check if pawn passed the center
 		if (begin.piece instanceof Pawn) {
 			Pawn movedPawn = (Pawn) begin.piece;
-			if (movedPawn.getSquare().getPozY() == 5 && end.getPozY() == 5)
+			if (movedPawn.getPozY() == 5 && end.getPozY() == 5)
 				movedPawn.passedCenter = true;
 		}
 		LogToFile.log(null, "INFO", begin.piece.getName()+" moved from "+ begin.getPozX()+","+begin.getPozY()+" to "+end.getPozX()+" , "+ end.getPozY() );

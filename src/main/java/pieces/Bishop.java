@@ -33,7 +33,7 @@ import main.java.game.Player;
  */
 public class Bishop extends Piece {
 
-	public static short value = 3;
+	public int value = 3;
 
 	ArrayList<IMove> moveBehaviour;
 

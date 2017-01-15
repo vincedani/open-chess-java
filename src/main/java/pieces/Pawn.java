@@ -38,7 +38,7 @@ public class Pawn extends Piece {
 	public boolean passedCenter;
 	// protected static final Image imageWhite = GUI.loadImage("Pawn-W.png");
 	// protected static final Image imageBlack = GUI.loadImage("Pawn-B.png");
-	public static short value = 1;
+	public int value = 1;
 	ArrayList<IMove> moveBehaviour;
 
 	public Pawn(IChessboard chessboard, Player player, ArrayList<IMove> moveBehaviour) {

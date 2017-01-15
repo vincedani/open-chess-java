@@ -89,7 +89,24 @@ public class Piece {
 	public IChessboard getChessboard() {
 		return chessboard;
 	}
+	
+	public Square getSquares(int i, int j) {
+		Square square = getChessboard().getSquares()[i][j];
+		return square;
+	}
 
+	public int getPozX(){
+		return getSquare().getPozX();
+	}
+	
+	public int getPozY(){
+		return getSquare().getPozY();
+	}
+	
+	public int allMovesSize (Piece boardPiece, boolean ignoreKing){
+		return boardPiece.allMoves(false).size();
+	}
+	
 	public void setChessboard(IChessboard chessboard2) {
 		this.chessboard = chessboard2;
 	}
