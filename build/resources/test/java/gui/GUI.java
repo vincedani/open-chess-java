@@ -20,19 +20,20 @@
  */
 package main.java.gui;
 
-import java.awt.*;
-import java.net.*;
-import java.io.*;
-
-import javax.swing.*;
-import javax.swing.JPanel;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.util.Properties;
 
 import main.java.JChessApp;
 import main.java.LogToFile;
 import main.java.game.Game;
-
-import java.util.Properties;
-import java.util.logging.Logger;
 
 /**
  * Class representing the game interface which is seen by a player and where are
@@ -67,14 +68,11 @@ public class GUI {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		try {
 			String imageLink = "theme/" + configFile.getProperty("THEME", "default") + "/images/" + name;
-			//System.out.println(configFile.getProperty("THEME"));
-			LogToFile.log(null,"INFO", configFile.getProperty("THEME"));
 			url = JChessApp.class.getResource(imageLink);
 			img = tk.getImage(url);
 
 		} catch (Exception e) {
-			//System.out.println("some error loading image!");
-			LogToFile.log(null,"INFO", "some error loading image!");
+			LogToFile.log(e, "ERROR", "some error loading image!");
 			e.printStackTrace();
 		}
 		return img;

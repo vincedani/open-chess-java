@@ -51,9 +51,9 @@ public class PieceBehaviour {
 	 */
 	public boolean checkPiece(int x, int y) {
 		Piece squarePiece = getSquares(x,y).piece;
-		if (squarePiece != null && squarePiece.getName().equals("King")) {
+		/*if (squarePiece != null && squarePiece.getName().equals("King")) {
 			return false;
-		}
+		}*/
 		if (squarePiece == null || squarePiece.getPlayer() != this.getPlayer()){
 			return true;
 		}

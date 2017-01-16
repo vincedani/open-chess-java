@@ -5,17 +5,12 @@ import java.util.ArrayList;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
-import main.java.movesInCircleBoard.BishopMovesInCircleBoard;
 import main.java.movesInCircleBoard.KingMovesInCircleBoard;
-import main.java.movesInCircleBoard.KnightMovesInCircleBoard;
 import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
 import main.java.movesInCircleBoard.RookMovesInCircleBoard;
-import main.java.pieces.Bishop;
 import main.java.pieces.King;
-import main.java.pieces.Knight;
 import main.java.pieces.Pawn;
 import main.java.pieces.PieceFactory;
-import main.java.pieces.Queen;
 import main.java.pieces.Rook;
 
 public class CircleBoardInitialization {

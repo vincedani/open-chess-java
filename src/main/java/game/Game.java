@@ -478,6 +478,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 						// checkmate or stalemate
 						King king = chessboard.getKing(this.activePlayer);
+						if(king.isChecked()){
+							System.out.println("Checked!");
+						}
 
 						switch (king.isCheckmatedOrStalemated()) {
 						case 1:
@@ -486,10 +489,13 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 						case 2:
 							this.endGame("Stalemate! Draw!");
 							break;
+						default:
+							System.out.println("The king is ok!");
 						}
 					}
 
 				} catch (NullPointerException exc) {
+					exc.printStackTrace();
 					LogToFile.log(exc, "Error", "NullPointerException " + exc.getMessage());
 					chessboard.getDisplay().repaint();
 					return;

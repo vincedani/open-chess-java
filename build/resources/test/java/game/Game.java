@@ -58,10 +58,8 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	private IChessboard chessboard;
 	private Player activePlayer;
 	private GameClock gameClock;
-	private Client client;
 	private MovesTable moves;
-	private Chat chat;
-
+	
 	public Game() {
 
 		moves = new MovesTable(this);
@@ -71,20 +69,13 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		initializeChessboardPanel();
 		initializeClock();
 		initializeMovesHistory();
-		initializeChat();
-
+		
 		this.blockedChessboard = false;
 		this.setLayout(null);
 		this.addComponentListener(this);
 		this.setDoubleBuffered(true);
 	}
 
-	private void initializeChat() {
-		this.setChat(new Chat());
-		this.getChat().setSize(new Dimension(380, 100));
-		this.getChat().setLocation(new Point(0, 500));
-		this.getChat().setMinimumSize(new Dimension(400, 100));
-	}
 
 	private void initializeMovesHistory() {
 		JScrollPane movesHistory = this.getMoves().getScrollPane();
@@ -135,7 +126,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			fileW.flush();
 			fileW.close();
 		} catch (java.io.IOException exc) {
-			// System.out.println("error writing to file: " + exc);
 			LogToFile.log(exc, "Error", "error writing to file: " + exc.getMessage());
 			JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file") + ": " + exc);
 			return;
@@ -155,7 +145,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			fileR = new FileReader(file);
 		} catch (java.io.IOException exc) {
-			// System.out.println("Something wrong reading file: " + exc);
 			LogToFile.log(exc, "Error", "Something wrong reading file: " + exc.getMessage());
 			return;
 		}
@@ -171,7 +160,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			blueName = getValue(tempStr);
 			tempStr = getLineWithVar(br, new String("1."));
 		} catch (ReadGameError err) {
-			// System.out.println("Error reading file: " + err);
 			LogToFile.log(err, "Error", "Error reading file: " + err.getMessage());
 			return;
 		}
@@ -185,7 +173,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		locSetts.playerWhite.setType(Player.playerTypes.localUser);
 		locSetts.playerBlue.setType(Player.playerTypes.localUser);
 
-		locSetts.gameMode = Settings.gameModes.loadGame;
+		locSetts.gameMode = Settings.gameModes.loadedGame;
 		locSetts.gameType = Settings.gameTypes.local;
 
 		newGUI.newGame();
@@ -213,7 +201,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 			try {
 				str = br.readLine();
 			} catch (java.io.IOException exc) {
-				// System.out.println("Something wrong reading file: " + exc);
 				LogToFile.log(exc, "Error", "Something wrong reading file: " + exc.getMessage());
 			}
 			if (str == null) {
@@ -235,7 +222,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *             object class when something goes wrong
 	 */
 	static public String getValue(String line) throws ReadGameError {
-		// System.out.println("getValue called with: "+line);
 		int from = line.indexOf("\"");
 		int to = line.lastIndexOf("\"");
 		int size = line.length() - 1;
@@ -246,7 +232,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			result = line.substring(from + 1, to);
 		} catch (java.lang.StringIndexOutOfBoundsException exc) {
-			// System.out.println("error getting value: " + exc);
 			LogToFile.log(exc, "Error", "error getting value: " + exc.getMessage());
 			return "none";
 		}
@@ -273,6 +258,34 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.repaint();
 	}
 
+	public void newGameV2(Settings gameSettings) {
+
+		switch (gameSettings.boardType) {
+		case circleBoard:
+			chessboard = new CircleBoard(gameSettings, this.getMoves());
+			break;
+		case squareBoard:
+			chessboard = new SquareBoard(gameSettings, this.getMoves());
+			break;
+		default:
+			break;
+		}
+		initializeChessboardPanel();
+		chessboard.setPieces(gameSettings.players);
+		activePlayer = gameSettings.players[0];
+		
+		if (activePlayer.playerType != Player.playerTypes.localUser) {
+			this.blockedChessboard = true;
+		}
+		Game activeGame = JChessApp.getJcv().getActiveTabGame();
+		this.settings = gameSettings;
+		this.blockedChessboard=false;
+		activeGame.chessboard.getDisplay().repaint();
+		activeGame.repaint();
+		chessboard.getDisplay().repaint();
+		this.repaint();
+	}
+
 	/**
 	 * Method to end game
 	 * 
@@ -289,16 +302,17 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	/**
 	 * Method to switch active players after move
 	 */
-	public void switchActive() {
-		if (activePlayer == getSettings().playerWhite) {
+	public void switchActivePlayer() {
+		/*if (activePlayer == getSettings().playerWhite) {
 			activePlayer = getSettings().playerBlack;
 		} else if (activePlayer == getSettings().playerBlack) {
 			activePlayer = getSettings().playerBlue;
 		} else if (activePlayer == getSettings().playerBlue) {
 			activePlayer = getSettings().playerWhite;
 		}
-
-		this.getGameClock().switch_clocks();
+*/
+		activePlayer = getSettings().nextPlayer(activePlayer);
+		//this.getGameClock().switch_clocks();
 	}
 
 	/**
@@ -314,7 +328,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * Method to go to next move (checks if game is local/network etc.)
 	 */
 	public void nextMove() {
-		switchActive();
+		switchActivePlayer();
 
 		System.out.println("next move, active player: " + activePlayer.name + ", color: "
 				+ activePlayer.getColor().name() + ", type: " + activePlayer.playerType.name());
@@ -372,14 +386,11 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		if (this.getSettings().gameType == Settings.gameTypes.local) {
 			status = chessboard.undo();
 			if (status) {
-				this.switchActive();
+				this.switchActivePlayer();
 			} else {
 				chessboard.getDisplay().repaint();// repaint for sure
 			}
-		} else if (this.getSettings().gameType == Settings.gameTypes.network) {
-			this.getClient().sendUndoAsk();
-			status = true;
-		}
+		} 
 		return status;
 	}
 
@@ -458,11 +469,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 					{
 						if (getSettings().gameType == Settings.gameTypes.local) {
 							chessboard.move(chessboard.getActiveSquare(), sq);
-						} else if (getSettings().gameType == Settings.gameTypes.network) {
-							getClient().sendMove(chessboard.getActiveSquare().getPozX(),
-									chessboard.getActiveSquare().getPozY(), sq.getPozX(), sq.getPozY());
-							chessboard.move(chessboard.getActiveSquare(), sq);
-						}
+						} 
 
 						chessboard.unselect();
 
@@ -471,6 +478,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 						// checkmate or stalemate
 						King king = chessboard.getKing(this.activePlayer);
+						if(king.isChecked()){
+							System.out.println("Checked!");
+						}
 
 						switch (king.isCheckmatedOrStalemated()) {
 						case 1:
@@ -479,17 +489,18 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 						case 2:
 							this.endGame("Stalemate! Draw!");
 							break;
+						default:
+							System.out.println("The king is ok!");
 						}
 					}
 
 				} catch (NullPointerException exc) {
-					// System.err.println(exc.getMessage());
+					exc.printStackTrace();
 					LogToFile.log(exc, "Error", "NullPointerException " + exc.getMessage());
 					chessboard.getDisplay().repaint();
 					return;
 				}
 			} else if (blockedChessboard) {
-				// System.out.println("Chessboard is blocked");
 				LogToFile.log(null, "INFO", "Chessboard is blocked");
 			}
 		}
@@ -504,10 +515,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.getMoves().getScrollPane().setLocation(new Point(chess_height + 5, 100));
 		this.getMoves().getScrollPane().setSize(this.getMoves().getScrollPane().getWidth(), chess_height - 100);
 		this.getGameClock().setLocation(new Point(chess_height + 5, 0));
-		if (this.getChat() != null) {
-			this.getChat().setLocation(new Point(0, chess_height + 5));
-			this.getChat().setSize(new Dimension(chess_height, this.getHeight() - (chess_height + 5)));
-		}
+		
 	}
 
 	public Settings getSettings() {
@@ -518,21 +526,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.settings = settings;
 	}
 
-	public Chat getChat() {
-		return chat;
-	}
-
-	public void setChat(Chat chat) {
-		this.chat = chat;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
 
 	public IChessboard getChessboard() {
 		return chessboard;

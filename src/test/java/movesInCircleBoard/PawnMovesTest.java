@@ -36,23 +36,27 @@ public class PawnMovesTest {
 	// Case 1: Before Center
 	@Test
 	public final void testGetMoves_1() {
-		/*int x = 3;
+		int x = 3;
 		int y = 3;
-
-		CircleBoard board = new CircleBoard(mock(Settings.class), mock(MovesTable.class));
+		CircleBoard board=  mock(CircleBoard.class);
+		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
+		when(board.getSquares()).thenReturn(board_squares.getSquares());
+		
 		Pawn pawn = new Pawn(board, p1, moveBehaviour);
-		board.getSquares()[x][y].setPiece(pawn);
+		board_squares.getSquares()[x][y].setPiece(pawn);
+		board.initial = board_squares;
 		PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
 		when(pieceBehaviour.isout(x, y+1)).thenReturn(false);
 
 		ArrayList<Square> expected = new ArrayList<Square>();
-		Square expectedSq = board.getSquares()[x][y+1];
+		Square expectedSq = board_squares.getSquares()[x][y+1];
 		expected.add(expectedSq);
 
-		PawnMoves pm = new PawnMoves();
+		PawnMovesInCircleBoard pm = new PawnMovesInCircleBoard();
 		ArrayList<Square> obtained = pm.getMoves(pawn, true);
 
-		assertTrue(obtained.containsAll(expected));*/
+		assertTrue(obtained.containsAll(expected));
+		//assertTrue(expected!=null);
 
 	}
 

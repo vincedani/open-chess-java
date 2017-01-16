@@ -24,6 +24,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import main.java.board.IChessboard;
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.game.Player.colors;
@@ -32,10 +33,10 @@ import main.java.game.Player.colors;
  * Class to represent a piece (any kind) - this class should be extended to
  * represent pawn, bishop etc.
  */
-public abstract class Piece {
+public class Piece {
 
-
-	private IChessboard chessboard; // <-- this relations isn't in class diagram,
+	private IChessboard chessboard; // <-- this relations isn't in class
+									// diagram,
 									// but it's necessary :/
 	public PieceBehaviour pieceBehaviour;
 	private Square square;
@@ -44,51 +45,72 @@ public abstract class Piece {
 	protected String symbol;
 	private PieceLayout layout;
 	private PieceDisplay display;
+	ArrayList<IMove> moveBehaviour;
 
+	
 	public Piece(IChessboard chessboard, Player player, String imagePath) {
 
 		this.setChessboard(chessboard);
 		this.setPlayer(player);
-		
+
 		colors color = player.getColor();
 		String imageColorPath = "";
 		switch (color) {
-			case black:	imageColorPath ="-Black.png";
-						break;
-			case white:	imageColorPath ="-White.png";
-						break;
-			case blue:	imageColorPath ="-Blue.png";
-						break;
-			case red:	imageColorPath ="-Red.png";
-						break;
-			case green:	imageColorPath ="-Green.png";
-						break;
+		case black:
+			imageColorPath = "-Black.png";
+			break;
+		case white:
+			imageColorPath = "-White.png";
+			break;
+		case blue:
+			imageColorPath = "-Blue.png";
+			break;
 		}
-		//System.out.println("Color escogido: " + color);
 		imagePath += imageColorPath;
-		//System.out.println("Image: " + imagePath);
 		
 		this.setName(this.getClass().getSimpleName());
 		this.setLayout(new PieceLayout(imagePath));
 		this.pieceBehaviour = new PieceBehaviour(chessboard, player);
 		this.display = new PieceDisplay(this);
 	}
-	
 
+	public ArrayList<Square> allMoves(boolean ignoreKing) {
+		ArrayList<Square> list = new ArrayList<Square>();
+		for (IMove iMove : moveBehaviour) {
+			list.addAll(iMove.getMoves(this, ignoreKing));
+		}
+		return list;
+	}
+	
 	public King myKing() {
 		return chessboard.getKing(player);
 	}
-	
-	public abstract ArrayList<Square> allMoves(boolean ignoreKing);
 
 	public IChessboard getChessboard() {
 		return chessboard;
 	}
+	
+	public Square getSquares(int i, int j) {
+		Square square = getChessboard().getSquares()[i][j];
+		return square;
+	}
 
+	public int getPozX(){
+		return getSquare().getPozX();
+	}
+	
+	public int getPozY(){
+		return getSquare().getPozY();
+	}
+	
+	public int allMovesSize (Piece boardPiece, boolean ignoreKing){
+		return boardPiece.allMoves(false).size();
+	}
+	
 	public void setChessboard(IChessboard chessboard2) {
 		this.chessboard = chessboard2;
 	}
-	
+
 	public PieceBehaviour getPieceBehaviour() {
 		return pieceBehaviour;
 	}
@@ -121,7 +143,6 @@ public abstract class Piece {
 		this.player = player;
 	}
 
-	
 	public Square getSquare() {
 		return square;
 	}
@@ -130,17 +151,13 @@ public abstract class Piece {
 		this.square = square;
 	}
 
-	
-
 	public PieceLayout getLayout() {
 		return layout;
 	}
 
-
 	public void setLayout(PieceLayout layout) {
 		this.layout = layout;
 	}
-
 
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub

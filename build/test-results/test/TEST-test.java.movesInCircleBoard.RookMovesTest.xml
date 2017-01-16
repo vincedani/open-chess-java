@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInCircleBoard.RookMovesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-12-12T00:06:10" hostname="mateo" time="0.006">
+<testsuite name="test.java.movesInCircleBoard.RookMovesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-01-16T00:42:16" hostname="AZD-PC" time="0.003">
   <properties/>
   <testcase name="testGetMoves_2_forward" classname="test.java.movesInCircleBoard.RookMovesTest" time="0.0"/>
   <testcase name="testGetMoves_1_clockWise" classname="test.java.movesInCircleBoard.RookMovesTest" time="0.0"/>
-  <testcase name="testGetMoves_2_backwards" classname="test.java.movesInCircleBoard.RookMovesTest" time="0.001"/>
-  <testcase name="testGetMoves_2_counterClockwise" classname="test.java.movesInCircleBoard.RookMovesTest" time="0.0"/>
+  <testcase name="testGetMoves_2_backwards" classname="test.java.movesInCircleBoard.RookMovesTest" time="0.0"/>
+  <testcase name="testGetMoves_2_counterClockwise" classname="test.java.movesInCircleBoard.RookMovesTest" time="0.001"/>
   <testcase name="testGetMoves_1_forward" classname="test.java.movesInCircleBoard.RookMovesTest" time="0.0"/>
   <testcase name="testGetMoves_1_counterClockwise" classname="test.java.movesInCircleBoard.RookMovesTest" time="0.0"/>
   <testcase name="testGetMoves_1_backwards" classname="test.java.movesInCircleBoard.RookMovesTest" time="0.0"/>

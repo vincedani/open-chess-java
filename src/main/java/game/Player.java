@@ -54,6 +54,7 @@ public class Player implements Serializable {
 		this.name = name;
 		this.setColor(colors.valueOf(color.toLowerCase()));
 		this.setGoDown(false);
+		this.playerType = playerTypes.localUser;
 	}
 
 	/**

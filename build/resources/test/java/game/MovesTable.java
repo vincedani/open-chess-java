@@ -32,8 +32,8 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import main.java.LogToFile;
+import main.java.board.Move;
 import main.java.board.Square;
-import main.java.pieces.Move;
 import main.java.pieces.Piece;
 import main.java.squareBoard.SquareBoard;
 
@@ -47,7 +47,7 @@ import main.java.squareBoard.SquareBoard;
  */
 public class MovesTable extends AbstractTableModel {
 
-	private ArrayList<String> move = new ArrayList<String>();
+	private ArrayList<String> move = new ArrayList<>();
 	private int columnsNum = 3;
 	private int rowsNum = 0;
 	private String[] names = new String[] { Settings.lang("white"), Settings.lang("black"), Settings.lang("blue") };
@@ -77,9 +77,7 @@ public class MovesTable extends AbstractTableModel {
 		this.tableModel.addTableModelListener(null);
 		this.scrollPane.setAutoscrolls(true);
 
-		this.game = game;// I think that this class should not have access to
-							// the game!
-
+		this.game = game;
 	}
 
 	@Override
@@ -164,7 +162,7 @@ public class MovesTable extends AbstractTableModel {
 		}
 
 	}
-	
+
 	public void addMove(Square begin, Square end, boolean registerInHistory, castling castlingMove,
 			boolean wasEnPassant, Piece promotedPiece) {
 
@@ -240,12 +238,14 @@ public class MovesTable extends AbstractTableModel {
 		}
 		if ((!this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerBlack).isChecked())
 				|| (this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerWhite).isChecked())) {// if
-																							// checked
+			// checked
 
-			if ((!this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerBlack).isCheckmatedOrStalemated() == 1)
-					|| (this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerWhite).isCheckmatedOrStalemated() == 1)) {// check
-																													// if
-																													// checkmated
+			if ((!this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerBlack)
+					.isCheckmatedOrStalemated() == 1)
+					|| (this.enterBlack && this.game.getChessboard().getKing(game.getSettings().playerWhite)
+							.isCheckmatedOrStalemated() == 1)) {// check
+				// if
+				// checkmated
 				locMove += "#";// check mate
 			} else {
 				locMove += "+";// check
@@ -359,7 +359,7 @@ public class MovesTable extends AbstractTableModel {
 	 *            String which in is capt player move
 	 * @return boolean 1 if the move is correct, else 0
 	 */
-	
+
 	static public boolean isMoveCorrect(String move) {
 		if (move.equals("O-O") || move.equals("O-O-O")) {
 			return true;
@@ -466,7 +466,7 @@ public class MovesTable extends AbstractTableModel {
 			try {
 				tempArray.add(moves.substring(from + 1, to).trim());
 			} catch (java.lang.StringIndexOutOfBoundsException exc) {
-				//System.out.println("error parsing file to load: " + exc);
+				// System.out.println("error parsing file to load: " + exc);
 				LogToFile.log(exc, "Error", "error parsing file to load: " + exc.getMessage());
 				break;
 			}
@@ -569,7 +569,7 @@ public class MovesTable extends AbstractTableModel {
 			} else {
 				xFrom = locMove.charAt(from) - 97;// from ASCII
 				yFrom = SquareBoard.bottom - (locMove.charAt(from + 1) - 49);// from
-																			// ASCII
+																				// ASCII
 				xTo = locMove.charAt(from + 3) - 97;// from ASCII
 				yTo = SquareBoard.bottom - (locMove.charAt(from + 4) - 49);// from
 																			// ASCII

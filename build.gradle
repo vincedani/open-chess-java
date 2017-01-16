@@ -45,6 +45,13 @@ apply plugin: 'eclipse'
 	   	compile group: 'com.lmax', name: 'disruptor', version: '3.2.0'
 	   	compile group: 'org.jdesktop', name: 'appframework', version: '1.0.3'
 	   	compile 'org.slf4j:slf4j-api:1.6.2'
+	   	
+	   	// https://mvnrepository.com/artifact/com.jgoodies/jgoodies-forms
+		compile group: 'com.jgoodies', name: 'jgoodies-forms', version: '1.9.0'
+		// https://mvnrepository.com/artifact/com.jgoodies/jgoodies-common
+		compile group: 'com.jgoodies', name: 'jgoodies-common', version: '1.8.1'
+		
+	   	
 	    
 	}
 
