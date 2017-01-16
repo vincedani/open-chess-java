@@ -44,7 +44,10 @@ No database configuration is required for this project.
 
 * How to run tests
 
-To be announced.
+Running of tests are possible in two ways:-
+
+1. Running the tests independently using IDE.
+2. Once the tests are placed in there respective folders then tests are executed automatically when the build are run.
 
 * Deployment instructions
 
