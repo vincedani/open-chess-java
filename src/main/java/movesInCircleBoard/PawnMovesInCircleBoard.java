@@ -4,11 +4,17 @@ import java.util.ArrayList;
 
 import main.java.board.IMove;
 import main.java.board.Square;
-import main.java.pieces.Pawn;
 import main.java.pieces.Piece;
 
 public class PawnMovesInCircleBoard implements IMove {
-	public void regularMoveBeforeCenter(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
+	
+	private boolean passedCenter = false;
+	
+	public void passCenter(){
+		passedCenter = true;
+	}
+	
+	private void regularMoveBeforeCenter(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int newY = piece.getPozY() + 1;
 		if (!piece.pieceBehaviour.isout(piece.getPozX(), newY)) {
 			Square moveSq = piece.getSquares(piece.getPozX(),newY);
@@ -23,7 +29,7 @@ public class PawnMovesInCircleBoard implements IMove {
 		}
 	}
 
-	public void passCenter(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
+	private void passCenter(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int newX = piece.getPozX() + 8;
 		if (newX >= 24) {
 			newX -= 24;
@@ -41,7 +47,7 @@ public class PawnMovesInCircleBoard implements IMove {
 		}
 	}
 
-	public void regularMoveAfterCenter(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
+	private void regularMoveAfterCenter(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int newY = piece.getPozY() - 1;
 
 		if (!piece.pieceBehaviour.isout(piece.getPozX(), newY)) {
@@ -58,7 +64,7 @@ public class PawnMovesInCircleBoard implements IMove {
 		}
 	}
 
-	public void captureMove(Piece piece, ArrayList<Square> list, int newX, int newY, boolean ignoreKing) {
+	private void captureMove(Piece piece, ArrayList<Square> list, int newX, int newY, boolean ignoreKing) {
 
 		if (!piece.pieceBehaviour.isout(newX, newY)) {
 			Square moveSq = piece.getSquares(newX,newY);
@@ -77,7 +83,7 @@ public class PawnMovesInCircleBoard implements IMove {
 
 	}
 
-	private void captureMovesBeforeCenter(Pawn piece, ArrayList<Square> list, boolean ignoreKing) {
+	private void captureMovesBeforeCenter(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getPozX(), y = piece.getPozY();
 		if (x == 0) {
 			captureMove(piece, list, x + 1, y + 1, ignoreKing);
@@ -92,7 +98,7 @@ public class PawnMovesInCircleBoard implements IMove {
 		}
 	}
 
-	private void captureMovesAfterCenter(Pawn piece, ArrayList<Square> list, boolean ignoreKing) {
+	private void captureMovesAfterCenter(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getPozX(), y = piece.getPozY();
 		if (x == 0) {
 			captureMove(piece, list, x + 1, y - 1, ignoreKing);
@@ -107,12 +113,12 @@ public class PawnMovesInCircleBoard implements IMove {
 		}
 	}
 	
-	public ArrayList<Square> getMoves(Piece piece1, boolean ignoreKing) {
-		Pawn piece = (Pawn) piece1;
+	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
+
 		ArrayList<Square> list = new ArrayList<>();
 
 		if (piece.getPozY() < 5) {
-			if (!piece.passedCenter) {
+			if (!passedCenter) {
 				regularMoveBeforeCenter(piece, list, ignoreKing);
 				captureMovesBeforeCenter(piece, list, ignoreKing);
 			} else {
@@ -120,7 +126,7 @@ public class PawnMovesInCircleBoard implements IMove {
 				captureMovesAfterCenter(piece, list, ignoreKing);
 			}
 		} else if (piece.getPozY() == 5) {
-			if (!piece.passedCenter) {
+			if (!passedCenter) {
 				passCenter(piece, list, ignoreKing);
 			} else {
 				passCenter(piece, list, ignoreKing);

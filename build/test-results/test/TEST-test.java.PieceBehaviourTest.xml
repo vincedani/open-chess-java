@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.PieceBehaviourTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-01-16T00:42:16" hostname="AZD-PC" time="0.035">
-  <properties/>
-  <testcase name="testSetPlayer" classname="test.java.PieceBehaviourTest" time="0.0"/>
-  <testcase name="testGetPlayer" classname="test.java.PieceBehaviourTest" time="0.001"/>
-  <testcase name="testIsout_0" classname="test.java.PieceBehaviourTest" time="0.001"/>
-  <testcase name="testIsout_1" classname="test.java.PieceBehaviourTest" time="0.001"/>
-  <testcase name="testIsout_2" classname="test.java.PieceBehaviourTest" time="0.03"/>
-  <testcase name="testIsout_3" classname="test.java.PieceBehaviourTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+<testsuite name="test.java.PieceBehaviourTest" tests="6"
+	skipped="0" failures="0" errors="0" timestamp="2017-01-16T00:42:16"
+	hostname="AZD-PC" time="0.035">
+	<properties />
+	<testcase name="testSetPlayer" classname="test.java.PieceBehaviourTest"
+		time="0.0" />
+	<testcase name="testGetPlayer" classname="test.java.PieceBehaviourTest"
+		time="0.001" />
+	<testcase name="testIsout_0" classname="test.java.PieceBehaviourTest"
+		time="0.001" />
+	<testcase name="testIsout_1" classname="test.java.PieceBehaviourTest"
+		time="0.001" />
+	<testcase name="testIsout_2" classname="test.java.PieceBehaviourTest"
+		time="0.03" />
+	<testcase name="testIsout_3" classname="test.java.PieceBehaviourTest"
+		time="0.001" />
+	<system-out><![CDATA[]]>
+	</system-out>
+	<system-err><![CDATA[]]>
+	</system-err>
 </testsuite>

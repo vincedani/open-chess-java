@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInCircleBoard.PawnMovesTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-01-16T00:42:15" hostname="AZD-PC" time="0.723">
-  <properties/>
-  <testcase name="testGetMoves_1" classname="test.java.movesInCircleBoard.PawnMovesTest" time="0.723"/>
-  <testcase name="testGetMoves_2" classname="test.java.movesInCircleBoard.PawnMovesTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[java.lang.NullPointerException
+<testsuite name="test.java.movesInCircleBoard.PawnMovesTest"
+	tests="2" skipped="0" failures="0" errors="0" timestamp="2017-01-16T00:42:15"
+	hostname="AZD-PC" time="0.723">
+	<properties />
+	<testcase name="testGetMoves_1" classname="test.java.movesInCircleBoard.PawnMovesTest"
+		time="0.723" />
+	<testcase name="testGetMoves_2" classname="test.java.movesInCircleBoard.PawnMovesTest"
+		time="0.0" />
+	<system-out><![CDATA[]]>
+	</system-out>
+	<system-err><![CDATA[java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImageFromHash(SunToolkit.java:725)
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)

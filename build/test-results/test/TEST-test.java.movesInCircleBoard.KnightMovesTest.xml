@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInCircleBoard.KnightMovesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-01-16T00:42:15" hostname="AZD-PC" time="0.004">
-  <properties/>
-  <testcase name="testGetMoves_LMove_1" classname="test.java.movesInCircleBoard.KnightMovesTest" time="0.0"/>
-  <testcase name="testGetMoves_LMove_2" classname="test.java.movesInCircleBoard.KnightMovesTest" time="0.001"/>
-  <testcase name="testGetMoves_LMove_3" classname="test.java.movesInCircleBoard.KnightMovesTest" time="0.001"/>
-  <testcase name="testGetMoves_LMove_4" classname="test.java.movesInCircleBoard.KnightMovesTest" time="0.0"/>
-  <testcase name="testGetMoves_LMove_5" classname="test.java.movesInCircleBoard.KnightMovesTest" time="0.0"/>
-  <testcase name="testGetMoves_LMove_6" classname="test.java.movesInCircleBoard.KnightMovesTest" time="0.0"/>
-  <testcase name="testGetMoves_LMove_7" classname="test.java.movesInCircleBoard.KnightMovesTest" time="0.0"/>
-  <testcase name="testGetMoves_LMove_8" classname="test.java.movesInCircleBoard.KnightMovesTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+<testsuite name="test.java.movesInCircleBoard.KnightMovesTest"
+	tests="8" skipped="0" failures="0" errors="0" timestamp="2017-01-16T00:42:15"
+	hostname="AZD-PC" time="0.004">
+	<properties />
+	<testcase name="testGetMoves_LMove_1" classname="test.java.movesInCircleBoard.KnightMovesTest"
+		time="0.0" />
+	<testcase name="testGetMoves_LMove_2" classname="test.java.movesInCircleBoard.KnightMovesTest"
+		time="0.001" />
+	<testcase name="testGetMoves_LMove_3" classname="test.java.movesInCircleBoard.KnightMovesTest"
+		time="0.001" />
+	<testcase name="testGetMoves_LMove_4" classname="test.java.movesInCircleBoard.KnightMovesTest"
+		time="0.0" />
+	<testcase name="testGetMoves_LMove_5" classname="test.java.movesInCircleBoard.KnightMovesTest"
+		time="0.0" />
+	<testcase name="testGetMoves_LMove_6" classname="test.java.movesInCircleBoard.KnightMovesTest"
+		time="0.0" />
+	<testcase name="testGetMoves_LMove_7" classname="test.java.movesInCircleBoard.KnightMovesTest"
+		time="0.0" />
+	<testcase name="testGetMoves_LMove_8" classname="test.java.movesInCircleBoard.KnightMovesTest"
+		time="0.0" />
+	<system-out><![CDATA[]]>
+	</system-out>
+	<system-err><![CDATA[]]>
+	</system-err>
 </testsuite>

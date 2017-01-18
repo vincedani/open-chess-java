@@ -6,7 +6,6 @@ import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
-import main.java.pieces.Rook;
 
 public class KingMovesInSquareBoard implements IMove {
 

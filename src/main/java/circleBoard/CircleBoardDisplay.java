@@ -16,10 +16,6 @@ import main.java.board.Square;
 
 public class CircleBoardDisplay extends ChessboardDisplay {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5579307748341547598L;
 	public Square activeSquare;
 	public Image upDownLabel;
 	public Image LeftRightLabel;

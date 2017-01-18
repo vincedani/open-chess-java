@@ -37,13 +37,8 @@ import main.java.game.Settings;
 import main.java.movesInSquareBoard.BishopMovesInSquareBoard;
 import main.java.movesInSquareBoard.KnightMovesInSquareBoard;
 import main.java.movesInSquareBoard.RookMovesInSquareBoard;
-import main.java.pieces.Bishop;
 import main.java.pieces.King;
-import main.java.pieces.Knight;
-import main.java.pieces.Pawn;
 import main.java.pieces.Piece;
-import main.java.pieces.Queen;
-import main.java.pieces.Rook;
 
 /**
  * Class to represent a SquareChessboard from 8x8 Squares for a two player Chess
@@ -69,8 +64,8 @@ public class SquareBoard implements IChessboard {
 	// ----------------------------
 	// For En passant:
 	// |-> Pawn whose in last turn moved two square
-	public static Pawn twoSquareMovedPawn = null;
-	public static Pawn twoSquareMovedPawn2 = null;
+	//public static Pawn twoSquareMovedPawn = null;
+	//public static Pawn twoSquareMovedPawn2 = null;
 
 	ChessboardLayout board_layout = new ChessboardLayout("chessboard.png", "sel_square.png", "able_square.png");
 	public SquareBoardInitialization initial;
@@ -228,8 +223,9 @@ public class SquareBoard implements IChessboard {
 	 * @param refresh
 	 *            chessboard, default: true
 	 */
+	/*
 	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) {
-
+		
 		castling wasCastling = MovesTable.castling.none;
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
@@ -405,6 +401,10 @@ public class SquareBoard implements IChessboard {
 		}
 	}/* endOf-move()- */
 
+
+public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) {
+	throw new UnsupportedOperationException();
+}
 	public boolean redo() {
 		return redo(true);
 	}

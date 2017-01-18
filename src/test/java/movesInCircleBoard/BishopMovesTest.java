@@ -1,26 +1,17 @@
 package test.java.movesInCircleBoard;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-
 import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import main.java.board.IMove;
-import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
-import main.java.game.MovesTable;
 import main.java.game.Player;
-import main.java.game.Settings;
-import main.java.movesInCircleBoard.BishopMovesInCircleBoard;
-import main.java.pieces.Bishop;
 
 public class BishopMovesTest {
 	ArrayList<IMove> moveBehaviour;
 	private Player p1;
-	private Bishop bishop;
 	CircleBoard board;
 	int x, y;
 

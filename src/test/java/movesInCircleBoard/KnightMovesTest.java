@@ -1,7 +1,7 @@
 package test.java.movesInCircleBoard;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
@@ -9,31 +9,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import main.java.board.IMove;
-import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
-import main.java.game.MovesTable;
+import main.java.circleBoard.CircleBoardInitialization;
 import main.java.game.Player;
-import main.java.game.Settings;
-import main.java.movesInCircleBoard.KnightMovesInCircleBoard;
-import main.java.movesInCircleBoard.RookMovesInCircleBoard;
-import main.java.pieces.Knight;
-import main.java.pieces.Rook;
 
 public class KnightMovesTest {
 	ArrayList<IMove> moveBehaviour;
 	private Player p1;
-	private Knight knight;
 	CircleBoard board;
 	int x,y;
 
 	@Before
 	public void setUp() throws Exception {
-		/*p1 = new Player("Player1", "white");
+		p1 = new Player("Player1", "white");
 		x = 3;
 		y = 3;
-		board = new CircleBoard(mock(Settings.class), mock(MovesTable.class));
-		knight = new Knight(board, p1, moveBehaviour);
-		board.getSquares()[x][y].setPiece(knight);*/
+		
+
+		board=  mock(CircleBoard.class);
+		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
+		when(board.getSquares()).thenReturn(board_squares.getSquares());
+		
 	}
 
 	//#1

@@ -64,7 +64,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 		moves = new MovesTable(this);
 		settings = new Settings();
-		chessboard = new CircleBoard(this.getSettings(), this.getMoves());
+		chessboard = new CircleBoard();
 
 		initializeChessboardPanel();
 		initializeClock();
@@ -262,7 +262,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 		switch (gameSettings.boardType) {
 		case circleBoard:
-			chessboard = new CircleBoard(gameSettings, this.getMoves());
+			chessboard = new CircleBoard();
 			break;
 		case squareBoard:
 			chessboard = new SquareBoard(gameSettings, this.getMoves());

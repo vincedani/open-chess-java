@@ -7,9 +7,11 @@ import main.java.board.IMove;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.BishopMovesInCircleBoard;
 import main.java.movesInCircleBoard.KnightMovesInCircleBoard;
+import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
 import main.java.movesInCircleBoard.RookMovesInCircleBoard;
 import main.java.movesInSquareBoard.BishopMovesInSquareBoard;
 import main.java.movesInSquareBoard.KnightMovesInSquareBoard;
+import main.java.movesInSquareBoard.PawnMovesInSquareBoard;
 import main.java.movesInSquareBoard.RookMovesInSquareBoard;
 
 public class PieceFactory {
@@ -91,4 +93,47 @@ public class PieceFactory {
 		return queen;
 	}
 
+	public static Piece createPawnInCircleBoard(IChessboard chessboard, Player player) {
+		Piece pawn= new Piece(chessboard, player, "Pawn"); 
+		pawn.symbol = "";
+		ArrayList<IMove> pawnMoves = new ArrayList<>();
+		pawnMoves.add(new PawnMovesInCircleBoard());
+		
+		pawn.moveBehaviour = pawnMoves;
+		
+		return pawn;
+	}
+	
+	public static Piece createPawnInSquareBoard(IChessboard chessboard, Player player) {
+		Piece pawn= new Piece(chessboard, player, "Pawn"); 
+		pawn.symbol = "";
+		ArrayList<IMove> pawnMoves = new ArrayList<>();
+		pawnMoves.add(new PawnMovesInSquareBoard());
+		
+		pawn.moveBehaviour = pawnMoves;
+		
+		return pawn;
+	}
+	
+	public static Piece createRookInCircleBoard(IChessboard chessboard, Player player) {
+		Piece rook = new Piece(chessboard, player, "Rook"); 
+		rook.symbol = "";
+		ArrayList<IMove> rookMoves = new ArrayList<>();
+		rookMoves.add(new RookMovesInCircleBoard());
+		
+		rook.moveBehaviour = rookMoves;
+		
+		return rook;
+	}
+	
+	public static Piece createRookInSquareBoard(IChessboard chessboard, Player player) {
+		Piece rook = new Piece(chessboard, player, "Rook"); 
+		rook.symbol = "";
+		ArrayList<IMove> rookMoves = new ArrayList<>();
+		rookMoves.add(new RookMovesInSquareBoard());
+		
+		rook.moveBehaviour = rookMoves;
+		
+		return rook;
+	}
 }

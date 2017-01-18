@@ -6,12 +6,8 @@ import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.KingMovesInCircleBoard;
-import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
-import main.java.movesInCircleBoard.RookMovesInCircleBoard;
 import main.java.pieces.King;
-import main.java.pieces.Pawn;
 import main.java.pieces.PieceFactory;
-import main.java.pieces.Rook;
 
 public class CircleBoardInitialization {
 	Square[][] squares;
@@ -66,10 +62,8 @@ public class CircleBoardInitialization {
 	private void setFigures4NewGame(int i, int j, Player player) {
 
 		// Rooks
-		ArrayList<IMove> rookMoves = new ArrayList<>();
-		rookMoves.add(new RookMovesInCircleBoard());
-		squares[i][j].setPiece(new Rook(board, player, rookMoves));
-		squares[i + 7][j].setPiece(new Rook(board, player, rookMoves));
+		squares[i][j].setPiece(PieceFactory.createRookInCircleBoard(board, player));
+		squares[i+7][j].setPiece(PieceFactory.createRookInCircleBoard(board, player));
 
 		// Knight
 		squares[i + 1][j].setPiece(PieceFactory.createKnightInCircleBoard(board, player));
@@ -107,9 +101,8 @@ public class CircleBoardInitialization {
 	private void setPawns4NewGame(int i, int j, Player player) {
 
 		for (int k = 0; k < 8; k++) {
-			ArrayList<IMove> pawnMoves = new ArrayList<>();
-			pawnMoves.add(new PawnMovesInCircleBoard());
-			squares[i + k][j].setPiece(new Pawn(board, player, pawnMoves));
+			
+			squares[i + k][j].setPiece(PieceFactory.createPawnInCircleBoard(board, player));
 		}
 	}
 

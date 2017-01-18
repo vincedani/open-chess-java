@@ -2,9 +2,8 @@ package main.java.gui;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -25,7 +24,6 @@ import main.java.JChessApp;
 import main.java.game.Game;
 import main.java.game.Player;
 import main.java.game.Settings;
-import java.awt.event.ActionListener;
 
 public class NewGameWindow extends JFrame {
 

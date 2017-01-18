@@ -1,8 +1,8 @@
 package test.java.movesInCircleBoard;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
@@ -12,16 +12,11 @@ import org.junit.Test;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
-import main.java.circleBoard.CircleBoardDisplay;
 import main.java.circleBoard.CircleBoardInitialization;
-import main.java.game.Game;
-import main.java.game.MovesTable;
 import main.java.game.Player;
-import main.java.game.Settings;
 import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
-import main.java.pieces.Pawn;
 import main.java.pieces.Piece;
-import main.java.pieces.PieceBehaviour;
+import main.java.pieces.PieceFactory;
 
 public class PawnMovesTest {
 	ArrayList<IMove> moveBehaviour;
@@ -35,18 +30,19 @@ public class PawnMovesTest {
 
 	// Case 1: Before Center
 	@Test
-	public final void testGetMoves_1() {
+	public final void testGetMovesBeforeCenter() {
 		int x = 3;
 		int y = 3;
 		CircleBoard board=  mock(CircleBoard.class);
 		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
 		
-		Pawn pawn = new Pawn(board, p1, moveBehaviour);
+		Piece pawn = PieceFactory.createPawnInCircleBoard(board, p1);
+		//Pawn pawn = new Pawn(board, p1, moveBehaviour);
 		board_squares.getSquares()[x][y].setPiece(pawn);
 		board.initial = board_squares;
-		PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
-		when(pieceBehaviour.isout(x, y+1)).thenReturn(false);
+		//PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
+		//when(pieceBehaviour.isout(x, y+1)).thenReturn(false);
 
 		ArrayList<Square> expected = new ArrayList<Square>();
 		Square expectedSq = board_squares.getSquares()[x][y+1];
@@ -56,31 +52,61 @@ public class PawnMovesTest {
 		ArrayList<Square> obtained = pm.getMoves(pawn, true);
 
 		assertTrue(obtained.containsAll(expected));
-		//assertTrue(expected!=null);
 
 	}
 
-	// Case 2: After Center
+	// Case 2: Circle Center
 	@Test
-	public final void testGetMoves_2() {
-		/*int x = 3;
+	public final void testGetMovesOnCircleCenter() {
+		int x = 3;
 		int y = 5;
 
-		CircleBoard board = new CircleBoard(mock(Settings.class), mock(MovesTable.class));
-		Pawn pawn = new Pawn(board, p1, moveBehaviour);
+		CircleBoard board=  mock(CircleBoard.class);
+		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
+		when(board.getSquares()).thenReturn(board_squares.getSquares());
+		
+		Piece pawn = PieceFactory.createPawnInCircleBoard(board, p1);
 		board.getSquares()[x][y].setPiece(pawn);
-		PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
-		when(pieceBehaviour.isout(x + 8, y)).thenReturn(false);
+		//PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
+		//when(pieceBehaviour.isout(x + 8, y)).thenReturn(false);
 
 		ArrayList<Square> expected = new ArrayList<Square>();
 		Square expectedSq = board.getSquares()[x + 8][y];
 		expected.add(expectedSq);
 
-		PawnMoves pm = new PawnMoves();
+		PawnMovesInCircleBoard pm = new PawnMovesInCircleBoard();
+		pm.passCenter();
 		ArrayList<Square> obtained = pm.getMoves(pawn, true);
 
-		assertTrue(obtained.containsAll(expected));*/
+		assertTrue(obtained.containsAll(expected));
 
 	}
 
+	// Case 3: After Center
+	@Test
+	public final void testGetMovesAfterCenter() {
+		int x = 3;
+		int y = 3;
+		CircleBoard board=  mock(CircleBoard.class);
+		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
+		when(board.getSquares()).thenReturn(board_squares.getSquares());
+		
+		Piece pawn = PieceFactory.createPawnInCircleBoard(board, p1);
+		//Pawn pawn = new Pawn(board, p1, moveBehaviour);
+		board_squares.getSquares()[x][y].setPiece(pawn);
+		board.initial = board_squares;
+		//PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
+		//when(pieceBehaviour.isout(x, y+1)).thenReturn(false);
+
+		ArrayList<Square> expected = new ArrayList<Square>();
+		Square expectedSq = board_squares.getSquares()[x][y-1];
+		expected.add(expectedSq);
+
+		PawnMovesInCircleBoard pm = new PawnMovesInCircleBoard();
+		pm.passCenter();
+		ArrayList<Square> obtained = pm.getMoves(pawn, true);
+
+		assertTrue(obtained.containsAll(expected));
+
+	}
 }

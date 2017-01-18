@@ -21,8 +21,9 @@ public class KingMovesInCircleBoard implements IMove {
 						continue;
 					} else {
 						if (piece.pieceBehaviour.checkPiece(i, j)) {// if square
-							//Check if will be checked or stalemated
-								list.add(sq);
+							//Check if will be checked
+							if(piece.isSafe(sq)){
+								list.add(sq);}
 
 						}
 					}

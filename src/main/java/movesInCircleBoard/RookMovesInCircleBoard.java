@@ -8,6 +8,12 @@ import main.java.pieces.Piece;
 
 public class RookMovesInCircleBoard implements IMove {
 
+	private boolean wasMoved = false;
+	
+	public void passCenter(){
+		wasMoved = true;
+	}
+	
 	private static void forwardVerticalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getPozX(), y = piece.getPozY();
 		for (int i = y + 1; i <= 5; i++) {// up

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.SquareTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-01-16T00:42:16" hostname="AZD-PC" time="0.015">
-  <properties/>
-  <testcase name="testgetPozX" classname="test.java.SquareTest" time="0.015"/>
-  <testcase name="testgetPozY" classname="test.java.SquareTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+<testsuite name="test.java.SquareTest" tests="2" skipped="0"
+	failures="0" errors="0" timestamp="2017-01-16T00:42:16" hostname="AZD-PC"
+	time="0.015">
+	<properties />
+	<testcase name="testgetPozX" classname="test.java.SquareTest"
+		time="0.015" />
+	<testcase name="testgetPozY" classname="test.java.SquareTest"
+		time="0.0" />
+	<system-out><![CDATA[]]>
+	</system-out>
+	<system-err><![CDATA[]]>
+	</system-err>
 </testsuite>

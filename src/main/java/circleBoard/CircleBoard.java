@@ -7,11 +7,10 @@ import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.IChessboard;
 import main.java.board.Square;
-import main.java.game.MovesTable;
 import main.java.game.Player;
-import main.java.game.Settings;
+import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
 import main.java.pieces.King;
-import main.java.pieces.Pawn;
+import main.java.pieces.Piece;
 
 /**
  * Class to represent a Circle Chessboard for a three player Chess game. It
@@ -20,20 +19,15 @@ import main.java.pieces.Pawn;
 
 public class CircleBoard implements IChessboard {
 
-	public static final int top = 0;
-	public static final int bottom = 7;
-
-	public MovesTable moves_history;
-
+	
 	ChessboardLayout board_layout = new ChessboardLayout("circle_chessboard.png", "sel_circle.png", "able_circle.png");
 	public CircleBoardInitialization initial;
 	private CircleBoardDisplay display;
 
-	public CircleBoard(Settings settings, MovesTable moves_history) {
+	public CircleBoard() {
 
 		initial = new CircleBoardInitialization(this);
 		display = new CircleBoardDisplay(null, null, new Point(0, 0), this);
-		this.moves_history = moves_history;
 	}
 
 	/**
@@ -123,11 +117,12 @@ public class CircleBoard implements IChessboard {
 	 */
 	public void move(Square begin, Square end) {
 		// Check if pawn passed the center
-		if (begin.piece instanceof Pawn) {
-			Pawn movedPawn = (Pawn) begin.piece;
-			if (movedPawn.getPozY() == 5 && end.getPozY() == 5)
-				movedPawn.passedCenter = true;
-		}
+		if (begin.piece.getName().equals("Pawn")) {
+			Piece movedPawn = begin.piece;
+			if (movedPawn.getPozY() == 5 && end.getPozY() == 5){
+				PawnMovesInCircleBoard pawnBeh = (PawnMovesInCircleBoard) movedPawn.getMoveBehaviour();
+				pawnBeh.passCenter();
+		}}
 		LogToFile.log(null, "INFO", begin.piece.getName()+" moved from "+ begin.getPozX()+","+begin.getPozY()+" to "+end.getPozX()+" , "+ end.getPozY() );
 		if(end.piece !=null){
 			LogToFile.log(null, "INFO", begin.piece.getName()+" "+ begin.piece.getPlayer().getColor()+" taked "+ end.piece.getName()+" "+ end.piece.getPlayer().getColor());

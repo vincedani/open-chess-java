@@ -48,7 +48,11 @@ public class Piece {
 	ArrayList<IMove> moveBehaviour;
 
 	
-	public Piece(IChessboard chessboard, Player player, String imagePath) {
+	public IMove getMoveBehaviour() {
+		return moveBehaviour.get(0);
+	}
+
+	public Piece(IChessboard chessboard, Player player, String name) {
 
 		this.setChessboard(chessboard);
 		this.setPlayer(player);
@@ -66,10 +70,9 @@ public class Piece {
 			imageColorPath = "-Blue.png";
 			break;
 		}
-		imagePath += imageColorPath;
-		
-		this.setName(this.getClass().getSimpleName());
-		this.setLayout(new PieceLayout(imagePath));
+		this.setName(name);
+		name += imageColorPath;
+		this.setLayout(new PieceLayout(name));
 		this.pieceBehaviour = new PieceBehaviour(chessboard, player);
 		this.display = new PieceDisplay(this);
 	}
