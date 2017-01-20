@@ -40,8 +40,6 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		LeftRightLabel = leftRightLabel;
 		this.topLeftPoint = topLeft;
 		this.board_layout = board.board_layout;
-		this.renderLabels = renderLabels;
-		this.upsideDown = upsideDown;
 		this.squares = board.initial.getSquares();
 		this.board = board;
 		activeSquare = null;
@@ -69,6 +67,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);
 		drawPieces(g);
 		drawHighlightedSquares(g2d);
+		
 
 	}/*--endOf-paint--*/
 

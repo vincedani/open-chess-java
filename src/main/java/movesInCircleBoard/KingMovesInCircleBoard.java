@@ -4,12 +4,37 @@ import java.util.ArrayList;
 
 import main.java.board.IMove;
 import main.java.board.Square;
+import main.java.circleBoard.CircleBoard;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
 
 public class KingMovesInCircleBoard implements IMove {
 
-	public void regularMove(Piece piece1, ArrayList<Square> list, int x, int y, boolean ignoreKing) {
+	/**
+	 * Method to check is the king is checked by an opponent
+	 * 
+	 * @param s
+	 *            Square where is a king
+	 * @return bool true if king is save, else returns false
+	 */
+	public boolean isSafe(CircleBoard board, Piece king, Square s) 
+	{
+		for (int i = 0; i < 24; i++) {
+			for (int j = 0; j < 6; j++) {
+				Piece boardPiece = board.getSquares()[i][j].piece;
+				if (boardPiece != null && boardPiece.getPlayer() != king.getPlayer()) {
+						ArrayList<Square> pieceMoves = boardPiece.allMoves(true);
+						if (pieceMoves.contains(s)) {
+							return false;
+						}
+					}
+				}
+			}
+		
+
+		return true;
+	}
+	private void regularMove(Piece piece1, ArrayList<Square> list, int x, int y, boolean ignoreKing) {
 		King piece = (King) piece1;
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {

@@ -504,7 +504,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 				LogToFile.log(null, "INFO", "Chessboard is blocked");
 			}
 		}
-		// chessboard.repaint();
 	}
 
 	public void componentResized(ComponentEvent e) {

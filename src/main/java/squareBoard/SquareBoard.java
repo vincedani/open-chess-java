@@ -24,6 +24,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import main.java.JChessApp;
+import main.java.LogToFile;
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.IChessboard;
@@ -46,12 +47,10 @@ import main.java.pieces.Piece;
  */
 public class SquareBoard implements IChessboard {
 
-	public static final int top = 0;
-	public static final int bottom = 7;
-
-	// public Graphics graph;
+	
 	ArrayList<Square> moves;
 	private Settings settings;
+	
 	// -------- for undo ----------
 	private Square undo1_sq_begin = null;
 	private Square undo1_sq_end = null;
@@ -61,6 +60,7 @@ public class SquareBoard implements IChessboard {
 	public Piece ifWasCastling;
 	public boolean breakCastling;
 	public MovesTable moves_history;
+	
 	// ----------------------------
 	// For En passant:
 	// |-> Pawn whose in last turn moved two square
@@ -81,10 +81,11 @@ public class SquareBoard implements IChessboard {
 	 */
 	public SquareBoard(Settings settings, MovesTable moves_history) {
 		this.settings = settings;
-		initial = new SquareBoardInitialization(settings.upsideDown, this);
-		display = new SquareBoardDisplay(null, null, new Point(0, 0), this);
 		this.moves_history = moves_history;
 
+		initial = new SquareBoardInitialization(settings.upsideDown, this);
+		display = new SquareBoardDisplay(null, null, new Point(0, 0), this);
+		
 	}/*--endOf-Chessboard--*/
 
 	/**
@@ -97,11 +98,9 @@ public class SquareBoard implements IChessboard {
 	 * @return reference to searched square
 	 */
 	public Square getSquare(int x, int y) {
-		if ((x > this.get_height()) || (y > this.get_widht())) // test if click
-																// is out of
-																// chessboard
+		if ((x > this.get_height()) || (y > this.get_widht())) 
 		{
-			System.out.println("click out of chessboard.");
+			LogToFile.log(null, "INFO", "click out of chessboard.");
 			return null;
 		}
 		x -= this.display.upDownLabel.getHeight(null);
@@ -425,7 +424,7 @@ public void move(Square begin, Square end, boolean refresh, boolean clearForward
 				this.move(this.initial.getSquares()[from.getPozX()][from.getPozY()],
 						this.initial.getSquares()[to.getPozX()][to.getPozY()], true, false);
 				if (first.getPromotedPiece() != null) {
-					Pawn pawn = (Pawn) this.initial.getSquares()[to.getPozX()][to.getPozY()].piece;
+					Piece pawn = this.initial.getSquares()[to.getPozX()][to.getPozY()].piece;
 					pawn.setSquare(null);
 
 					this.initial.getSquares()[to.getPozX()][to.getPozY()].piece = first.getPromotedPiece();
@@ -471,12 +470,12 @@ public void move(Square begin, Square end, boolean refresh, boolean clearForward
 						this.initial.getSquares()[end.getPozX() + 1][end.getPozY()].piece = null;
 					}
 					((King) moved).wasMotion = false;
-					((Rook) rook).setWasMotion(false);
+					rook.setWasMoved(false);
 					breakCastling = false;
 				} else if (moved.getName().equals("Rook")) {
-					((Rook) moved).setWasMotion(false);
+					(moved).setWasMoved(false);
 				} else if (moved.getName().equals("Pawn") && last.wasEnPassant()) {
-					Pawn pawn = (Pawn) last.getTakenPiece();
+					Piece pawn = last.getTakenPiece();
 					this.initial.getSquares()[end.getPozX()][begin.getPozY()].piece = pawn;
 					pawn.setSquare(this.initial.getSquares()[end.getPozX()][begin.getPozY()]);
 
@@ -492,7 +491,7 @@ public void move(Square begin, Square end, boolean refresh, boolean clearForward
 					Piece canBeTakenEnPassant = this.initial.getSquares()[oneMoveEarlier.getTo()
 							.getPozX()][oneMoveEarlier.getTo().getPozY()].piece;
 					if (canBeTakenEnPassant.getName().equals("Pawn")) {
-						this.twoSquareMovedPawn = (Pawn) canBeTakenEnPassant;
+						//this.twoSquareMovedPawn = (Pawn) canBeTakenEnPassant;
 					}
 				}
 
@@ -553,7 +552,7 @@ public void move(Square begin, Square end, boolean refresh, boolean clearForward
 		return null;
 	}
 
-	public Piece getTwoSquareMovedPawn() {
+	/*public Piece getTwoSquareMovedPawn() {
 		return twoSquareMovedPawn;
-	}
+	}*/
 }

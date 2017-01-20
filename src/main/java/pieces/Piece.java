@@ -46,6 +46,7 @@ public class Piece {
 	private PieceLayout layout;
 	private PieceDisplay display;
 	ArrayList<IMove> moveBehaviour;
+	private boolean wasMoved = false;
 
 	
 	public IMove getMoveBehaviour() {
@@ -72,7 +73,7 @@ public class Piece {
 		}
 		this.setName(name);
 		name += imageColorPath;
-		this.setLayout(new PieceLayout(name));
+		setLayout(new PieceLayout(name));
 		this.pieceBehaviour = new PieceBehaviour(chessboard, player);
 		this.display = new PieceDisplay(this);
 	}
@@ -121,23 +122,7 @@ public class Piece {
 	public void setPieceBehaviour(PieceBehaviour pieceBehaviour) {
 		this.pieceBehaviour = pieceBehaviour;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSymbol() {
-		return symbol;
-	}
-
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
-
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -154,16 +139,54 @@ public class Piece {
 		this.square = square;
 	}
 
+
+	public void draw(Graphics g) {
+		display.draw(g);
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the layout
+	 */
 	public PieceLayout getLayout() {
 		return layout;
 	}
 
+	/**
+	 * @param layout the layout to set
+	 */
 	public void setLayout(PieceLayout layout) {
 		this.layout = layout;
 	}
 
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		display.draw(g);
+	/**
+	 * @return the wasMoved
+	 */
+	public boolean wasMoved() {
+		return wasMoved;
+	}
+
+	/**
+	 * @param wasMoved the wasMoved to set
+	 */
+	public void setWasMoved(boolean wasMoved) {
+		this.wasMoved = wasMoved;
+	}
+
+	public String getSymbol() {
+		return this.symbol;
 	}
 }
