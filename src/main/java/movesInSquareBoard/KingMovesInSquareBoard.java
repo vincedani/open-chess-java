@@ -83,8 +83,8 @@ public class KingMovesInSquareBoard implements IMove {
 		ArrayList<Square> list = new ArrayList<>();
 		int x = piece.getPozX(), y = piece.getPozY();
 		regularMove(piece, list, x, y);
-		King king = (King) piece;
-		if (!king.wasMotion && !king.isChecked()) {
+		Piece king = piece;
+		if (king.wasMoved()) {
 			// check if king was not moved before
 			Piece tempPiece = king.getSquares(0, y).piece;
 			if (tempPiece != null && tempPiece.getName().equals("Rook")) {

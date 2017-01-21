@@ -33,7 +33,9 @@ import java.util.ArrayList;
 import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.board.Square;
+import main.java.circleBoard.CircleBoard;
 import main.java.game.Player;
+import main.java.squareBoard.SquareBoard;
 
 public class King extends Piece {
 
@@ -450,8 +452,17 @@ public class King extends Piece {
 	 */
 	public boolean isSafe(Square s) 
 	{
-		for (int i = 0; i < 24; i++) {
-			for (int j = 0; j < 6; j++) {
+		int nx=0, ny=0;
+		if (this.getChessboard() instanceof SquareBoard) {
+			nx=8; 
+			ny=8;
+		} else if (this.getChessboard() instanceof CircleBoard) {
+			nx=24; 
+			ny=6;
+		}
+		
+		for (int i = 0; i < nx; i++) {
+			for (int j = 0; j < ny; j++) {
 				Piece boardPiece = this.getSquares(i, j).piece;
 				if (boardPiece != null && boardPiece.getPlayer() != this.getPlayer()) {
 						ArrayList<Square> pieceMoves = boardPiece.allMoves(true);
@@ -470,7 +481,7 @@ public class King extends Piece {
 	 * Method to check will the king be safe after the move of the pieces in the
 	 * given squares
 	 * 
-	 * @param sqIsHere
+	 * @param sqIsHe	re
 	 *            the original square of the piece
 	 * @param sqWillBeThere
 	 *            the future square of the piece

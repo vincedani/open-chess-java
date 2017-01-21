@@ -17,14 +17,14 @@ public class KingMovesInCircleBoard implements IMove {
 	 *            Square where is a king
 	 * @return bool true if king is save, else returns false
 	 */
-	public boolean isSafe(CircleBoard board, Piece king, Square s) 
+	public boolean isSafe(CircleBoard board, Piece king) 
 	{
 		for (int i = 0; i < 24; i++) {
 			for (int j = 0; j < 6; j++) {
 				Piece boardPiece = board.getSquares()[i][j].piece;
 				if (boardPiece != null && boardPiece.getPlayer() != king.getPlayer()) {
 						ArrayList<Square> pieceMoves = boardPiece.allMoves(true);
-						if (pieceMoves.contains(s)) {
+						if (pieceMoves.contains(king.getSquare())) {
 							return false;
 						}
 					}
@@ -34,6 +34,32 @@ public class KingMovesInCircleBoard implements IMove {
 
 		return true;
 	}
+	
+	/**
+	 * Method to check will the king be safe after the move of the pieces in the
+	 * given squares
+	 * 
+	 * @param sqIsHere
+	 *            the original square of the piece
+	 * @param sqWillBeThere
+	 *            the future square of the piece
+	 * @return boolean true if king is save, else returns false
+	 */
+	public boolean willBeSafeAfterMove(CircleBoard board, Piece king, Square sqIsHere, Square sqWillBeThere) {
+		Piece tmp = sqWillBeThere.piece;
+		sqWillBeThere.piece = sqIsHere.piece; // move without redraw
+		sqIsHere.piece = null;
+		boolean ret;
+		
+		ret = isSafe(board, king);
+		
+		sqIsHere.piece = sqWillBeThere.piece;
+		sqWillBeThere.piece = tmp;
+
+		return ret;
+	}
+	
+	
 	private void regularMove(Piece piece1, ArrayList<Square> list, int x, int y, boolean ignoreKing) {
 		King piece = (King) piece1;
 		for (int i = x - 1; i <= x + 1; i++) {

@@ -9,7 +9,7 @@ import main.java.pieces.Piece;
 public class BishopMovesInCircleBoard implements IMove {
 
 	/**
-	 * Method returning the posible moves of the given piece
+	 * Method returning the possible moves of the given piece
 	 * 
 	 * @param Piece
 	 *            the instance of the piece to extract the possible moves
@@ -29,11 +29,10 @@ public class BishopMovesInCircleBoard implements IMove {
 		for (int h = x - 1, i = y + 1; !piece.pieceBehaviour.isout(h, i); --h, ++i) // left-up
 		{
 			if (piece.pieceBehaviour.checkPiece(h, i)) {
-				if (ignoreKing) {
-					list.add(piece.getSquares(h,i));
-				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(),
-						piece.getSquares(h,i))) {
-					list.add(piece.getSquares(h,i));
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i)) ) {
+					list.add(piece.getSquares(h, i));
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i))) {
+					list.add(piece.getSquares(h, i));
 				}
 
 				if (piece.pieceBehaviour.otherOwner(h, i)) {
@@ -60,10 +59,9 @@ public class BishopMovesInCircleBoard implements IMove {
 														// isn't piece
 			{
 				if (ignoreKing) {
-					list.add(piece.getSquares(h,i));
-				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(),
-						piece.getSquares(h,i))) {
-					list.add(piece.getSquares(h,i));
+					list.add(piece.getSquares(h, i));
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i))) {
+					list.add(piece.getSquares(h, i));
 				}
 
 				if (piece.pieceBehaviour.otherOwner(h, i)) {
@@ -91,10 +89,9 @@ public class BishopMovesInCircleBoard implements IMove {
 														// piece
 			{
 				if (ignoreKing) {
-					list.add(piece.getSquares(h,i));
-				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(),
-						piece.getSquares(h, i))) {
-					list.add(piece.getSquares(h,i));
+					list.add(piece.getSquares(h, i));
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i))) {
+					list.add(piece.getSquares(h, i));
 				}
 
 				if (piece.pieceBehaviour.otherOwner(h, i)) {
@@ -122,10 +119,9 @@ public class BishopMovesInCircleBoard implements IMove {
 														// isn't piece
 			{
 				if (ignoreKing) {
-					list.add(piece.getSquares(h,i));
-				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(),
-						piece.getSquares(h,i))) {
-					list.add(piece.getSquares(h,i));
+					list.add(piece.getSquares(h, i));
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i))) {
+					list.add(piece.getSquares(h, i));
 				}
 
 				if (piece.pieceBehaviour.otherOwner(h, i)) {
