@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import main.java.circleBoard.CircleBoard;
-import main.java.game.MovesTable;
 import main.java.game.Player;
 import main.java.game.Settings;
 import main.java.pieces.PieceBehaviour;

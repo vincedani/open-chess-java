@@ -11,7 +11,6 @@ import org.junit.Test;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
-import main.java.game.MovesTable;
 import main.java.game.Player;
 import main.java.game.Settings;
 import main.java.movesInCircleBoard.KingMovesInCircleBoard;

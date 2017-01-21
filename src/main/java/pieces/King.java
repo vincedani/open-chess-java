@@ -79,7 +79,7 @@ public class King extends Piece {
 
 		// 0:Nothing, 1:Checkmate, 2:Stalemate
 
-		if (this.allMoves(false).size() == 0) {
+		if (this.allMoves(false).isEmpty()) {
 			Piece boardPiece; // Piece in Board
 
 			for (int i = 0; i < 8; ++i) {
@@ -111,10 +111,19 @@ public class King extends Piece {
 		/*
 		 * returns: 0-nothing, 1-checkmate, 2-stalemate
 		 */
-		if (this.allMoves(false).size() == 0) {
+		int nx=0, ny=0;
+		if (this.getChessboard() instanceof SquareBoard) {
+			nx=8; 
+			ny=8;
+		} else if (this.getChessboard() instanceof CircleBoard) {
+			nx=24; 
+			ny=6;
+		}
+		
+		if (this.allMoves(false).isEmpty()) {
 			Piece boardPiece;
-			for (int i = 0; i < 24; ++i) {
-				for (int j = 0; j < 6; ++j) {
+			for (int i = 0; i < nx; ++i) {
+				for (int j = 0; j < ny; ++j) {
 					boardPiece = getSquares(i, j).piece;
 					if (boardPiece != null && boardPiece.getPlayer() == this.getPlayer()
 							&& allMovesSize(boardPiece, false) != 0) {
