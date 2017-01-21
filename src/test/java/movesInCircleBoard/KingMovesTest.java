@@ -1,7 +1,7 @@
 package test.java.movesInCircleBoard;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
@@ -9,29 +9,31 @@ import org.junit.Before;
 import org.junit.Test;
 
 import main.java.board.IMove;
-import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
+import main.java.circleBoard.CircleBoardInitialization;
 import main.java.game.Player;
-import main.java.game.Settings;
-import main.java.movesInCircleBoard.KingMovesInCircleBoard;
-import main.java.pieces.King;
+import main.java.pieces.Piece;
 
 
 public class KingMovesTest {
 	ArrayList<IMove> moveBehaviour;
 	private Player p1;
-	private King king;
 	CircleBoard board;
 	int x,y;
-
+	Piece king;
+	
 	@Before
 	public void setUp() throws Exception {
-		/*p1 = new Player("Player1", "white");
+		p1 = new Player("Player1", "white");
 		x = 3;
 		y = 3;
-		board = new CircleBoard(mock(Settings.class), mock(MovesTable.class));
-		king = new King(board, p1, moveBehaviour);
-		board.getSquares()[x][y].setPiece(king);*/
+
+		board=  mock(CircleBoard.class);
+		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
+		when(board.getSquares()).thenReturn(board_squares.getSquares());
+		
+		//king = PieceFactory.createKingInCircleBoard(board, p1);
+		//board.getSquares()[x][y].setPiece(king);
 	}
 	
 /* 	 Possible Moves for King
