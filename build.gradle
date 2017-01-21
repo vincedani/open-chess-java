@@ -1,5 +1,15 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+       classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6'
+	   clover 'com.cenqua.clover:clover:3.2.0'
+    }
+}
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'com.bmuschko.clover'
 
 	 task fatJar(type: Jar) {
 		manifest {
@@ -22,12 +32,10 @@ apply plugin: 'eclipse'
 
 	repositories {
 	    mavenCentral()
-	    jcenter()
 	}
 
 	dependencies {
-		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6'
-
+		
 	    testCompile group: 'junit', name: 'junit', version: '4.+'
 	    testCompile group: 'org.mockito', name: 'mockito-core', version: '1.+'
 	    
@@ -46,16 +54,10 @@ apply plugin: 'eclipse'
 		// https://mvnrepository.com/artifact/com.jgoodies/jgoodies-common
 		compile group: 'com.jgoodies', name: 'jgoodies-common', version: '1.8.1'
 		//compile 'com.bmuschko:gradle-clover-plugin:2.0.1'
-		clover 'com.cenqua.clover:clover:3.2.0'
+		
 	   	
 	    
 	}
-	apply plugin: 'groovy'
-	apply plugin: 'idea'
-	apply plugin: 'maven-publish'
-	apply plugin: 'com.jfrog.bintray'
-	apply plugin: 'com.bmuschko.clover'
-	
 
 	sourceSets {
 		main {
