@@ -38,11 +38,9 @@ public class PawnMovesTest {
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
 		
 		Piece pawn = PieceFactory.createPawnInCircleBoard(board, p1);
-		//Pawn pawn = new Pawn(board, p1, moveBehaviour);
+
 		board_squares.getSquares()[x][y].setPiece(pawn);
 		board.initial = board_squares;
-		//PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
-		//when(pieceBehaviour.isout(x, y+1)).thenReturn(false);
 
 		ArrayList<Square> expected = new ArrayList<Square>();
 		Square expectedSq = board_squares.getSquares()[x][y+1];
@@ -67,8 +65,6 @@ public class PawnMovesTest {
 		
 		Piece pawn = PieceFactory.createPawnInCircleBoard(board, p1);
 		board.getSquares()[x][y].setPiece(pawn);
-		//PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
-		//when(pieceBehaviour.isout(x + 8, y)).thenReturn(false);
 
 		ArrayList<Square> expected = new ArrayList<Square>();
 		Square expectedSq = board.getSquares()[x + 8][y];
@@ -92,11 +88,8 @@ public class PawnMovesTest {
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
 		
 		Piece pawn = PieceFactory.createPawnInCircleBoard(board, p1);
-		//Pawn pawn = new Pawn(board, p1, moveBehaviour);
 		board_squares.getSquares()[x][y].setPiece(pawn);
 		board.initial = board_squares;
-		//PieceBehaviour pieceBehaviour = mock(PieceBehaviour.class);
-		//when(pieceBehaviour.isout(x, y+1)).thenReturn(false);
 
 		ArrayList<Square> expected = new ArrayList<Square>();
 		Square expectedSq = board_squares.getSquares()[x][y-1];
