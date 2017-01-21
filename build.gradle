@@ -1,5 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'com.bmuschko.clover'
+
 
 	 task fatJar(type: Jar) {
 		manifest {
@@ -23,11 +25,12 @@ apply plugin: 'eclipse'
 
 	repositories {
 	     mavenCentral()
+	     jcenter()
 	}
 	//println "http.proxyHost = " + System.getProperty("http.proxyHost")
 	
 	dependencies {
-	
+		
 		compile group: 'org.jdesktop', name: 'appframework', version: '1.0+'
     	compile group: 'org.jdesktop', name: 'swing-worker', version: '1.1+'
     	testCompile group: 'junit', name: 'junit', version: '4.+' 
@@ -50,7 +53,8 @@ apply plugin: 'eclipse'
 		compile group: 'com.jgoodies', name: 'jgoodies-forms', version: '1.9.0'
 		// https://mvnrepository.com/artifact/com.jgoodies/jgoodies-common
 		compile group: 'com.jgoodies', name: 'jgoodies-common', version: '1.8.1'
-		
+		classpath 'com.bmuschko:gradle-clover-plugin:2.0.1'
+		clover 'com.cenqua.clover:clover:3.2.0'
 	   	
 	    
 	}
