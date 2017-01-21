@@ -39,7 +39,6 @@ import main.java.game.Settings;
 import main.java.gui.GUI;
 import main.java.gui.JChessAboutBox;
 import main.java.gui.NewGameWindow;
-import main.java.gui.NewGameWindow;
 import main.java.gui.PawnPromotionWindow;
 import main.java.gui.ThemeChooseWindow;
 

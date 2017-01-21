@@ -6,7 +6,6 @@ import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
-import main.java.pieces.Rook;
 
 public class KingMovesInSquareBoard implements IMove {
 
@@ -38,8 +37,8 @@ public class KingMovesInSquareBoard implements IMove {
 		King tempPiece = (King) piece1;
 		boolean canCastling = true;
 
-		Rook rook = (Rook) tempPiece.getSquares(0, y).piece;
-		if (!rook.wasMotion()) {
+		Piece rook = tempPiece.getSquares(0, y).piece;
+		if (!rook.wasMoved()) {
 			for (int i = x - 1; i > 0; i--) {// go
 												// left
 				if (tempPiece.getSquares(i,y).piece != null) {
@@ -61,8 +60,8 @@ public class KingMovesInSquareBoard implements IMove {
 		King piece = (King) piece1;
 		boolean canCastling = true;
 
-		Rook rook = (Rook) piece.getSquares(7,y).piece;
-		if (!rook.wasMotion()) {
+		Piece rook = piece.getSquares(7,y).piece;
+		if (!rook.wasMoved()) {
 			for (int i = x + 1; i < 7; i++) {// go
 												// left
 				if (piece.getSquares(i,y).piece != null) {
@@ -84,8 +83,8 @@ public class KingMovesInSquareBoard implements IMove {
 		ArrayList<Square> list = new ArrayList<>();
 		int x = piece.getPozX(), y = piece.getPozY();
 		regularMove(piece, list, x, y);
-		King king = (King) piece;
-		if (!king.wasMotion && !king.isChecked()) {
+		Piece king = piece;
+		if (king.wasMoved()) {
 			// check if king was not moved before
 			Piece tempPiece = king.getSquares(0, y).piece;
 			if (tempPiece != null && tempPiece.getName().equals("Rook")) {

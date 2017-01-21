@@ -14,13 +14,8 @@ import main.java.movesInSquareBoard.KingMovesInSquareBoard;
 import main.java.movesInSquareBoard.KnightMovesInSquareBoard;
 import main.java.movesInSquareBoard.PawnMovesInSquareBoard;
 import main.java.movesInSquareBoard.RookMovesInSquareBoard;
-import main.java.pieces.Bishop;
 import main.java.pieces.King;
-import main.java.pieces.Knight;
-import main.java.pieces.Pawn;
 import main.java.pieces.PieceFactory;
-import main.java.pieces.Queen;
-import main.java.pieces.Rook;
 
 public class SquareBoardInitialization {
 	private Square[][] squares;
@@ -106,10 +101,8 @@ public class SquareBoardInitialization {
 		}
 
 		// Rook
-		ArrayList<IMove> rookMoves = new ArrayList<>();
-		rookMoves.add(new RookMovesInSquareBoard());
-		getSquares()[0][i].setPiece(new Rook(board, player, rookMoves));
-		getSquares()[7][i].setPiece(new Rook(board, player, rookMoves));
+		getSquares()[0][i].setPiece(PieceFactory.createRookInSquareBoard(board, player));
+		getSquares()[7][i].setPiece(PieceFactory.createRookInSquareBoard(board, player));
 
 		// Knight
 		ArrayList<IMove> knightMoves = new ArrayList<>();
@@ -167,7 +160,7 @@ public class SquareBoardInitialization {
 		pawnMoves.add(new PawnMovesInSquareBoard());
 
 		for (int x = 0; x < 8; x++) {
-			getSquares()[x][i].setPiece(new Pawn(board, player, pawnMoves));
+			getSquares()[x][i].setPiece(PieceFactory.createPawnInSquareBoard(board, player));
 		}
 	}
 
