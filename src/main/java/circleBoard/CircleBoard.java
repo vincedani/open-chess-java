@@ -8,6 +8,7 @@ import main.java.board.ChessboardLayout;
 import main.java.board.IChessboard;
 import main.java.board.Square;
 import main.java.game.Player;
+import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
 import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
 import main.java.movesInCircleBoard.RookMovesInCircleBoard;
 import main.java.pieces.King;
@@ -133,12 +134,6 @@ public class CircleBoard implements IChessboard {
 		if (!begin.piece.wasMoved()) {
 			begin.piece.setWasMoved(true);
 		}
-		
-		if (end.piece != null && begin.piece.getName().equals("Rook")) {
-			System.out.println("The princess " + end.piece.getName() + " " + end.piece.getPlayer().getColor()
-					+ " is captured");
-			begin.piece = PieceFactory.releaseTheDragon(this, begin.piece.getPlayer());
-		}
 
 		LogToFile.log(null, "INFO", begin.piece.getName() + " moved from " + begin.getPozX() + "," + begin.getPozY()
 				+ " to " + end.getPozX() + " , " + end.getPozY());
@@ -148,11 +143,41 @@ public class CircleBoard implements IChessboard {
 					+ end.piece.getName() + " " + end.piece.getPlayer().getColor());
 
 		}
-		begin.piece.setSquare(end);// set square of piece to ending
-		end.piece = begin.piece;// for ending square set piece from beginning
-								// square
 
-		begin.piece = null;// make null piece for beginning square
+		if (end.piece != null && begin.piece.getName().equals("Rook")) {
+			System.out.println(
+					"The princess " + end.piece.getName() + " " + end.piece.getPlayer().getColor() + " is captured");
+			end.piece = PieceFactory.releaseTheDragon(this, begin.piece.getPlayer());
+			end.piece.setSquare(end);
+			begin.piece = null;
+		} else if (begin.piece.getName().equals("Dragon") && end.piece != null) {
+			Piece dragon = begin.piece;
+			DragonMovesInCircleBoard dragonBeh = (DragonMovesInCircleBoard) dragon.getMoveBehaviour();
+			dragonBeh.increaseFireLoader();
+
+			end.piece = null;
+
+			if (dragonBeh.getFireLoader() == 4) {
+				System.out.println("Nobody defeated the dragon!");
+				begin.piece = PieceFactory.createRookInCircleBoard(this, begin.piece.getPlayer());
+				begin.piece.setSquare(begin);
+			}
+		} else if (end.piece!=null && end.piece.getName().equals("Dragon")) {
+			Piece warrior = begin.piece;
+			System.out.println("YOU defeated the dragon! Your princess is now a queen");
+			warrior.setSquare(end);
+			end.piece = warrior;
+
+			begin.piece = PieceFactory.createQueenInCircleBoard(this, begin.piece.getPlayer());
+			begin.piece.setSquare(begin);
+		}else {
+			begin.piece.setSquare(end);// set square of piece to ending
+			end.piece = begin.piece;// for ending square set piece from
+									// beginning
+									// square
+
+			begin.piece = null;// make null piece for beginning square
+		}
 		this.unselect();// unselect square
 		display.repaint();
 

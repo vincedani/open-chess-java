@@ -100,16 +100,20 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			fileW = new FileWriter(file);
 		} catch (java.io.IOException exc) {
-			// System.err.println("error creating fileWriter: " + exc);
+			System.err.println("error creating fileWriter: " + exc);
 			LogToFile.log(exc, "Error", "error creating fileWriter: " + exc.getMessage());
 			JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file") + ": " + exc);
 			return;
 		}
-		String str = new String("");
-		String info = new String("[Event \"Game\"]\n[Date \"" + Calendar.YEAR + "." + Calendar.MONTH + 1 + "."
-				+ Calendar.DAY_OF_MONTH + "\"]\n" + "[White \"" + this.getSettings().playerWhite.name + "\"]\n[Black \""
-				+ this.getSettings().playerBlack.name + "\"]\n\n");
-		str += info;
+		
+		String str = "[Event \"Game\"]\n[Date \"" + Calendar.YEAR + "." + Calendar.MONTH + 1 + "."
+				+ Calendar.DAY_OF_MONTH + "\"]" ;
+		
+		for(Player p :this.getSettings().players){
+			str+="\n["+p.getColor()+" \"" + p.name + "\"]";
+					
+		}
+	
 		try {
 			fileW.write(str);
 			fileW.flush();
