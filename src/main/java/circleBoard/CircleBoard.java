@@ -172,10 +172,7 @@ public class CircleBoard implements IChessboard {
 			begin.piece.setSquare(begin);
 		}else {
 			begin.piece.setSquare(end);// set square of piece to ending
-			end.piece = begin.piece;// for ending square set piece from
-									// beginning
-									// square
-
+			end.piece = begin.piece;// for ending square set piece from beginning square
 			begin.piece = null;// make null piece for beginning square
 		}
 		this.unselect();// unselect square

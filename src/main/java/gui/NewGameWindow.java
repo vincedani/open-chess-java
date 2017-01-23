@@ -151,7 +151,7 @@ public class NewGameWindow extends JFrame {
 						Game newGUI = JChessApp.getJcv().addNewTab(name1 + " vs. " + name2 + " vs. " + name3);
 						Settings gameSettings = new Settings(players, Settings.boardTypes.circleBoard,
 								Settings.gameTypes.local);
-						newGUI.newGameV2(gameSettings);
+						newGUI.newGame(gameSettings);
 						
 						NewGameWindow.this.dispose();
 					}
@@ -175,7 +175,7 @@ public class NewGameWindow extends JFrame {
 						Game newGUI = JChessApp.getJcv().addNewTab(name1 + " vs. " + name2);
 						Settings gameSettings = new Settings(players, Settings.boardTypes.squareBoard,
 								Settings.gameTypes.local);
-						newGUI.newGameV2(gameSettings);
+						newGUI.newGame(gameSettings);
 						newGUI.getChessboard().getDisplay().repaint();
 					}
 				} else {
