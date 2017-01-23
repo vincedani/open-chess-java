@@ -7,11 +7,11 @@ import main.java.board.Square;
 import main.java.pieces.Piece;
 
 public class KnightMovesInSquareBoard implements IMove {
-	public static void LMove(Piece piece, int newX, int newY, ArrayList<Square> list) {
+	public static void LMove(Piece piece, int newX, int newY, ArrayList<Square> list, boolean ignoreKing) {
 
 		if (!piece.pieceBehaviour.isout(newX, newY) && piece.pieceBehaviour.checkPiece(newX, newY)) {
 			Square newMove = piece.getSquares(newX,newY);
-			if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
+			if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 				list.add(newMove);
 			}
 		}
@@ -25,49 +25,49 @@ public class KnightMovesInSquareBoard implements IMove {
 		newX = piece.getPozX() - 2;
 		newY = piece.getPozY() + 1;
 
-		LMove(piece, newX, newY, list);
+		LMove(piece, newX, newY, list, ignoreKing);
 
 		// 2
 		newX = piece.getPozX() - 1;
 		newY = piece.getPozY() + 2;
 
-		LMove(piece, newX, newY, list);
+		LMove(piece, newX, newY, list, ignoreKing);
 
 		// 3
 		newX = piece.getPozX() + 1;
 		newY = piece.getPozY() + 2;
 
-		LMove(piece, newX, newY, list);
+		LMove(piece, newX, newY, list, ignoreKing);
 
 		// 4
 		newX = piece.getPozX() + 2;
 		newY = piece.getPozY() + 1;
 
-		LMove(piece, newX, newY, list);
+		LMove(piece, newX, newY, list, ignoreKing);
 
 		// 5
 		newX = piece.getPozX() + 2;
 		newY = piece.getPozY() - 1;
 
-		LMove(piece, newX, newY, list);
+		LMove(piece, newX, newY, list, ignoreKing);
 
 		// 6
 		newX = piece.getPozX() + 1;
 		newY = piece.getPozY() - 2;
 
-		LMove(piece, newX, newY, list);
+		LMove(piece, newX, newY, list, ignoreKing);
 
 		// 7
 		newX = piece.getPozX() - 1;
 		newY = piece.getPozY() - 2;
 
-		LMove(piece, newX, newY, list);
+		LMove(piece, newX, newY, list, ignoreKing);
 
 		// 8
 		newX = piece.getPozX() - 2;
 		newY = piece.getPozY() - 1;
 
-		LMove(piece, newX, newY, list);
+		LMove(piece, newX, newY, list, ignoreKing);
 
 		return list;
 	}

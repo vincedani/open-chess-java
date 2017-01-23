@@ -9,7 +9,7 @@ import main.java.squareBoard.SquareBoard;
 
 public class PawnMovesInSquareBoard implements IMove {
 
-	public void regularMove(Piece piece, ArrayList<Square> list, int i) {
+	public void regularMove(Piece piece, ArrayList<Square> list, int i, boolean ignoreKing) {
 		int newY = 0;
 		if (piece.getPlayer().isGoDown()) {// check if player "go" down or up
 			newY = piece.getPozY() + i;// if yes, change value
@@ -21,14 +21,14 @@ public class PawnMovesInSquareBoard implements IMove {
 		if (!piece.pieceBehaviour.isout(piece.getPozX(), newY)) {
 			Square moveSq = piece.getSquares(piece.getPozX(),newY);
 
-			if (moveSq.piece == null && piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
+			if (moveSq.piece == null && (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq))) {
 				list.add(moveSq);
 
 			}
 		}
 	}
 
-	public void captureMove(Piece piece, ArrayList<Square> list, int newX) {
+	public void captureMove(Piece piece, ArrayList<Square> list, int newX, boolean ignoreKing) {
 		int newY = 0;
 		if (piece.getPlayer().isGoDown()) {// check if player "go" down or up
 			newY = piece.getPozY() + 1;// if yes, change value
@@ -40,7 +40,7 @@ public class PawnMovesInSquareBoard implements IMove {
 			Square moveSq = piece.getSquares(newX,newY);
 			if (moveSq.piece != null) {// check if can hit left
 				if (piece.getPlayer() != moveSq.piece.getPlayer() && !moveSq.piece.getName().equals("King")) {
-					if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
+					if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
 						list.add(moveSq);
 					}
 				}
@@ -49,7 +49,7 @@ public class PawnMovesInSquareBoard implements IMove {
 
 	}
 
-	public void enPassantMove(Piece piece, ArrayList<Square> list, int newX, int i) {
+	public void enPassantMove(Piece piece, ArrayList<Square> list, int newX, int i, boolean ignoreKing) {
 		int newY = piece.getPozY();
 		if (!piece.pieceBehaviour.isout(newX, newY + i)) {
 			Square attSq = piece.getSquares(newX,newY);
@@ -59,7 +59,7 @@ public class PawnMovesInSquareBoard implements IMove {
 					&& attSq == chessboard.getTwoSquareMovedPawn().getSquare()) {
 				// check if can hit left
 				if (piece.getPlayer() != attSq.piece.getPlayer() && !attSq.piece.getName().equals("King")) {
-					if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
+					if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), moveSq)) {
 						list.add(moveSq);
 
 					}
@@ -70,18 +70,18 @@ public class PawnMovesInSquareBoard implements IMove {
 
 	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
-		regularMove(piece, list, 1);
+		regularMove(piece, list, 1, ignoreKing);
 		if ((piece.getPlayer().isGoDown() && piece.getPozY() == 1)
 				|| (!piece.getPlayer().isGoDown() && piece.getPozY() == 6)) {
-			regularMove(piece, list, 2);
+			regularMove(piece, list, 2, ignoreKing);
 		}
 
-		captureMove(piece, list, piece.getPozX() - 1);
-		enPassantMove(piece, list, piece.getPozX() - 1, -1);
+		captureMove(piece, list, piece.getPozX() - 1, ignoreKing);
+		enPassantMove(piece, list, piece.getPozX() - 1, -1, ignoreKing);
 
 		// right
-		captureMove(piece, list, piece.getPozX() + 1);
-		enPassantMove(piece, list, piece.getPozX() + 1, 1);
+		captureMove(piece, list, piece.getPozX() + 1, ignoreKing);
+		enPassantMove(piece, list, piece.getPozX() + 1, 1, ignoreKing);
 
 		return list;
 	}

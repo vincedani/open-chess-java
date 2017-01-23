@@ -8,14 +8,14 @@ import main.java.pieces.Piece;
 
 public class RookMovesInSquareBoard implements IMove {
 
-	private static void forwardVerticalMoves(Piece piece, ArrayList<Square> list) {
+	private static void forwardVerticalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getPozX(), y = piece.getPozY();
 		for (int i = y + 1; i <= 7; i++) {// up
 
 			if (piece.pieceBehaviour.checkPiece(x, i)) {
 				Square newMove = piece.getSquares(x,i);
 
-				if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);
 				}
 
@@ -30,7 +30,7 @@ public class RookMovesInSquareBoard implements IMove {
 		}
 	}
 
-	private static void backwardVerticalMoves(Piece piece, ArrayList<Square> list) {
+	private static void backwardVerticalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getPozX(), y = piece.getPozY();
 		for (int i = y - 1; i >= 0; i--) {// down
 
@@ -39,7 +39,7 @@ public class RookMovesInSquareBoard implements IMove {
 
 				Square newMove = piece.getSquares(x,i);
 
-				if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);
 				}
 
@@ -53,7 +53,7 @@ public class RookMovesInSquareBoard implements IMove {
 		}
 	}
 
-	private static void rightHorizontalMoves(Piece piece, ArrayList<Square> list) {
+	private static void rightHorizontalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getPozX(), y = piece.getPozY();
 		for (int i = x + 1; i <= 7; ++i) {// right
 
@@ -62,7 +62,7 @@ public class RookMovesInSquareBoard implements IMove {
 
 				Square newMove = piece.getSquares(i,y);
 
-				if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);
 				}
 
@@ -76,19 +76,14 @@ public class RookMovesInSquareBoard implements IMove {
 		}
 	}
 
-	private static void leftHorizontalMoves(Piece piece, ArrayList<Square> list) {
+	private static void leftHorizontalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getPozX(), y = piece.getPozY();
 		for (int i = x - 1; i >= 0; --i) {// left
 
 			if (piece.pieceBehaviour.checkPiece(i, piece.getPozY())) {// if
-																					// on
-																					// this
-																					// square
-																					// isn't
-																					// piece
 				Square newMove = piece.getSquares(i,y);
 
-				if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);
 				}
 
@@ -104,10 +99,10 @@ public class RookMovesInSquareBoard implements IMove {
 
 	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
-		forwardVerticalMoves(piece, list);
-		backwardVerticalMoves(piece, list);
-		leftHorizontalMoves(piece, list);
-		rightHorizontalMoves(piece, list);
+		forwardVerticalMoves(piece, list, ignoreKing);
+		backwardVerticalMoves(piece, list, ignoreKing);
+		leftHorizontalMoves(piece, list, ignoreKing);
+		rightHorizontalMoves(piece, list, ignoreKing);
 
 		return list;
 	}

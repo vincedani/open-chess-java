@@ -1,5 +1,6 @@
 package test.java.movesInCircleBoard;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -9,153 +10,74 @@ import org.junit.Before;
 import org.junit.Test;
 
 import main.java.board.IMove;
+import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.circleBoard.CircleBoardInitialization;
 import main.java.game.Player;
+import main.java.movesInCircleBoard.KingMovesInCircleBoard;
+import main.java.pieces.King;
 import main.java.pieces.Piece;
-
 
 public class KingMovesTest {
 	ArrayList<IMove> moveBehaviour;
 	private Player p1;
 	CircleBoard board;
-	int x,y;
 	Piece king;
-	
+	int x = 0;
+	int y = 0;
+
 	@Before
 	public void setUp() throws Exception {
 		p1 = new Player("Player1", "white");
-		x = 3;
-		y = 3;
 
-		board=  mock(CircleBoard.class);
+		board = mock(CircleBoard.class);
 		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
-		
-		//king = PieceFactory.createKingInCircleBoard(board, p1);
-		//board.getSquares()[x][y].setPiece(king);
-	}
-	
-/* 	 Possible Moves for King
-	 * |1|2|3| 
-	 * |8| |4| 
-	 * |7|6|5|
-*/
-	
-	//#1
-	@Test
-	public final void testGetMoves_1() {
 
-		/*ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x-1][y + 1];
+		ArrayList<IMove> kingMoves = new ArrayList<>();
+		kingMoves.add(new KingMovesInCircleBoard());
+		king = new King(board, p1, kingMoves);
+		board.getSquares()[x][y].setPiece(king);
+	}
+
+	// #1
+	@Test
+	public final void testBoundariesCircleBoard() {
+
+		ArrayList<Square> expected = new ArrayList<Square>();
+
+		Square expectedSq = board.getSquares()[1][0];
 		expected.add(expectedSq);
 
-		KingMoves km = new KingMoves();
+		IMove km = new KingMovesInCircleBoard();
 		ArrayList<Square> obtained = km.getMoves(king, true);
 
-		assertTrue(obtained.containsAll(expected));*/
+		assertTrue(obtained.containsAll(expected));
 
 	}
 
-	//#2
+	// #2
 	@Test
-	public final void testGetMovese_2() {
-		/*ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x][y + 1];
-		expected.add(expectedSq);
+	public final void testMovesInCircleBoard() {
+		int x = 3;
+		int y = 3;
 
-		KingMoves km = new KingMoves();
+		ArrayList<Square> expected = new ArrayList<Square>();
+		board.getSquares()[x][y].setPiece(king);
+
+		expected.add(board.getSquares()[x	 ][y + 1]);
+		expected.add(board.getSquares()[x	 ][y - 1]);
+		expected.add(board.getSquares()[x + 1][y + 1]);
+		expected.add(board.getSquares()[x + 1][y - 1]);
+		expected.add(board.getSquares()[x - 1][y + 1]);
+		expected.add(board.getSquares()[x - 1][y - 1]);
+		expected.add(board.getSquares()[x + 1][y	]);
+		expected.add(board.getSquares()[x - 1][y	]);
+
+		IMove km = new KingMovesInCircleBoard();
 		ArrayList<Square> obtained = km.getMoves(king, true);
 
-		assertTrue(obtained.containsAll(expected));*/
+		assertTrue(obtained.containsAll(expected));
 	}
 
-	//#3
-	@Test
-	public final void testGetMoves_3() {
-		/*ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x+1][y + 1];
-		expected.add(expectedSq);
-
-		KingMoves km = new KingMoves();
-		ArrayList<Square> obtained = km.getMoves(king, true);
-
-		assertTrue(obtained.containsAll(expected));*/
-	}
-	
-	//#4
-	@Test
-	public final void testGetMoves_4() {
-		/*ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x+1][y];
-		expected.add(expectedSq);
-
-		KingMoves km = new KingMoves();
-		ArrayList<Square> obtained = km.getMoves(king, true);
-
-		assertTrue(obtained.containsAll(expected));*/
-	}
-	
-	//#5
-	@Test
-	public final void testGetMoves_5() {
-		/*ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x+1][y- 1];
-		expected.add(expectedSq);
-
-		KingMoves km = new KingMoves();
-		ArrayList<Square> obtained = km.getMoves(king, true);
-
-		assertTrue(obtained.containsAll(expected));*/
-
-	}
-	
-	//#6
-	@Test
-	public final void testGetMoves_6() {
-		/*ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x][y - 1];
-		expected.add(expectedSq);
-
-		KingMoves km = new KingMoves();
-		ArrayList<Square> obtained = km.getMoves(king, true);
-
-		assertTrue(obtained.containsAll(expected));*/
-
-	}
-	
-	//#7
-	@Test
-	public final void testGetMoves_7() {
-		/*ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x-1][y - 1];
-		expected.add(expectedSq);
-
-		KingMoves km = new KingMoves();
-		ArrayList<Square> obtained = km.getMoves(king, true);
-
-		assertTrue(obtained.containsAll(expected));*/
-
-	}
-
-	//#8
-	@Test
-	public final void testGetMoves_8() {
-		/*ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x-1][y];
-		expected.add(expectedSq);
-
-		KingMoves km = new KingMoves();
-		ArrayList<Square> obtained = km.getMoves(king, true);
-
-		assertTrue(obtained.containsAll(expected));*/
-	}
 }
