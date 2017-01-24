@@ -41,7 +41,6 @@ import main.java.gui.GUI;
 import main.java.gui.JChessAboutBox;
 import main.java.gui.NewGameWindow;
 import main.java.gui.PawnPromotionWindow;
-import main.java.gui.ThemeChooseWindow;
 
 /**
  * The application's main frame.
