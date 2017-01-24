@@ -2,32 +2,41 @@ package main.java.movesInCircleBoard;
 
 import java.util.ArrayList;
 
+import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.Piece;
 
-public class DragonMovesInCircleBoard {
+public class DragonMovesInCircleBoard implements IMove {
 
-	private int counter = 5;
 	private int fireLoader = 1;
 	
-	public void decreaseCounter(){
-		counter--;
+	public int getFireLoader() {
+		return fireLoader;
 	}
-	
+
+	public void increaseFireLoader(){
+		fireLoader++;
+	}
 	
 	private void regularMove(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getPozX(), y = piece.getPozY();
 		for (int i = x - fireLoader; i <= x + fireLoader; i++) {
 			for (int j = y - fireLoader; j <= y + fireLoader; j++) {
-				if (!piece.pieceBehaviour.isout(i, j)) {// out of bounds
+				int posi = i;
+				if(posi<0){
+					posi+=24;
+				}else if(posi>23){
+					posi-=24;
+				}
+				if (!piece.pieceBehaviour.isout(posi, j)) {// out of bounds
 														// protection
-					Square sq = piece.getSquares(i, j);
+					Square sq = piece.getSquares(posi, j);
 					if (piece.getSquare() == sq) {// if we're checking square on
 													// which is King
 						continue;
 					} else {
-						Square moveSq = piece.getSquares(i, j);
-						if (moveSq.piece!=null && piece.pieceBehaviour.otherOwner(i, j)) {
+						Square moveSq = piece.getSquares(posi, j);
+						if (moveSq.piece!=null && piece.pieceBehaviour.otherOwner(posi, j)&& !moveSq.piece.getName().equals("King") ) {
 								list.add(sq);}
 						}
 					}

@@ -474,11 +474,14 @@ public class King extends Piece {
 			for (int j = 0; j < ny; j++) {
 				Piece boardPiece = this.getSquares(i, j).piece;
 				if (boardPiece != null && boardPiece.getPlayer() != this.getPlayer()) {
+					if(boardPiece.getName().equals("Dragon")){
+						continue;
+					}else{
 						ArrayList<Square> pieceMoves = boardPiece.allMoves(true);
 						if (pieceMoves.contains(s)) {
 							return false;
 						}
-					}
+					}}
 				}
 			}
 		

@@ -6,6 +6,7 @@ import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.BishopMovesInCircleBoard;
+import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
 import main.java.movesInCircleBoard.KnightMovesInCircleBoard;
 import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
 import main.java.movesInCircleBoard.RookMovesInCircleBoard;
@@ -153,7 +154,7 @@ public class PieceFactory {
 		Piece dragon = new Piece(chessboard, player, "Dragon");
 		dragon.symbol = "D";
 		ArrayList<IMove> dragonMoves = new ArrayList<>();
-		dragonMoves.add(new BishopMovesInCircleBoard());
+		dragonMoves.add(new DragonMovesInCircleBoard());
 
 		dragon.moveBehaviour = dragonMoves;
 

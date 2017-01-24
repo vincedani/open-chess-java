@@ -100,16 +100,20 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		try {
 			fileW = new FileWriter(file);
 		} catch (java.io.IOException exc) {
-			// System.err.println("error creating fileWriter: " + exc);
+			System.err.println("error creating fileWriter: " + exc);
 			LogToFile.log(exc, "Error", "error creating fileWriter: " + exc.getMessage());
 			JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file") + ": " + exc);
 			return;
 		}
-		String str = new String("");
-		String info = new String("[Event \"Game\"]\n[Date \"" + Calendar.YEAR + "." + Calendar.MONTH + 1 + "."
-				+ Calendar.DAY_OF_MONTH + "\"]\n" + "[White \"" + this.getSettings().playerWhite.name + "\"]\n[Black \""
-				+ this.getSettings().playerBlack.name + "\"]\n\n");
-		str += info;
+		
+		String str = "[Event \"Game\"]\n[Date \"" + Calendar.YEAR + "." + Calendar.MONTH + 1 + "."
+				+ Calendar.DAY_OF_MONTH + "\"]" ;
+		
+		for(Player p :this.getSettings().players){
+			str+="\n["+p.getColor()+" \"" + p.name + "\"]";
+					
+		}
+	
 		try {
 			fileW.write(str);
 			fileW.flush();
@@ -165,11 +169,11 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		locSetts.gameMode = Settings.gameModes.loadedGame;
 		locSetts.gameType = Settings.gameTypes.local;
 
-		newGUI.newGame();
+		//newGUI.newGame();
 		// newGUI.blockedChessboard = true;
 		//newGUI.getMoves().setMoves(tempStr);
 		// newGUI.blockedChessboard = false;
-		newGUI.chessboard.getDisplay().repaint();
+		//newGUI.chessboard.getDisplay().repaint();
 	}
 
 	/**
@@ -231,23 +235,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * Method to Start new game
 	 *
 	 */
-	public void newGame() {
-		chessboard.setPieces(
-				new Player[] { getSettings().playerWhite, getSettings().playerBlack, getSettings().playerBlue });
 
-		activePlayer = getSettings().playerWhite;
-		if (activePlayer.playerType != Player.playerTypes.localUser) {
-			this.blockedChessboard = true;
-		}
-		Game activeGame = JChessApp.getJcv().getActiveTabGame();
 
-		activeGame.chessboard.getDisplay().repaint();
-		activeGame.repaint();
-		chessboard.getDisplay().repaint();
-		this.repaint();
-	}
-
-	public void newGameV2(Settings gameSettings) {
+	public void newGame(Settings gameSettings) {
 
 		switch (gameSettings.boardType) {
 		case circleBoard:
@@ -292,16 +282,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 * Method to switch active players after move
 	 */
 	public void switchActivePlayer() {
-		/*if (activePlayer == getSettings().playerWhite) {
-			activePlayer = getSettings().playerBlack;
-		} else if (activePlayer == getSettings().playerBlack) {
-			activePlayer = getSettings().playerBlue;
-		} else if (activePlayer == getSettings().playerBlue) {
-			activePlayer = getSettings().playerWhite;
-		}
-*/
+		
 		activePlayer = getSettings().nextPlayer(activePlayer);
-		//this.getGameClock().switch_clocks();
+
 	}
 
 	/**
@@ -321,52 +304,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 		System.out.println("next move, active player: " + activePlayer.name + ", color: "
 				+ activePlayer.getColor().name() + ", type: " + activePlayer.playerType.name());
-		if (activePlayer.playerType == Player.playerTypes.localUser) {
-			this.blockedChessboard = false;
-		} else if (activePlayer.playerType == Player.playerTypes.networkUser) {
-			this.blockedChessboard = true;
-		} else if (activePlayer.playerType == Player.playerTypes.computer) {
-			// ? if nothing here then delete
-		}
-	}
-
-	/**
-	 * Method to simulate Move to check if it's correct etc. (usable for network
-	 * game).
-	 * 
-	 * @param beginX
-	 *            from which X (on chessboard) move starts
-	 * @param beginY
-	 *            from which Y (on chessboard) move starts
-	 * @param endX
-	 *            to which X (on chessboard) move go
-	 * @param endY
-	 *            to which Y (on chessboard) move go
-	 */
-	public boolean simulateMove(int beginX, int beginY, int endX, int endY) {
-		try {
-			chessboard.select(chessboard.getSquares()[beginX][beginY]);
-			if (chessboard.getActiveSquare().piece.allMoves(false).indexOf(chessboard.getSquares()[endX][endY]) != -1) // move
-			{
-				chessboard.move(chessboard.getSquares()[beginX][beginY], chessboard.getSquares()[endX][endY]);
-			} else {
-				System.out.println("Bad move");
-				return false;
-			}
-			chessboard.unselect();
-			nextMove();
-
-			return true;
-
-		} catch (StringIndexOutOfBoundsException exc) {
-			return false;
-		} catch (ArrayIndexOutOfBoundsException exc) {
-			return false;
-		} catch (NullPointerException exc) {
-			return false;
-		} finally {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, "ERROR");
-		}
+		
 	}
 
 	public boolean undo() {

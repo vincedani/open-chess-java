@@ -1,5 +1,5 @@
-#Tue Jan 24 01:10:03 CET 2017
+#Tue Jan 24 23:43:17 CET 2017
 >>>>>>>=code_refactoring
-THEME=hunter
-<<<<<<<=HEAD
+THEME=default
 =\=\=\=\=\=\=
+<<<<<<<=HEAD
