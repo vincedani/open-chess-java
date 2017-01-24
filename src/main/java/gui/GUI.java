@@ -78,9 +78,24 @@ public class GUI {
 		return img;
 	}/*--endOf-loadImage--*/
 
-	static boolean themeIsValid(String name) {
-		return true;
-	}
+	
+	public static Image loadImage(String theme, String name) {
+		
+		Image img = null;
+		URL url = null;
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		try {
+			String imageLink = "theme/" + theme + "/images/" + name;
+			url = JChessApp.class.getResource(imageLink);
+			img = tk.getImage(url);
+
+		} catch (Exception e) {
+			LogToFile.log(e, "ERROR", "some error loading image!");
+			e.printStackTrace();
+		}
+		return img;
+	}/*--endOf-loadImage--*/
+
 
 	static String getJarPath() {
 		String path = GUI.class.getProtectionDomain().getCodeSource().getLocation().getFile();

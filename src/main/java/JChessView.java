@@ -36,6 +36,7 @@ import org.jdesktop.application.TaskMonitor;
 
 import main.java.game.Game;
 import main.java.game.Settings;
+import main.java.gui.ChooseThemeWindow;
 import main.java.gui.GUI;
 import main.java.gui.JChessAboutBox;
 import main.java.gui.NewGameWindow;
@@ -109,12 +110,11 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 			}
 		} else if (target == this.themeSettingsMenu) {
 			try {
-				ThemeChooseWindow choose = new ThemeChooseWindow(this.getFrame());
+				ChooseThemeWindow choose = new ChooseThemeWindow(this.getFrame());
 				JChessApp.getApplication().show(choose);
 			} catch (Exception exc) {
 				JOptionPane.showMessageDialog(JChessApp.getApplication().getMainFrame(), exc.getMessage());
-				// System.out.println("Something wrong creating window - perhaps
-				// themeList is null");
+				 System.out.println("Something wrong creating window - perhaps themeList is null");
 
 				LogToFile.log(exc, "Error", "Something wrong creating window - perhaps themeList is null");
 				exc.printStackTrace();

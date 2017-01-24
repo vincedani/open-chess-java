@@ -162,7 +162,7 @@ public class CircleBoard implements IChessboard {
 				begin.piece = PieceFactory.createRookInCircleBoard(this, begin.piece.getPlayer());
 				begin.piece.setSquare(begin);
 			}
-		} else if (end.piece!=null && end.piece.getName().equals("Dragon")) {
+		} else if (end.piece != null && end.piece.getName().equals("Dragon")) {
 			Piece warrior = begin.piece;
 			System.out.println("YOU defeated the dragon! Your princess is now a queen");
 			warrior.setSquare(end);
@@ -170,9 +170,10 @@ public class CircleBoard implements IChessboard {
 
 			begin.piece = PieceFactory.createQueenInCircleBoard(this, begin.piece.getPlayer());
 			begin.piece.setSquare(begin);
-		}else {
+		} else {
 			begin.piece.setSquare(end);// set square of piece to ending
-			end.piece = begin.piece;// for ending square set piece from beginning square
+			end.piece = begin.piece;// for ending square set piece from
+			// beginning square
 			begin.piece = null;// make null piece for beginning square
 		}
 		this.unselect();// unselect square
