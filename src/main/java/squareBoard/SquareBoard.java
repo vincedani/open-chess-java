@@ -23,6 +23,7 @@ package main.java.squareBoard;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import main.java.Constants;
 import main.java.JChessApp;
 import main.java.LogToFile;
 import main.java.board.ChessboardDisplay;
@@ -31,6 +32,7 @@ import main.java.board.IChessboard;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.game.Settings;
+import main.java.pieces.ConcretePieceFactory;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;
@@ -173,7 +175,8 @@ public class SquareBoard implements IChessboard {
 
 		Piece promotedPiece = null;
 		boolean wasEnPassant = false;
-
+		ConcretePieceFactory pieceFac = new ConcretePieceFactory();
+		
 		if (end.piece != null) {
 			end.piece.setSquare(null);
 		}
@@ -248,19 +251,23 @@ public class SquareBoard implements IChessboard {
 
 					if (newPiece.equals("Queen")) // transform pawn to queen
 					{
-						end.piece = PieceFactory.createQueenInSquareBoard(end.piece.getChessboard(),
-								end.piece.getPlayer());
+						/*end.piece = PieceFactory.createQueenInSquareBoard(end.piece.getChessboard(),
+								end.piece.getPlayer());*/
+						end.piece = pieceFac.GetPieceForSquareBoard(Constants.Symbols.Queen.toString(),Constants.Pieces.Queen.toString(), end.piece.getChessboard(), end.piece.getPlayer());
 					} else if (newPiece.equals("Rook")) // transform pawn to
 														// rook
 					{
-						PieceFactory.createRookInSquareBoard(end.piece.getChessboard(), end.piece.getPlayer());
+						//PieceFactory.createRookInSquareBoard(end.piece.getChessboard(), end.piece.getPlayer());
+						pieceFac.GetPieceForSquareBoard(Constants.Symbols.Rook.toString(),Constants.Pieces.Rook.toString(), end.piece.getChessboard(), end.piece.getPlayer());
 					} else if (newPiece.equals("Bishop")) // transform pawn to
 															// bishop
 					{
-						PieceFactory.createBishopInSquareBoard(end.piece.getChessboard(), end.piece.getPlayer());
+						//PieceFactory.createBishopInSquareBoard(end.piece.getChessboard(), end.piece.getPlayer());
+						pieceFac.GetPieceForSquareBoard(Constants.Symbols.Bishop.toString(),Constants.Pieces.Bishop.toString(), end.piece.getChessboard(), end.piece.getPlayer());
 					} else // transform pawn to knight
 					{
-						PieceFactory.createKnightInSquareBoard(end.piece.getChessboard(), end.piece.getPlayer());
+						//PieceFactory.createKnightInSquareBoard(end.piece.getChessboard(), end.piece.getPlayer());
+						pieceFac.GetPieceForSquareBoard(Constants.Symbols.Knight.toString(),Constants.Pieces.Knight.toString(), end.piece.getChessboard(), end.piece.getPlayer());
 					}
 					promotedPiece = end.piece;
 				}

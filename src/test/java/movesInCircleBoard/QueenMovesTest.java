@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import main.java.Constants;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.circleBoard.CircleBoardInitialization;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.RookMovesInCircleBoard;
+import main.java.pieces.ConcretePieceFactory;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;
 
@@ -32,11 +34,12 @@ public class QueenMovesTest {
 		x = 3;
 		y = 3;
 
+		ConcretePieceFactory pieceFac = new ConcretePieceFactory();
 		board = mock(CircleBoard.class);
 		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
 
-		queen = PieceFactory.createQueenInCircleBoard(board, p1);
+		queen = pieceFac.GetPieceForCircleBoard(Constants.Symbols.Queen.toString(),Constants.Pieces.Queen.toString(), board, p1);//PieceFactory.createQueenInCircleBoard(board, p1);
 		board.getSquares()[x][y].setPiece(queen);
 	}
 	

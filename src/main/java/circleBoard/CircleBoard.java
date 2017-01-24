@@ -2,6 +2,7 @@ package main.java.circleBoard;
 
 import java.awt.Point;
 
+import main.java.Constants;
 import main.java.LogToFile;
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
@@ -11,6 +12,7 @@ import main.java.game.Player;
 import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
 import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
 import main.java.movesInCircleBoard.RookMovesInCircleBoard;
+import main.java.pieces.ConcretePieceFactory;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;
@@ -121,6 +123,8 @@ public class CircleBoard implements IChessboard {
 	 */
 	public void move(Square begin, Square end) {
 
+		ConcretePieceFactory piceFac = new ConcretePieceFactory();
+		
 		// Check if pawn passed the center
 		if (begin.piece.getName().equals("Pawn")) {
 			Piece movedPawn = begin.piece;
@@ -147,7 +151,8 @@ public class CircleBoard implements IChessboard {
 		if (end.piece != null && begin.piece.getName().equals("Rook")) {
 			System.out.println(
 					"The princess " + end.piece.getName() + " " + end.piece.getPlayer().getColor() + " is captured");
-			end.piece = PieceFactory.releaseTheDragon(this, begin.piece.getPlayer());
+			//end.piece = PieceFactory.releaseTheDragon(this, begin.piece.getPlayer());			
+			end.piece = piceFac.GetPieceForCircleBoard(Constants.Symbols.Dragon.toString(),Constants.Pieces.Dragon.toString(), this, begin.piece.getPlayer());
 			end.piece.setSquare(end);
 			begin.piece = null;
 		} else if (begin.piece.getName().equals("Dragon") && end.piece != null) {
@@ -159,7 +164,8 @@ public class CircleBoard implements IChessboard {
 
 			if (dragonBeh.getFireLoader() == 4) {
 				System.out.println("Nobody defeated the dragon!");
-				begin.piece = PieceFactory.createRookInCircleBoard(this, begin.piece.getPlayer());
+				//begin.piece = PieceFactory.createRookInCircleBoard(this, begin.piece.getPlayer());
+				begin.piece = piceFac.GetPieceForCircleBoard(Constants.Symbols.Rook.toString(),Constants.Pieces.Rook.toString(), this, begin.piece.getPlayer());
 				begin.piece.setSquare(begin);
 			}
 		} else if (end.piece != null && end.piece.getName().equals("Dragon")) {
@@ -168,7 +174,8 @@ public class CircleBoard implements IChessboard {
 			warrior.setSquare(end);
 			end.piece = warrior;
 
-			begin.piece = PieceFactory.createQueenInCircleBoard(this, begin.piece.getPlayer());
+			//begin.piece = PieceFactory.createQueenInCircleBoard(this, begin.piece.getPlayer());
+			begin.piece = piceFac.GetPieceForCircleBoard(Constants.Symbols.Queen.toString(),Constants.Pieces.Queen.toString(), this, begin.piece.getPlayer());
 			begin.piece.setSquare(begin);
 		} else {
 			begin.piece.setSquare(end);// set square of piece to ending

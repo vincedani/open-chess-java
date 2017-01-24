@@ -2,6 +2,7 @@ package main.java.pieces;
 
 import java.util.ArrayList;
 
+import main.java.LogToFile;
 import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.game.Player;
@@ -16,11 +17,79 @@ import main.java.movesInSquareBoard.PawnMovesInSquareBoard;
 import main.java.movesInSquareBoard.RookMovesInSquareBoard;
 
 public class PieceFactory {
+	
+	public PieceFactory()
+	{}
 
-	public static Piece createBishopInCircleBoard(IChessboard chessboard, Player player) {
+	public Piece CreateSpecificPieceForCircleBoard(IChessboard chessboard, Player player,String symbol,String pieceName)
+	{
+		Piece piece = new Piece(chessboard, player, pieceName);
+		piece.symbol = symbol;
+		ArrayList<IMove> pieceMoves = new ArrayList<>();
+		
+		
+		 switch (pieceName)
+         {		   
+             case "Bishop":
+            	 pieceMoves.add(new BishopMovesInCircleBoard());         		
+             case "Knight":
+            	 pieceMoves.add(new KnightMovesInCircleBoard());
+             case "Queen":
+             {
+            	 pieceMoves.add(new RookMovesInCircleBoard());
+            	 pieceMoves.add(new BishopMovesInCircleBoard());
+             }
+             case "Rook":
+            	 pieceMoves.add(new RookMovesInCircleBoard());
+             case "Pawn" :
+            	 pieceMoves.add(new PawnMovesInCircleBoard());
+             //case "King":
+            //	 return new King(symbol,pieceName,chessboard,player,moveBehaviour);
+             case "Dragon":
+            	 pieceMoves.add(new DragonMovesInCircleBoard());
+             default:
+            	LogToFile.log(null,"Info",String.format("Piece '{0}' cannot be created", pieceName));
+         }
+    	
+		 piece.moveBehaviour = pieceMoves;  
+		return piece;
+	}
+	
+	public Piece CreateSpecificPieceForSquareBoard(IChessboard chessboard, Player player,String symbol,String pieceName)
+	{
+		Piece piece = new Piece(chessboard, player, pieceName);
+		piece.symbol = symbol;
+		ArrayList<IMove> pieceMoves = new ArrayList<>();
+		
+		
+		 switch (pieceName)
+         {		   
+             case "Bishop":
+            	 pieceMoves.add(new BishopMovesInSquareBoard());         		
+             case "Knight":
+            	 pieceMoves.add(new KnightMovesInSquareBoard());
+             case "Queen":
+             {
+            	 pieceMoves.add(new RookMovesInSquareBoard());
+            	 pieceMoves.add(new BishopMovesInSquareBoard());
+             }
+             case "Rook":
+            	 pieceMoves.add(new RookMovesInSquareBoard());
+             case "Pawn" :
+            	 pieceMoves.add(new PawnMovesInSquareBoard());
+             //case "King":
+            //	 return new King(symbol,pieceName,chessboard,player,moveBehaviour);
+            	LogToFile.log(null,"Info",String.format("Piece '{0}' cannot be created", pieceName));
+         }
+    	
+		 piece.moveBehaviour = pieceMoves;  
+		return piece;
+	}
+	
+	/*public static Piece createBishopInCircleBoard(IChessboard chessboard, Player player,String symbol,String pieceName) {
 
-		Piece bishop = new Piece(chessboard, player, "Bishop");
-		bishop.symbol = "B";
+		Piece bishop = new Piece(chessboard, player, pieceName);
+		bishop.symbol = symbol;
 		ArrayList<IMove> bishopMoves = new ArrayList<>();
 		bishopMoves.add(new BishopMovesInCircleBoard());
 
@@ -160,5 +229,5 @@ public class PieceFactory {
 
 		return dragon;
 
-	}
+	}*/
 }
