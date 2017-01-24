@@ -36,7 +36,7 @@ public class DragonMovesInCircleBoard implements IMove {
 						continue;
 					} else {
 						Square moveSq = piece.getSquares(posi, j);
-						if (moveSq.piece!=null && piece.pieceBehaviour.otherOwner(posi, j)) {
+						if (moveSq.piece!=null && piece.pieceBehaviour.otherOwner(posi, j)&& !moveSq.piece.getName().equals("King") ) {
 								list.add(sq);}
 						}
 					}
