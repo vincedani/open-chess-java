@@ -36,7 +36,7 @@ public class DragonMovesTest {
 
 	@Before
 	public void setUp() throws Exception {
-		/*// Initialize board
+		// Initialize board
 		board = new CircleBoard();
 		board_squares = new CircleBoardInitialization(board);
 
@@ -52,13 +52,13 @@ public class DragonMovesTest {
 		board.initial = board_squares;
 
 		board.move(board_squares.getSquares()[x1][y1], board_squares.getSquares()[x2][y2]);
-		dm = new DragonMovesInCircleBoard();*/
+		dm = new DragonMovesInCircleBoard();
 	}
 
 	@Test
 	public final void releaseTheDragon() {
-		/*String dragon = board_squares.getSquares()[x2][y2].piece.getName();
-		assertEquals("Dragon", dragon);*/
+		String dragon = board_squares.getSquares()[x2][y2].piece.getName();
+		assertEquals("Dragon", dragon);
 	}
 
 	@Test
