@@ -73,7 +73,7 @@ public class KingMovesInCircleBoard implements IMove {
 					} else {
 						if (piece.pieceBehaviour.checkPiece(i, j)) {// if square
 							//Check if will be checked
-							if(piece.isSafe(sq)){
+							if(piece.willBeSafeAfterMove(piece.getSquare(), sq)){
 								list.add(sq);}
 
 						}

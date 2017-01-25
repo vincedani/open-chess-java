@@ -1,7 +1,10 @@
 package test.java.movesInCircleBoard;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -10,6 +13,7 @@ import org.junit.Test;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
+import main.java.circleBoard.CircleBoardDisplay;
 import main.java.circleBoard.CircleBoardInitialization;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
@@ -20,8 +24,9 @@ import main.java.pieces.PieceFactory;
 
 public class DragonMovesTest {
 	CircleBoardInitialization board_squares;
-	DragonMovesInCircleBoard dm;
 	CircleBoard board;
+	DragonMovesInCircleBoard dm;
+	
 	Piece pawn, rook;
 	Player p1;
 	Player p2;
@@ -37,9 +42,9 @@ public class DragonMovesTest {
 	@Before
 	public void setUp() throws Exception {
 		// Initialize board
-		board = new CircleBoard();
+		board= new CircleBoard();
 		board_squares = new CircleBoardInitialization(board);
-
+		
 		p1 = new Player("Player1", "white");
 		p2 = new Player("Player1", "black");
 
@@ -63,7 +68,7 @@ public class DragonMovesTest {
 
 	@Test
 	public final void theDragonFireBlasterInnerCircle() {
-		/*int x = x2;
+		int x = x2;
 		int y = y2;
 		
 		// Set pieces around the Dragon
@@ -75,12 +80,12 @@ public class DragonMovesTest {
 		// Obtained set of moves 
 		ArrayList<Square> obtained = dm.getMoves(board_squares.getSquares()[x2][y2].piece, true);
 		
-		assertTrue(obtained.containsAll(expected));*/
+		assertTrue(obtained.containsAll(expected));
 	}
 	
 	@Test
 	public final void testIncreaseFireBlasterMiddleCircle() {
-		/*// Blast fire
+		// Blast fire
 		dm.increaseFireLoader();
 		int x = x2;
 		int y = y2;
@@ -96,12 +101,12 @@ public class DragonMovesTest {
 		// Obtained set of moves ;
 		ArrayList<Square> obtained = dm.getMoves(board_squares.getSquares()[x][y].piece, true);
 
-		assertTrue(obtained.containsAll(expected));*/
+		assertTrue(obtained.containsAll(expected));
 	}
 	
 	@Test
-	public final void testKingInMiddleCircle() {
-		/*// Blast fire
+	public final void testKingAroundDragon() {
+		// Blast fire
 		int x = y2;
 		int y = x2;
 		
@@ -117,26 +122,36 @@ public class DragonMovesTest {
 		expected.add(board.getSquares()[x+1][y]);
 		expected.add(board.getSquares()[x-1][y]);
 
-		// Obtained set of moves ;
+		// Obtained set of moves
 		ArrayList<Square> obtained = dm.getMoves(board_squares.getSquares()[x][y].piece, true);
+		
+		// Debugging Stuff
+		/*System.out.println("Obtained \n");
+		for (int i=0; i<obtained.size();i++){
+			System.out.println(obtained.get(i).getPozX() + ", " + obtained.get(i).getPozY());
+		}		
+		System.out.println("expected");
+		for (int i=0; i<expected.size();i++){
+			System.out.println(expected.get(i).getPozX() + ", " + expected.get(i).getPozY());
+		}*/
 
-		//assertTrue(obtained.containsAll(expected));
-		assertTrue(true);*/
+		assertFalse(obtained.contains(board.getSquares()[x+1][y])); // FALSE, that it CAN move where the KING IS.
+		
 	}
 	
 	void addPiecesAround(Piece piece, int x, int y, int a) {
-		/*board_squares.getSquares()[x	][y + a ].setPiece(piece);
+		board_squares.getSquares()[x	][y + a ].setPiece(piece);
 		board_squares.getSquares()[x	][y - a ].setPiece(piece);
 		board_squares.getSquares()[x + a][y + a ].setPiece(piece);
 		board_squares.getSquares()[x + a][y - a ].setPiece(piece);
 		board_squares.getSquares()[x - a][y + a ].setPiece(piece);
 		board_squares.getSquares()[x - a][y - a ].setPiece(piece);
 		board_squares.getSquares()[x + a][y		].setPiece(piece);
-		board_squares.getSquares()[x - a][y		].setPiece(piece);*/
+		board_squares.getSquares()[x - a][y		].setPiece(piece);
 	}
 	
-	/*ArrayList<Square> addToExpectedAround(int x, int y, int a) {
-		/*ArrayList<Square> expected = new ArrayList<Square>();
+	ArrayList<Square> addToExpectedAround(int x, int y, int a) {
+		ArrayList<Square> expected = new ArrayList<Square>();
 		expected.add(board.getSquares()[x	 ][y + a]);
 		expected.add(board.getSquares()[x	 ][y - a]);
 		expected.add(board.getSquares()[x + a][y + a]);
@@ -146,6 +161,6 @@ public class DragonMovesTest {
 		expected.add(board.getSquares()[x + a][y	]);
 		expected.add(board.getSquares()[x - a][y	]);
 		return expected;
-	}*/
+	}
 
 }

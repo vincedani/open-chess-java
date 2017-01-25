@@ -176,8 +176,13 @@ public class CircleBoard implements IChessboard {
 			// beginning square
 			begin.piece = null;// make null piece for beginning square
 		}
+		
+		//if (display !=null) {
+			
+		//}
 		this.unselect();// unselect square
 		display.repaint();
+
 
 	}
 

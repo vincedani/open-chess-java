@@ -47,7 +47,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		active_y_square = -1;
 
 		this.setDoubleBuffered(true);
-		drawLabels(get_square_height());
+		//drawLabels(get_square_height());
 	}
 
 	public void paintComponent(Graphics g) {

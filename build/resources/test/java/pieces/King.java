@@ -111,22 +111,29 @@ public class King extends Piece {
 		/*
 		 * returns: 0-nothing, 1-checkmate, 2-stalemate
 		 */
-		int nx=0, ny=0;
+		int nx = 0, ny = 0;
 		if (this.getChessboard() instanceof SquareBoard) {
-			nx=8; 
-			ny=8;
+			nx = 8;
+			ny = 8;
 		} else if (this.getChessboard() instanceof CircleBoard) {
-			nx=24; 
-			ny=6;
+			nx = 24;
+			ny = 6;
 		}
-		
+
 		if (this.allMoves(false).isEmpty()) {
 			Piece boardPiece;
 			for (int i = 0; i < nx; ++i) {
 				for (int j = 0; j < ny; ++j) {
 					boardPiece = getSquares(i, j).piece;
-					if (boardPiece != null && boardPiece.getPlayer() == this.getPlayer()
+					if (boardPiece != null && boardPiece != this && boardPiece.getPlayer() == this.getPlayer()
 							&& allMovesSize(boardPiece, false) != 0) {
+						System.out.println(this +"," + boardPiece + ", " + boardPiece.getPlayer().getColor());
+						System.out.println("Objeto 1");
+						System.out.println(this.getSquare().getPozX() +", " + this.getSquare().getPozY() + boardPiece + ", " + boardPiece.getPlayer().getColor());
+
+						System.out.println("Objeto 2");
+						System.out.println(boardPiece.getSquare().getPozX() +", " + boardPiece.getSquare().getPozY() + boardPiece + ", " + boardPiece.getPlayer().getColor());
+
 						return 0;
 					}
 				}
@@ -215,12 +222,12 @@ public class King extends Piece {
 		}
 
 		// Bishop & Queen
-		for (int h = s.getPozX() - 1, i = s.getPozY() + 1; !pieceBehaviour.isout(h, i); --h, ++i){
+		for (int h = s.getPozX() - 1, i = s.getPozY() + 1; !pieceBehaviour.isout(h, i); --h, ++i) {
 			// Left-up
 			Piece boardPiece = this.getSquares(h, i).piece;
 			if (boardPiece == null || boardPiece == this) {
 				continue;
-			} else if (boardPiece.getPlayer() != this.getPlayer()){
+			} else if (boardPiece.getPlayer() != this.getPlayer()) {
 				if (boardPiece.getName().equals("Bishop") || boardPiece.getName().equals("Queen")) {
 					return false;
 				} else {
@@ -233,11 +240,11 @@ public class King extends Piece {
 
 		for (int h = s.getPozX() - 1, i = s.getPozY() - 1; !pieceBehaviour.isout(h, i); --h, --i) // left-down
 		{
-			Piece boardPiece = this.getSquares(h,i).piece;
-			if (boardPiece == null || boardPiece == this){
+			Piece boardPiece = this.getSquares(h, i).piece;
+			if (boardPiece == null || boardPiece == this) {
 				continue;
-			} else if (boardPiece.getPlayer() != this.getPlayer()){
-				if (boardPiece.getName().equals("Bishop")|| boardPiece.getName().equals("Queen")) {
+			} else if (boardPiece.getPlayer() != this.getPlayer()) {
+				if (boardPiece.getName().equals("Bishop") || boardPiece.getName().equals("Queen")) {
 					return false;
 				} else {
 					break;
@@ -247,12 +254,12 @@ public class King extends Piece {
 			}
 		}
 
-		for (int h = s.getPozX() + 1, i = s.getPozY() + 1; !pieceBehaviour.isout(h, i); ++h, ++i){
+		for (int h = s.getPozX() + 1, i = s.getPozY() + 1; !pieceBehaviour.isout(h, i); ++h, ++i) {
 			// Right-up
 			Piece boardPiece = this.getSquares(i, s.getPozY()).piece;
-			if (boardPiece == null || boardPiece == this){
+			if (boardPiece == null || boardPiece == this) {
 				continue;
-			} else if (boardPiece.getPlayer() != this.getPlayer()){
+			} else if (boardPiece.getPlayer() != this.getPlayer()) {
 				if (boardPiece.getName().equals("Bishop") || boardPiece.getName().equals("Queen")) {
 					return false;
 				} else {
@@ -265,11 +272,11 @@ public class King extends Piece {
 
 		for (int h = s.getPozX() + 1, i = s.getPozY() - 1; !pieceBehaviour.isout(h, i); ++h, --i) // right-down
 		{
-			Piece boardPiece = this.getSquares(h,i).piece;
+			Piece boardPiece = this.getSquares(h, i).piece;
 
-			if (boardPiece == null || boardPiece == this){
+			if (boardPiece == null || boardPiece == this) {
 				continue;
-			} else if (boardPiece.getPlayer() != this.getPlayer()){
+			} else if (boardPiece.getPlayer() != this.getPlayer()) {
 				if (boardPiece.getName().equals("Bishop") || boardPiece.getName().equals("Queen")) {
 					return false;
 				} else {
@@ -286,11 +293,11 @@ public class King extends Piece {
 		// 1
 		newX = s.getPozX() - 2;
 		newY = s.getPozY() + 1;
-		Piece boardPiece = this.getSquares(newX,newY).piece;
+		Piece boardPiece = this.getSquares(newX, newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (boardPiece == null){
-			} else if (boardPiece.getPlayer() == this.getPlayer()){
+			if (boardPiece == null) {
+			} else if (boardPiece.getPlayer() == this.getPlayer()) {
 			} else if (boardPiece.getName().equals("Knight")) {
 				return false;
 			}
@@ -299,11 +306,11 @@ public class King extends Piece {
 		// 2
 		newX = s.getPozX() - 1;
 		newY = s.getPozY() + 2;
-		boardPiece = this.getSquares(newX,newY).piece;
-		
+		boardPiece = this.getSquares(newX, newY).piece;
+
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (boardPiece == null){
-			} else if (boardPiece.getPlayer() == this.getPlayer()){
+			if (boardPiece == null) {
+			} else if (boardPiece.getPlayer() == this.getPlayer()) {
 			} else if (boardPiece.getName().equals("Knight")) {
 				return false;
 			}
@@ -312,11 +319,11 @@ public class King extends Piece {
 		// 3
 		newX = s.getPozX() + 1;
 		newY = s.getPozY() + 2;
-		boardPiece = this.getSquares(newX,newY).piece;
+		boardPiece = this.getSquares(newX, newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (boardPiece == null){
-			} else if (boardPiece.getPlayer() == this.getPlayer()){
+			if (boardPiece == null) {
+			} else if (boardPiece.getPlayer() == this.getPlayer()) {
 			} else if (boardPiece.getName().equals("Knight")) {
 				return false;
 			}
@@ -325,11 +332,11 @@ public class King extends Piece {
 		// 4
 		newX = s.getPozX() + 2;
 		newY = s.getPozY() + 1;
-		boardPiece = this.getSquares(newX,newY).piece;
+		boardPiece = this.getSquares(newX, newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (boardPiece == null){
-			} else if (boardPiece.getPlayer() == this.getPlayer()){
+			if (boardPiece == null) {
+			} else if (boardPiece.getPlayer() == this.getPlayer()) {
 			} else if (boardPiece.getName().equals("Knight")) {
 				return false;
 			}
@@ -338,11 +345,11 @@ public class King extends Piece {
 		// 5
 		newX = s.getPozX() + 2;
 		newY = s.getPozY() - 1;
-		boardPiece = this.getSquares(newX,newY).piece;
+		boardPiece = this.getSquares(newX, newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (boardPiece == null){
-			} else if (boardPiece.getPlayer() == this.getPlayer()){
+			if (boardPiece == null) {
+			} else if (boardPiece.getPlayer() == this.getPlayer()) {
 			} else if (boardPiece.getName().equals("Knight")) {
 				return false;
 			}
@@ -351,11 +358,11 @@ public class King extends Piece {
 		// 6
 		newX = s.getPozX() + 1;
 		newY = s.getPozY() - 2;
-		boardPiece = this.getSquares(newX,newY).piece;
+		boardPiece = this.getSquares(newX, newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
 			if (boardPiece == null) {
-			} else if (boardPiece.getPlayer() == this.getPlayer()){
+			} else if (boardPiece.getPlayer() == this.getPlayer()) {
 			} else if (boardPiece.getName().equals("Knight")) {
 				return false;
 			}
@@ -364,11 +371,11 @@ public class King extends Piece {
 		// 7
 		newX = s.getPozX() - 1;
 		newY = s.getPozY() - 2;
-		boardPiece = this.getSquares(newX,newY).piece;
+		boardPiece = this.getSquares(newX, newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (boardPiece == null){
-			} else if (boardPiece.getPlayer() == this.getPlayer()){
+			if (boardPiece == null) {
+			} else if (boardPiece.getPlayer() == this.getPlayer()) {
 			} else if (boardPiece.getName().equals("Knight")) {
 				return false;
 			}
@@ -377,11 +384,11 @@ public class King extends Piece {
 		// 8
 		newX = s.getPozX() - 2;
 		newY = s.getPozY() - 1;
-		boardPiece = this.getSquares(newX,newY).piece;
+		boardPiece = this.getSquares(newX, newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
-			if (boardPiece == null){
-			} else if (boardPiece.getPlayer() == this.getPlayer()){
+			if (boardPiece == null) {
+			} else if (boardPiece.getPlayer() == this.getPlayer()) {
 			} else if (boardPiece.getName().equals("Knight")) {
 				return false;
 			}
@@ -400,49 +407,49 @@ public class King extends Piece {
 		 * otherKing.getSquare().getPozY() + 1 && s.getPozY() >=
 		 * otherKing.getSquare().getPozY() - 1) { return false; }
 		 */
-		
+
 		// Pawn
-		if (this.getPlayer().isGoDown()){
+		if (this.getPlayer().isGoDown()) {
 			// Down
 			newX = s.getPozX() - 1;
 			newY = s.getPozY() + 1;
-			boardPiece = this.getSquares(newX,newY).piece;
+			boardPiece = this.getSquares(newX, newY).piece;
 			if (!pieceBehaviour.isout(newX, newY)) {
-				if (boardPiece == null){
-				} else if (boardPiece.getPlayer() == this.getPlayer()){
+				if (boardPiece == null) {
+				} else if (boardPiece.getPlayer() == this.getPlayer()) {
 				} else if (boardPiece.getName().equals("Pawn")) {
 					return false;
 				}
 			}
-			
+
 			newX = s.getPozX() + 1;
-			boardPiece = this.getSquares(newX,newY).piece;
+			boardPiece = this.getSquares(newX, newY).piece;
 			if (!pieceBehaviour.isout(newX, newY)) {
-				if (boardPiece == null){
-				} else if (boardPiece.getPlayer() == this.getPlayer()){
+				if (boardPiece == null) {
+				} else if (boardPiece.getPlayer() == this.getPlayer()) {
 				} else if (boardPiece.getName().equals("Pawn")) {
 					return false;
 				}
 			}
-			
+
 		} else {
 			// Go UP
 			newX = s.getPozX() - 1;
 			newY = s.getPozY() - 1;
-			boardPiece = this.getSquares(newX,newY).piece;
+			boardPiece = this.getSquares(newX, newY).piece;
 			if (!pieceBehaviour.isout(newX, newY)) {
-				if (boardPiece == null){
-				} else if (boardPiece.getPlayer() == this.getPlayer()){
+				if (boardPiece == null) {
+				} else if (boardPiece.getPlayer() == this.getPlayer()) {
 				} else if (boardPiece.getName().equals("Pawn")) {
 					return false;
 				}
 			}
-			
+
 			newX = s.getPozX() + 1;
-			boardPiece = this.getSquares(newX,newY).piece;
+			boardPiece = this.getSquares(newX, newY).piece;
 			if (!pieceBehaviour.isout(newX, newY)) {
-				if (boardPiece == null){
-				} else if (boardPiece.getPlayer() == this.getPlayer()){
+				if (boardPiece == null) {
+				} else if (boardPiece.getPlayer() == this.getPlayer()) {
 				} else if (boardPiece.getName().equals("Pawn")) {
 					return false;
 				}
@@ -459,32 +466,31 @@ public class King extends Piece {
 	 *            Square where is a king
 	 * @return bool true if king is save, else returns false
 	 */
-	public boolean isSafe(Square s) 
-	{
-		int nx=0, ny=0;
+	public boolean isSafe(Square s) {
+		int nx = 0, ny = 0;
 		if (this.getChessboard() instanceof SquareBoard) {
-			nx=8; 
-			ny=8;
+			nx = 8;
+			ny = 8;
 		} else if (this.getChessboard() instanceof CircleBoard) {
-			nx=24; 
-			ny=6;
+			nx = 24;
+			ny = 6;
 		}
-		
+
 		for (int i = 0; i < nx; i++) {
 			for (int j = 0; j < ny; j++) {
 				Piece boardPiece = this.getSquares(i, j).piece;
 				if (boardPiece != null && boardPiece.getPlayer() != this.getPlayer()) {
-					if(boardPiece.getName().equals("Dragon")){
+					if (boardPiece.getName().equals("Dragon")) {
 						continue;
-					}else{
+					} else {
 						ArrayList<Square> pieceMoves = boardPiece.allMoves(true);
 						if (pieceMoves.contains(s)) {
 							return false;
 						}
-					}}
+					}
 				}
 			}
-		
+		}
 
 		return true;
 	}
@@ -493,8 +499,8 @@ public class King extends Piece {
 	 * Method to check will the king be safe after the move of the pieces in the
 	 * given squares
 	 * 
-	 * @param sqIsHe	re
-	 *            the original square of the piece
+	 * @param sqIsHe
+	 *            re the original square of the piece
 	 * @param sqWillBeThere
 	 *            the future square of the piece
 	 * @return boolean true if king is save, else returns false
@@ -504,14 +510,20 @@ public class King extends Piece {
 		sqWillBeThere.piece = sqIsHere.piece; // move without redraw
 		sqIsHere.piece = null;
 		boolean ret;
+
+		/*if (sqWillBeThere.piece.equals(this)) {
+			ret = isSafe(this.getSquare());
+		} else {
+			ret = isSafe(sqWillBeThere);
+
+		}*/
 		
 		ret = isSafe(this.getSquare());
-		
+
 		sqIsHere.piece = sqWillBeThere.piece;
 		sqWillBeThere.piece = tmp;
 
 		return ret;
 	}
-	
-	
+
 }
