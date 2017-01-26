@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.PieceBehaviourTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-01-25T17:48:03" hostname="mateo" time="0.056">
+<testsuite name="test.java.PieceBehaviourTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-01-26T00:01:53" hostname="mateo" time="0.022">
   <properties/>
-  <testcase name="testSetPlayer" classname="test.java.PieceBehaviourTest" time="0.001"/>
-  <testcase name="testGetPlayer" classname="test.java.PieceBehaviourTest" time="0.001"/>
+  <testcase name="testSetPlayer" classname="test.java.PieceBehaviourTest" time="0.003"/>
+  <testcase name="testGetPlayer" classname="test.java.PieceBehaviourTest" time="0.002"/>
   <testcase name="testIsout_0" classname="test.java.PieceBehaviourTest" time="0.001"/>
-  <testcase name="testIsout_1" classname="test.java.PieceBehaviourTest" time="0.001"/>
-  <testcase name="testIsout_2" classname="test.java.PieceBehaviourTest" time="0.047"/>
-  <testcase name="testIsout_3" classname="test.java.PieceBehaviourTest" time="0.0"/>
+  <testcase name="testIsout_1" classname="test.java.PieceBehaviourTest" time="0.003"/>
+  <testcase name="testIsout_2" classname="test.java.PieceBehaviourTest" time="0.002"/>
+  <testcase name="testIsout_3" classname="test.java.PieceBehaviourTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
