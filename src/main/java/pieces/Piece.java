@@ -29,6 +29,7 @@ import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.game.Player.colors;
+import main.java.game.Settings.BoardType;
 import main.java.pieces.PieceFactory.PieceType;
 
 /**
@@ -37,8 +38,7 @@ import main.java.pieces.PieceFactory.PieceType;
  */
 public class Piece {
 
-	private IChessboard chessboard; 
-	//public PieceBehaviour pieceBehaviour;
+	private PieceBehaviour pieceBehaviour;
 	private Square square;
 	private Player player;
 	private PieceType type;
@@ -49,10 +49,8 @@ public class Piece {
 	private boolean wasMoved = false;
 
 	
-	
 	public Piece(IChessboard chessboard, Player player, PieceType pieceType) {
 
-		this.setChessboard(chessboard);
 		this.setPlayer(player);
 
 		colors color = player.getColor();
@@ -82,28 +80,20 @@ public class Piece {
 		this.setType(pieceType);
 		imageColorPath = pieceType.toString()+ imageColorPath;
 		setLayout(new PieceLayout(imageColorPath));
-		//this.pieceBehaviour = new PieceBehaviour(chessboard, player);
+		this.pieceBehaviour = chessboard.getPieceBehaviour();
 		this.display = new PieceDisplay(this);
 	}
 
-	public ArrayList<Square> allMoves(boolean ignoreKing) {
+	public ArrayList<Square> allMoves(IChessboard board, boolean ignoreKing) {
 		
-		return moveBehaviour.getMoves(this, ignoreKing);
+		return getMoveBehaviour().getMoves(board, this, ignoreKing);
 	}
 	/*
 	public IKing myKing() {
 		return chessboard.getKing(player);
 	}
 */
-	public IChessboard getChessboard() {
-		return chessboard;
-	}
-	/*
-	public Square getSquares(int i, int j) {
-		Square square = getChessboard().getSquares()[i][j];
-		return square;
-	}
-*/
+	
 	public int getPosX(){
 		return getSquare().getPosX();
 	}
@@ -112,18 +102,7 @@ public class Piece {
 		return getSquare().getPosY();
 	}
 	
-	public void setChessboard(IChessboard chessboard2) {
-		this.chessboard = chessboard2;
-	}
-/*
-	public PieceBehaviour getPieceBehaviour() {
-		return pieceBehaviour;
-	}
 
-	public void setPieceBehaviour(PieceBehaviour pieceBehaviour) {
-		this.pieceBehaviour = pieceBehaviour;
-	}
-*/
 	public Player getPlayer() {
 		return player;
 	}
@@ -194,6 +173,43 @@ public class Piece {
 	
 	public IMove getMoveBehaviour() {
 		return moveBehaviour;
+	}
+
+	public boolean isout(int x, int y) {
+		
+		return pieceBehaviour.isout(x, y);
+	}
+
+	public boolean checkPiece(int i, int j) {
+		
+		return pieceBehaviour.checkPiece(this, i, j);
+	}
+
+	public IKing myKing() {
+		return pieceBehaviour.getKing(this.player);
+	}
+
+	public Piece myKingAsPiece() {
+		return pieceBehaviour.getKingAsPiece(this.player);
+	}
+	
+	public boolean otherOwner(int i, int j) {
+		return pieceBehaviour.otherOwner(this, i, j);
+	}
+
+	/**
+	 * @param moveBehaviour the moveBehaviour to set
+	 */
+	public void setMoveBehaviour(IMove moveBehaviour) {
+		this.moveBehaviour = moveBehaviour;
+	}
+
+	public BoardType getChessboardType() {
+		return pieceBehaviour.getChessboardType();
+	}
+
+	public IChessboard getChessboard() {
+		return pieceBehaviour.getChessboard();
 	}
 
 }

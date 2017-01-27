@@ -20,28 +20,23 @@
  */
 package main.java.game;
 
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import main.java.JChessApp;
 import main.java.LogToFile;
 import main.java.board.IChessboard;
 import main.java.board.IKing;
+import main.java.board.IKing.KingState;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
-import main.java.pieces.King;
+import main.java.pieces.Piece;
 import main.java.squareBoard.SquareBoard;
 
 /**
@@ -57,8 +52,6 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	private Player activePlayer;
 
 	public Game() {
-
-		initializeChessboardPanel();
 
 		this.blockedChessboard = false;
 		this.setLayout(null);
@@ -80,7 +73,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 *            address of place where game will be saved
 	 */
 	public void saveGame(File path) {
-		
+
 	}
 
 	/**
@@ -91,7 +84,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	 */
 
 	static public void loadGame(File file) {
-		
+
 	}
 
 	/**
@@ -156,7 +149,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 	@Override
 	public void mousePressed(MouseEvent event) {
-		 if (event.getButton() == MouseEvent.BUTTON1) // left button
+		if (event.getButton() == MouseEvent.BUTTON1) // left button
 		{
 
 			if (!blockedChessboard) {
@@ -166,58 +159,57 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 					Square sq = chessboard.getSquareFromCoordinates(x, y);
 
-					if(sq != null){
+					if (sq != null) {
 						if (sq.getPiece() != null && sq.getPlayer() == this.activePlayer
 								&& sq != chessboard.getActiveSquare()) {
-							//Select piece and display possible moves
+							// Select piece and display possible moves
 							chessboard.unselect();
 							chessboard.select(sq);
-						} else if (chessboard.getActiveSquare() == sq){
+						} else if (chessboard.getActiveSquare() == sq) {
 							// Unselect
 							chessboard.unselect();
-						}else if (chessboard.getActiveSquare() != null && chessboard.getActiveSquare().getPiece() != null
-								&& chessboard.getActiveSquare().getPiece().allMoves(false).indexOf(sq) != -1) {
+						} else if (chessboard.getActiveSquare() != null
+								&& chessboard.getActiveSquare().getPiece() != null
+								&& chessboard.getActiveSquare().getPiece().allMoves(chessboard, false).indexOf(sq) != -1) {
 							// Move
-							
+
 							chessboard.move(chessboard.getActiveSquare(), sq);
 							chessboard.unselect();
 							checkGameState();
 							this.nextMove();
-							
+
 						}
 					}
-					 
 
 				} catch (NullPointerException exc) {
 					exc.printStackTrace();
 					LogToFile.log(exc, "Error", "NullPointerException " + exc.getMessage());
 					chessboard.getDisplay().repaint();
 					return;
-				}}
-			} else if (blockedChessboard) {
-				LogToFile.log(null, "INFO", "Chessboard is blocked");
+				}
 			}
+		} else if (blockedChessboard) {
+			LogToFile.log(null, "INFO", "Chessboard is blocked");
 		}
+	}
 
 	private void checkGameState() {
 		// checkmate or stalemate
-		IKing king = chessboard.getKing(this.activePlayer);
-		if(king.isChecked()){
-			System.out.println("Checked!");
+		for (Player player : this.getSettings().players) {
+			Piece king = chessboard.getKing(player);
+			IKing kingBeh = (IKing) king.getMoveBehaviour();
+			KingState kingState = kingBeh.isCheckmatedOrStalemated(chessboard, king);
+			if (kingState.equals(IKing.KingState.checkmate)) {
+				this.endGame("Checkmate! " + king.getPlayer().getColor().toString() + " player lose!");
+			} else if (kingState.equals(IKing.KingState.stalemate)) {
+				this.endGame("Stalemate! Draw!");
+			} else {
+				System.out.println("The King "+ king.getPlayer().getColor()+" is ok!");
+			}
 		}
 
-		switch (king.isCheckmatedOrStalemated()) {
-		case 1:
-			this.endGame("Checkmate! " + king.getPlayer().getColor().toString() + " player lose!");
-			break;
-		case 2:
-			this.endGame("Stalemate! Draw!");
-			break;
-		default:
-			System.out.println("The king is ok!");
-		}
 	}
-	
+
 	@Override
 	public void componentResized(ComponentEvent e) {
 		int height = this.getHeight() >= this.getWidth() ? this.getWidth() : this.getHeight();

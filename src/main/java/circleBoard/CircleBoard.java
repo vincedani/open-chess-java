@@ -13,6 +13,7 @@ import main.java.game.Player;
 import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
 import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
 import main.java.pieces.Piece;
+import main.java.pieces.PieceBehaviour;
 import main.java.pieces.PieceFactory;
 import main.java.pieces.PieceFactory.PieceType;
 
@@ -26,11 +27,13 @@ public class CircleBoard implements IChessboard {
 	ChessboardLayout board_layout = new ChessboardLayout("circle_chessboard.png", "sel_circle.png", "able_circle.png");
 	CircleBoardInitialization initial;
 	private CircleBoardDisplay display;
+	PieceBehaviour pieceBehaviour;
 
 	public CircleBoard() {
 
 		initial = new CircleBoardInitialization(this);
 		display = new CircleBoardDisplay(null, null, new Point(0, 0), this);
+		pieceBehaviour = new PieceBehaviour(this);
 	}
 
 	/**
@@ -147,7 +150,7 @@ public class CircleBoard implements IChessboard {
 			// Create Dragon if a rook captures a piece
 			JOptionPane.showMessageDialog(null, "The princess " + end.getPiece().getType().toString() + " "
 					+ end.getPiece().getPlayer().getColor()
-					+ " is captured, if the dragon is defeated, you will get a queen. Be careful with the dragon, although he can only be used 3 times, he can throw fire to all the pieces around him, and with each move, his power grows. Good luck! ");
+					+ " is captured, if the dragon is defeated, you will get a queen. \n Be careful with the dragon, although he can only be used 3 times, he can throw fire to all the pieces around him, and with each move, his power grows. \n Good luck! ");
 			end.setPiece(PieceFactory.createSpecificPieceForCircleBoard(this, begin.getPiece().getPlayer(), PieceType.Dragon));
 			end.getPiece().setSquare(end);
 			begin.setPiece(null);
@@ -238,6 +241,10 @@ public class CircleBoard implements IChessboard {
 			return initial.kingBlue;
 		}
 		return null;
+	}
+	
+	public PieceBehaviour getPieceBehaviour() {
+		return pieceBehaviour;
 	}
 
 	/*

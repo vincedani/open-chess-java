@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import main.java.LogToFile;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
+import main.java.game.Settings.BoardType;
 import main.java.squareBoard.SquareBoard;
 
 public class PieceDisplay {
@@ -17,9 +18,9 @@ public class PieceDisplay {
 
 	public PieceDisplay(Piece piece) {
 
-		if (piece.getChessboard() instanceof CircleBoard)
+		if (piece.getChessboardType().equals(BoardType.circleBoard))
 			display = new CirclePieceDisplay(piece);
-		else if (piece.getChessboard() instanceof SquareBoard)
+		else if (piece.getChessboardType().equals(BoardType.squareBoard))
 			display = new SquarePieceDisplay(piece);
 	}
 

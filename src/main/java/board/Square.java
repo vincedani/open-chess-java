@@ -36,12 +36,12 @@ public class Square {
 		this.setPosX(pozX);
 		this.setPosY(pozY);
 		this.setPiece(piece);
+		
 	}/*--endOf-Square--*/
 
 	public Square(Square square) {
 		this.setPosX(square.getPosX());
 		this.setPosY(square.getPosY());
-		this.setPiece(square.getPiece());
 	}
 
 	public Square clone(Square square) {
@@ -64,23 +64,24 @@ public class Square {
 		this.posY = posY;
 	}
 
-	/**
-	 * @return the piece
-	 */
-	public Piece getPiece() {
-		return piece;
-	}
-
+	
 	/**
 	 * Set the given piece to this Square and set this Square to the given piece
-	 * @param piece the piece to set
+	 * 
+	 * @param piece
+	 *            the piece to set
 	 */
 	public void setPiece(Piece piece) {
 		this.piece = piece;
-		this.piece.setSquare(this);
+		if(piece != null){
+		this.piece.setSquare(this);}
 	}
-	
+
 	public Player getPlayer() {
 		return piece.getPlayer();
+	}
+
+	public Piece getPiece() {
+		return piece;
 	}
 }

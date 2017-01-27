@@ -22,6 +22,6 @@ public interface IMove {
 	 * 
 	 */
 
-	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing);
+	public ArrayList<Square> getMoves(IChessboard board, Piece piece, boolean ignoreKing);
 	
 }

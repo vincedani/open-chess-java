@@ -3,7 +3,6 @@ package main.java.circleBoard;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.pieces.Piece;
-import main.java.pieces.PieceBehaviour;
 import main.java.pieces.PieceFactory;
 import main.java.pieces.PieceFactory.PieceType;
 
@@ -16,8 +15,7 @@ public class CircleBoardInitialization {
 
 	public CircleBoardInitialization(CircleBoard board) {
 		this.board = board;
-		squares = new Square[24][6];// Initialization of 8x8 board
-		PieceBehaviour pieceBehaviour = new PieceBehaviour(board);
+		squares = new Square[24][6];
 		createSquares();
 	}
 
@@ -28,7 +26,7 @@ public class CircleBoardInitialization {
 	private void createSquares() {
 		for (int i = 0; i < 24; i++) {
 			for (int y = 0; y < 6; y++) {
-				getSquares()[i][y] = new Square(i, y, null);
+				squares[i][y] = new Square(i, y, null);
 			}
 		}
 	}

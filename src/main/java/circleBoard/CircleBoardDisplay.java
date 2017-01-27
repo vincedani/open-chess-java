@@ -96,7 +96,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 			g2d.drawImage(board_layout.selSquare, xm, ym, null);
 
 			if (getActiveSquare().getPiece() != null) {
-				ArrayList<Square> moves = getActiveSquare().getPiece().allMoves(false);
+				ArrayList<Square> moves = getActiveSquare().getPiece().allMoves(board, false);
 				for (Square sq : moves) {
 					Point pointSq = indexToCartesian(new Point(sq.getPosX(), sq.getPosY()));
 

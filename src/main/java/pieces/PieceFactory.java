@@ -56,7 +56,7 @@ public class PieceFactory {
             	LogToFile.log(null,"Info", "Piece "+pieceName.toString()+" cannot be created" );
          }
     	
-		 piece.moveBehaviour = pieceMove;  
+		 piece.setMoveBehaviour(pieceMove);  
 		return piece;
 	}
 	

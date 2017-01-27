@@ -47,8 +47,6 @@ public class GUI {
 
 	public GUI() {
 		this.game = new Game();
-
-		// this.drawGUI();
 	}/*--endOf-GUI--*/
 
 	/*

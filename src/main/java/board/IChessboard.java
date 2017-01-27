@@ -2,6 +2,7 @@ package main.java.board;
 
 import main.java.game.Player;
 import main.java.pieces.Piece;
+import main.java.pieces.PieceBehaviour;
 
 /**
  * Interface to manage the logical behaviors of any type of chessboard.
@@ -91,4 +92,5 @@ public interface IChessboard {
 	 */
 	public Piece getKing(Player player);
 
+	public PieceBehaviour getPieceBehaviour();
 }

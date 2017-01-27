@@ -1,8 +1,11 @@
 package main.java.pieces;
 
 import main.java.board.IChessboard;
+import main.java.board.IKing;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
+import main.java.game.Player;
+import main.java.game.Settings.BoardType;
 import main.java.squareBoard.SquareBoard;
 
 /**
@@ -48,8 +51,8 @@ public class PieceBehaviour {
 	 */
 	public boolean checkPiece(Piece piece, int i, int j) {
 		Piece squarePiece = chessboard.getSquareFromIndexes(i, j).getPiece();
-		
-		if (squarePiece == null || squarePiece.getPlayer() != piece.getPlayer()){
+
+		if (squarePiece == null || squarePiece.getPlayer() != piece.getPlayer()) {
 			return true;
 		}
 		return false;
@@ -74,7 +77,7 @@ public class PieceBehaviour {
 		}
 		return false;
 	}
-	
+
 	public Square getSquare(int i, int j) {
 		return chessboard.getSquareFromIndexes(i, j);
 	}
@@ -83,4 +86,22 @@ public class PieceBehaviour {
 		this.chessboard = chessboard2;
 	}
 
+	public IKing getKing(Player player) {
+		return (IKing) this.chessboard.getKing(player).getMoveBehaviour();
+	}
+
+	public Piece getKingAsPiece(Player player) {
+		return this.chessboard.getKing(player);
+	}
+
+	public BoardType getChessboardType() {
+		if(chessboard instanceof CircleBoard)
+			return BoardType.circleBoard;
+		else if(chessboard instanceof SquareBoard)
+			return BoardType.squareBoard;
+		return null;
 }
+
+	public IChessboard getChessboard() {
+		return chessboard;
+	}}
