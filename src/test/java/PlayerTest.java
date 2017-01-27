@@ -16,33 +16,33 @@ public class PlayerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		//p = new Player("Player1", "red");
+		p = new Player("Player1", "white");
 	}
 
 	@Test
 	public final void testGetName() {
-		/*String expected = "Player1";
+		String expected = "Player1";
 		String obtained = p.getName();
-		assertEquals(expected, obtained);*/
+		assertEquals(expected, obtained);
 	}
 
 	@Test
 	public final void testSetName() {
-		/*String name = "Homer";
+		String name = "Homer";
 		p.setName(name);
 		assertNotNull(p.getName());
-	*/}
+	}
 
 	@Test
 	public final void testGetColor() {
-		/*main.java.game.Player.colors expected = colors.valueOf("red");
+		main.java.game.Player.colors expected = colors.valueOf("white");
 		main.java.game.Player.colors obtained = p.getColor();
 
-		assertEquals(expected, obtained);*/
+		assertEquals(expected, obtained);
 	}
 
 	@Test
 	public final void isGoDown() {
-		/*assertFalse(p.isGoDown());*/
+		assertFalse(p.isGoDown());
 	}
 }

@@ -1,7 +1,6 @@
 package test.java.movesInCircleBoard;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -133,7 +132,8 @@ public class KingMovesInCircleBoardTest {
 		 * 
 		 * }
 		 */
-
+		KingMovesInCircleBoard kingMovesTest = new KingMovesInCircleBoard();
+		assertFalse(kingMovesTest.isSafe(board,rey));
 		assertEquals(rey.isCheckmatedOrStalemated(), 1);
 	}
 

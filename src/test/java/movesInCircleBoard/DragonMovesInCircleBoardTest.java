@@ -85,6 +85,7 @@ public class DragonMovesInCircleBoardTest {
 	public final void testIncreaseFireBlasterMiddleCircle() {
 		// Blast fire
 		dm.increaseFireLoader();
+		int fire = dm.getFireLoader();
 		int x = x2;
 		int y = y2;
 		
@@ -98,7 +99,8 @@ public class DragonMovesInCircleBoardTest {
 		
 		// Obtained set of moves ;
 		ArrayList<Square> obtained = dm.getMoves(board_squares.getSquares()[x][y].piece, true);
-
+		
+		assertTrue(fire>0);
 		assertTrue(obtained.containsAll(expected));
 	}
 	
