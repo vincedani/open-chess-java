@@ -51,6 +51,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 	}
 
 	public void paintComponent(Graphics g) {
+		super.paintComponents(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -65,9 +66,8 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 			g2d.drawImage(this.LeftRightLabel, board_layout.image.getHeight(null) + topLeftPoint.x, 0, null);
 		}
 		g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);
-		drawPieces(g);
+		drawPieces(g2d);
 		drawHighlightedSquares(g2d);
-		
 
 	}/*--endOf-paint--*/
 

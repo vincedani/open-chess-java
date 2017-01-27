@@ -60,20 +60,6 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 		drawLabels((int) square_height);
 	}
 
-	/**
-	 * Method to draw Chessboard and their elements (pieces etc.)
-	 * 
-	 * @deprecated
-	 */
-	public void draw() {
-		this.getGraphics().drawImage(board_layout.image, this.getTopLeftPoint().x, this.getTopLeftPoint().y, null);// draw
-																													// an
-																													// Image
-																													// of
-																													// chessboard
-		this.drawLabels();
-		this.repaint();
-	}/*--endOf-draw--*/
 
 	/**
 	 * Annotations to superclass Game updateing and painting the crossboard
@@ -108,11 +94,7 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 			g2d.drawImage(LeftRightLabel, 0, 0, null);
 			g2d.drawImage(LeftRightLabel, board_layout.image.getHeight(null) + topLeftPoint.x, 0, null);
 		}
-		g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);// draw
-																				// an
-																				// Image
-																				// of
-																				// chessboard
+		g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);
 		drawPieces(g);
 		if ((active_x_square != -1) && (active_y_square != -1)) // if some
 																// square is

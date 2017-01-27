@@ -173,7 +173,8 @@ public class NewGameWindow extends JFrame {
 						Settings gameSettings = new Settings(players, Settings.boardTypes.squareBoard,
 								Settings.gameTypes.local);
 						newGUI.newGame(gameSettings);
-						newGUI.getChessboard().getDisplay().repaint();
+						
+						NewGameWindow.this.dispose();
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Select different colors for each player");
