@@ -15,7 +15,7 @@ public class KingMovesInSquareBoard implements IMove {
 			for (int j = y - 1; j <= y + 1; j++) {
 				if (!piece.pieceBehaviour.isout(i, j)) {// out of bounds
 														// protection
-					Square sq = piece.getSquares(i, j);
+					Square sq = piece.getSquare(i, j);
 					if (piece.getSquare() == sq) {// if we're checking square on
 													// which is King
 						continue;
@@ -37,18 +37,18 @@ public class KingMovesInSquareBoard implements IMove {
 		King tempPiece = (King) piece1;
 		boolean canCastling = true;
 
-		Piece rook = tempPiece.getSquares(0, y).piece;
+		Piece rook = tempPiece.getSquare(0, y).piece;
 		if (!rook.wasMoved()) {
 			for (int i = x - 1; i > 0; i--) {// go
 												// left
-				if (tempPiece.getSquares(i,y).piece != null) {
+				if (tempPiece.getSquare(i,y).piece != null) {
 					canCastling = false;
 					break;
 				}
 			}
 
-			Square sq = tempPiece.getSquares(x - 2, y);
-			Square sq1 = tempPiece.getSquares(x - 1, y);
+			Square sq = tempPiece.getSquare(x - 2, y);
+			Square sq1 = tempPiece.getSquare(x - 1, y);
 			if (canCastling && tempPiece.isSafe(sq) && tempPiece.isSafe(sq1)) {
 				// can do castling when neither sq nor sq1 is checked
 				list.add(sq);
@@ -60,18 +60,18 @@ public class KingMovesInSquareBoard implements IMove {
 		King piece = (King) piece1;
 		boolean canCastling = true;
 
-		Piece rook = piece.getSquares(7,y).piece;
+		Piece rook = piece.getSquare(7,y).piece;
 		if (!rook.wasMoved()) {
 			for (int i = x + 1; i < 7; i++) {// go
 												// left
-				if (piece.getSquares(i,y).piece != null) {
+				if (piece.getSquare(i,y).piece != null) {
 					canCastling = false;
 					break;
 				}
 			}
 
-			Square sq = piece.getSquares(x + 2,y);
-			Square sq1 = piece.getSquares(x + 1,y);
+			Square sq = piece.getSquare(x + 2,y);
+			Square sq1 = piece.getSquare(x + 1,y);
 			if (canCastling && piece.isSafe(sq) && piece.isSafe(sq1)) {
 				// can do castling when neither sq nor sq1 is checked
 				list.add(sq);
@@ -81,16 +81,16 @@ public class KingMovesInSquareBoard implements IMove {
 
 	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		regularMove(piece, list, x, y);
 		Piece king = piece;
 		if (king.wasMoved()) {
 			// check if king was not moved before
-			Piece tempPiece = king.getSquares(0, y).piece;
+			Piece tempPiece = king.getSquare(0, y).piece;
 			if (tempPiece != null && tempPiece.getName().equals("Rook")) {
 				castlingLeftMove(king, list, x, y);
 			}
-			if (king.getSquares(7, y).piece != null && tempPiece.getName().equals("Rook")) {
+			if (king.getSquare(7, y).piece != null && tempPiece.getName().equals("Rook")) {
 				castlingLeftMove(king, list, x, y);
 			}
 		}

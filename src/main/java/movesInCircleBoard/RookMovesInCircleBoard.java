@@ -10,10 +10,10 @@ public class RookMovesInCircleBoard implements IMove {
 
 	
 	private void forwardVerticalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		for (int i = y + 1; i <= 5; i++) {// up
-			Square newMove = piece.getSquares(x, i);
-			if (newMove.piece == null || (piece.pieceBehaviour.otherOwner(x, i) && piece.wasMoved())) {
+			Square newMove = piece.getSquare(x, i);
+			if (newMove.getPiece() == null || (piece.pieceBehaviour.otherOwner(x, i) && piece.wasMoved())) {
 				
 				if (ignoreKing) {
 					list.add(newMove);
@@ -33,10 +33,10 @@ public class RookMovesInCircleBoard implements IMove {
 	}
 
 	private void backwardVerticalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		for (int i = y - 1; i >= 0; i--) {// down
-			Square newMove = piece.getSquares(x,i);
-			if (newMove.piece == null || (piece.pieceBehaviour.otherOwner(x, i) && piece.wasMoved())) {
+			Square newMove = piece.getSquare(x,i);
+			if (newMove.getPiece() == null || (piece.pieceBehaviour.otherOwner(x, i) && piece.wasMoved())) {
 
 				if (ignoreKing) {
 					list.add(newMove);
@@ -55,14 +55,14 @@ public class RookMovesInCircleBoard implements IMove {
 	}
 
 	private void rightHorizontalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		if (x == 23) {
 			x = -1;
 		}
 		for (int i = x + 1; i <= 23; ++i) {// right
 
-				Square newMove = piece.getSquares(i,y);
-				if (newMove.piece == null || (piece.pieceBehaviour.otherOwner(i,y) && piece.wasMoved())) {
+				Square newMove = piece.getSquare(i,y);
+				if (newMove.getPiece() == null || (piece.pieceBehaviour.otherOwner(i,y) && piece.wasMoved())) {
 
 				if (ignoreKing) {
 					list.add(newMove);
@@ -86,15 +86,15 @@ public class RookMovesInCircleBoard implements IMove {
 	}
 
 	private void leftHorizontalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		if (x == 0) {
 			x = 24;
 		}
 		for (int i = x - 1; i >= 0; --i) {// left
 
 			
-				Square newMove = piece.getSquares(i,y);
-				if (newMove.piece == null || (piece.pieceBehaviour.otherOwner(i,y) && piece.wasMoved())) {
+				Square newMove = piece.getSquare(i,y);
+				if (newMove.getPiece() == null || (piece.pieceBehaviour.otherOwner(i,y) && piece.wasMoved())) {
 
 				if (ignoreKing) {
 					list.add(newMove);

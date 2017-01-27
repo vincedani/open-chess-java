@@ -23,7 +23,7 @@ public class SquareTest
 	@Test 
 	public void testgetPozX() {
 		int expected = 1; 
-		int obtained = cookie.getPozX();
+		int obtained = cookie.getPosX();
 		
 		assertEquals(expected, obtained);
 	}
@@ -31,7 +31,7 @@ public class SquareTest
 	@Test 
 	public void testgetPozY() {
 		int expected = 1; 
-		int obtained = cookie.getPozY();
+		int obtained = cookie.getPosY();
 		
 		assertEquals(expected, obtained);
 		

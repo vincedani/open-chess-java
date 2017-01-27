@@ -16,8 +16,7 @@ public interface IMove {
 	 *            the instance of the piece to extract the possible moves
 	 * 
 	 * @param ignoreKing
-	 *            if active, it will not be checked if the King is in Check or
-	 *            Stalemate
+	 *            if active, it will not check if its King will remain safe
 	 * 
 	 * @return an ArrayList of Squares with the possible moves of the piece
 	 * 

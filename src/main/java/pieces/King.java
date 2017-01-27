@@ -66,10 +66,8 @@ public class King extends Piece {
 		return list;
 	}
 
-	/**
-	 * Method to check is the king is checked
-	 * 
-	 * @return bool true if king is not save, else returns false
+	/* (non-Javadoc)
+	 * @see main.java.pieces.IKing#isChecked()
 	 */
 	public boolean isChecked() {
 		return !isSafe(this.getSquare());
@@ -84,7 +82,7 @@ public class King extends Piece {
 
 			for (int i = 0; i < 8; ++i) {
 				for (int j = 0; j < 8; ++j) {
-					boardPiece = getSquares(i, j).piece;
+					boardPiece = getSquare(i, j).piece;
 					if (boardPiece != null && boardPiece.getPlayer() == this.getPlayer()
 							&& allMovesSize(boardPiece, false) != 0) {
 						return 0;
@@ -102,10 +100,8 @@ public class King extends Piece {
 		}
 	}
 
-	/**
-	 * Method to check is the king is checked or stalemated
-	 * 
-	 * @return int 0 if nothing, 1 if checkmate, else returns 2
+	/* (non-Javadoc)
+	 * @see main.java.pieces.IKing#isCheckmatedOrStalemated()
 	 */
 	public int isCheckmatedOrStalemated() {
 		/*
@@ -124,7 +120,7 @@ public class King extends Piece {
 			Piece boardPiece;
 			for (int i = 0; i < nx; ++i) {
 				for (int j = 0; j < ny; ++j) {
-					boardPiece = getSquares(i, j).piece;
+					boardPiece = getSquare(i, j).piece;
 					if (boardPiece != null && boardPiece.getPlayer() == this.getPlayer()
 							&& allMovesSize(boardPiece, false) != 0) {
 						return 0;
@@ -145,9 +141,9 @@ public class King extends Piece {
 	public boolean isSafeOld(Square s) // A bit confusing code.
 	{
 		// Rook & Queen
-		for (int i = s.getPozY() + 1; i <= 7; ++i) {
+		for (int i = s.getPosY() + 1; i <= 7; ++i) {
 			// Up
-			Piece boardPiece = this.getSquares(s.getPozX(), i).piece;
+			Piece boardPiece = this.getSquare(s.getPosX(), i).piece;
 			if (boardPiece == null || boardPiece == this) {
 				// No piece on this square?
 				continue;
@@ -162,9 +158,9 @@ public class King extends Piece {
 				break;
 			}
 		}
-		for (int i = s.getPozY() - 1; i >= 0; --i) {
+		for (int i = s.getPosY() - 1; i >= 0; --i) {
 			// Down
-			Piece boardPiece = this.getSquares(s.getPozX(), i).piece;
+			Piece boardPiece = this.getSquare(s.getPosX(), i).piece;
 
 			if (boardPiece == null || boardPiece == this) {
 				// No piece in this square?
@@ -180,9 +176,9 @@ public class King extends Piece {
 				break;
 			}
 		}
-		for (int i = s.getPozX() - 1; i >= 0; --i) {
+		for (int i = s.getPosX() - 1; i >= 0; --i) {
 			// Left
-			Piece boardPiece = this.getSquares(i, s.getPozY()).piece;
+			Piece boardPiece = this.getSquare(i, s.getPosY()).piece;
 
 			if (boardPiece == null || boardPiece == this) {
 				// No piece in square?
@@ -198,9 +194,9 @@ public class King extends Piece {
 				break;
 			}
 		}
-		for (int i = s.getPozX() + 1; i <= 7; ++i) {
+		for (int i = s.getPosX() + 1; i <= 7; ++i) {
 			// Right
-			Piece boardPiece = this.getSquares(i, s.getPozY()).piece;
+			Piece boardPiece = this.getSquare(i, s.getPosY()).piece;
 			if (boardPiece == null || boardPiece == this) {
 				continue;
 			} else if (boardPiece.getPlayer() != this.getPlayer()) {
@@ -215,9 +211,9 @@ public class King extends Piece {
 		}
 
 		// Bishop & Queen
-		for (int h = s.getPozX() - 1, i = s.getPozY() + 1; !pieceBehaviour.isout(h, i); --h, ++i){
+		for (int h = s.getPosX() - 1, i = s.getPosY() + 1; !pieceBehaviour.isout(h, i); --h, ++i){
 			// Left-up
-			Piece boardPiece = this.getSquares(h, i).piece;
+			Piece boardPiece = this.getSquare(h, i).piece;
 			if (boardPiece == null || boardPiece == this) {
 				continue;
 			} else if (boardPiece.getPlayer() != this.getPlayer()){
@@ -231,9 +227,9 @@ public class King extends Piece {
 			}
 		}
 
-		for (int h = s.getPozX() - 1, i = s.getPozY() - 1; !pieceBehaviour.isout(h, i); --h, --i) // left-down
+		for (int h = s.getPosX() - 1, i = s.getPosY() - 1; !pieceBehaviour.isout(h, i); --h, --i) // left-down
 		{
-			Piece boardPiece = this.getSquares(h,i).piece;
+			Piece boardPiece = this.getSquare(h,i).piece;
 			if (boardPiece == null || boardPiece == this){
 				continue;
 			} else if (boardPiece.getPlayer() != this.getPlayer()){
@@ -247,9 +243,9 @@ public class King extends Piece {
 			}
 		}
 
-		for (int h = s.getPozX() + 1, i = s.getPozY() + 1; !pieceBehaviour.isout(h, i); ++h, ++i){
+		for (int h = s.getPosX() + 1, i = s.getPosY() + 1; !pieceBehaviour.isout(h, i); ++h, ++i){
 			// Right-up
-			Piece boardPiece = this.getSquares(i, s.getPozY()).piece;
+			Piece boardPiece = this.getSquare(i, s.getPosY()).piece;
 			if (boardPiece == null || boardPiece == this){
 				continue;
 			} else if (boardPiece.getPlayer() != this.getPlayer()){
@@ -263,9 +259,9 @@ public class King extends Piece {
 			}
 		}
 
-		for (int h = s.getPozX() + 1, i = s.getPozY() - 1; !pieceBehaviour.isout(h, i); ++h, --i) // right-down
+		for (int h = s.getPosX() + 1, i = s.getPosY() - 1; !pieceBehaviour.isout(h, i); ++h, --i) // right-down
 		{
-			Piece boardPiece = this.getSquares(h,i).piece;
+			Piece boardPiece = this.getSquare(h,i).piece;
 
 			if (boardPiece == null || boardPiece == this){
 				continue;
@@ -284,9 +280,9 @@ public class King extends Piece {
 		int newX, newY;
 
 		// 1
-		newX = s.getPozX() - 2;
-		newY = s.getPozY() + 1;
-		Piece boardPiece = this.getSquares(newX,newY).piece;
+		newX = s.getPosX() - 2;
+		newY = s.getPosY() + 1;
+		Piece boardPiece = this.getSquare(newX,newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
 			if (boardPiece == null){
@@ -297,9 +293,9 @@ public class King extends Piece {
 		}
 
 		// 2
-		newX = s.getPozX() - 1;
-		newY = s.getPozY() + 2;
-		boardPiece = this.getSquares(newX,newY).piece;
+		newX = s.getPosX() - 1;
+		newY = s.getPosY() + 2;
+		boardPiece = this.getSquare(newX,newY).piece;
 		
 		if (!pieceBehaviour.isout(newX, newY)) {
 			if (boardPiece == null){
@@ -310,9 +306,9 @@ public class King extends Piece {
 		}
 
 		// 3
-		newX = s.getPozX() + 1;
-		newY = s.getPozY() + 2;
-		boardPiece = this.getSquares(newX,newY).piece;
+		newX = s.getPosX() + 1;
+		newY = s.getPosY() + 2;
+		boardPiece = this.getSquare(newX,newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
 			if (boardPiece == null){
@@ -323,9 +319,9 @@ public class King extends Piece {
 		}
 
 		// 4
-		newX = s.getPozX() + 2;
-		newY = s.getPozY() + 1;
-		boardPiece = this.getSquares(newX,newY).piece;
+		newX = s.getPosX() + 2;
+		newY = s.getPosY() + 1;
+		boardPiece = this.getSquare(newX,newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
 			if (boardPiece == null){
@@ -336,9 +332,9 @@ public class King extends Piece {
 		}
 
 		// 5
-		newX = s.getPozX() + 2;
-		newY = s.getPozY() - 1;
-		boardPiece = this.getSquares(newX,newY).piece;
+		newX = s.getPosX() + 2;
+		newY = s.getPosY() - 1;
+		boardPiece = this.getSquare(newX,newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
 			if (boardPiece == null){
@@ -349,9 +345,9 @@ public class King extends Piece {
 		}
 
 		// 6
-		newX = s.getPozX() + 1;
-		newY = s.getPozY() - 2;
-		boardPiece = this.getSquares(newX,newY).piece;
+		newX = s.getPosX() + 1;
+		newY = s.getPosY() - 2;
+		boardPiece = this.getSquare(newX,newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
 			if (boardPiece == null) {
@@ -362,9 +358,9 @@ public class King extends Piece {
 		}
 
 		// 7
-		newX = s.getPozX() - 1;
-		newY = s.getPozY() - 2;
-		boardPiece = this.getSquares(newX,newY).piece;
+		newX = s.getPosX() - 1;
+		newY = s.getPosY() - 2;
+		boardPiece = this.getSquare(newX,newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
 			if (boardPiece == null){
@@ -375,9 +371,9 @@ public class King extends Piece {
 		}
 
 		// 8
-		newX = s.getPozX() - 2;
-		newY = s.getPozY() - 1;
-		boardPiece = this.getSquares(newX,newY).piece;
+		newX = s.getPosX() - 2;
+		newY = s.getPosY() - 1;
+		boardPiece = this.getSquare(newX,newY).piece;
 
 		if (!pieceBehaviour.isout(newX, newY)) {
 			if (boardPiece == null){
@@ -404,9 +400,9 @@ public class King extends Piece {
 		// Pawn
 		if (this.getPlayer().isGoDown()){
 			// Down
-			newX = s.getPozX() - 1;
-			newY = s.getPozY() + 1;
-			boardPiece = this.getSquares(newX,newY).piece;
+			newX = s.getPosX() - 1;
+			newY = s.getPosY() + 1;
+			boardPiece = this.getSquare(newX,newY).piece;
 			if (!pieceBehaviour.isout(newX, newY)) {
 				if (boardPiece == null){
 				} else if (boardPiece.getPlayer() == this.getPlayer()){
@@ -415,8 +411,8 @@ public class King extends Piece {
 				}
 			}
 			
-			newX = s.getPozX() + 1;
-			boardPiece = this.getSquares(newX,newY).piece;
+			newX = s.getPosX() + 1;
+			boardPiece = this.getSquare(newX,newY).piece;
 			if (!pieceBehaviour.isout(newX, newY)) {
 				if (boardPiece == null){
 				} else if (boardPiece.getPlayer() == this.getPlayer()){
@@ -427,9 +423,9 @@ public class King extends Piece {
 			
 		} else {
 			// Go UP
-			newX = s.getPozX() - 1;
-			newY = s.getPozY() - 1;
-			boardPiece = this.getSquares(newX,newY).piece;
+			newX = s.getPosX() - 1;
+			newY = s.getPosY() - 1;
+			boardPiece = this.getSquare(newX,newY).piece;
 			if (!pieceBehaviour.isout(newX, newY)) {
 				if (boardPiece == null){
 				} else if (boardPiece.getPlayer() == this.getPlayer()){
@@ -438,8 +434,8 @@ public class King extends Piece {
 				}
 			}
 			
-			newX = s.getPozX() + 1;
-			boardPiece = this.getSquares(newX,newY).piece;
+			newX = s.getPosX() + 1;
+			boardPiece = this.getSquare(newX,newY).piece;
 			if (!pieceBehaviour.isout(newX, newY)) {
 				if (boardPiece == null){
 				} else if (boardPiece.getPlayer() == this.getPlayer()){
@@ -452,12 +448,8 @@ public class King extends Piece {
 		return true;
 	}
 
-	/**
-	 * Method to check is the king is checked by an opponent
-	 * 
-	 * @param s
-	 *            Square where is a king
-	 * @return bool true if king is save, else returns false
+	/* (non-Javadoc)
+	 * @see main.java.pieces.IKing#isSafe(main.java.board.Square)
 	 */
 	public boolean isSafe(Square s) 
 	{
@@ -472,7 +464,7 @@ public class King extends Piece {
 		
 		for (int i = 0; i < nx; i++) {
 			for (int j = 0; j < ny; j++) {
-				Piece boardPiece = this.getSquares(i, j).piece;
+				Piece boardPiece = this.getSquare(i, j).piece;
 				if (boardPiece != null && boardPiece.getPlayer() != this.getPlayer()) {
 					if(boardPiece.getName().equals("Dragon")){
 						continue;
@@ -489,26 +481,19 @@ public class King extends Piece {
 		return true;
 	}
 
-	/**
-	 * Method to check will the king be safe after the move of the pieces in the
-	 * given squares
-	 * 
-	 * @param sqIsHe	re
-	 *            the original square of the piece
-	 * @param sqWillBeThere
-	 *            the future square of the piece
-	 * @return boolean true if king is save, else returns false
+	/* (non-Javadoc)
+	 * @see main.java.pieces.IKing#willBeSafeAfterMove(main.java.board.Square, main.java.board.Square)
 	 */
 	public boolean willBeSafeAfterMove(Square sqIsHere, Square sqWillBeThere) {
-		Piece tmp = sqWillBeThere.piece;
-		sqWillBeThere.piece = sqIsHere.piece; // move without redraw
-		sqIsHere.piece = null;
+		Piece tmp = sqWillBeThere.getPiece();
+		sqWillBeThere.setPiece(sqIsHere.getPiece()); // move without redraw
+		sqIsHere.setPiece(null);
 		boolean ret;
 		
 		ret = isSafe(this.getSquare());
 		
-		sqIsHere.piece = sqWillBeThere.piece;
-		sqWillBeThere.piece = tmp;
+		sqIsHere.setPiece(sqWillBeThere.getPiece());
+		sqWillBeThere.setPiece(tmp);
 
 		return ret;
 	}

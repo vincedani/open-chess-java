@@ -22,17 +22,17 @@ public class BishopMovesInCircleBoard implements IMove {
 	 * 
 	 */
 	private static void backwardRightMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		if (x == 0) {
 			x = 24;
 		}
-		for (int h = x - 1, i = y + 1; !piece.pieceBehaviour.isout(h, i); --h, ++i) // left-up
+		for (int h = x - 1, i = y + 1; ! piece.pieceBehaviour.isout(h, i); h--, i++) // left-up
 		{
 			if (piece.pieceBehaviour.checkPiece(h, i)) {
-				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i)) ) {
-					list.add(piece.getSquares(h, i));
-				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i))) {
-					list.add(piece.getSquares(h, i));
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquare(h, i)) ) {
+					list.add(piece.getSquare(h, i));
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquare(h, i))) {
+					list.add(piece.getSquare(h, i));
 				}
 
 				if (piece.pieceBehaviour.otherOwner(h, i)) {
@@ -49,7 +49,7 @@ public class BishopMovesInCircleBoard implements IMove {
 	}
 
 	private static void backwardLeftMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		if (x == 0) {
 			x = 24;
 		}
@@ -59,9 +59,9 @@ public class BishopMovesInCircleBoard implements IMove {
 														// isn't piece
 			{
 				if (ignoreKing) {
-					list.add(piece.getSquares(h, i));
-				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i))) {
-					list.add(piece.getSquares(h, i));
+					list.add(piece.getSquare(h, i));
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquare(h, i))) {
+					list.add(piece.getSquare(h, i));
 				}
 
 				if (piece.pieceBehaviour.otherOwner(h, i)) {
@@ -78,7 +78,7 @@ public class BishopMovesInCircleBoard implements IMove {
 	}
 
 	private static void forwardRightMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		if (x == 23) {
 			x = -1;
 		}
@@ -89,9 +89,9 @@ public class BishopMovesInCircleBoard implements IMove {
 														// piece
 			{
 				if (ignoreKing) {
-					list.add(piece.getSquares(h, i));
-				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i))) {
-					list.add(piece.getSquares(h, i));
+					list.add(piece.getSquare(h, i));
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquare(h, i))) {
+					list.add(piece.getSquare(h, i));
 				}
 
 				if (piece.pieceBehaviour.otherOwner(h, i)) {
@@ -109,7 +109,7 @@ public class BishopMovesInCircleBoard implements IMove {
 	}
 
 	private static void forwardLeftMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		if (x == 23) {
 			x = -1;
 		}
@@ -119,9 +119,9 @@ public class BishopMovesInCircleBoard implements IMove {
 														// isn't piece
 			{
 				if (ignoreKing) {
-					list.add(piece.getSquares(h, i));
-				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquares(h, i))) {
-					list.add(piece.getSquares(h, i));
+					list.add(piece.getSquare(h, i));
+				} else if (piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquare(h, i))) {
+					list.add(piece.getSquare(h, i));
 				}
 
 				if (piece.pieceBehaviour.otherOwner(h, i)) {

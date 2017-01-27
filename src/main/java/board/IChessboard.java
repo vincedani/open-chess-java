@@ -1,7 +1,7 @@
 package main.java.board;
 
 import main.java.game.Player;
-import main.java.pieces.King;
+import main.java.pieces.Piece;
 
 /**
  * Interface to manage the logical behaviors of any type of chessboard.
@@ -19,8 +19,20 @@ public interface IChessboard {
 	 * 
 	 * @return reference to searched square
 	 */
-	public Square getSquare(int x, int y);
+	public Square getSquareFromCoordinates(int x, int y);
 
+	/**
+	 * Get the reference to the square for the given i and j indexes
+	 * 
+	 * @param i
+	 *            i index in the board
+	 * @param j
+	 *            j index in the board
+	 * 
+	 * @return reference to searched square
+	 */
+	public Square getSquareFromIndexes(int i, int j);
+	
 	/**
 	 * Select a Square in chessboard
 	 * 
@@ -37,6 +49,12 @@ public interface IChessboard {
 
 	/**
 	 * 
+	 * @return selected square of the Chessboard
+	 */
+	public Square getActiveSquare();
+	
+	/**
+	 * 
 	 * @return ChesboardDisplay Object of the Chessboard.
 	 */
 	public ChessboardDisplay getDisplay();
@@ -50,11 +68,6 @@ public interface IChessboard {
 	 */
 	public void setPieces(Player[] players);
 
-	/**
-	 * 
-	 * @return two dimensional array of Squares of the Chessboard
-	 */
-	public Square[][] getSquares();
 
 	/**
 	 * Move piece from a square to a different one
@@ -65,16 +78,7 @@ public interface IChessboard {
 	 *            square where we want to move piece
 	 */
 	public void move(Square begin, Square end);
-
-	public boolean undo();
-
-	public boolean redo();
-
-	/**
-	 * 
-	 * @return selected square of the Chessboard
-	 */
-	public Square getActiveSquare();
+	
 
 	/**
 	 * 
@@ -85,6 +89,6 @@ public interface IChessboard {
 	 *         not found
 	 * 
 	 */
-	public King getKing(Player player);
+	public Piece getKing(Player player);
 
 }

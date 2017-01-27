@@ -20,6 +20,7 @@
  */
 package main.java.board;
 
+import main.java.game.Player;
 import main.java.pieces.Piece;
 
 /**
@@ -27,52 +28,59 @@ import main.java.pieces.Piece;
  */
 public class Square {
 
-	private int pozX;
-	private int pozY;
-	public Piece piece = null;
+	private int posX;
+	private int posY;
+	private Piece piece = null;
 
 	public Square(int pozX, int pozY, Piece piece) {
-		this.setPozX(pozX);
-		this.setPozY(pozY);
-		this.piece = piece;
+		this.setPosX(pozX);
+		this.setPosY(pozY);
+		this.setPiece(piece);
 	}/*--endOf-Square--*/
 
 	public Square(Square square) {
-		this.setPozX(square.getPozX());
-		this.setPozY(square.getPozY());
-		this.piece = square.piece;
+		this.setPosX(square.getPosX());
+		this.setPosY(square.getPosY());
+		this.setPiece(square.getPiece());
 	}
 
 	public Square clone(Square square) {
 		return new Square(square);
 	}
 
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	/**
+	 * @return the piece
+	 */
+	public Piece getPiece() {
+		return piece;
+	}
+
 	/**
 	 * Set the given piece to this Square and set this Square to the given piece
-	 * 
-	 * @param piece
-	 *            Instance of piece to set
-	 * 
+	 * @param piece the piece to set
 	 */
-
 	public void setPiece(Piece piece) {
 		this.piece = piece;
 		this.piece.setSquare(this);
 	}
-
-	public int getPozX() {
-		return pozX;
-	}
-
-	public void setPozX(int pozX) {
-		this.pozX = pozX;
-	}
-
-	public int getPozY() {
-		return pozY;
-	}
-
-	public void setPozY(int pozY) {
-		this.pozY = pozY;
+	
+	public Player getPlayer() {
+		return piece.getPlayer();
 	}
 }

@@ -13,7 +13,7 @@ import main.java.circleBoard.CircleBoard;
 import main.java.circleBoard.CircleBoardInitialization;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
-import main.java.movesInCircleBoard.KingMovesInCircleBoard;
+import main.java.movesInCircleBoard.KingInCircleBoard;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;

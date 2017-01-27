@@ -38,64 +38,30 @@ public class Settings implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static ResourceBundle loc = null;
-	public int timeForGame;
-	public boolean runningChat;
-	public boolean runningGameClock;
-	public boolean timeLimitSet;
-	public boolean upsideDown;
 	public LogToFile logger = new LogToFile();
 
-	public enum gameModes {
+	public enum GameMode {
 
 		newGame, loadedGame
 	}
 
-	public gameModes gameMode;
+	public GameMode gameMode;
 
-	public enum boardTypes {
+	public enum BoardType {
 
 		squareBoard, circleBoard
 	}
 	
-	public boardTypes boardType;
-
-	public Player playerWhite;
-	public Player playerBlack;
-	public Player playerBlue;
+	public BoardType boardType;
 
 	public Player[] players ;
 
-	public enum gameTypes {
-
-		local, network
-	}
-
-	public gameTypes gameType;
-
 	
-	public Settings() {
-		// temporally
-		this.playerWhite = new Player("", "white");
-		this.playerBlack = new Player("", "black");
-		this.playerBlue = new Player("", "blue");
-		this.timeLimitSet = false;
-		gameMode = gameModes.newGame;
-	}
-	
-	public Settings(Player[] players, boardTypes boardType, gameTypes gameType){
+	public Settings(Player[] players, BoardType boardType){
 		this.players= players;
 		this.boardType = boardType;
-		this.gameType = gameType;
 	}
 
-	/**
-	 * Method to get game time set by player
-	 * 
-	 * @return timeFofGame int with how long the game will last
-	 */
-	public int getTimeForGame() {
-		return this.timeForGame;
-	}
 
 	public static String lang(String key) {
 		if (Settings.loc == null) {

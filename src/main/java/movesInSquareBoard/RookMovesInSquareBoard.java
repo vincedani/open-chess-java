@@ -9,11 +9,11 @@ import main.java.pieces.Piece;
 public class RookMovesInSquareBoard implements IMove {
 
 	private static void forwardVerticalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		for (int i = y + 1; i <= 7; i++) {// up
 
 			if (piece.pieceBehaviour.checkPiece(x, i)) {
-				Square newMove = piece.getSquares(x,i);
+				Square newMove = piece.getSquare(x,i);
 
 				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);
@@ -31,13 +31,13 @@ public class RookMovesInSquareBoard implements IMove {
 	}
 
 	private static void backwardVerticalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		for (int i = y - 1; i >= 0; i--) {// down
 
 			if (piece.pieceBehaviour.checkPiece(x, i)) {// if on this square
 														// isn't piece
 
-				Square newMove = piece.getSquares(x,i);
+				Square newMove = piece.getSquare(x,i);
 
 				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);
@@ -54,13 +54,13 @@ public class RookMovesInSquareBoard implements IMove {
 	}
 
 	private static void rightHorizontalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		for (int i = x + 1; i <= 7; ++i) {// right
 
 			if (piece.pieceBehaviour.checkPiece(i, y)) {// if on this square
 														// isn't piece
 
-				Square newMove = piece.getSquares(i,y);
+				Square newMove = piece.getSquare(i,y);
 
 				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);
@@ -77,11 +77,11 @@ public class RookMovesInSquareBoard implements IMove {
 	}
 
 	private static void leftHorizontalMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPozX(), y = piece.getPozY();
+		int x = piece.getPosX(), y = piece.getPosY();
 		for (int i = x - 1; i >= 0; --i) {// left
 
-			if (piece.pieceBehaviour.checkPiece(i, piece.getPozY())) {// if
-				Square newMove = piece.getSquares(i,y);
+			if (piece.pieceBehaviour.checkPiece(i, piece.getPosY())) {// if
+				Square newMove = piece.getSquare(i,y);
 
 				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), newMove)) {
 					list.add(newMove);

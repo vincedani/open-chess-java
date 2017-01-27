@@ -107,12 +107,12 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 																					// selected
 																					// square
 			Square tmpSquare = squares[active_x_square][active_y_square];
-			if (tmpSquare.piece != null) {
-				board.moves = squares[active_x_square][active_y_square].piece.allMoves(false);
+			if (tmpSquare.getPiece() != null) {
+				board.moves = squares[active_x_square][active_y_square].getPiece().allMoves(false);
 				for (Iterator it = board.moves.iterator(); board.moves != null && it.hasNext();) {
 					Square sq = (Square) it.next();
-					g2d.drawImage(board_layout.ableSquare, (sq.getPozX() * (int) square_height) + topLeftPoint.x,
-							(sq.getPozY() * (int) square_height) + topLeftPoint.y, null);
+					g2d.drawImage(board_layout.ableSquare, (sq.getPosX() * (int) square_height) + topLeftPoint.x,
+							(sq.getPosY() * (int) square_height) + topLeftPoint.y, null);
 				}
 			}
 
@@ -123,8 +123,8 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 		for (int i = 0; i < 8; i++) // drawPiecesOnSquares
 		{
 			for (int y = 0; y < 8; y++) {
-				if (squares[i][y].piece != null) {
-					squares[i][y].piece.draw(g);// draw image of Piece
+				if (squares[i][y].getPiece() != null) {
+					squares[i][y].getPiece().draw(g);// draw image of Piece
 				}
 			}
 		} // --endOf--drawPiecesOnSquares
