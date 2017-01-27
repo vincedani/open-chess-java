@@ -2,10 +2,12 @@ package main.java.circleBoard;
 
 import java.util.ArrayList;
 
+import main.java.Constants;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.KingMovesInCircleBoard;
+import main.java.pieces.ConcretePieceFactory;
 import main.java.pieces.King;
 import main.java.pieces.PieceFactory;
 
@@ -60,21 +62,22 @@ public class CircleBoardInitialization {
 	 *            which is owner of pawns
 	 */
 	private void setFigures4NewGame(int i, int j, Player player) {
-
+        
+		ConcretePieceFactory piceFac = new ConcretePieceFactory();
 		// Rooks
-		squares[i][j].setPiece(PieceFactory.createRookInCircleBoard(board, player));
-		squares[i+7][j].setPiece(PieceFactory.createRookInCircleBoard(board, player));
+		squares[i][j].setPiece(piceFac.GetPieceForCircleBoard(Constants.Symbols.Rook.toString(),Constants.Pieces.Rook.toString(), board, player));/*PieceFactory.createRookInCircleBoard(board, player));*/
+		squares[i+7][j].setPiece(piceFac.GetPieceForCircleBoard(Constants.Symbols.Rook.toString(),Constants.Pieces.Rook.toString(), board, player));/*PieceFactory.createRookInCircleBoard(board, player));*/
 
 		// Knight
-		squares[i + 1][j].setPiece(PieceFactory.createKnightInCircleBoard(board, player));
-		squares[i + 6][j].setPiece(PieceFactory.createKnightInCircleBoard(board, player));
+		squares[i + 1][j].setPiece(piceFac.GetPieceForCircleBoard(Constants.Symbols.Knight.toString(),Constants.Pieces.Knight.toString(), board, player));/*PieceFactory.createKnightInCircleBoard(board, player));*/
+		squares[i + 6][j].setPiece(piceFac.GetPieceForCircleBoard(Constants.Symbols.Knight.toString(),Constants.Pieces.Knight.toString(), board, player));/*PieceFactory.createKnightInCircleBoard(board, player));*/
 
 		// Bishop
-		squares[i + 2][j].setPiece(PieceFactory.createBishopInCircleBoard(board, player));
-		squares[i + 5][j].setPiece(PieceFactory.createBishopInCircleBoard(board, player));
+		squares[i + 2][j].setPiece(piceFac.GetPieceForCircleBoard(Constants.Symbols.Bishop.toString(),Constants.Pieces.Bishop.toString(), board, player)/*PieceFactory.createBishopInCircleBoard(board, player)*/);
+		squares[i + 5][j].setPiece(piceFac.GetPieceForCircleBoard(Constants.Symbols.Bishop.toString(),Constants.Pieces.Bishop.toString(), board, player)/*PieceFactory.createBishopInCircleBoard(board, player)*/);
 
 		// THE QUEEN MOTHER OF DRAGONS
-		squares[i + 4][j].setPiece(PieceFactory.createQueenInCircleBoard(board, player));
+		squares[i + 4][j].setPiece(piceFac.GetPieceForCircleBoard(Constants.Symbols.Queen.toString(),Constants.Pieces.Queen.toString(), board, player)/*PieceFactory.createQueenInCircleBoard(board, player)*/);
 
 		ArrayList<IMove> kingMoves = new ArrayList<>();
 		kingMoves.add(new KingMovesInCircleBoard());
@@ -100,9 +103,11 @@ public class CircleBoardInitialization {
 	 */
 	private void setPawns4NewGame(int i, int j, Player player) {
 
+		ConcretePieceFactory piceFac = new ConcretePieceFactory();
+		
 		for (int k = 0; k < 8; k++) {
 			
-			squares[i + k][j].setPiece(PieceFactory.createPawnInCircleBoard(board, player));
+			squares[i + k][j].setPiece(piceFac.GetPieceForCircleBoard("",Constants.Pieces.Pawn.toString(), board, player)/*PieceFactory.createPawnInCircleBoard(board, player)*/);
 		}
 	}
 

@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import main.java.Constants;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.circleBoard.CircleBoardInitialization;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.BishopMovesInCircleBoard;
+import main.java.pieces.ConcretePieceFactory;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;
 
@@ -30,12 +32,12 @@ public class BishopMovesTest {
 		p1 = new Player("Player1", "white");
 		x = 3;
 		y = 3;
-		
+		ConcretePieceFactory pieceFac = new ConcretePieceFactory();
 		board=  mock(CircleBoard.class);
 		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
 		
-		bishop = PieceFactory.createKnightInCircleBoard(board, p1);
+		bishop = pieceFac.GetPieceForSquareBoard(Constants.Symbols.Knight.toString(),Constants.Pieces.Knight.toString(), board, p1);//PieceFactory.createKnightInCircleBoard(board, p1);
 		board.getSquares()[x][y].setPiece(bishop);
 	}
 

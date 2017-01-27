@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import main.java.Constants;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.circleBoard.CircleBoardInitialization;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
+import main.java.pieces.ConcretePieceFactory;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;
 
@@ -35,9 +37,10 @@ public class PawnMovesTest {
 		int y = 3;
 		CircleBoard board=  mock(CircleBoard.class);
 		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
+		ConcretePieceFactory pieceFac = new ConcretePieceFactory();
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
 		
-		Piece pawn = PieceFactory.createPawnInCircleBoard(board, p1);
+		Piece pawn = pieceFac.GetPieceForCircleBoard("",Constants.Pieces.Pawn.toString(), board, p1);//PieceFactory.createPawnInCircleBoard(board, p1);
 
 		board_squares.getSquares()[x][y].setPiece(pawn);
 		board.initial = board_squares;
@@ -58,12 +61,13 @@ public class PawnMovesTest {
 	public final void testGetMovesOnCircleCenter() {
 		int x = 3;
 		int y = 5;
-
+		
+		ConcretePieceFactory pieceFac = new ConcretePieceFactory();
 		CircleBoard board=  mock(CircleBoard.class);
 		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
 		
-		Piece pawn = PieceFactory.createPawnInCircleBoard(board, p1);
+		Piece pawn = pieceFac.GetPieceForCircleBoard("",Constants.Pieces.Pawn.toString(), board, p1);//PieceFactory.createPawnInCircleBoard(board, p1);
 		board.getSquares()[x][y].setPiece(pawn);
 
 		ArrayList<Square> expected = new ArrayList<Square>();
@@ -83,11 +87,13 @@ public class PawnMovesTest {
 	public final void testGetMovesAfterCenter() {
 		int x = 3;
 		int y = 3;
+		
+		ConcretePieceFactory pieceFac = new ConcretePieceFactory();
 		CircleBoard board=  mock(CircleBoard.class);
 		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
 		
-		Piece pawn = PieceFactory.createPawnInCircleBoard(board, p1);
+		Piece pawn = pieceFac.GetPieceForCircleBoard("",Constants.Pieces.Pawn.toString(), board, p1);//PieceFactory.createPawnInCircleBoard(board, p1);
 		board_squares.getSquares()[x][y].setPiece(pawn);
 		board.initial = board_squares;
 
