@@ -10,8 +10,7 @@ import org.junit.Test;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.game.Settings;
-import main.java.movesInSquareBoard.BishopMovesInSquareBoard;
-import main.java.movesInSquareBoard.RookMovesInSquareBoard;
+import main.java.movesInSquareBoard.QueenMovesInSquareBoard;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;
 import main.java.pieces.PieceFactory.PieceType;
@@ -48,7 +47,7 @@ public class QueenMovesInSquareBoardTest {
 		}
 		
 		// Obtained by Algorithm
-		RookMovesInSquareBoard pm = new RookMovesInSquareBoard();
+		QueenMovesInSquareBoard pm = new QueenMovesInSquareBoard();
 		ArrayList<Square> obtained = pm.getMoves(board, queen, true);
 
 		assertTrue(obtained.containsAll(expected));
@@ -65,7 +64,7 @@ public class QueenMovesInSquareBoardTest {
 		}
 
 		// Obtained Moves by Algorithm
-		RookMovesInSquareBoard pm = new RookMovesInSquareBoard();
+		QueenMovesInSquareBoard pm = new QueenMovesInSquareBoard();
 		ArrayList<Square> obtained = pm.getMoves(board, queen, true);
 
 		assertTrue(obtained.containsAll(expected));
@@ -82,7 +81,7 @@ public class QueenMovesInSquareBoardTest {
 		}
 
 		// Obtained Moves by Algorithm
-		RookMovesInSquareBoard pm = new RookMovesInSquareBoard();
+		QueenMovesInSquareBoard pm = new QueenMovesInSquareBoard();
 		ArrayList<Square> obtained = pm.getMoves(board, queen, true);
 		
 		assertTrue(obtained.containsAll(expected));
@@ -97,7 +96,7 @@ public class QueenMovesInSquareBoardTest {
 			expected.add(expectedSq);
 		}
 
-		RookMovesInSquareBoard pm = new RookMovesInSquareBoard();
+		QueenMovesInSquareBoard pm = new QueenMovesInSquareBoard();
 		ArrayList<Square> obtained = pm.getMoves(board, queen, true);
 		
 		assertTrue(obtained.containsAll(expected));
@@ -114,7 +113,7 @@ public class QueenMovesInSquareBoardTest {
 				expected.add(expectedSq);
 			}
 
-			BishopMovesInSquareBoard bm = new BishopMovesInSquareBoard();
+			QueenMovesInSquareBoard bm = new QueenMovesInSquareBoard();
 			ArrayList<Square> obtained = bm.getMoves(board, queen, true);
 			
 			assertTrue(obtained.containsAll(expected));
@@ -130,7 +129,7 @@ public class QueenMovesInSquareBoardTest {
 				expected.add(expectedSq);
 			}
 
-			BishopMovesInSquareBoard bm = new BishopMovesInSquareBoard();
+			QueenMovesInSquareBoard bm = new QueenMovesInSquareBoard();
 			ArrayList<Square> obtained = bm.getMoves(board, queen, true);
 			
 			assertTrue(obtained.containsAll(expected));
@@ -146,7 +145,7 @@ public class QueenMovesInSquareBoardTest {
 				expected.add(expectedSq);
 			}
 
-			BishopMovesInSquareBoard bm = new BishopMovesInSquareBoard();
+			QueenMovesInSquareBoard bm = new QueenMovesInSquareBoard();
 			ArrayList<Square> obtained = bm.getMoves(board, queen, true);
 			
 			assertTrue(obtained.containsAll(expected));
@@ -162,7 +161,7 @@ public class QueenMovesInSquareBoardTest {
 				expected.add(expectedSq);
 			}
 
-			BishopMovesInSquareBoard bm = new BishopMovesInSquareBoard();
+			QueenMovesInSquareBoard bm = new QueenMovesInSquareBoard();
 			ArrayList<Square> obtained = bm.getMoves(board, queen, true);
 			
 			assertTrue(obtained.containsAll(expected));
