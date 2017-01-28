@@ -10,7 +10,6 @@ import main.java.board.Square;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
 import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
-import main.java.movesInCircleBoard.RookMovesInCircleBoard;
 import main.java.pieces.King;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;
@@ -66,13 +65,13 @@ public class CircleBoard implements IChessboard {
 			ai = 270 + Math.toDegrees(Math.acos((cx - x) / ri));
 		}
 
-		double square_x = (ai / 15);
+		double squareX = (ai / 15);
 
-		double square_y = (cy - ri) / hi;
+		double squareY = (cy - ri) / hi;
 
 		Square result;
 		try {
-			result = initial.squares[(int) square_x][(int) square_y];
+			result = initial.squares[(int) squareX][(int) squareY];
 			return result;
 
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {

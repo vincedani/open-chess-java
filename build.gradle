@@ -1,8 +1,8 @@
 buildscript {
     repositories {
         jcenter()
-}        
-           dependencies {
+	}        
+    dependencies {
         classpath 'com.bmuschko:gradle-clover-plugin:2.0.1'
     }
 }
@@ -67,12 +67,12 @@ apply plugin: 'com.bmuschko.clover'
   
      
     clover {
-    licenseLocation = '/home/bamboo/clover.license'
-    excludes = ['**/JChessApp.java', '**/JChessView.java', '**/LogToFile.java', '**/JChessAboutBox.java', '**/JChessTabbedPane.java', '**/Clock.java', '**/TabbedPaneIcon.java', '**/PawnPromotionWindow.java', '**/GameClock.java', '**/NewGameWindow.java']
-    report {
-        html = true
-        xml = true
-    }
+	    licenseLocation = '/home/bamboo/clover.license'
+	    excludes = ['**/JChessApp.java', '**/JChessView.java', '**/LogToFile.java', '**/JChessAboutBox.java', '**/JChessTabbedPane.java', '**/Clock.java', '**/TabbedPaneIcon.java', '**/PawnPromotionWindow.java', '**/GameClock.java', '**/NewGameWindow.java']
+	    report {
+	        html = true
+	        xml = true
+	    }
 	}
 
 	sourceSets {

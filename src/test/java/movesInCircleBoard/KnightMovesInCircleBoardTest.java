@@ -1,5 +1,6 @@
 package test.java.movesInCircleBoard;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.circleBoard.CircleBoardInitialization;
@@ -19,139 +19,79 @@ import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;
 
 public class KnightMovesInCircleBoardTest {
-	ArrayList<IMove> moveBehaviour;
-	private Player p1;
-	CircleBoard board;
-	Piece knight;
-	int x,y;
-
+	
 	@Before
 	public void setUp() throws Exception {
-		p1 = new Player("Player1", "white");
-		x = 3;
-		y = 3;
+	}
 
-		board=  mock(CircleBoard.class);
+	// Moves for Knight
+	@Test
+	public final void testGetMovesKnight() {
+		// Initialize Board
+		CircleBoard board =  mock(CircleBoard.class);
 		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
 		when(board.getSquares()).thenReturn(board_squares.getSquares());
-		
-		knight = PieceFactory.createKnightInCircleBoard(board, p1);
+						
+		// Set Player and Piece
+		int x = 3;
+		int y = 3;
+		Player p1 = new Player("Player1", "white");
+		Piece knight = PieceFactory.createKnightInCircleBoard(board, p1);
 		board.getSquares()[x][y].setPiece(knight);
 		
-	}
-
-	//#1
-	@Test
-	public final void testGetMovesForwardMove_1() {
+		// Expected Moves
 		ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x-2][y + 1];
-		expected.add(expectedSq);
+		// Forward 
+		expected.add(board.getSquares()[x - 2][y + 1]);
+		expected.add(board.getSquares()[x - 1][y + 2]);
+		expected.add(board.getSquares()[x + 1][y + 2]);
+		expected.add(board.getSquares()[x + 2][y + 1]);
+		// Backwards
+		expected.add(board.getSquares()[x + 2][y - 1]);
+		expected.add(board.getSquares()[x + 1][y - 2]);
+		expected.add(board.getSquares()[x - 1][y - 2]);
+		expected.add(board.getSquares()[x - 2][y - 1]);
 
 		KnightMovesInCircleBoard km = new KnightMovesInCircleBoard();
 		ArrayList<Square> obtained = km.getMoves(knight, true);
 		
-		assertTrue(obtained.containsAll(expected));
-
-	}
-
-	//#2
-	@Test
-	public final void testGetMovesForwardMove_2() {
-		ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x-1][y + 2];
-		expected.add(expectedSq);
-
-		KnightMovesInCircleBoard km = new KnightMovesInCircleBoard();
-		ArrayList<Square> obtained = km.getMoves(knight, true);
-		
-		assertTrue(obtained.containsAll(expected));
-	}
-
-	//#3
-	@Test
-	public final void testGetMovesForwardMove_3() {
-		ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x+1][y + 2];
-		expected.add(expectedSq);
-
-		KnightMovesInCircleBoard km = new KnightMovesInCircleBoard();
-		ArrayList<Square> obtained = km.getMoves(knight, true);
-		
+		assertEquals(obtained.size(), expected.size());
 		assertTrue(obtained.containsAll(expected));
 	}
 	
-	//#4
+	// Moves for Knight in border
 	@Test
-	public final void testGetMovesForwardMove_4() {
-		ArrayList<Square> expected = new ArrayList<Square>();
+	public final void testGetMovesKnightInBorder() {
+		// Initialize Board
+		CircleBoard board =  mock(CircleBoard.class);
+		CircleBoardInitialization board_squares = new CircleBoardInitialization(board);
+		when(board.getSquares()).thenReturn(board_squares.getSquares());
+						
+		// Set Player and Piece
+		int x = 0;
+		int y = 3;
+		Player p1 = new Player("Player1", "white");
+		Piece knight = PieceFactory.createKnightInCircleBoard(board, p1);
+		board.getSquares()[x][y].setPiece(knight);
 		
-		Square expectedSq = board.getSquares()[x+2][y + 1];
-		expected.add(expectedSq);
+		// Expected Moves
+		ArrayList<Square> expected = new ArrayList<Square>();
+		// Forward 
+		expected.add(board.getSquares()[22][4]);
+		expected.add(board.getSquares()[23][5]);
+		expected.add(board.getSquares()[1 ][5]);
+		expected.add(board.getSquares()[2 ][4]);
+		// Backwards
+		expected.add(board.getSquares()[2 ][2]);
+		expected.add(board.getSquares()[1 ][1]);
+		expected.add(board.getSquares()[23][1]);
+		expected.add(board.getSquares()[22][2]);
 
 		KnightMovesInCircleBoard km = new KnightMovesInCircleBoard();
 		ArrayList<Square> obtained = km.getMoves(knight, true);
 		
-		assertTrue(obtained.containsAll(expected));
-	}
-	
-	//#5
-	@Test
-	public final void testGetMovesBackwardMove_1() {
-		ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x+2][y -1];
-		expected.add(expectedSq);
-
-		KnightMovesInCircleBoard km = new KnightMovesInCircleBoard();
-		ArrayList<Square> obtained = km.getMoves(knight, true);
-		
-		assertTrue(obtained.containsAll(expected));
-	}
-	
-	//#6
-	@Test
-	public final void testGetMovesBackwardMove_2() {
-		ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x+1][y -2];
-		expected.add(expectedSq);
-
-		KnightMovesInCircleBoard km = new KnightMovesInCircleBoard();
-		ArrayList<Square> obtained = km.getMoves(knight, true);
-		
-		assertTrue(obtained.containsAll(expected));
-
-	}
-	
-	//#7
-	@Test
-	public final void testGetMovesBackwardMove_3() {
-		ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x-1][y -2];
-		expected.add(expectedSq);
-
-		KnightMovesInCircleBoard km = new KnightMovesInCircleBoard();
-		ArrayList<Square> obtained = km.getMoves(knight, true);
-		
+		assertEquals(obtained.size(), expected.size());
 		assertTrue(obtained.containsAll(expected));
 	}
 
-	//#8
-	@Test
-	public final void testGetMoves_LMove_8() {	
-		ArrayList<Square> expected = new ArrayList<Square>();
-		
-		Square expectedSq = board.getSquares()[x-2][y -1];
-		expected.add(expectedSq);
-
-		KnightMovesInCircleBoard km = new KnightMovesInCircleBoard();
-		ArrayList<Square> obtained = km.getMoves(knight, true);
-		
-		assertTrue(obtained.containsAll(expected));
-
-	}
 }

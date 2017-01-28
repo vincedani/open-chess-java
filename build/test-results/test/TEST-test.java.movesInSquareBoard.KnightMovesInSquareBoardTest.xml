@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-01-26T00:01:52" hostname="mateo" time="0.128">
+<testsuite name="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-01-28T01:15:40" hostname="mateo" time="0.17">
   <properties/>
-  <testcase name="testGetMovesBackwardMove_1" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.022"/>
-  <testcase name="testGetMovesBackwardMove_2" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.015"/>
-  <testcase name="testGetMovesBackwardMove_3" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.027"/>
-  <testcase name="testGetMovesForwardMove_1" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.018"/>
-  <testcase name="testGetMovesForwardMove_2" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.016"/>
-  <testcase name="testGetMovesForwardMove_3" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.006"/>
+  <testcase name="testGetMovesBackwardMove_1" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.06"/>
+  <testcase name="testGetMovesBackwardMove_2" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.01"/>
+  <testcase name="testGetMovesBackwardMove_3" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.004"/>
+  <testcase name="testGetMovesForwardMove_1" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.003"/>
+  <testcase name="testGetMovesForwardMove_2" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.076"/>
+  <testcase name="testGetMovesForwardMove_3" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.005"/>
   <testcase name="testGetMovesForwardMove_4" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.004"/>
-  <testcase name="testGetMoves_LMove_8" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.01"/>
+  <testcase name="testGetMoves_LMove_8" classname="test.java.movesInSquareBoard.KnightMovesInSquareBoardTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImageFromHash(SunToolkit.java:725)

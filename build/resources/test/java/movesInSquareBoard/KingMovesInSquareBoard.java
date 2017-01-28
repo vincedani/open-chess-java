@@ -9,7 +9,7 @@ import main.java.pieces.Piece;
 
 public class KingMovesInSquareBoard implements IMove {
 
-	public void regularMove(Piece piece1, ArrayList<Square> list, int x, int y) {
+	private void regularMove(Piece piece1, ArrayList<Square> list, int x, int y, boolean ignoreKing) {
 		King piece = (King) piece1;
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
@@ -21,10 +21,10 @@ public class KingMovesInSquareBoard implements IMove {
 						continue;
 					} else {
 						if (piece.pieceBehaviour.checkPiece(i, j)) {// if square
-																	// is empty
-							if (piece.isSafe(sq)) {
-								list.add(sq);
-							}
+							//Check if will be checked
+							if(piece.willBeSafeAfterMove(piece.getSquare(), sq)){
+								list.add(sq);}
+
 						}
 					}
 				}
@@ -82,7 +82,7 @@ public class KingMovesInSquareBoard implements IMove {
 	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
 		int x = piece.getPozX(), y = piece.getPozY();
-		regularMove(piece, list, x, y);
+		regularMove(piece, list, x, y, ignoreKing);
 		Piece king = piece;
 		if (king.wasMoved()) {
 			// check if king was not moved before

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-26T00:01:49" hostname="mateo" time="0.403">
+<testsuite name="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-28T01:15:38" hostname="mateo" time="0.844">
   <properties/>
-  <testcase name="testKingAroundDragon" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.193"/>
-  <testcase name="releaseTheDragon" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.118"/>
-  <testcase name="testIncreaseFireBlasterMiddleCircle" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.049"/>
-  <testcase name="theDragonFireBlasterInnerCircle" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.04"/>
+  <testcase name="testKingAroundDragon" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.569"/>
+  <testcase name="releaseTheDragon" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.14"/>
+  <testcase name="testIncreaseFireBlasterMiddleCircle" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.078"/>
+  <testcase name="theDragonFireBlasterInnerCircle" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.055"/>
   <system-out><![CDATA[The princess Pawn black is captured
 The princess Pawn black is captured
 The princess Pawn black is captured
@@ -15,7 +15,7 @@ The princess Pawn black is captured
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:21)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -65,7 +65,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:22)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -115,7 +115,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:23)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -269,7 +269,7 @@ java.lang.NullPointerException
 	at main.java.pieces.PieceLayout.<init>(PieceLayout.java:12)
 	at main.java.pieces.Piece.<init>(Piece.java:76)
 	at main.java.pieces.PieceFactory.releaseTheDragon(PieceFactory.java:154)
-	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:150)
+	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:149)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:57)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -321,7 +321,7 @@ java.lang.NullPointerException
 	at main.java.pieces.PieceLayout.<init>(PieceLayout.java:12)
 	at main.java.pieces.Piece.<init>(Piece.java:76)
 	at main.java.pieces.King.<init>(King.java:49)
-	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.testKingAroundDragon(DragonMovesInCircleBoardTest.java:114)
+	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.testKingAroundDragon(DragonMovesInCircleBoardTest.java:116)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -371,7 +371,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:21)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -421,7 +421,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:22)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -471,7 +471,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:23)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -625,7 +625,7 @@ java.lang.NullPointerException
 	at main.java.pieces.PieceLayout.<init>(PieceLayout.java:12)
 	at main.java.pieces.Piece.<init>(Piece.java:76)
 	at main.java.pieces.PieceFactory.releaseTheDragon(PieceFactory.java:154)
-	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:150)
+	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:149)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:57)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -675,7 +675,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:21)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -725,7 +725,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:22)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -775,7 +775,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:23)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -929,7 +929,7 @@ java.lang.NullPointerException
 	at main.java.pieces.PieceLayout.<init>(PieceLayout.java:12)
 	at main.java.pieces.Piece.<init>(Piece.java:76)
 	at main.java.pieces.PieceFactory.releaseTheDragon(PieceFactory.java:154)
-	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:150)
+	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:149)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:57)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -979,7 +979,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:21)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -1029,7 +1029,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:22)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -1079,7 +1079,7 @@ java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImage(SunToolkit.java:759)
 	at main.java.gui.GUI.loadImage(GUI.java:72)
 	at main.java.board.ChessboardLayout.<init>(ChessboardLayout.java:23)
-	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:25)
+	at main.java.circleBoard.CircleBoard.<init>(CircleBoard.java:24)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -1233,7 +1233,7 @@ java.lang.NullPointerException
 	at main.java.pieces.PieceLayout.<init>(PieceLayout.java:12)
 	at main.java.pieces.Piece.<init>(Piece.java:76)
 	at main.java.pieces.PieceFactory.releaseTheDragon(PieceFactory.java:154)
-	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:150)
+	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:149)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:57)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

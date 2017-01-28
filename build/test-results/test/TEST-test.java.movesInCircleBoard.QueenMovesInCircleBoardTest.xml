@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-01-26T00:01:49" hostname="mateo" time="0.289">
+<testsuite name="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-01-28T01:15:40" hostname="mateo" time="0.153">
   <properties/>
-  <testcase name="testGetMovesBackwards" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.022"/>
-  <testcase name="testGetMoves_forwardRightMoves" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.095"/>
-  <testcase name="testGetMoves_backwardRightMoves" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.018"/>
+  <testcase name="testGetMovesBackwards" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.025"/>
+  <testcase name="testGetMoves_forwardRightMoves" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.034"/>
+  <testcase name="testGetMoves_backwardRightMoves" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.024"/>
   <testcase name="testGetMovesForward" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.021"/>
-  <testcase name="testGetMoves_backwardleftMoves" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.055"/>
-  <testcase name="testGetMovesRight" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.025"/>
-  <testcase name="testGetMoves_forwardleftMoves" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.029"/>
-  <testcase name="testGetMovesLeft" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.01"/>
+  <testcase name="testGetMoves_backwardleftMoves" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.017"/>
+  <testcase name="testGetMovesRight" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.006"/>
+  <testcase name="testGetMoves_forwardleftMoves" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.005"/>
+  <testcase name="testGetMovesLeft" classname="test.java.movesInCircleBoard.QueenMovesInCircleBoardTest" time="0.011"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImageFromHash(SunToolkit.java:725)

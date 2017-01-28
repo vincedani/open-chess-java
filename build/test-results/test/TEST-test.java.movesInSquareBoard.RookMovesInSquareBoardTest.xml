@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-26T00:01:53" hostname="mateo" time="0.137">
+<testsuite name="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-28T01:15:41" hostname="mateo" time="0.102">
   <properties/>
-  <testcase name="testGetMovesBackwardsBeforeCenter" classname="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" time="0.073"/>
-  <testcase name="testGetMovesForwardBeforeCenter" classname="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" time="0.027"/>
-  <testcase name="testGetMovesRight" classname="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" time="0.019"/>
-  <testcase name="testGetMovesLeft" classname="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" time="0.015"/>
+  <testcase name="testGetMovesBackwardsBeforeCenter" classname="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" time="0.027"/>
+  <testcase name="testGetMovesForwardBeforeCenter" classname="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" time="0.018"/>
+  <testcase name="testGetMovesRight" classname="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" time="0.016"/>
+  <testcase name="testGetMovesLeft" classname="test.java.movesInSquareBoard.RookMovesInSquareBoardTest" time="0.035"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImageFromHash(SunToolkit.java:725)

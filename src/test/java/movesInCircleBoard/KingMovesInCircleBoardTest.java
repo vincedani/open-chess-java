@@ -47,38 +47,39 @@ public class KingMovesInCircleBoardTest {
 	// #1
 	@Test
 	public final void testBoundariesCircleBoard() {
-
+		// Expected move in border by King
 		ArrayList<Square> expected = new ArrayList<Square>();
-
 		Square expectedSq = board.getSquares()[1][0];
 		expected.add(expectedSq);
-
+		
+		// Obtained by Algorithm
 		IMove km = new KingMovesInCircleBoard();
 		ArrayList<Square> obtained = km.getMoves(king, true);
 
 		board_squares.getSquares()[x][y].piece = null;
-
 		assertTrue(obtained.containsAll(expected));
 	}
 
 	// #2
 	@Test
 	public final void testMovesInCircleBoard() {
+		// Set piece in board
 		int x = 3;
 		int y = 3;
-
-		ArrayList<Square> expected = new ArrayList<Square>();
 		board.getSquares()[x][y].setPiece(king);
 
-		expected.add(board_squares.getSquares()[x][y + 1]);
-		expected.add(board_squares.getSquares()[x][y - 1]);
+		// Expected Moves by King
+		ArrayList<Square> expected = new ArrayList<Square>();
+		expected.add(board_squares.getSquares()[x    ][y + 1]);
+		expected.add(board_squares.getSquares()[x    ][y - 1]);
 		expected.add(board_squares.getSquares()[x + 1][y + 1]);
 		expected.add(board_squares.getSquares()[x + 1][y - 1]);
 		expected.add(board_squares.getSquares()[x - 1][y + 1]);
 		expected.add(board_squares.getSquares()[x - 1][y - 1]);
-		expected.add(board_squares.getSquares()[x + 1][y]);
-		expected.add(board_squares.getSquares()[x - 1][y]);
+		expected.add(board_squares.getSquares()[x + 1][y    ]);
+		expected.add(board_squares.getSquares()[x - 1][y    ]);
 
+		// Obtained moves by Algorithm
 		IMove km = new KingMovesInCircleBoard();
 		ArrayList<Square> obtained = km.getMoves(king, true);
 
@@ -107,14 +108,14 @@ public class KingMovesInCircleBoardTest {
 		// Set Pawns
 		p2 = new Player("Player2", "black");
 
-		board.getSquares()[x][y + a].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
-		board.getSquares()[x][y - a].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
+		board.getSquares()[x    ][y + a].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
+		board.getSquares()[x    ][y - a].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
 		board.getSquares()[x + a][y + a].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
 		board.getSquares()[x + a][y - a].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
 		board.getSquares()[x - a][y + a].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
 		board.getSquares()[x - a][y - a].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
-		board.getSquares()[x + a][y].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
-		board.getSquares()[x - a][y].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
+		board.getSquares()[x + a][y    ].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
+		board.getSquares()[x - a][y    ].setPiece(PieceFactory.createBishopInCircleBoard(board, p2));
 
 		// Debugging Stuff
 		/*

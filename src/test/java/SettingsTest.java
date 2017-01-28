@@ -23,7 +23,7 @@ public class SettingsTest {
 		settings.gameMode = settings.gameMode.newGame;
 		settings.gameType = settings.gameType.local;
 		
-		settings.lang("This is a Key");
+		//settings.lang("This is a Key");
 		Player obtained = settings.nextPlayer(settings.playerBlack);
 		
 		assertEquals(obtained, settings.playerBlue);

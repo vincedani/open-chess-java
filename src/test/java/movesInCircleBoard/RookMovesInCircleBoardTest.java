@@ -41,66 +41,47 @@ public class RookMovesInCircleBoardTest {
 
 	// Case 1: Forward Before Center
 	@Test
-	public final void testGetMovesForwardBeforeCenter() {
+	public final void testGetMovesForwardRook() {
 
 		ArrayList<Square> expected = new ArrayList<Square>();
 		// Forward
 		for (int i = 1; i <= 2; i++) {
-			Square expectedSq = board.getSquares()[x][y + i];
-			expected.add(expectedSq);
+			expected.add(board.getSquares()[x][y + i]);
 		}
-		
-		RookMovesInCircleBoard pm = new RookMovesInCircleBoard();
-		ArrayList<Square> obtained = pm.getMoves(rook, true);
-
-		assertTrue(obtained.containsAll(expected));
-
-	}
-
-	@Test
-	public final void testGetMovesBackwardsBeforeCenter() {
-		ArrayList<Square> expected = new ArrayList<Square>();
 		// Backwards
 		for (int i = 1; i <= 3; i++) {
-			Square expectedSq = board.getSquares()[x][y - i];
-			expected.add(expectedSq);
+			expected.add(board.getSquares()[x][y - i]);
 		}
-
-		RookMovesInCircleBoard pm = new RookMovesInCircleBoard();
-		ArrayList<Square> obtained = pm.getMoves(rook, true);
-
-		assertTrue(obtained.containsAll(expected));
-	}
-
-	@Test
-	public final void testGetMovesClockWise() {
-		ArrayList<Square> expected = new ArrayList<Square>();
 		// Clockwise
 		for (int i = 1; i <= 20; i++) {
-			Square expectedSq = board.getSquares()[x + i][y];
-			expected.add(expectedSq);
+			expected.add(board.getSquares()[x + i][y]);
 		}
-
-		RookMovesInCircleBoard pm = new RookMovesInCircleBoard();
-		ArrayList<Square> obtained = pm.getMoves(rook, true);
-		
-		assertTrue(obtained.containsAll(expected));
-
-	}
-
-	@Test
-	public final void testGetMovesCounterClockwise() {
-		ArrayList<Square> expected = new ArrayList<Square>();
 		// Counterclockwise
 		for (int i = 3; i > 0; i--) {
-			Square expectedSq = board.getSquares()[x + i][y];
-			expected.add(expectedSq);
+			expected.add(board.getSquares()[x + i][y]);
 		}
 
 		RookMovesInCircleBoard pm = new RookMovesInCircleBoard();
 		ArrayList<Square> obtained = pm.getMoves(rook, true);
-		
+
+		/*
+		for (int i = 0; i < expected.size(); i++){
+			Square esperado = expected.get(i);
+			int sum = 0;
+			for (int j = 0; j < obtained.size(); j++){
+				if (expected.get(i)==obtained.get(j)){
+					sum ++;
+				}
+			}
+			if (sum == 0){
+				System.out.println("No está: " + esperado.getPozX() + ", " + esperado.getPozY());
+			}
+			
+		}*/
 		assertTrue(obtained.containsAll(expected));
+
 	}
+
+
 
 }
