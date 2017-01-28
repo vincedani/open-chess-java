@@ -172,7 +172,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 								&& chessboard.getActiveSquare().getPiece().allMoves(chessboard, false).indexOf(sq) != -1) {
 							// Move
 
-							chessboard.move(chessboard.getActiveSquare(), sq);
+							chessboard.move(chessboard.getActiveSquare(), sq, true);
 							chessboard.unselect();
 							checkGameState();
 							this.nextMove();

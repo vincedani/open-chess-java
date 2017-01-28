@@ -47,7 +47,7 @@ public class DragonMovesInCircleBoardTest {
 		pawn = PieceFactory.createSpecificPieceForCircleBoard(board, p2, PieceType.Pawn); 
 		board.getSquares()[x1][y1].setPiece(rook);
 		board.getSquares()[x2][y2].setPiece(pawn);
-		board.move(board.getSquares()[x1][y1], board.getSquares()[x2][y2]);
+		board.move(board.getSquares()[x1][y1], board.getSquares()[x2][y2], false);
 		dm = new DragonMovesInCircleBoard();
 	}
 

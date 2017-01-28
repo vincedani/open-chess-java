@@ -140,7 +140,7 @@ public class SquareBoard implements IChessboard {
 		return (int) this.display.square_height;
 	}
 
-	public void move(Square begin, Square end) {
+	public void move(Square begin, Square end, Boolean displayWindow) {
 		move(begin, end, true);
 	}
 

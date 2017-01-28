@@ -77,8 +77,9 @@ public interface IChessboard {
 	 *            square from which move piece
 	 * @param end
 	 *            square where we want to move piece
+	 * @param displayWindow TODO
 	 */
-	public void move(Square begin, Square end);
+	public void move(Square begin, Square end, Boolean displayWindow);
 	
 
 	/**

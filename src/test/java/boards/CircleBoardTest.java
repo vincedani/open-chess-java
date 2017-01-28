@@ -41,7 +41,7 @@ public class CircleBoardTest {
 		begin.setPiece(pawn);		
 
 		// Call Move Function
-		board.move(begin, end);
+		board.move(begin, end, true);
 		
 		// Does it call getPosY function?
 		verify(end, atLeast(2)).getPosY();			

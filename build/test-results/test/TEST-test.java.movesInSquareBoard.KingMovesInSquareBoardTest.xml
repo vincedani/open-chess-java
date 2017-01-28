@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-28T22:13:24" hostname="AZD-PC" time="0.149">
+<testsuite name="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-28T22:42:56" hostname="AZD-PC" time="0.115">
   <properties/>
-  <testcase name="testMovesInSquareBoard" classname="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" time="0.013"/>
-  <testcase name="testChecked" classname="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" time="0.059"/>
-  <testcase name="testCheckMate" classname="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" time="0.051"/>
-  <testcase name="testBoundariesSquareBoard" classname="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" time="0.018"/>
+  <testcase name="testMovesInSquareBoard" classname="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" time="0.031"/>
+  <testcase name="testChecked" classname="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" time="0.023"/>
+  <testcase name="testCheckMate" classname="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" time="0.035"/>
+  <testcase name="testBoundariesSquareBoard" classname="test.java.movesInSquareBoard.KingMovesInSquareBoardTest" time="0.022"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImageFromHash(SunToolkit.java:725)

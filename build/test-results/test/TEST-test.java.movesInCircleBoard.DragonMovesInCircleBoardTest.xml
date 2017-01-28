@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-28T22:13:19" hostname="AZD-PC" time="4.353">
+<testsuite name="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-28T22:42:55" hostname="AZD-PC" time="0.107">
   <properties/>
-  <testcase name="testKingAroundDragon" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="2.239"/>
-  <testcase name="releaseTheDragon" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.818"/>
-  <testcase name="testIncreaseFireBlasterMiddleCircle" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.676"/>
-  <testcase name="theDragonFireBlasterInnerCircle" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.616"/>
+  <testcase name="testKingAroundDragon" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.054"/>
+  <testcase name="releaseTheDragon" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.019"/>
+  <testcase name="testIncreaseFireBlasterMiddleCircle" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.018"/>
+  <testcase name="theDragonFireBlasterInnerCircle" classname="test.java.movesInCircleBoard.DragonMovesInCircleBoardTest" time="0.015"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImageFromHash(SunToolkit.java:725)
@@ -265,7 +265,7 @@ java.lang.NullPointerException
 	at main.java.pieces.PieceLayout.<init>(PieceLayout.java:12)
 	at main.java.pieces.Piece.<init>(Piece.java:82)
 	at main.java.pieces.PieceFactory.createSpecificPieceForCircleBoard(PieceFactory.java:30)
-	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:149)
+	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:152)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:50)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -621,7 +621,7 @@ java.lang.NullPointerException
 	at main.java.pieces.PieceLayout.<init>(PieceLayout.java:12)
 	at main.java.pieces.Piece.<init>(Piece.java:82)
 	at main.java.pieces.PieceFactory.createSpecificPieceForCircleBoard(PieceFactory.java:30)
-	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:149)
+	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:152)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:50)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -925,7 +925,7 @@ java.lang.NullPointerException
 	at main.java.pieces.PieceLayout.<init>(PieceLayout.java:12)
 	at main.java.pieces.Piece.<init>(Piece.java:82)
 	at main.java.pieces.PieceFactory.createSpecificPieceForCircleBoard(PieceFactory.java:30)
-	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:149)
+	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:152)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:50)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -1229,7 +1229,7 @@ java.lang.NullPointerException
 	at main.java.pieces.PieceLayout.<init>(PieceLayout.java:12)
 	at main.java.pieces.Piece.<init>(Piece.java:82)
 	at main.java.pieces.PieceFactory.createSpecificPieceForCircleBoard(PieceFactory.java:30)
-	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:149)
+	at main.java.circleBoard.CircleBoard.move(CircleBoard.java:152)
 	at test.java.movesInCircleBoard.DragonMovesInCircleBoardTest.setUp(DragonMovesInCircleBoardTest.java:50)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

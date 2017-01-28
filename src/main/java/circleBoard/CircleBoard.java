@@ -116,7 +116,7 @@ public class CircleBoard implements IChessboard {
 	 * regular move is changed from forward to backward in the y axis.
 	 * 
 	 */
-	public void move(Square begin, Square end) {
+	public void move(Square begin, Square end, Boolean displayWindow) {
 
 		// Check if pawn passed the center
 		if (begin.getPiece().getType().equals(PieceType.Pawn)) {
@@ -142,10 +142,13 @@ public class CircleBoard implements IChessboard {
 		}
 
 		if (end.getPiece() != null && begin.getPiece().getType().equals(PieceType.Rook)) {
-			// Create Dragon if a rook captures a piece
-			JOptionPane.showMessageDialog(null, "The princess " + end.getPiece().getType().toString() + " "
-					+ end.getPiece().getPlayer().getColor()
-					+ " is captured, if the dragon is defeated, you will get a queen. \n Be careful with the dragon, although he can only be used 3 times, he can throw fire to all the pieces around him, and with each move, his power grows. \n Good luck! ");
+			if (displayWindow){
+				// Create Dragon if a rook captures a piece
+				JOptionPane.showMessageDialog(null, "The princess " + end.getPiece().getType().toString() + " "
+						+ end.getPiece().getPlayer().getColor()
+						+ " is captured, if the dragon is defeated, you will get a queen. \n Be careful with the dragon, although he can only be used 3 times, he can throw fire to all the pieces around him, and with each move, his power grows. \n Good luck! ");
+			}
+			
 			end.setPiece(PieceFactory.createSpecificPieceForCircleBoard(this, begin.getPiece().getPlayer(), PieceType.Dragon));
 			end.getPiece().setSquare(end);
 			begin.setPiece(null);
@@ -161,7 +164,9 @@ public class CircleBoard implements IChessboard {
 			// Check if the dragon has made all his moves, if so bring the rook
 			// back
 			if (dragonBeh.getFireLoader() == 4) {
-				JOptionPane.showMessageDialog(null, "Nobody defeated the dragon!");
+				if (displayWindow){
+					JOptionPane.showMessageDialog(null, "Nobody defeated the dragon!");
+				}
 				begin.setPiece(PieceFactory.createSpecificPieceForCircleBoard(this, begin.getPiece().getPlayer(),
 						PieceType.Rook));
 				begin.getPiece().setSquare(begin);
@@ -170,8 +175,10 @@ public class CircleBoard implements IChessboard {
 		} else if (end.getPiece() != null && end.getPiece().getType().equals(PieceType.Dragon)) {
 			// The active player defeated the dragon, and earn a queen
 			Piece warrior = begin.getPiece();
-			JOptionPane.showMessageDialog(null,
-					begin.getPiece().getPlayer().getName() + " defeated the dragon! Your have earned a queen");
+			if (displayWindow){
+				JOptionPane.showMessageDialog(null, begin.getPiece().getPlayer().getName() + " defeated the dragon! Your have earned a queen");
+			}
+			
 			warrior.setSquare(end);
 			end.setPiece(warrior);
 			begin.setPiece(PieceFactory.createSpecificPieceForCircleBoard(this, begin.getPiece().getPlayer(),
@@ -184,11 +191,8 @@ public class CircleBoard implements IChessboard {
 			end.setPiece(begin.getPiece());
 			begin.setPiece(null);
 		}
-
 		this.unselect();// unselect square
 		display.repaint();
-
-
 	}
 
 	@Override

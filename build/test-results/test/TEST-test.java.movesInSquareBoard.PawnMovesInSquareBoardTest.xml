@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test.java.movesInSquareBoard.PawnMovesInSquareBoardTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-01-28T22:13:24" hostname="AZD-PC" time="0.013">
+<testsuite name="test.java.movesInSquareBoard.PawnMovesInSquareBoardTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-01-28T22:42:56" hostname="AZD-PC" time="0.019">
   <properties/>
-  <testcase name="testGetMovesBeforeCenter" classname="test.java.movesInSquareBoard.PawnMovesInSquareBoardTest" time="0.013"/>
+  <testcase name="testGetMovesBeforeCenter" classname="test.java.movesInSquareBoard.PawnMovesInSquareBoardTest" time="0.019"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.lang.NullPointerException
 	at sun.awt.SunToolkit.getImageFromHash(SunToolkit.java:725)
