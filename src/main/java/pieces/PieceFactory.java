@@ -8,7 +8,7 @@ import main.java.board.IMove;
 import main.java.game.Player;
 import main.java.movesInCircleBoard.BishopMovesInCircleBoard;
 import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
-import main.java.movesInCircleBoard.KingInCircleBoard;
+import main.java.movesInCircleBoard.KingMovesInCircleBoard;
 import main.java.movesInCircleBoard.KnightMovesInCircleBoard;
 import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
 import main.java.movesInCircleBoard.QueenMovesInCircleBoard;
@@ -48,7 +48,7 @@ public class PieceFactory {
             	 pieceMove = new PawnMovesInCircleBoard(); 
             	 break;
              case King:
-            	 pieceMove = new KingInCircleBoard(); 
+            	 pieceMove = new KingMovesInCircleBoard(); 
             	 break;
              case Dragon:
             	 pieceMove = new DragonMovesInCircleBoard(); 

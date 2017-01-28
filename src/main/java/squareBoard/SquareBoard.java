@@ -23,8 +23,6 @@ package main.java.squareBoard;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import org.mockito.cglib.core.Constants;
-
 import main.java.JChessApp;
 import main.java.LogToFile;
 import main.java.board.ChessboardDisplay;
@@ -314,6 +312,10 @@ public class SquareBoard implements IChessboard {
 	@Override
 	public PieceBehaviour getPieceBehaviour() {
 		return pieceBehaviour;
+	}
+	
+	public void setKing(Piece king){
+		initial.setKing(king);
 	}
 
 }

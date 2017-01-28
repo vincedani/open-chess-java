@@ -83,4 +83,5 @@ public class Settings implements Serializable {
 			return players[0];
 		return players[actualIndex+1];
 	}
+	
 }

@@ -30,7 +30,6 @@ public class CircleBoard implements IChessboard {
 	PieceBehaviour pieceBehaviour;
 
 	public CircleBoard() {
-
 		initial = new CircleBoardInitialization(this);
 		display = new CircleBoardDisplay(new Point(0, 0), this);
 		pieceBehaviour = new PieceBehaviour(this);
@@ -57,9 +56,7 @@ public class CircleBoard implements IChessboard {
 
 		// Calculate the angle depending on the quadrant
 		double ai = calculateAngle(x, y, cx, cy, ri);
-
 		double squareX = ai / 15;
-
 		double squareY = (cy - ri) / hi;
 
 		Square result;
@@ -100,9 +97,7 @@ public class CircleBoard implements IChessboard {
 	}
 
 	public void setPieces(Player[] players) {
-
 		initial.setPieces(players);
-
 	}
 
 	public int get_height() {
@@ -189,8 +184,10 @@ public class CircleBoard implements IChessboard {
 			end.setPiece(begin.getPiece());
 			begin.setPiece(null);
 		}
-		this.unselect();
+
+		this.unselect();// unselect square
 		display.repaint();
+
 
 	}
 
@@ -247,4 +244,7 @@ public class CircleBoard implements IChessboard {
 		return pieceBehaviour;
 	}
 
+	public void setKing(Piece king){
+		initial.setKing(king);
+	}
 }

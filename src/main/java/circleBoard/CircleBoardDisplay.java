@@ -141,6 +141,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		return topLeftPoint;
 	}
 
+
 	/**
 	 * @return the activeSquare
 	 */

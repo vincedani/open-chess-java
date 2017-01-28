@@ -23,14 +23,7 @@ public interface IChessboardDisplay {
 	 */
 	int getHeight();
 
-	/**
-	 * 
-	 * @deprecated
-	 * 
-	 * 			used in the network game
-	 */
-	void draw();
-
+	
 	/**
 	 * @return upper point of the chessboard
 	 * 

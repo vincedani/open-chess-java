@@ -18,6 +18,7 @@ public class KingMovesInSquareBoard implements IMove, IKing {
 			for (int j = y - 1; j <= y + 1; j++) {
 				if (!piece.isout(i, j) && piece.checkPiece(i, j) && (ignoreKing || willBeSafeAfterMove(board, piece.getSquare(), board.getSquareFromIndexes(i, j)))) {
 					list.add(board.getSquareFromIndexes(i, j));
+
 				}
 			}
 		}
@@ -69,6 +70,7 @@ public class KingMovesInSquareBoard implements IMove, IKing {
 
 	public ArrayList<Square> getMoves(IChessboard board, Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
+
 		int x = piece.getPosX(), y = piece.getPosY();
 		regularMove(board, piece, list, x, y, ignoreKing);
 		Piece king = piece;

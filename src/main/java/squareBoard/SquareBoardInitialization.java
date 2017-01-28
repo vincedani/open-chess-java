@@ -130,5 +130,15 @@ public class SquareBoardInitialization {
 	public void setSquares(Square[][] squares) {
 		this.squares = squares;
 	}
+	
+	public void setKing(Piece king){
+		if (king.getPlayer().getColor().equals(Player.colors.white)) {
+			kingWhite =  king;
+		} else if (king.getPlayer().getColor().equals(Player.colors.black)) {
+			kingBlack =  king;
+		} else if (king.getPlayer().getColor().equals(Player.colors.blue)) {
+			kingBlue = king;
+		}
+	}
 
 }
