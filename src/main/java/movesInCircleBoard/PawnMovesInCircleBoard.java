@@ -19,10 +19,7 @@ public class PawnMovesInCircleBoard implements IMove {
 		int newY = piece.getPosY() + 1;
 		if (!piece.isout(piece.getPosX(), newY)) {
 			Square moveSq = board.getSquareFromIndexes(piece.getPosX(), newY);
-			if (moveSq.getPiece() == null && ignoreKing) {
-				list.add(moveSq);
-
-			} else if (moveSq.getPiece() == null && piece.myKing().willBeSafeAfterMove(board,piece.getSquare(), moveSq)) {
+			if (moveSq.getPiece() == null && (ignoreKing || piece.myKing().willBeSafeAfterMove(board,piece.getSquare(), moveSq))) {
 
 				list.add(moveSq);
 

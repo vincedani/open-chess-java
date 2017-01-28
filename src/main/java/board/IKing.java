@@ -29,7 +29,7 @@ public interface IKing {
 	 *            Square where is a king
 	 * @return bool true if king is save, else returns false
 	 */
-	boolean isSafe(IChessboard board,Piece king);
+	boolean isSafe(IChessboard board,Piece king, Square sq);
 
 	/**
 	 * Method to check will the king be safe after the move of the pieces in the

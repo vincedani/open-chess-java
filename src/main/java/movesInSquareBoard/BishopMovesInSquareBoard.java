@@ -2,25 +2,64 @@ package main.java.movesInSquareBoard;
 
 import java.util.ArrayList;
 
+import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.board.Square;
 import main.java.pieces.Piece;
 
 public class BishopMovesInSquareBoard implements IMove {
 
-	private static void backwardRightMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPosX(), y = piece.getPosY();
-		for (int h = x - 1, i = y + 1; !piece.pieceBehaviour.isout(h, i); --h, ++i) // left-up
+	private void backwardRightMoves(IChessboard board, Piece piece, ArrayList<Square> list, boolean ignoreKing) {
+		int x = piece.getPosX();
+		int y = piece.getPosY();
+		for (int h = x - 1, i = y + 1; !piece.isout(h, i); --h, ++i) // left-up
 		{
-			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
+			if (piece.checkPiece(h, i)) 
+			{
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(board, piece.getSquare(), board.getSquareFromIndexes(h,i))) {
+					list.add(board.getSquareFromIndexes(h,i));
+				}
+
+				if (piece.otherOwner(h, i)) {
+					break;
+				}
+			} else {
+				break;
+			}
+		}
+	}
+
+	private void backwardLeftMoves(IChessboard board, Piece piece, ArrayList<Square> list, boolean ignoreKing) {
+		int x = piece.getPosX(), y = piece.getPosY();
+		for (int h = x - 1, i = y - 1; !piece.isout(h, i); h--, i--) // left-down
+		{
+			if (piece.checkPiece(h, i)){
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(board,piece.getSquare(), board.getSquareFromIndexes(h,i))) {
+					list.add(board.getSquareFromIndexes(h,i));
+				}
+
+				if (piece.otherOwner(h, i)) {
+					break;
+				}
+			} else {
+				break;
+			}
+		}
+	}
+
+	private void forwardRightMoves(IChessboard board, Piece piece, ArrayList<Square> list, boolean ignoreKing) {
+		int x = piece.getPosX(), y = piece.getPosY();
+		for (int h = x + 1, i = y + 1; !piece.isout(h, i); ++h, ++i) // right-up
+		{
+			if (piece.checkPiece(h, i)) // if on this square
 														// isn't
 														// piece
 			{
-				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquare(h,i))) {
-					list.add(piece.getSquare(h,i));
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(board,piece.getSquare(), board.getSquareFromIndexes(h,i))) {
+					list.add(board.getSquareFromIndexes(h,i));
 				}
 
-				if (piece.pieceBehaviour.otherOwner(h, i)) {
+				if (piece.otherOwner(h, i)) {
 					break;
 				}
 			} else {
@@ -30,18 +69,18 @@ public class BishopMovesInSquareBoard implements IMove {
 		}
 	}
 
-	private static void backwardLeftMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
+	private void forwardLeftMoves(IChessboard board, Piece piece, ArrayList<Square> list, boolean ignoreKing) {
 		int x = piece.getPosX(), y = piece.getPosY();
-		for (int h = x - 1, i = y - 1; !piece.pieceBehaviour.isout(h, i); --h, --i) // left-down
+		for (int h = x + 1, i = y - 1; !piece.isout(h, i); ++h, --i) // right-down
 		{
-			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
+			if (piece.checkPiece(h, i)) // if on this square
 														// isn't piece
 			{
-				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquare(h,i))) {
-					list.add(piece.getSquare(h,i));
+				if (ignoreKing || piece.myKing().willBeSafeAfterMove(board,piece.getSquare(), board.getSquareFromIndexes(h,i))) {
+					list.add(board.getSquareFromIndexes(h,i));
 				}
 
-				if (piece.pieceBehaviour.otherOwner(h, i)) {
+				if (piece.otherOwner(h, i)) {
 					break;
 				}
 			} else {
@@ -51,55 +90,12 @@ public class BishopMovesInSquareBoard implements IMove {
 		}
 	}
 
-	private static void forwardRightMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPosX(), y = piece.getPosY();
-		for (int h = x + 1, i = y + 1; !piece.pieceBehaviour.isout(h, i); ++h, ++i) // right-up
-		{
-			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
-														// isn't
-														// piece
-			{
-				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquare(h,i))) {
-					list.add(piece.getSquare(h,i));
-				}
-
-				if (piece.pieceBehaviour.otherOwner(h, i)) {
-					break;
-				}
-			} else {
-				break;// we've to break because we cannot go beside other
-						// piece!!
-			}
-		}
-	}
-
-	private static void forwardLeftMoves(Piece piece, ArrayList<Square> list, boolean ignoreKing) {
-		int x = piece.getPosX(), y = piece.getPosY();
-		for (int h = x + 1, i = y - 1; !piece.pieceBehaviour.isout(h, i); ++h, --i) // right-down
-		{
-			if (piece.pieceBehaviour.checkPiece(h, i)) // if on this square
-														// isn't piece
-			{
-				if (ignoreKing || piece.myKing().willBeSafeAfterMove(piece.getSquare(), piece.getSquare(h,i))) {
-					list.add(piece.getSquare(h,i));
-				}
-
-				if (piece.pieceBehaviour.otherOwner(h, i)) {
-					break;
-				}
-			} else {
-				break;// we've to break because we cannot go beside other
-						// piece!!
-			}
-		}
-	}
-
-	public ArrayList<Square> getMoves(Piece piece, boolean ignoreKing) {
+	public ArrayList<Square> getMoves(IChessboard board, Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
-		forwardLeftMoves(piece, list, ignoreKing);
-		forwardRightMoves(piece, list, ignoreKing);
-		backwardLeftMoves(piece, list, ignoreKing);
-		backwardRightMoves(piece, list, ignoreKing);
+		forwardLeftMoves(board, piece, list, ignoreKing);
+		forwardRightMoves(board, piece, list, ignoreKing);
+		backwardLeftMoves(board, piece, list, ignoreKing);
+		backwardRightMoves(board, piece, list, ignoreKing);
 
 		return list;
 	}

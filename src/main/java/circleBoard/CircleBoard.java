@@ -32,7 +32,7 @@ public class CircleBoard implements IChessboard {
 	public CircleBoard() {
 
 		initial = new CircleBoardInitialization(this);
-		display = new CircleBoardDisplay(null, null, new Point(0, 0), this);
+		display = new CircleBoardDisplay(new Point(0, 0), this);
 		pieceBehaviour = new PieceBehaviour(this);
 	}
 
@@ -247,13 +247,4 @@ public class CircleBoard implements IChessboard {
 		return pieceBehaviour;
 	}
 
-	/*
-	 * public IKing getKing(Player player) { if
-	 * (player.getColor().equals(Player.colors.white)) { return (IKing)
-	 * initial.kingWhite.pieceBehaviour; } else if
-	 * (player.getColor().equals(Player.colors.black)) { return (IKing)
-	 * initial.kingBlack.pieceBehaviour; } else if
-	 * (player.getColor().equals(Player.colors.blue)) { return (IKing)
-	 * initial.kingBlue.pieceBehaviour; } return null; }
-	 */
 }

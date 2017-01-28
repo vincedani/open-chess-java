@@ -17,6 +17,7 @@ import main.java.movesInSquareBoard.BishopMovesInSquareBoard;
 import main.java.movesInSquareBoard.KingMovesInSquareBoard;
 import main.java.movesInSquareBoard.KnightMovesInSquareBoard;
 import main.java.movesInSquareBoard.PawnMovesInSquareBoard;
+import main.java.movesInSquareBoard.QueenMovesInSquareBoard;
 import main.java.movesInSquareBoard.RookMovesInSquareBoard;
 
 public class PieceFactory {
@@ -60,39 +61,38 @@ public class PieceFactory {
 		return piece;
 	}
 	
-	public static Piece createSpecificPieceForSquareBoard(IChessboard chessboard, Player player,String symbol,PieceType pieceName)
+	public static Piece createSpecificPieceForSquareBoard(IChessboard chessboard, Player player,PieceType pieceName)
 	{
 		Piece piece = new Piece(chessboard, player, pieceName);
-		piece.symbol = symbol;
-		ArrayList<IMove> pieceMoves = new ArrayList<>();
+		
+		IMove pieceMove = null;
 		
 		 switch (pieceName)
          {		   
              case Bishop:
-            	 pieceMoves.add(new BishopMovesInSquareBoard());    
+            	 pieceMove = new BishopMovesInSquareBoard();    
             	 break;
              case Knight:
-            	 pieceMoves.add(new KnightMovesInSquareBoard());
+            	 pieceMove = new KnightMovesInSquareBoard();
             	 break;
              case Queen:
              
-            	 pieceMoves.add(new RookMovesInSquareBoard());
-            	 pieceMoves.add(new BishopMovesInSquareBoard());
+            	 pieceMove = new QueenMovesInSquareBoard();
             	 break;
              case Rook:
-            	 pieceMoves.add(new RookMovesInSquareBoard());
+            	 pieceMove = new RookMovesInSquareBoard();
             	 break;
              case Pawn :
-            	 pieceMoves.add(new PawnMovesInSquareBoard());
+            	 pieceMove = new PawnMovesInSquareBoard();
             	 break;
              case King:
-            	 pieceMoves.add(new KingMovesInSquareBoard());
+            	 pieceMove = new KingMovesInSquareBoard();
             	 break;
             default:
             	 LogToFile.log(null,"Info","Piece "+pieceName.toString()+" cannot be created");
          }
     	
-		 //piece.moveBehaviour = pieceMoves;  
+		piece.setMoveBehaviour(pieceMove);  
 		return piece;
 	}
 	

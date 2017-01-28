@@ -18,9 +18,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 	private Point topLeftPoint;
 	
 	public static final int img_x = 5;// image x position (used in JChessView
-										// class!)
 	public static final int img_y = img_x;// image y position (used in
-											// JChessView class!)
 	public static final int img_widht = 480;// image width
 	public static final int img_height = img_widht;// image height
 
@@ -28,17 +26,17 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 	Square[][] squares;
 	CircleBoard board;
 
-	public CircleBoardDisplay(Image upDownLabel, Image leftRightLabel, Point topLeft, CircleBoard board) {
+	public CircleBoardDisplay(Point topLeft, CircleBoard board) {
 		this.topLeftPoint = topLeft;
 		this.board_layout = board.board_layout;
 		this.squares = board.initial.getSquares();
 		this.board = board;
+		
 		setActiveSquare(null);
 		this.setDoubleBuffered(true);
 	}
 
 	public void paintComponent(Graphics g) {
-		super.paintComponents(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);

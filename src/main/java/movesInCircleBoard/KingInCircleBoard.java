@@ -12,13 +12,18 @@ import main.java.pieces.PieceFactory.PieceType;
 public class KingInCircleBoard implements IMove, IKing {
 
 	private void regularMove(IChessboard board, Piece piece, ArrayList<Square> list, int x, int y) {
-		
+
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
-				if (!piece.isout(i, j) && piece.checkPiece(i, j)
-						&& piece.getSquare() != board.getSquareFromIndexes(i, j)
-						&& isSafe(board,piece)) {
-					list.add(board.getSquareFromIndexes(i, j));
+				int posi = i;
+				if (posi < 0) {
+					posi += 24;
+				} else if (posi > 23) {
+					posi -= 24;
+				}
+				if (!piece.isout(posi, j) && piece.checkPiece(posi, j)
+						&& piece.getSquare() != board.getSquareFromIndexes(posi, j) && isSafe(board, piece, board.getSquareFromIndexes(posi, j))) {
+					list.add(board.getSquareFromIndexes(posi, j));
 				}
 
 			}
@@ -39,7 +44,7 @@ public class KingInCircleBoard implements IMove, IKing {
 	 *            Square where is a king
 	 * @return bool true if king is safe, else returns false
 	 */
-	public boolean isSafe(IChessboard board, Piece king) {
+	public boolean isSafe(IChessboard board, Piece king, Square sq) {
 		for (int i = 0; i < 24; i++) {
 			for (int j = 0; j < 6; j++) {
 				Piece boardPiece = board.getSquareFromIndexes(i, j).getPiece();
@@ -58,7 +63,7 @@ public class KingInCircleBoard implements IMove, IKing {
 	}
 
 	public boolean isChecked(IChessboard board, Piece king) {
-		return !isSafe(board,king);
+		return !isSafe(board, king, king.getSquare());
 	}
 
 	/**
@@ -78,7 +83,7 @@ public class KingInCircleBoard implements IMove, IKing {
 		sqIsHere.setPiece(null);
 		boolean ret;
 
-		ret = isSafe(board, king);
+		ret = isSafe(board, king, king.getSquare());
 
 		sqIsHere.setPiece(sqWillBeThere.getPiece());
 		sqWillBeThere.setPiece(tmp);
@@ -109,6 +114,5 @@ public class KingInCircleBoard implements IMove, IKing {
 			return KingState.safe;
 		}
 	}
-
 
 }

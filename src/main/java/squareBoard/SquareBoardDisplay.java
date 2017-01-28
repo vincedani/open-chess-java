@@ -11,28 +11,22 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
-import java.util.Iterator;
-
+import java.util.ArrayList;
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.Square;
 
-@SuppressWarnings("serial")
 public class SquareBoardDisplay extends ChessboardDisplay {
 	public Square activeSquare;
+	public Point topLeft;
+	public int square_height;
+
 	public Image upDownLabel;
 	public Image LeftRightLabel;
-	public Point topLeft;
-	public int active_x_square;
-	public int active_y_square;
-	public float square_height;
 
 	public static final int img_x = 5;// image x position (used in JChessView
-										// class!)
 	public static final int img_y = img_x;// image y position (used in
-											// JChessView class!)
 	public static final int img_widht = 480;// image width
 	public static final int img_height = img_widht;// image height
 
@@ -53,20 +47,9 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 
 		activeSquare = null;
 		square_height = img_height / 8;
-		active_x_square = -1;
-		active_y_square = -1;
 
 		this.setDoubleBuffered(true);
-		drawLabels((int) square_height);
-	}
-
-
-	/**
-	 * Annotations to superclass Game updateing and painting the crossboard
-	 */
-	@Override
-	public void update(Graphics g) {
-		repaint();
+		drawLabels();
 	}
 
 	public Point getTopLeftPoint() {
@@ -82,11 +65,7 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		Point topLeftPoint = this.getTopLeftPoint();
 		if (renderLabels) {
-			if (topLeftPoint.x <= 0 && topLeftPoint.y <= 0) // if renderLabels
-															// and (0,0), than
-															// draw it! (for
-															// first run)
-			{
+			if (topLeftPoint.x <= 0 && topLeftPoint.y <= 0) {
 				this.drawLabels();
 			}
 			g2d.drawImage(upDownLabel, 0, 0, null);
@@ -95,29 +74,47 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 			g2d.drawImage(LeftRightLabel, board_layout.image.getHeight(null) + topLeftPoint.x, 0, null);
 		}
 		g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);
-		drawPieces(g);
-		if ((active_x_square != -1) && (active_y_square != -1)) // if some
-																// square is
-																// active
-		{
-			g2d.drawImage(board_layout.selSquare, (active_x_square * (int) square_height) + topLeftPoint.x,
-					(active_y_square * (int) square_height) + topLeftPoint.y, null);// draw
-																					// image
-																					// of
-																					// selected
-																					// square
-			Square tmpSquare = squares[active_x_square][active_y_square];
-			if (tmpSquare.getPiece() != null) {
-				board.moves = squares[active_x_square][active_y_square].getPiece().allMoves(false);
-				for (Iterator it = board.moves.iterator(); board.moves != null && it.hasNext();) {
-					Square sq = (Square) it.next();
-					g2d.drawImage(board_layout.ableSquare, (sq.getPosX() * (int) square_height) + topLeftPoint.x,
-							(sq.getPosY() * (int) square_height) + topLeftPoint.y, null);
+		drawPieces(g2d);
+		drawHighlightedSquares(g2d);
+	}/*--endOf-paint--*/
+
+	private void drawHighlightedSquares(Graphics2D g2d) {
+		if (activeSquare != null) {
+			int xi = activeSquare.getPosX();
+			int yi = activeSquare.getPosY();
+			Point topLeft = this.getTopLeftPoint();
+			Image tempImage = board_layout.orgSelSquare;
+			BufferedImage resized = resizeImage(tempImage, square_height);
+			board_layout.selSquare = resized.getScaledInstance(square_height, square_height, 0);
+			g2d.drawImage(board_layout.selSquare, topLeft.x + xi * square_height, topLeft.y + yi * square_height, null);
+
+			if (activeSquare.getPiece() != null) {
+				ArrayList<Square> moves = getActiveSquare().getPiece().allMoves(board, false);
+				for (Square sq : moves) {
+					Point pointSq = new Point(sq.getPosX()*square_height, sq.getPosY()*square_height);
+					tempImage = board_layout.orgAbleSquare;
+					resized = resizeImage(tempImage, square_height);
+					board_layout.ableSquare = resized.getScaledInstance(square_height, square_height, 0);
+
+					g2d.drawImage(board_layout.ableSquare, topLeft.x + pointSq.x, topLeft.y + pointSq.y, null);
 				}
 			}
 
 		}
-	}/*--endOf-paint--*/
+	}
+
+	private BufferedImage resizeImage(Image tempImage, int height) {
+		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
+		Graphics2D imageGr = resized.createGraphics();
+		imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		imageGr.drawImage(tempImage, topLeft.y, topLeft.y, height, height, null);
+		imageGr.dispose();
+		return resized;
+	}
+
+	private Square getActiveSquare() {
+		return activeSquare;
+	}
 
 	private void drawPieces(Graphics g) {
 		for (int i = 0; i < 8; i++) // drawPiecesOnSquares
@@ -131,38 +128,17 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 	}
 
 	public void resizeChessboard(int height) {
-		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
-		Graphics g = resized.createGraphics();
-		g.drawImage(board_layout.orgImage, 0, 0, height, height, null);
-		g.dispose();
+		BufferedImage resized = resizeImage(board_layout.orgImage, height);
 		board_layout.image = resized.getScaledInstance(height, height, 0);
-		square_height = (float) (height / 8);
+		square_height = height / 8;
 		if (renderLabels) {
 			height += 2 * (upDownLabel.getHeight(null));
 		}
 		this.setSize(height, height);
-
-		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
-		g = resized.createGraphics();
-		g.drawImage(board_layout.orgAbleSquare, 0, 0, (int) square_height, (int) square_height, null);
-		g.dispose();
-		board_layout.ableSquare = resized.getScaledInstance((int) square_height, (int) square_height, 0);
-
-		resized = new BufferedImage((int) square_height, (int) square_height, BufferedImage.TYPE_INT_ARGB_PRE);
-		g = resized.createGraphics();
-		g.drawImage(board_layout.orgSelSquare, 0, 0, (int) square_height, (int) square_height, null);
-		g.dispose();
-		board_layout.selSquare = resized.getScaledInstance((int) square_height, (int) square_height, 0);
 		this.drawLabels();
 	}
 
-	protected void drawLabels() {
-		this.drawLabels((int) square_height);
-	}
-
-	protected final void drawLabels(int square_height) {
-		// BufferedImage uDL = new BufferedImage(800, 800,
-		// BufferedImage.TYPE_3BYTE_BGR);
+	protected final void drawLabels() {
 		int min_label_height = 20;
 		int labelHeight = (int) Math.ceil(square_height / 4);
 		labelHeight = (labelHeight < min_label_height) ? min_label_height : labelHeight;
@@ -175,7 +151,7 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 		uDL2D.fillRect(0, 0, labelWidth + min_label_height, labelHeight);
 		uDL2D.setColor(Color.black);
 		uDL2D.setFont(new Font("Arial", Font.BOLD, 12));
-		int addX = (square_height / 2);
+		int addX = (int) (square_height / 2);
 		if (renderLabels) {
 			addX += labelHeight;
 		}
@@ -215,18 +191,6 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 		}
 		uDL2D.dispose();
 		LeftRightLabel = uDL;
-	}
-
-	public void componentMoved(ComponentEvent e) {
-		// throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public void componentShown(ComponentEvent e) {
-		// throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public void componentHidden(ComponentEvent e) {
-		// throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 }
