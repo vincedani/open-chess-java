@@ -11,7 +11,7 @@ import main.java.pieces.PieceFactory.PieceType;
 
 public class KingInCircleBoard implements IMove, IKing {
 
-	private void regularMove(IChessboard board, Piece piece, ArrayList<Square> list, int x, int y) {
+	private void regularMove(IChessboard board, Piece piece, ArrayList<Square> list, int x, int y, boolean ignoreKing) {
 
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
@@ -21,8 +21,7 @@ public class KingInCircleBoard implements IMove, IKing {
 				} else if (posi > 23) {
 					posi -= 24;
 				}
-				if (!piece.isout(posi, j) && piece.checkPiece(posi, j)
-						&& piece.getSquare() != board.getSquareFromIndexes(posi, j) && isSafe(board, piece, board.getSquareFromIndexes(posi, j))) {
+				if (!piece.isout(posi, j) && piece.checkPiece(posi, j) &&(ignoreKing || willBeSafeAfterMove(board, piece.getSquare(), board.getSquareFromIndexes(posi, j)))) {
 					list.add(board.getSquareFromIndexes(posi, j));
 				}
 
@@ -33,7 +32,7 @@ public class KingInCircleBoard implements IMove, IKing {
 
 	public ArrayList<Square> getMoves(IChessboard board, Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
-		regularMove(board, piece, list, piece.getPosX(), piece.getPosY());
+		regularMove(board, piece, list, piece.getPosX(), piece.getPosY(), ignoreKing);
 		return list;
 	}
 

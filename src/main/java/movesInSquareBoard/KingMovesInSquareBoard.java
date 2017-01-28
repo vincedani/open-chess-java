@@ -12,12 +12,11 @@ import main.java.pieces.PieceFactory.PieceType;
 
 public class KingMovesInSquareBoard implements IMove, IKing {
 
-	public void regularMove(IChessboard board, Piece piece, ArrayList<Square> list, int x, int y) {
+	public void regularMove(IChessboard board, Piece piece, ArrayList<Square> list, int x, int y, boolean ignoreKing) {
 		
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
-				if (!piece.isout(i, j) && piece.checkPiece(i, j)
-						&& piece.getSquare() != board.getSquareFromIndexes(i, j) && isSafe(board, piece, board.getSquareFromIndexes(i, j))) {
+				if (!piece.isout(i, j) && piece.checkPiece(i, j) && (ignoreKing || willBeSafeAfterMove(board, piece.getSquare(), board.getSquareFromIndexes(i, j)))) {
 					list.add(board.getSquareFromIndexes(i, j));
 				}
 			}
@@ -71,9 +70,9 @@ public class KingMovesInSquareBoard implements IMove, IKing {
 	public ArrayList<Square> getMoves(IChessboard board, Piece piece, boolean ignoreKing) {
 		ArrayList<Square> list = new ArrayList<>();
 		int x = piece.getPosX(), y = piece.getPosY();
-		regularMove(board, piece, list, x, y);
+		regularMove(board, piece, list, x, y, ignoreKing);
 		Piece king = piece;
-		if (king.wasMoved()) {
+		if (!king.wasMoved()) {
 			// check if king was not moved before
 			Piece tempPiece = board.getSquareFromIndexes(0, y).getPiece();
 			if (tempPiece != null && tempPiece.getType().equals(PieceType.Rook)) {
