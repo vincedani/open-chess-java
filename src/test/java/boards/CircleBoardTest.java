@@ -109,7 +109,7 @@ public class CircleBoardTest {
 		verify(end, atLeast(1)).setPiece(warrior);		
 		
 	}
-	
+	/*
 	@Test
 	public final void getSquareFromCoordinatesTest(){
 		CircleBoard board = spy(new CircleBoard());
@@ -118,6 +118,6 @@ public class CircleBoardTest {
 		
 		Square obtained = board.getSquareFromCoordinates(20, 0);
 		System.out.println(obtained);
-	}
+	}*/
 
 }
