@@ -3,6 +3,7 @@ package test.java.boards;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,6 @@ import org.junit.Test;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.game.Player;
-import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory;
 import main.java.pieces.PieceFactory.PieceType;
@@ -98,15 +98,26 @@ public class CircleBoardTest {
 		Square end = spy(new Square(x, y, dragon));
 		
 		// Pawn debe colocarse en begin, no es claro el motivo
-		begin.setPiece(dragon);		
+		begin.setPiece(dragon);	
+		end.setPiece(dragon);
 
 		// Call Move Function
 		board.move(begin, end, true);
 		
 		// Does it call SetPiece function?
 		Piece warrior = begin.getPiece();
-		verify(end, atLeast(1)).setPiece(null);		
+		verify(end, atLeast(1)).setPiece(warrior);		
 		
+	}
+	
+	@Test
+	public final void getSquareFromCoordinatesTest(){
+		CircleBoard board = spy(new CircleBoard());
+		when(board.get_height()).thenReturn(500);
+		when(board.getRadius()).thenReturn(500);
+		
+		Square obtained = board.getSquareFromCoordinates(20, 0);
+		System.out.println(obtained);
 	}
 
 }
