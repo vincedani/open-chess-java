@@ -1,9 +1,11 @@
 package test.java.boards;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,8 +26,7 @@ public class SquareBoardTest {
 	}
 
 	@Test
-	public final void moveTestPawn() {
-				
+	public final void moveTestPawn() {	
 		// Initialize Board
 		SquareBoard board=  new SquareBoard(settings);
 					
@@ -49,5 +50,32 @@ public class SquareBoardTest {
 		// Does it call getPosY function?
 		verify(end, atLeast(2)).getPosY();			
 	}	
+	@Test
+	public final void moveCastlingTest(){
+		int xRook = 7; 
+		int yRook = 0; 
+		
+		int xKing = 4; 
+		int yKing = 0;
+		
+		// Set Player and Board
+		Player p1 = new Player("Player1", "white");
+		SquareBoard board = new SquareBoard(settings); 
+		
+		// Set King
+		Piece king = PieceFactory.createSpecificPieceForSquareBoard(board, p1, PieceType.King);
+		board.getSquares()[xKing][yKing].setPiece(king);
+		king.setSquare(board.getSquares()[xKing][yKing]);
+		board.setKing(king);
+		
+		// Set Rook Right
+		Piece rook = PieceFactory.createSpecificPieceForSquareBoard(board, p1, PieceType.Rook);
+		board.getSquares()[xRook][yRook].setPiece(rook);
+		rook.setSquare(board.getSquares()[xRook][yRook]);
+		
+		board.move(board.getSquares()[xKing][yKing], board.getSquares()[6][0], false);		
+		assertTrue(board.getSquares()[6][0].getPiece()==king && board.getSquares()[5][0].getPiece()==rook);
+	}
+	
 	
 }
