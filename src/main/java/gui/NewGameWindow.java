@@ -38,22 +38,6 @@ public class NewGameWindow extends JFrame {
 	private JComboBox<String> player3Color;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NewGameWindow frame = new NewGameWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public NewGameWindow() {
@@ -80,7 +64,7 @@ public class NewGameWindow extends JFrame {
 		contentPane.add(namePlayer1, "2, 4, left, top");
 		contentPane.add(lblNewLabel, "2, 2, left, top");
 
-		player1Color = new JComboBox<String>();
+		player1Color = new JComboBox<>();
 		player1Color.setModel(new DefaultComboBoxModel<String>(new String[] { "Black", "White", "Blue" }));
 		player1Color.setSelectedIndex(0);
 		contentPane.add(player1Color, "4, 4, left, default");
@@ -92,7 +76,7 @@ public class NewGameWindow extends JFrame {
 		contentPane.add(namePlayer2, "2, 8, left, default");
 		namePlayer2.setColumns(10);
 
-		player2Color = new JComboBox<String>();
+		player2Color = new JComboBox<>();
 		player2Color.setModel(new DefaultComboBoxModel<String>(new String[] { "Black", "White", "Blue" }));
 		player2Color.setSelectedIndex(1);
 		contentPane.add(player2Color, "4, 8, left, default");
@@ -146,8 +130,7 @@ public class NewGameWindow extends JFrame {
 						Player[] players = { player1, player2, player3 };
 
 						Game newGUI = JChessApp.getJcv().addNewTab(name1 + " vs. " + name2 + " vs. " + name3);
-						Settings gameSettings = new Settings(players, Settings.boardTypes.circleBoard,
-								Settings.gameTypes.local);
+						Settings gameSettings = new Settings(players, Settings.BoardType.circleBoard);
 						newGUI.newGame(gameSettings);
 						
 						NewGameWindow.this.dispose();
@@ -170,10 +153,10 @@ public class NewGameWindow extends JFrame {
 						Player[] players = { player1, player2 };
 
 						Game newGUI = JChessApp.getJcv().addNewTab(name1 + " vs. " + name2);
-						Settings gameSettings = new Settings(players, Settings.boardTypes.squareBoard,
-								Settings.gameTypes.local);
+						Settings gameSettings = new Settings(players, Settings.BoardType.squareBoard);
 						newGUI.newGame(gameSettings);
-						newGUI.getChessboard().getDisplay().repaint();
+						
+						NewGameWindow.this.dispose();
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Select different colors for each player");

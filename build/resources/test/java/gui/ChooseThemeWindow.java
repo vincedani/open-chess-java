@@ -57,9 +57,10 @@ public class ChooseThemeWindow extends JFrame {
 		
 		btnSelect = new JButton("Select");
 		btnSelect.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Properties prp = GUI.getConfigFile();
-				String selectedTheme = (String) themeList.getSelectedValue();
+				String selectedTheme = themeList.getSelectedValue();
 				if (selectedTheme !=null) {
 					prp.setProperty("THEME", selectedTheme);
 					try {
@@ -94,8 +95,9 @@ public class ChooseThemeWindow extends JFrame {
 			themeList = new JList<>(dirNames);
 			contentPane.add(themeList, "2, 2, fill, fill");
 			themeList.addListSelectionListener(new ListSelectionListener() {
+				@Override
 				public void valueChanged(ListSelectionEvent e) {
-					String selectedTheme = (String) themeList.getSelectedValue();
+					String selectedTheme = themeList.getSelectedValue();
 					ImageIcon image = new ImageIcon(GUI.loadImage(selectedTheme, "Preview.png"));
 					previewImage = new JLabel(image);
 					imageContainer.removeAll();

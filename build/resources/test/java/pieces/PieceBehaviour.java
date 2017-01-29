@@ -1,9 +1,11 @@
 package main.java.pieces;
 
 import main.java.board.IChessboard;
+import main.java.board.IKing;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.game.Player;
+import main.java.game.Settings.BoardType;
 import main.java.squareBoard.SquareBoard;
 
 /**
@@ -12,12 +14,10 @@ import main.java.squareBoard.SquareBoard;
 public class PieceBehaviour {
 
 	private IChessboard chessboard;
-	private Player player;
 
-	public PieceBehaviour(IChessboard chessboard, Player player) {
+	public PieceBehaviour(IChessboard chessboard) {
 
 		this.setChessboard(chessboard);
-		this.setPlayer(player);
 	}
 
 	/**
@@ -49,12 +49,10 @@ public class PieceBehaviour {
 	 *         player , false if the square contains a piece of the same player
 	 *         or a King
 	 */
-	public boolean checkPiece(int x, int y) {
-		Piece squarePiece = getSquares(x,y).piece;
-		/*if (squarePiece != null && squarePiece.getName().equals("King")) {
-			return false;
-		}*/
-		if (squarePiece == null || squarePiece.getPlayer() != this.getPlayer()){
+	public boolean checkPiece(Piece piece, int i, int j) {
+		Piece squarePiece = chessboard.getSquareFromIndexes(i, j).getPiece();
+
+		if (squarePiece == null || squarePiece.getPlayer() != piece.getPlayer()) {
 			return true;
 		}
 		return false;
@@ -69,36 +67,41 @@ public class PieceBehaviour {
 	 *            y index on chessboard
 	 * @return true if owner(player) is different
 	 */
-	public boolean otherOwner(int x, int y) {
-		Square sq = getChessboard().getSquares()[x][y];
-		if (sq.piece == null) {
+	public boolean otherOwner(Piece piece, int i, int j) {
+		Square sq = chessboard.getSquareFromIndexes(i, j);
+		if (sq.getPiece() == null) {
 			return false;
 		}
-		if (this.getPlayer() != sq.piece.getPlayer()) {
+		if (piece.getPlayer() != sq.getPiece().getPlayer()) {
 			return true;
 		}
 		return false;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
-	private void setPlayer(Player player) {
-		this.player = player;
-	}
-
-	private IChessboard getChessboard() {
-		return chessboard;
-	}
-
-	public Square getSquares(int i, int j) {
-		Square square = getChessboard().getSquares()[i][j];
-		return square;
+	public Square getSquare(int i, int j) {
+		return chessboard.getSquareFromIndexes(i, j);
 	}
 
 	private void setChessboard(IChessboard chessboard2) {
 		this.chessboard = chessboard2;
 	}
 
+	public IKing getKing(Player player) {
+		return (IKing) this.chessboard.getKing(player).getMoveBehaviour();
+	}
+
+	public Piece getKingAsPiece(Player player) {
+		return this.chessboard.getKing(player);
+	}
+
+	public BoardType getChessboardType() {
+		if(chessboard instanceof CircleBoard)
+			return BoardType.circleBoard;
+		else if(chessboard instanceof SquareBoard)
+			return BoardType.squareBoard;
+		return null;
 }
+
+	public IChessboard getChessboard() {
+		return chessboard;
+	}}

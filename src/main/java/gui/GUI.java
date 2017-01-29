@@ -43,12 +43,10 @@ import main.java.game.Game;
 public class GUI {
 
 	public Game game;
-	static final public Properties configFile = GUI.getConfigFile();
+	public static final  Properties configFile = GUI.getConfigFile();
 
 	public GUI() {
 		this.game = new Game();
-
-		// this.drawGUI();
 	}/*--endOf-GUI--*/
 
 	/*
