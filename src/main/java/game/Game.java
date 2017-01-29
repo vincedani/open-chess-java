@@ -59,6 +59,7 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	}
 
 	private void initializeChessboardPanel() {
+		
 		chessboard.getDisplay().setVisible(true);
 		chessboard.getDisplay().addMouseListener(this);
 		chessboard.getDisplay().setLocation(new Point(0, 0));
@@ -109,6 +110,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.blockedChessboard = false;
 		this.settings = gameSettings;
 
+		
+		this.chessboard.getDisplay().revalidate();
+		this.chessboard.getDisplay().repaint();
 		initializeChessboardPanel();
 		this.repaint();
 

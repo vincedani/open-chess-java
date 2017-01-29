@@ -17,11 +17,6 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 	private Square activeSquare;
 	private Point topLeftPoint;
 	
-	public static final int img_x = 5;// image x position (used in JChessView
-	public static final int img_y = img_x;// image y position (used in
-	public static final int img_widht = 480;// image width
-	public static final int img_height = img_widht;// image height
-
 	private ChessboardLayout board_layout;
 	Square[][] squares;
 	CircleBoard board;
@@ -31,17 +26,17 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 		this.board_layout = board.board_layout;
 		this.squares = board.getInitial().getSquares();
 		this.board = board;
-		
 		setActiveSquare(null);
 		this.setDoubleBuffered(true);
 	}
 
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);
-		drawPieces(g2d);
-		drawHighlightedSquares(g2d);
+		g.drawImage(board_layout.image, topLeftPoint.x, topLeftPoint.y, null);
+		drawPieces(g);
+		drawHighlightedSquares(g);
 
 	}/*--endOf-paint--*/
 
@@ -77,7 +72,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 
 	}
 
-	public void drawHighlightedSquares(Graphics2D g2d) {
+	public void drawHighlightedSquares(Graphics g2d) {
 
 		if (getActiveSquare() != null) {
 			int xi = getActiveSquare().getPosX();
@@ -140,7 +135,6 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 	public Point getTopLeftPoint() {
 		return topLeftPoint;
 	}
-
 
 	/**
 	 * @return the activeSquare

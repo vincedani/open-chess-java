@@ -4,11 +4,10 @@ import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import main.java.JChessApp;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.game.Settings;
@@ -51,4 +50,5 @@ public class SquareBoardTest {
 		// Does it call getPosY function?
 		verify(end, atLeast(2)).getPosY();			
 	}	
+	
 }
