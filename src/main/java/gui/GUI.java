@@ -21,7 +21,6 @@
 package main.java.gui;
 
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,6 +29,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.Properties;
+
+import javax.imageio.ImageIO;
 
 import main.java.JChessApp;
 import main.java.LogToFile;
@@ -43,7 +44,7 @@ import main.java.game.Game;
 public class GUI {
 
 	public Game game;
-	public static final  Properties configFile = GUI.getConfigFile();
+	protected static final  Properties configFile = GUI.getConfigFile();
 
 	public GUI() {
 		this.game = new Game();
@@ -63,12 +64,10 @@ public class GUI {
 		}
 		Image img = null;
 		URL url = null;
-		Toolkit tk = Toolkit.getDefaultToolkit();
 		try {
 			String imageLink = "theme/" + configFile.getProperty("THEME", "default") + "/images/" + name;
 			url = JChessApp.class.getResource(imageLink);
-			img = tk.getImage(url);
-
+			img = ImageIO.read(url);
 		} catch (Exception e) {
 			LogToFile.log(e, "ERROR", "some error loading image!");
 			e.printStackTrace();
@@ -81,11 +80,10 @@ public class GUI {
 		
 		Image img = null;
 		URL url = null;
-		Toolkit tk = Toolkit.getDefaultToolkit();
 		try {
 			String imageLink = "theme/" + theme + "/images/" + name;
 			url = JChessApp.class.getResource(imageLink);
-			img = tk.getImage(url);
+			img = ImageIO.read(url);
 
 		} catch (Exception e) {
 			LogToFile.log(e, "ERROR", "some error loading image!");

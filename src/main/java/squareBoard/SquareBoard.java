@@ -43,8 +43,6 @@ import main.java.pieces.PieceFactory.PieceType;
 public class SquareBoard implements IChessboard {
 
 	ArrayList<Square> moves;
-	private Settings settings;
-
 	public static final int bottom = 7;
 
 	public boolean breakCastling;
@@ -55,7 +53,7 @@ public class SquareBoard implements IChessboard {
 	public static Piece twoSquareMovedPawn = null;
 	public static Piece twoSquareMovedPawn2 = null;
 
-	ChessboardLayout board_layout = new ChessboardLayout("chessboard.png", "sel_square.png", "able_square.png");
+	ChessboardLayout board_layout = new ChessboardLayout("square_chessboard.png", "sel_square.png", "able_square.png");
 	public SquareBoardInitialization initial;
 	private SquareBoardDisplay display;
 	PieceBehaviour pieceBehaviour;
@@ -68,7 +66,6 @@ public class SquareBoard implements IChessboard {
 	 *            reference to MovesTable class object for this chessboard
 	 */
 	public SquareBoard(Settings settings) {
-		this.settings = settings;
 		initial = new SquareBoardInitialization(this);
 		display = new SquareBoardDisplay(null, null, new Point(0, 0), this);
 		pieceBehaviour = new PieceBehaviour(this);
@@ -161,14 +158,10 @@ public class SquareBoard implements IChessboard {
 
 	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) {
 
-		Piece promotedPiece = null;
-		boolean wasEnPassant = false;
-
 		if (end.getPiece() != null) {
 			end.getPiece().setSquare(null);
 		}
 
-		Square tempBegin = new Square(begin);
 		Square tempEnd = new Square(end);
 
 		breakCastling = false;
@@ -210,7 +203,6 @@ public class SquareBoard implements IChessboard {
 				tempEnd.setPiece(initial.getSquares()[end.getPosX()][begin.getPosY()].getPiece()); // ugly
 				// hack
 				initial.getSquares()[end.getPosX()][begin.getPosY()].setPiece(null);
-				wasEnPassant = true;
 			}
 
 			if (begin.getPosY() - end.getPosY() == 2 || end.getPosY() - begin.getPosY() == 2) // moved
@@ -228,11 +220,11 @@ public class SquareBoard implements IChessboard {
 				if (clearForwardHistory) {
 					String color = null;
 					if (end.getPiece().getPlayer().getColor() == Player.colors.white) {
-						color = "W";
+						color = "White";
 					} else if (end.getPiece().getPlayer().getColor() == Player.colors.black) {
-						color = "BK";
+						color = "Black";
 					} else if (end.getPiece().getPlayer().getColor() == Player.colors.blue) {
-						color = "BL";
+						color = "Blue";
 					}
 
 					String newPiece = JChessApp.getJcv().showPawnPromotionBox(color);
@@ -251,7 +243,6 @@ public class SquareBoard implements IChessboard {
 						end.setPiece(PieceFactory.createSpecificPieceForSquareBoard(this, end.getPiece().getPlayer(),
 								PieceType.Knight));
 					}
-					promotedPiece = end.getPiece();
 				}
 			}
 		} else if (!end.getPiece().getType().equals(PieceType.Pawn))

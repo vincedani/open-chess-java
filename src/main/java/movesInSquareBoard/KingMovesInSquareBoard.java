@@ -80,8 +80,9 @@ public class KingMovesInSquareBoard implements IMove, IKing {
 			if (tempPiece != null && tempPiece.getType().equals(PieceType.Rook)) {
 				castlingLeftMove(board, king, list, x, y);
 			}
-			if (board.getSquareFromIndexes(7, y).getPiece() != null && tempPiece.getType().equals(PieceType.Rook)) {
-				castlingLeftMove(board, king, list, x, y);
+			Piece tempPiece2 = board.getSquareFromIndexes(7, y).getPiece();
+			if (tempPiece2 != null && tempPiece2.getType().equals(PieceType.Rook)) {
+				castlingRightMove(board, king, list, x, y);
 			}
 		}
 

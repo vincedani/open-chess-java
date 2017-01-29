@@ -1,6 +1,5 @@
 package main.java.gui;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,8 +40,10 @@ public class NewGameWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public NewGameWindow() {
+		setTitle("New Game");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 280, 270);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -86,6 +87,7 @@ public class NewGameWindow extends JFrame {
 
 		threePlayerGame = new JCheckBox("");
 		threePlayerGame.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				namePlayer3.setEnabled(threePlayerGame.isSelected());
 				player3Color.setEnabled(threePlayerGame.isSelected());
@@ -108,6 +110,7 @@ public class NewGameWindow extends JFrame {
 
 		JButton btnNewButton = new JButton("New Game");
 		btnNewButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (threePlayerGame.isSelected() && player1Color.getSelectedIndex() != player2Color.getSelectedIndex()
 						&& player1Color.getSelectedIndex() != player3Color.getSelectedIndex()

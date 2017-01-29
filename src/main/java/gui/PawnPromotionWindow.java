@@ -20,10 +20,7 @@
  */
 package main.java.gui;
 
-import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,26 +45,18 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	JButton bishopButton;
 	JButton rookButton;
 	JButton queenButton;
-	GridBagLayout gbl;
 	public String result;
-	GridBagConstraints gbc;
-
+	
 	public PawnPromotionWindow(Frame parent, String color) {
 		super(parent);
 		this.setTitle("Choose piece");
-		this.setMinimumSize(new Dimension(520, 130));
-		this.setSize(new Dimension(520, 130));
-		this.setMaximumSize(new Dimension(520, 130));
-		this.setResizable(false);
 		this.setLayout(new GridLayout(1, 4));
-		// this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		this.gbl = new GridBagLayout();
-		this.gbc = new GridBagConstraints();
+		
 		this.knightButton = new JButton(new ImageIcon(GUI.loadImage("Knight-" + color + ".png")));
 		this.bishopButton = new JButton(new ImageIcon(GUI.loadImage("Bishop-" + color + ".png")));
 		this.rookButton = new JButton(new ImageIcon(GUI.loadImage("Rook-" + color + ".png")));
 		this.queenButton = new JButton(new ImageIcon(GUI.loadImage("Queen-" + color + ".png")));
+		
 		this.result = "";
 
 		this.knightButton.addActionListener(this);
@@ -100,6 +89,7 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	 * @param arg0
 	 *            Capt information about performed action
 	 */
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == queenButton) {
 			result = "Queen";

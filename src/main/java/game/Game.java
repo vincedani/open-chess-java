@@ -25,7 +25,6 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -59,37 +58,12 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 	}
 
 	private void initializeChessboardPanel() {
+		
 		chessboard.getDisplay().setVisible(true);
 		chessboard.getDisplay().addMouseListener(this);
 		chessboard.getDisplay().setLocation(new Point(0, 0));
 		this.add(chessboard.getDisplay());
 	}
-
-	/**
-	 * Method to save actual state of game
-	 * 
-	 * @param path
-	 *            address of place where game will be saved
-	 */
-	public void saveGame(File path) {
-
-	}
-
-	/**
-	 * Loading game method(loading game state from the earlier saved file)
-	 * 
-	 * @param file
-	 *            File where is saved game
-	 */
-
-	static public void loadGame(File file) {
-
-	}
-
-	/**
-	 * Method to Start new game
-	 *
-	 */
 
 	public void newGame(Settings gameSettings) {
 
@@ -109,6 +83,9 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 		this.blockedChessboard = false;
 		this.settings = gameSettings;
 
+		
+		this.chessboard.getDisplay().revalidate();
+		this.chessboard.getDisplay().repaint();
 		initializeChessboardPanel();
 		this.repaint();
 
@@ -235,46 +212,33 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 	@Override
 	public void componentMoved(ComponentEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
-
+	
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+		}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	
 	}
-}
-
-class ReadGameError extends Exception {
 }

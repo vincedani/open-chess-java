@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import main.java.board.IChessboard;
 import main.java.board.IMove;
 import main.java.board.Square;
-import main.java.circleBoard.CircleBoard;
 import main.java.pieces.Piece;
 
 public class BishopMovesInCircleBoard implements IMove {

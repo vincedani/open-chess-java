@@ -25,13 +25,9 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 	public Image upDownLabel;
 	public Image LeftRightLabel;
 
-	public static final int img_x = 5;// image x position (used in JChessView
-	public static final int img_y = img_x;// image y position (used in
-	public static final int img_widht = 480;// image width
-	public static final int img_height = img_widht;// image height
-
 	private ChessboardLayout board_layout;
-	boolean renderLabels, upsideDown;
+	boolean renderLabels;
+	boolean upsideDown;
 	Square[][] squares;
 	SquareBoard board;
 
@@ -46,7 +42,7 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 		this.board = board;
 
 		activeSquare = null;
-		square_height = img_height / 8;
+		square_height = 480 / 8;
 
 		this.setDoubleBuffered(true);
 		drawLabels();
@@ -61,6 +57,7 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		Point topLeftPoint = this.getTopLeftPoint();
@@ -181,12 +178,12 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 
 		if (upsideDown) {
 			for (int i = 1; i <= 8; i++) {
-				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (i - 1)) + addX);
+				uDL2D.drawString(Integer.toString(i), 3 + (labelHeight / 3), (square_height * (i - 1)) + addX);
 			}
 		} else {
 			int j = 1;
 			for (int i = 8; i > 0; i--, j++) {
-				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (j - 1)) + addX);
+				uDL2D.drawString(Integer.toString(i), 3 + (labelHeight / 3), (square_height * (j - 1)) + addX);
 			}
 		}
 		uDL2D.dispose();

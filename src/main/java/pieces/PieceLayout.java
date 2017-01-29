@@ -14,7 +14,6 @@ public class PieceLayout {
 	}
 
 	public void setImage(Image scaledInstance) {
-		// TODO Auto-generated method stub
 		this.image = scaledInstance;
 	}
 

@@ -38,7 +38,6 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 
 	private TabbedPaneIcon closeIcon;
 	private Image addIcon = null;
-	private Image clickedAddIcon = null;
 	private Image unclickedAddIcon = null;
 	private Rectangle addIconRect = null;
 
@@ -46,7 +45,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 		super();
 		this.closeIcon = new TabbedPaneIcon(this.closeIcon);
 		this.unclickedAddIcon = GUI.loadImage("add-tab-icon.png");
-		this.clickedAddIcon = GUI.loadImage("clicked-add-tab-icon.png");
+		GUI.loadImage("clicked-add-tab-icon.png");
 		this.addIcon = this.unclickedAddIcon;
 		this.setDoubleBuffered(true);
 		super.addMouseListener(this);
@@ -62,10 +61,10 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 		System.out.println("Present number of tabs: " + this.getTabCount());
 		this.updateAddIconRect();
 	}
-
+	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
-
+@Override
 	public void mousePressed(MouseEvent e) {
 	}
 
@@ -98,10 +97,10 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
 		// x:"+this.addIconRect.x+" y::"+this.addIconRect.y+"
 		// width:"+this.addIconRect.width+" height: "+this.addIconRect.height);
 	}
-
+@Override
 	public void mouseEntered(MouseEvent e) {
 	}
-
+@Override
 	public void mouseExited(MouseEvent e) {
 	}
 
@@ -175,11 +174,11 @@ class TabbedPaneIcon implements Icon {
 			fileIcon.paintIcon(c, g, x + width, y_p);
 		}
 	}// --endOf-PaintIcon--
-
+@Override
 	public int getIconWidth() {
 		return width + (fileIcon != null ? fileIcon.getIconWidth() : 0);
 	}// --endOf-getIconWidth--
-
+@Override
 	public int getIconHeight() {
 		return height;
 	}// --endOf-getIconHeight()--

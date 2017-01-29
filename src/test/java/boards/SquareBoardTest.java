@@ -4,8 +4,6 @@ import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,4 +49,5 @@ public class SquareBoardTest {
 		// Does it call getPosY function?
 		verify(end, atLeast(2)).getPosY();			
 	}	
+	
 }
