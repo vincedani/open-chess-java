@@ -38,8 +38,9 @@ public class KingMovesInCircleBoard implements IMove, IKing {
 
 	/**
 	 * Method to check is the king is checked by an opponent
-	 * 
-	 * @param s
+	 * @param board instance of the chessboard that contains the king
+	 * @param king instance of the king piece to check
+	 * @param sq
 	 *            Square where is a king
 	 * @return bool true if king is safe, else returns false
 	 */

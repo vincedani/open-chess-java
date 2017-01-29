@@ -182,7 +182,7 @@ public class Piece {
 
 	public boolean checkPiece(int i, int j) {
 		
-		return pieceBehaviour.checkPiece(this, i, j);
+		return pieceBehaviour.checkMyPiece(this, i, j);
 	}
 
 	public IKing myKing() {

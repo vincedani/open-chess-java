@@ -23,6 +23,10 @@ public class PieceBehaviour {
 	/**
 	 * Check if the x or y indexes are out of bounds
 	 * 
+	 * @param x
+	 *            x-index
+	 * @param y
+	 *            y-index
 	 * @return true when out of bounds, else false
 	 */
 	public boolean isout(int x, int y) {
@@ -41,15 +45,17 @@ public class PieceBehaviour {
 	/**
 	 * Check if there is a piece in a given x and y indexes
 	 * 
-	 * @param x
+	 * @param piece
+	 *            the instance of the piece that calls the function
+	 * @param i
 	 *            x index on chessboard
-	 * @param y
+	 * @param j
 	 *            y index on chessboard
 	 * @return true if the square is empty or the piece is from a different
 	 *         player , false if the square contains a piece of the same player
 	 *         or a King
 	 */
-	public boolean checkPiece(Piece piece, int i, int j) {
+	public boolean checkMyPiece(Piece piece, int i, int j) {
 		Piece squarePiece = chessboard.getSquareFromIndexes(i, j).getPiece();
 
 		if (squarePiece == null || squarePiece.getPlayer() != piece.getPlayer()) {
@@ -60,10 +66,12 @@ public class PieceBehaviour {
 
 	/**
 	 * Check if piece has a different owner than the calling piece
+	 * @param piece
+	 *            the instance of the piece that calls the function
 	 * 
-	 * @param x
+	 * @param i
 	 *            x index on chessboard
-	 * @param y
+	 * @param j
 	 *            y index on chessboard
 	 * @return true if owner(player) is different
 	 */
@@ -95,13 +103,14 @@ public class PieceBehaviour {
 	}
 
 	public BoardType getChessboardType() {
-		if(chessboard instanceof CircleBoard)
+		if (chessboard instanceof CircleBoard)
 			return BoardType.circleBoard;
-		else if(chessboard instanceof SquareBoard)
+		else if (chessboard instanceof SquareBoard)
 			return BoardType.squareBoard;
 		return null;
-}
+	}
 
 	public IChessboard getChessboard() {
 		return chessboard;
-	}}
+	}
+}

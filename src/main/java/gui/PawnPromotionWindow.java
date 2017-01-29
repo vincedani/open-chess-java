@@ -34,10 +34,7 @@ import javax.swing.JDialog;
  * chessboard it can be change to rook, bishop, queen or knight. For what pawn
  * is promoted decideds player.
  * 
- * @param parent
- *            Information about the current piece
- * @param color
- *            The player color
+ * 
  */
 public class PawnPromotionWindow extends JDialog implements ActionListener {
 
@@ -46,7 +43,12 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	JButton rookButton;
 	JButton queenButton;
 	public String result;
-	
+	/**
+	@param parent
+	 *            Information about the current piece
+	 * @param color
+	 *            The player color
+	*/
 	public PawnPromotionWindow(Frame parent, String color) {
 		super(parent);
 		this.setTitle("Choose piece");
