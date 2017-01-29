@@ -92,7 +92,7 @@ public class KingMovesInSquareBoard implements IMove, IKing {
 	/**
 	 * Method to check is the king is checked by an opponent
 	 * 
-	 * @param s
+	 * @param sq
 	 *            Square where is a king
 	 * @return bool true if king is safe, else returns false
 	 */

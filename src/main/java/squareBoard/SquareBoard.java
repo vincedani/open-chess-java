@@ -62,8 +62,6 @@ public class SquareBoard implements IChessboard {
 	 * 
 	 * @param settings
 	 *            reference to Settings class object for this chessboard
-	 * @param moves_history
-	 *            reference to MovesTable class object for this chessboard
 	 */
 	public SquareBoard(Settings settings) {
 		initial = new SquareBoardInitialization(this);
@@ -137,14 +135,6 @@ public class SquareBoard implements IChessboard {
 		return (int) this.display.square_height;
 	}
 
-	public void move(Square begin, Square end, Boolean displayWindow) {
-		move(begin, end, true);
-	}
-
-	public void move(Square begin, Square end, boolean refresh) {
-		this.move(begin, end, refresh, true);
-	}
-
 	/**
 	 * Method move piece from square to square
 	 * 
@@ -152,11 +142,11 @@ public class SquareBoard implements IChessboard {
 	 *            square from which move piece
 	 * @param end
 	 *            square where we want to move piece *
-	 * @param refresh
-	 *            chessboard, default: true
+	 * @param displayWindow
+	 *            check if show instructions window, false for testing
 	 */
 
-	public void move(Square begin, Square end, boolean refresh, boolean clearForwardHistory) {
+	public void move(Square begin, Square end, Boolean displayWindow) {
 
 		if (end.getPiece() != null) {
 			end.getPiece().setSquare(null);
@@ -187,11 +177,11 @@ public class SquareBoard implements IChessboard {
 			// Castling
 			if (begin.getPosX() + 2 == end.getPosX()) {
 				move(initial.getSquares()[7][begin.getPosY()], initial.getSquares()[end.getPosX() - 1][begin.getPosY()],
-						false, false);
+						false);
 
 			} else if (begin.getPosX() - 2 == end.getPosX()) {
 				move(initial.getSquares()[0][begin.getPosY()], initial.getSquares()[end.getPosX() + 1][begin.getPosY()],
-						false, false);
+						false);
 
 			}
 
@@ -217,7 +207,6 @@ public class SquareBoard implements IChessboard {
 
 			if (end.getPiece().getSquare().getPosY() == 0 || end.getPiece().getSquare().getPosY() == 7) {
 				// Promote
-				if (clearForwardHistory) {
 					String color = null;
 					if (end.getPiece().getPlayer().getColor() == Player.colors.white) {
 						color = "White";
@@ -244,7 +233,7 @@ public class SquareBoard implements IChessboard {
 								PieceType.Knight));
 					}
 				}
-			}
+			
 		} else if (!end.getPiece().getType().equals(PieceType.Pawn))
 
 		{

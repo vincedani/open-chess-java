@@ -35,10 +35,8 @@ public class SquareBoardInitialization {
 	/**
 	 * Method setPieces on begin of new game or loaded game
 	 * 
-	 * @param plWhite
-	 *            reference to white player
-	 * @param plBlack
-	 *            reference to black player
+	 * @param players
+	 *            set of players for the game
 	 */
 	public void setPieces(Player[] players) {
 
@@ -48,7 +46,6 @@ public class SquareBoardInitialization {
 		this.setPawns4NewGame(6, players[1]);
 	}
 
-	
 	/**
 	 * method set Figures in row (and set Queen and King to right position)
 	 * 
@@ -67,7 +64,7 @@ public class SquareBoardInitialization {
 		} else if (i == 0) {
 			player.setGoDown(true);
 		}
-        // Rook
+		// Rook
 		getSquares()[0][i].setPiece(PieceFactory.createSpecificPieceForSquareBoard(board, player, PieceType.Rook));
 		getSquares()[7][i].setPiece(PieceFactory.createSpecificPieceForSquareBoard(board, player, PieceType.Rook));
 		// Knight
@@ -76,26 +73,26 @@ public class SquareBoardInitialization {
 		// Bishop
 		getSquares()[2][i].setPiece(PieceFactory.createSpecificPieceForSquareBoard(board, player, PieceType.Bishop));
 		getSquares()[5][i].setPiece(PieceFactory.createSpecificPieceForSquareBoard(board, player, PieceType.Bishop));
-		
+
 		if (upsideDown) {
 			getSquares()[4][i].setPiece(PieceFactory.createSpecificPieceForSquareBoard(board, player, PieceType.Queen));
 			getSquares()[3][i].setPiece(PieceFactory.createSpecificPieceForSquareBoard(board, player, PieceType.King));
-			
+
 			if (player.getColor().equals(Player.colors.white)) {
-				kingWhite =  squares[3][i].getPiece();
+				kingWhite = squares[3][i].getPiece();
 			} else if (player.getColor().equals(Player.colors.black)) {
-				kingBlack =  squares[3][i].getPiece();
+				kingBlack = squares[3][i].getPiece();
 			} else if (player.getColor().equals(Player.colors.blue)) {
 				kingBlue = squares[3][i].getPiece();
 			}
 		} else {
 			getSquares()[3][i].setPiece(PieceFactory.createSpecificPieceForSquareBoard(board, player, PieceType.Queen));
 			getSquares()[4][i].setPiece(PieceFactory.createSpecificPieceForSquareBoard(board, player, PieceType.King));
-			
+
 			if (player.getColor().equals(Player.colors.white)) {
-				kingWhite =  squares[4][i].getPiece();
+				kingWhite = squares[4][i].getPiece();
 			} else if (player.getColor().equals(Player.colors.black)) {
-				kingBlack =  squares[4][i].getPiece();
+				kingBlack = squares[4][i].getPiece();
 			} else if (player.getColor().equals(Player.colors.blue)) {
 				kingBlue = squares[4][i].getPiece();
 			}
@@ -111,7 +108,7 @@ public class SquareBoardInitialization {
 	 *            player which is owner of pawns
 	 */
 	private void setPawns4NewGame(int i, Player player) {
-		
+
 		if (i != 1 && i != 6) {
 			System.out.println("error setting pawns etc.");
 			return;
@@ -119,7 +116,7 @@ public class SquareBoardInitialization {
 
 		for (int x = 0; x < 8; x++) {
 			getSquares()[x][i].setPiece(PieceFactory.createSpecificPieceForSquareBoard(board, player, PieceType.Pawn));
-			
+
 		}
 	}
 
@@ -130,12 +127,12 @@ public class SquareBoardInitialization {
 	public void setSquares(Square[][] squares) {
 		this.squares = squares;
 	}
-	
-	public void setKing(Piece king){
+
+	public void setKing(Piece king) {
 		if (king.getPlayer().getColor().equals(Player.colors.white)) {
-			kingWhite =  king;
+			kingWhite = king;
 		} else if (king.getPlayer().getColor().equals(Player.colors.black)) {
-			kingBlack =  king;
+			kingBlack = king;
 		} else if (king.getPlayer().getColor().equals(Player.colors.blue)) {
 			kingBlue = king;
 		}

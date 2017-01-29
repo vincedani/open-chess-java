@@ -11,7 +11,8 @@ import main.java.pieces.Piece;
 public interface IMove {
 	/**
 	 * Return the possible moves of the given piece
-	 * 
+	 * @param board
+	 * 			the instance of the board which contains the piece
 	 * @param piece
 	 *            the instance of the piece to extract the possible moves
 	 * 
