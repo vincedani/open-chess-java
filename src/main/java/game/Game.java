@@ -212,41 +212,33 @@ public class Game extends JPanel implements MouseListener, ComponentListener {
 
 	@Override
 	public void componentMoved(ComponentEvent e) {
-throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void componentShown(ComponentEvent e) {
-		throw new UnsupportedOperationException();
-
+	
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
-		throw new UnsupportedOperationException();
-
-	}
+		}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		throw new UnsupportedOperationException();
-
+	
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		throw new UnsupportedOperationException();
-
+	
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		throw new UnsupportedOperationException();
-
+	
 	}
 }
