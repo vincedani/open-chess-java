@@ -43,8 +43,6 @@ import main.java.pieces.PieceFactory.PieceType;
 public class SquareBoard implements IChessboard {
 
 	ArrayList<Square> moves;
-	private Settings settings;
-
 	public static final int bottom = 7;
 
 	public boolean breakCastling;
@@ -68,7 +66,6 @@ public class SquareBoard implements IChessboard {
 	 *            reference to MovesTable class object for this chessboard
 	 */
 	public SquareBoard(Settings settings) {
-		this.settings = settings;
 		initial = new SquareBoardInitialization(this);
 		display = new SquareBoardDisplay(null, null, new Point(0, 0), this);
 		pieceBehaviour = new PieceBehaviour(this);

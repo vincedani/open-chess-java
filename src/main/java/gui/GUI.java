@@ -21,7 +21,6 @@
 package main.java.gui;
 
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -45,7 +44,7 @@ import main.java.game.Game;
 public class GUI {
 
 	public Game game;
-	public static final  Properties configFile = GUI.getConfigFile();
+	protected static final  Properties configFile = GUI.getConfigFile();
 
 	public GUI() {
 		this.game = new Game();

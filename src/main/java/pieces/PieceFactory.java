@@ -1,7 +1,5 @@
 package main.java.pieces;
 
-import java.util.ArrayList;
-
 import main.java.LogToFile;
 import main.java.board.IChessboard;
 import main.java.board.IMove;

@@ -19,28 +19,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.io.File;
 
-import javax.swing.Icon;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.SingleFrameApplication;
 
 import main.java.game.Game;
-import main.java.game.Settings;
 import main.java.gui.ChooseThemeWindow;
 import main.java.gui.GUI;
 import main.java.gui.JChessAboutBox;
 import main.java.gui.NewGameWindow;
 import main.java.gui.PawnPromotionWindow;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
 
 /**
  * The application's main frame.
@@ -55,59 +50,13 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		return newGUI;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent event) {
 		Object target = event.getSource();
 		if (target == newGameItem) {
 			this.newGameFrame = new NewGameWindow();
 			this.newGameFrame.setLocationRelativeTo(null);
 			JChessApp.getApplication().show(this.newGameFrame);
-		} else if (target == saveGameItem) { // saveGame
-			if (this.gamesPane.getTabCount() == 0) {
-				JOptionPane.showMessageDialog(null, Settings.lang("save_not_called_for_tab"));
-				return;
-			}
-			while (true) {// until
-				JFileChooser fc = new JFileChooser();
-				int retVal = fc.showSaveDialog(this.gamesPane);
-				if (retVal == JFileChooser.APPROVE_OPTION) {
-					File selFile = fc.getSelectedFile();
-					Game tempGUI = (Game) this.gamesPane.getComponentAt(this.gamesPane.getSelectedIndex());
-					if (!selFile.exists()) {
-						try {
-							selFile.createNewFile();
-						} catch (java.io.IOException exc) {
-							
-							LogToFile.log(exc, "ERROR", "Error creating file: ");
-						}
-					} else if (selFile.exists()) {
-						int opt = JOptionPane.showConfirmDialog(tempGUI, Settings.lang("file_exists"),
-								Settings.lang("file_exists"), JOptionPane.YES_NO_OPTION);
-						if (opt == JOptionPane.NO_OPTION)// if user choose to
-															// now overwrite
-						{
-							continue; // go back to file choose
-						}
-					}
-					if (selFile.canWrite()) {
-						tempGUI.saveGame(selFile);
-					}
-					// System.out.println(fc.getSelectedFile().isFile());
-					LogToFile.log(null, "INFO", "fc.getSelectedFile().isFile() = " + fc.getSelectedFile().isFile());
-					break;
-				} else if (retVal == JFileChooser.CANCEL_OPTION) {
-					break;
-				}
-				/// JChessView.gui.game.saveGame(fc.);
-			}
-		} else if (target == loadGameItem) { // loadGame
-			JFileChooser fc = new JFileChooser();
-			int retVal = fc.showOpenDialog(this.gamesPane);
-			if (retVal == JFileChooser.APPROVE_OPTION) {
-				File file = fc.getSelectedFile();
-				if (file.exists() && file.canRead()) {
-					Game.loadGame(file);
-				}
-			}
 		} else if (target == this.themeSettingsMenu) {
 			try {
 				ChooseThemeWindow choose = new ChooseThemeWindow(this.getFrame());
@@ -115,7 +64,7 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 				JChessApp.getApplication().show(choose);
 			} catch (Exception exc) {
 				JOptionPane.showMessageDialog(JChessApp.getApplication().getMainFrame(), exc.getMessage());
-				 System.out.println("Something wrong creating window - perhaps themeList is null");
+				System.out.println("Something wrong creating window - perhaps themeList is null");
 
 				LogToFile.log(exc, "Error", "Something wrong creating window - perhaps themeList is null");
 				exc.printStackTrace();
@@ -174,8 +123,6 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		menuBar = new javax.swing.JMenuBar();
 		javax.swing.JMenu fileMenu = new javax.swing.JMenu();
 		newGameItem = new javax.swing.JMenuItem();
-		loadGameItem = new javax.swing.JMenuItem();
-		saveGameItem = new javax.swing.JMenuItem();
 		javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
 		optionsMenu = new javax.swing.JMenu();
 		themeSettingsMenu = new javax.swing.JMenuItem();
@@ -190,20 +137,12 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		gamesPane.setName("gamesPane"); // NOI18N
 
 		javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-		mainPanelLayout.setHorizontalGroup(
-			mainPanelLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(mainPanelLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(gamesPane, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		mainPanelLayout.setVerticalGroup(
-			mainPanelLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(mainPanelLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(gamesPane, GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-					.addContainerGap())
-		);
+		mainPanelLayout.setHorizontalGroup(mainPanelLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(mainPanelLayout.createSequentialGroup().addContainerGap()
+						.addComponent(gamesPane, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE).addContainerGap()));
+		mainPanelLayout.setVerticalGroup(mainPanelLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(mainPanelLayout.createSequentialGroup().addContainerGap()
+						.addComponent(gamesPane, GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE).addContainerGap()));
 		mainPanel.setLayout(mainPanelLayout);
 
 		menuBar.setName("menuBar"); // NOI18N
@@ -219,20 +158,6 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		newGameItem.setName("newGameItem"); // NOI18N
 		fileMenu.add(newGameItem);
 		newGameItem.addActionListener(this);
-
-		loadGameItem.setAccelerator(
-				javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-		loadGameItem.setText(resourceMap.getString("loadGameItem.text")); // NOI18N
-		loadGameItem.setName("loadGameItem"); // NOI18N
-		fileMenu.add(loadGameItem);
-		loadGameItem.addActionListener(this);
-
-		saveGameItem.setAccelerator(
-				javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-		saveGameItem.setText(resourceMap.getString("saveGameItem.text")); // NOI18N
-		saveGameItem.setName("saveGameItem"); // NOI18N
-		fileMenu.add(saveGameItem);
-		saveGameItem.addActionListener(this);
 
 		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(main.java.JChessApp.class)
 				.getContext().getActionMap(JChessView.class, this);
@@ -264,20 +189,19 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 		setComponent(mainPanel);
 		setMenuBar(menuBar);
 	}// </editor-fold>//GEN-END:initComponents
+
 	private javax.swing.JTabbedPane gamesPane;
-	private javax.swing.JMenuItem loadGameItem;
 	public javax.swing.JPanel mainPanel;
 	private javax.swing.JMenuBar menuBar;
 	private javax.swing.JMenuItem newGameItem;
 	private javax.swing.JMenu optionsMenu;
-	private javax.swing.JMenuItem saveGameItem;
 	private javax.swing.JMenuItem themeSettingsMenu;
-	
 
 	private JDialog aboutBox;
 	private PawnPromotionWindow promotionBox;
 	public NewGameWindow newGameFrame;
 
+	@Override
 	public void componentResized(ComponentEvent e) {
 		// System.out.println("jchessView resized!!;");
 		LogToFile.log(new UnsupportedOperationException("Not supported yet."), "ERROR", "Nor supported operation");
@@ -285,22 +209,21 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
 	}
 
 	public Game getActiveTabGame() throws ArrayIndexOutOfBoundsException {
-		Game activeGame = (Game) this.gamesPane.getComponentAt(this.gamesPane.getSelectedIndex());
-		return activeGame;
+		return (Game) this.gamesPane.getComponentAt(this.gamesPane.getSelectedIndex());
 	}
 
 	public int getNumberOfOpenedTabs() {
 		return this.gamesPane.getTabCount();
 	}
-
+@Override
 	public void componentMoved(ComponentEvent e) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
-
+@Override
 	public void componentShown(ComponentEvent e) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
-
+@Override
 	public void componentHidden(ComponentEvent e) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}

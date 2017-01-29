@@ -7,7 +7,6 @@ import static org.mockito.Mockito.verify;
 import org.junit.Before;
 import org.junit.Test;
 
-import main.java.JChessApp;
 import main.java.board.Square;
 import main.java.game.Player;
 import main.java.game.Settings;

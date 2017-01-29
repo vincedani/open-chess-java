@@ -20,17 +20,10 @@
  */
 package main.java.gui;
 
-import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -52,22 +45,17 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 	JButton bishopButton;
 	JButton rookButton;
 	JButton queenButton;
-	GridBagLayout gbl;
 	public String result;
-	GridBagConstraints gbc;
-
+	
 	public PawnPromotionWindow(Frame parent, String color) {
 		super(parent);
 		this.setTitle("Choose piece");
 		this.setLayout(new GridLayout(1, 4));
 		
-		this.gbl = new GridBagLayout();
-		this.gbc = new GridBagConstraints();
-		
-		this.knightButton = new JButton(new ImageIcon(resizeImage(GUI.loadImage("Knight-" + color + ".png"), 10)));
-		this.bishopButton = new JButton(new ImageIcon(resizeImage(GUI.loadImage("Bishop-" + color + ".png"),10)));
-		this.rookButton = 	new JButton(new ImageIcon(resizeImage(GUI.loadImage("Rook-" + color + ".png"),10)));
-		this.queenButton = 	new JButton(new ImageIcon(resizeImage(GUI.loadImage("Queen-" + color + ".png"),10)));
+		this.knightButton = new JButton(new ImageIcon(GUI.loadImage("Knight-" + color + ".png")));
+		this.bishopButton = new JButton(new ImageIcon(GUI.loadImage("Bishop-" + color + ".png")));
+		this.rookButton = new JButton(new ImageIcon(GUI.loadImage("Rook-" + color + ".png")));
+		this.queenButton = new JButton(new ImageIcon(GUI.loadImage("Queen-" + color + ".png")));
 		
 		this.result = "";
 
@@ -95,20 +83,13 @@ public class PawnPromotionWindow extends JDialog implements ActionListener {
 		this.queenButton.setIcon(new ImageIcon(GUI.loadImage("Queen-" + color + ".png")));
 	}
 
-	private BufferedImage resizeImage(Image tempImage, int height) {
-		BufferedImage resized = new BufferedImage(height, height, BufferedImage.TYPE_INT_ARGB_PRE);
-		Graphics2D imageGr = resized.createGraphics();
-		imageGr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		imageGr.drawImage(tempImage, 0, 0, height, height, null);
-		imageGr.dispose();
-		return resized;
-	}
 	/**
 	 * Method which is changing a pawn into queen, rook, bishop or knight
 	 * 
 	 * @param arg0
 	 *            Capt information about performed action
 	 */
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == queenButton) {
 			result = "Queen";

@@ -26,7 +26,8 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 	public Image LeftRightLabel;
 
 	private ChessboardLayout board_layout;
-	boolean renderLabels, upsideDown;
+	boolean renderLabels;
+	boolean upsideDown;
 	Square[][] squares;
 	SquareBoard board;
 
@@ -177,12 +178,12 @@ public class SquareBoardDisplay extends ChessboardDisplay {
 
 		if (upsideDown) {
 			for (int i = 1; i <= 8; i++) {
-				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (i - 1)) + addX);
+				uDL2D.drawString(Integer.toString(i), 3 + (labelHeight / 3), (square_height * (i - 1)) + addX);
 			}
 		} else {
 			int j = 1;
 			for (int i = 8; i > 0; i--, j++) {
-				uDL2D.drawString(new Integer(i).toString(), 3 + (labelHeight / 3), (square_height * (j - 1)) + addX);
+				uDL2D.drawString(Integer.toString(i), 3 + (labelHeight / 3), (square_height * (j - 1)) + addX);
 			}
 		}
 		uDL2D.dispose();
