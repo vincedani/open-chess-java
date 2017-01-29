@@ -29,7 +29,7 @@ public class CircleBoardDisplay extends ChessboardDisplay {
 	public CircleBoardDisplay(Point topLeft, CircleBoard board) {
 		this.topLeftPoint = topLeft;
 		this.board_layout = board.board_layout;
-		this.squares = board.initial.getSquares();
+		this.squares = board.getInitial().getSquares();
 		this.board = board;
 		
 		setActiveSquare(null);

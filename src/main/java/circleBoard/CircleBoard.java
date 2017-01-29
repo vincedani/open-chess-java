@@ -25,12 +25,12 @@ import main.java.pieces.PieceFactory.PieceType;
 public class CircleBoard implements IChessboard {
 
 	ChessboardLayout board_layout = new ChessboardLayout("circle_chessboard.png", "sel_circle.png", "able_circle.png");
-	CircleBoardInitialization initial;
+	private CircleBoardInitialization initial;
 	private CircleBoardDisplay display;
 	PieceBehaviour pieceBehaviour;
 
 	public CircleBoard() {
-		initial = new CircleBoardInitialization(this);
+		setInitial(new CircleBoardInitialization(this));
 		display = new CircleBoardDisplay(new Point(0, 0), this);
 		pieceBehaviour = new PieceBehaviour(this);
 	}
@@ -97,7 +97,7 @@ public class CircleBoard implements IChessboard {
 	}
 
 	public void setPieces(Player[] players) {
-		initial.setPieces(players);
+		getInitial().setPieces(players);
 	}
 
 	public int get_height() {
@@ -106,7 +106,7 @@ public class CircleBoard implements IChessboard {
 	}
 
 	public Square[][] getSquares() {
-		return initial.squares;
+		return getInitial().squares;
 	}
 
 	/**
@@ -229,17 +229,17 @@ public class CircleBoard implements IChessboard {
 
 	@Override
 	public Square getSquareFromIndexes(int i, int j) {
-		return initial.getSquares()[i][j];
+		return getInitial().getSquares()[i][j];
 	}
 
 	@Override
 	public Piece getKing(Player player) {
 		if (player.getColor().equals(Player.colors.white)) {
-			return initial.kingWhite;
+			return getInitial().kingWhite;
 		} else if (player.getColor().equals(Player.colors.black)) {
-			return initial.kingBlack;
+			return getInitial().kingBlack;
 		} else if (player.getColor().equals(Player.colors.blue)) {
-			return initial.kingBlue;
+			return getInitial().kingBlue;
 		}
 		return null;
 	}
@@ -249,6 +249,14 @@ public class CircleBoard implements IChessboard {
 	}
 
 	public void setKing(Piece king){
-		initial.setKing(king);
+		getInitial().setKing(king);
+	}
+
+	public CircleBoardInitialization getInitial() {
+		return initial;
+	}
+
+	public void setInitial(CircleBoardInitialization initial) {
+		this.initial = initial;
 	}
 }
