@@ -1,7 +1,13 @@
+main.java
 main.java.board
 main.java.circleBoard
+main.java.game
+main.java.gui
 main.java.movesInCircleBoard
 main.java.movesInSquareBoard
 main.java.pieces
 main.java.squareBoard
-test.java
+test.java.boards
+test.java.game
+test.java.movesInCircleBoard
+test.java.movesInSquareBoard

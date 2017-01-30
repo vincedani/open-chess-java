@@ -1,9 +1,11 @@
 package main.java.pieces;
 
 import main.java.board.IChessboard;
+import main.java.board.IKing;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.game.Player;
+import main.java.game.Settings.BoardType;
 import main.java.squareBoard.SquareBoard;
 
 /**
@@ -12,17 +14,19 @@ import main.java.squareBoard.SquareBoard;
 public class PieceBehaviour {
 
 	private IChessboard chessboard;
-	private Player player;
 
-	public PieceBehaviour(IChessboard chessboard, Player player) {
+	public PieceBehaviour(IChessboard chessboard) {
 
 		this.setChessboard(chessboard);
-		this.setPlayer(player);
 	}
 
 	/**
 	 * Check if the x or y indexes are out of bounds
 	 * 
+	 * @param x
+	 *            x-index
+	 * @param y
+	 *            y-index
 	 * @return true when out of bounds, else false
 	 */
 	public boolean isout(int x, int y) {
@@ -41,24 +45,20 @@ public class PieceBehaviour {
 	/**
 	 * Check if there is a piece in a given x and y indexes
 	 * 
-	 * @param x
+	 * @param piece
+	 *            the instance of the piece that calls the function
+	 * @param i
 	 *            x index on chessboard
-	 * @param y
+	 * @param j
 	 *            y index on chessboard
 	 * @return true if the square is empty or the piece is from a different
 	 *         player , false if the square contains a piece of the same player
 	 *         or a King
 	 */
-	public boolean checkPiece(int x, int y) {
-		if (getChessboard().getSquares()[x][y].piece != null
-				&& getChessboard().getSquares()[x][y].piece.getName().equals("King")) {
-			return false;
-		}
-		Piece piece = getChessboard().getSquares()[x][y].piece;
-		if (piece == null || // if this square is empty
-				piece.getPlayer() != this.getPlayer()) // or piece is another
-														// player
-		{
+	public boolean checkMyPiece(Piece piece, int i, int j) {
+		Piece squarePiece = chessboard.getSquareFromIndexes(i, j).getPiece();
+
+		if (squarePiece == null || squarePiece.getPlayer() != piece.getPlayer()) {
 			return true;
 		}
 		return false;
@@ -66,38 +66,51 @@ public class PieceBehaviour {
 
 	/**
 	 * Check if piece has a different owner than the calling piece
+	 * @param piece
+	 *            the instance of the piece that calls the function
 	 * 
-	 * @param x
+	 * @param i
 	 *            x index on chessboard
-	 * @param y
+	 * @param j
 	 *            y index on chessboard
 	 * @return true if owner(player) is different
 	 */
-	public boolean otherOwner(int x, int y) {
-		Square sq = getChessboard().getSquares()[x][y];
-		if (sq.piece == null) {
+	public boolean otherOwner(Piece piece, int i, int j) {
+		Square sq = chessboard.getSquareFromIndexes(i, j);
+		if (sq.getPiece() == null) {
 			return false;
 		}
-		if (this.getPlayer() != sq.piece.getPlayer()) {
+		if (piece.getPlayer() != sq.getPiece().getPlayer()) {
 			return true;
 		}
 		return false;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
-	private void setPlayer(Player player) {
-		this.player = player;
-	}
-
-	private IChessboard getChessboard() {
-		return chessboard;
+	public Square getSquare(int i, int j) {
+		return chessboard.getSquareFromIndexes(i, j);
 	}
 
 	private void setChessboard(IChessboard chessboard2) {
 		this.chessboard = chessboard2;
 	}
 
+	public IKing getKing(Player player) {
+		return (IKing) this.chessboard.getKing(player).getMoveBehaviour();
+	}
+
+	public Piece getKingAsPiece(Player player) {
+		return this.chessboard.getKing(player);
+	}
+
+	public BoardType getChessboardType() {
+		if (chessboard instanceof CircleBoard)
+			return BoardType.circleBoard;
+		else if (chessboard instanceof SquareBoard)
+			return BoardType.squareBoard;
+		return null;
+	}
+
+	public IChessboard getChessboard() {
+		return chessboard;
+	}
 }

@@ -21,7 +21,6 @@
 package main.java.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
@@ -39,52 +38,30 @@ public class Settings implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static ResourceBundle loc = null;
-	public int timeForGame;
-	public boolean runningChat;
-	public boolean runningGameClock;
-	public boolean timeLimitSet;
-	public boolean upsideDown;
-	public LogToFile logToFile = new LogToFile();
+	public LogToFile logger = new LogToFile();
 
-	public enum gameModes {
+	public enum GameMode {
 
-		newGame, loadGame
+		newGame, loadedGame
 	}
 
-	public gameModes gameMode;
+	public GameMode gameMode;
 
-	public Player playerWhite;
-	public Player playerBlack;
-	public Player playerBlue;
+	public enum BoardType {
 
-	public ArrayList<Player> players = new ArrayList<>();
+		squareBoard, circleBoard
+	}
+	
+	public BoardType boardType;
 
-	public enum gameTypes {
+	public Player[] players ;
 
-		local, network
+	
+	public Settings(Player[] players, BoardType boardType){
+		this.players= players;
+		this.boardType = boardType;
 	}
 
-	public gameTypes gameType;
-
-	public boolean renderLabels = true;
-
-	public Settings() {
-		// temporally
-		this.playerWhite = new Player("", "white");
-		this.playerBlack = new Player("", "black");
-		this.playerBlue = new Player("", "blue");
-		this.timeLimitSet = false;
-		gameMode = gameModes.newGame;
-	}
-
-	/**
-	 * Method to get game time set by player
-	 * 
-	 * @return timeFofGame int with how long the game will last
-	 */
-	public int getTimeForGame() {
-		return this.timeForGame;
-	}
 
 	public static String lang(String key) {
 		if (Settings.loc == null) {
@@ -100,4 +77,11 @@ public class Settings implements Serializable {
 		return result;
 	}
 
+	public Player nextPlayer(Player actualPlayer){
+		int actualIndex = java.util.Arrays.asList(players).indexOf(actualPlayer);
+		if(actualIndex== (players.length - 1))
+			return players[0];
+		return players[actualIndex+1];
+	}
+	
 }

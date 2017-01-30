@@ -20,61 +20,68 @@
  */
 package main.java.board;
 
+import main.java.game.Player;
 import main.java.pieces.Piece;
 
 /**
  * Class to represent a chessboard square
  */
-public class Square
-{
+public class Square {
 
-    private int pozX; 
-    private int pozY; 
-    public Piece piece = null;
+	private int posX;
+	private int posY;
+	private Piece piece = null;
 
-    public Square(int pozX, int pozY, Piece piece)
-    {
-        this.setPozX(pozX);
-        this.setPozY(pozY);
-        this.piece = piece;
-    }/*--endOf-Square--*/
+	public Square(int pozX, int pozY, Piece piece) {
+		this.setPosX(pozX);
+		this.setPosY(pozY);
+		this.setPiece(piece);
+		
+	}/*--endOf-Square--*/
 
-
-    public Square(Square square)
-    {
-        this.setPozX(square.getPozX());
-        this.setPozY(square.getPozY());
-        this.piece = square.piece;
-    }
-
-    public Square clone(Square square)
-    {
-        return new Square(square);
-    }
-
-    public void setPiece(Piece piece)
-    {
-        this.piece = piece;
-        this.piece.setSquare(this);
-    }
-
-
-	public int getPozX() {
-		return pozX;
+	public Square(Square square) {
+		this.setPosX(square.getPosX());
+		this.setPosY(square.getPosY());
 	}
 
-
-	public void setPozX(int pozX) {
-		this.pozX = pozX;
+	public Square clone(Square square) {
+		return new Square(square);
 	}
 
-
-	public int getPozY() {
-		return pozY;
+	public int getPosX() {
+		return posX;
 	}
 
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
 
-	public void setPozY(int pozY) {
-		this.pozY = pozY;
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	
+	/**
+	 * Set the given piece to this Square and set this Square to the given piece
+	 * 
+	 * @param piece
+	 *            the piece to set
+	 */
+	public void setPiece(Piece piece) {
+		this.piece = piece;
+		if(piece != null){
+		this.piece.setSquare(this);}
+	}
+
+	public Player getPlayer() {
+		return piece.getPlayer();
+	}
+
+	public Piece getPiece() {
+		return piece;
 	}
 }

@@ -10,7 +10,6 @@ import java.util.logging.SimpleFormatter;
 
 public class LogToFile {
 
-	// protected static final Logger logger = Logger.getLogger("MYLOG");
 	private static LogManager lMgr = LogManager.getLogManager();
 	protected static final Logger logger = Logger.getLogger("MYLOG");
 	private static String logFile = "test";

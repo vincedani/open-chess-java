@@ -21,90 +21,67 @@
 package main.java.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import main.java.LogToFile;
 
-/** Class representing game settings available for the current player
+/**
+ * Class representing game settings available for the current player
  */
-public class Settings implements Serializable
-{
+public class Settings implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static ResourceBundle loc = null;
-    public int timeForGame;
-    public boolean runningChat;
-    public boolean runningGameClock;
-    public boolean timeLimitSet;
-    public boolean upsideDown;
-    public LogToFile logToFile = new LogToFile();
-    
-    public enum gameModes
-    {
 
-        newGame, loadGame
-    }
-    
-    public gameModes gameMode;
-    
-    public Player playerWhite;
-    public Player playerBlack;
-    public Player playerBlue;
-    
-    
-    public ArrayList<Player> players = new ArrayList<>() ;
-    public enum gameTypes
-    {
+	private static ResourceBundle loc = null;
+	public LogToFile logger = new LogToFile();
 
-        local, network
-    }
-    public gameTypes gameType;
-    
-    public boolean renderLabels = true;
+	public enum GameMode {
 
-    public Settings()
-    {
-        //temporally
-        this.playerWhite = new Player("", "white");
-        this.playerBlack = new Player("", "black");
-        this.playerBlue = new Player("", "blue");
-        this.timeLimitSet = false;
-        gameMode = gameModes.newGame;
-    }
+		newGame, loadedGame
+	}
 
-    /** Method to get game time set by player
-     *  @return timeFofGame int with how long the game will last
-     */
-    public int getTimeForGame()
-    {
-        return this.timeForGame;
-    }
+	public GameMode gameMode;
 
-    public static String lang(String key)
-    {
-        if (Settings.loc == null)
-        {
-            Settings.loc = PropertyResourceBundle.getBundle("main.java.resources.i18n.main_en");
-            Locale.setDefault(Locale.ENGLISH);
-        }
-        String result = "";
-        try
-        {
-            result = Settings.loc.getString(key);
-        }
-        catch (java.util.MissingResourceException exc)
-        {
-            result = key;
-        }
-       // System.out.println(Settings.loc.getLocale().toString());
-        // LogToFile.log(null, "INFO", Settings.loc.getLocale().toString());
-        return result;
-    }
+	public enum BoardType {
+
+		squareBoard, circleBoard
+	}
+	
+	public BoardType boardType;
+
+	public Player[] players ;
+
+	
+	public Settings(Player[] players, BoardType boardType){
+		this.players= players;
+		this.boardType = boardType;
+	}
+
+
+	public static String lang(String key) {
+		if (Settings.loc == null) {
+			Settings.loc = PropertyResourceBundle.getBundle("main.java.resources.i18n.main_en");
+			Locale.setDefault(Locale.ENGLISH);
+		}
+		String result = "";
+		try {
+			result = Settings.loc.getString(key);
+		} catch (java.util.MissingResourceException exc) {
+			result = key;
+		}
+		return result;
+	}
+
+	public Player nextPlayer(Player actualPlayer){
+		int actualIndex = java.util.Arrays.asList(players).indexOf(actualPlayer);
+		if(actualIndex== (players.length - 1))
+			return players[0];
+		return players[actualIndex+1];
+	}
+	
 }

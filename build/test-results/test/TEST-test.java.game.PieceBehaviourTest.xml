@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test.java.game.PieceBehaviourTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-28T22:42:55" hostname="AZD-PC" time="0.038">
+  <properties/>
+  <testcase name="testIsout_0" classname="test.java.game.PieceBehaviourTest" time="0.015"/>
+  <testcase name="testIsout_1" classname="test.java.game.PieceBehaviourTest" time="0.001"/>
+  <testcase name="testIsout_2" classname="test.java.game.PieceBehaviourTest" time="0.017"/>
+  <testcase name="testIsout_3" classname="test.java.game.PieceBehaviourTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
