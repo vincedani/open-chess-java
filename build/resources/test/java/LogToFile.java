@@ -10,7 +10,6 @@ import java.util.logging.SimpleFormatter;
 
 public class LogToFile {
 
-	// protected static final Logger logger = Logger.getLogger("MYLOG");
 	private static LogManager lMgr = LogManager.getLogManager();
 	protected static final Logger logger = Logger.getLogger("MYLOG");
 	private static String logFile = "test";
@@ -31,9 +30,11 @@ public class LogToFile {
 
 	private static void initialize() {
 		try {
-			//Logger logger = Logger.getLogger(this.getClass().getName());
+			// Logger logger = Logger.getLogger(this.getClass().getName());
 			SimpleFormatter formatter = new SimpleFormatter();
-			//FileHandler fh = new FileHandler("main" + File.separator + "java" + File.separator + "Logs" + File.separator + logFile + "%g%u.LOG", 10000, 2, true);
+			// FileHandler fh = new FileHandler("main" + File.separator + "java"
+			// + File.separator + "Logs" + File.separator + logFile +
+			// "%g%u.LOG", 10000, 2, true);
 			FileHandler fh = new FileHandler(logFile + "%g%u.LOG", 100000, 2, true);
 			fh.setFormatter(formatter);
 			fh.setLevel(Level.ALL);
@@ -54,20 +55,23 @@ public class LogToFile {
 		Logger logger1;
 		if (!checkFileName(logFile)) {
 			createFileName();
-		   // System.out.println("FileName: " + logFile);
+			// System.out.println("FileName: " + logFile);
 			initialize();
 		}
 
 		if ((logger1 = lMgr.getLogger("MYLOG")) != null) {
 			switch (level) {
-			case "Error":
+			case "ERROR":
 				logger1.log(Level.SEVERE, msg, ex);
 				break;
+			case "Error":
+				logger1.log(Level.SEVERE, msg, ex);
+				break;	
 			case "Debug":
 				logger1.log(Level.FINE, msg, ex);
 				break;
 			case "INFO":
-				logger1.log(Level.INFO, msg, ex);
+				logger1.log(Level.INFO, msg);
 				break;
 			}
 

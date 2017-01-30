@@ -1,15 +1,17 @@
+buildscript {
+    repositories {
+        jcenter()
+	}        
+    dependencies {
+        classpath 'com.bmuschko:gradle-clover-plugin:2.0.1'
+    }
+}
+        
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'com.bmuschko.clover'
 
-<<<<<<< HEAD
-// In this section you declare where to find the dependencies of your project
-repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    //jcenter()
-    mavenCentral()
-}
-=======
 	 task fatJar(type: Jar) {
 		manifest {
 	        attributes 'Implementation-Title': 'Gradle Jar File Example',
@@ -32,9 +34,10 @@ repositories {
 
 	repositories {
 	     mavenCentral()
+	     mavenLocal()
 	}
-	//println "http.proxyHost = " + System.getProperty("http.proxyHost")
 	
+
 	dependencies {
 	
 		compile group: 'org.jdesktop', name: 'appframework', version: '1.0+'
@@ -53,8 +56,23 @@ repositories {
 	   	compile group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'
 	   	compile group: 'com.lmax', name: 'disruptor', version: '3.2.0'
 	   	compile group: 'org.jdesktop', name: 'appframework', version: '1.0.3'
-	   	compile 'org.slf4j:slf4j-api:1.6.2'
-	    
+        clover 'com.cenqua.clover:clover:3.2.0'
+        
+        compile 'org.slf4j:slf4j-api:1.6.2'
+	   	
+		compile group: 'com.jgoodies', name: 'jgoodies-forms', version: '1.9.0'
+		compile group: 'com.jgoodies', name: 'jgoodies-common', version: '1.8.1'
+
+      }
+  
+     
+    clover {
+	    licenseLocation = '/home/bamboo/clover.license'
+	    excludes = ['**/JChessApp.java', '**/JChessView.java', '**/LogToFile.java', '**/JChessAboutBox.java', '**/JChessTabbedPane.java', '**/Clock.java', '**/TabbedPaneIcon.java', '**/PawnPromotionWindow.java', '**/GameClock.java', '**/NewGameWindow.java', '**/ChooseThemeWindow.java', '**/**Display**.java', '**/Game.java', '**/GUI.java']
+	    report {
+	        html = true
+	        xml = true
+	    }
 	}
 
 	sourceSets {
@@ -66,6 +84,9 @@ repositories {
 				srcDirs = ['src/main']
 			}
 		}
+		  
+ 
+ 
 		test {
 			java {
 				srcDirs = ['src/test']
@@ -96,10 +117,5 @@ repositories {
 	        options.compilerArgs << "-Xlint:unchecked"
 	    }
 	}
-	
->>>>>>> development
-
-
-}
-
-
+}	
+ 

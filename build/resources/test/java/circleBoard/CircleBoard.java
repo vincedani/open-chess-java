@@ -1,99 +1,103 @@
 package main.java.circleBoard;
 
 import java.awt.Point;
+
+import javax.swing.JOptionPane;
+
+import main.java.LogToFile;
 import main.java.board.ChessboardDisplay;
 import main.java.board.ChessboardLayout;
 import main.java.board.IChessboard;
 import main.java.board.Square;
-import main.java.game.MovesTable;
 import main.java.game.Player;
-import main.java.game.Settings;
-import main.java.pieces.King;
-import main.java.pieces.Pawn;
+import main.java.movesInCircleBoard.DragonMovesInCircleBoard;
+import main.java.movesInCircleBoard.PawnMovesInCircleBoard;
+import main.java.pieces.Piece;
+import main.java.pieces.PieceBehaviour;
+import main.java.pieces.PieceFactory;
+import main.java.pieces.PieceFactory.PieceType;
 
 /**
- * Class to represent a Circle Chessboard from 24x6 Squares for a three player Chess game. 
+ * Class to represent a Circle Chessboard for a three player Chess game. It
+ * contains 24 x 6 Squares
  */
 
 public class CircleBoard implements IChessboard {
 
-	public static final int top = 0;
-	public static final int bottom = 7;
-
-	public MovesTable moves_history;
-
 	ChessboardLayout board_layout = new ChessboardLayout("circle_chessboard.png", "sel_circle.png", "able_circle.png");
-	public CircleBoardInitialization initial;
+	CircleBoardInitialization initial;
 	private CircleBoardDisplay display;
+	PieceBehaviour pieceBehaviour;
 
-	public CircleBoard(Settings settings, MovesTable moves_history) {
-
-		settings.renderLabels = false;
+	public CircleBoard() {
 		initial = new CircleBoardInitialization(this);
-		display = new CircleBoardDisplay(null, null, new Point(0, 0), settings.renderLabels, settings.upsideDown, this);
-		this.moves_history = moves_history;
+		display = new CircleBoardDisplay(new Point(0, 0), this);
+		pieceBehaviour = new PieceBehaviour(this);
 	}
 
-	public Square getSquare(int x, int y) {
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Use transformation of x and y to polar coordinates to obtain the x and y
+	 * indexes of the Square. 
+	 */
 
-		if (x > 2 * getRadius() || y > 2 * getRadius()) // test if click is out
-														// of chessboard
-		{
-			System.out.println("click out of chessboard.");
+	public Square getSquareFromCoordinates(int x, int y) {
+
+		if (x > 2 * getRadius() || y > 2 * getRadius()) {
+			LogToFile.log(null, "INFO", "click out of chessboard.");
 			return null;
 		}
 
-		int cx = getRadius(), cy = getRadius(), hi = get_square_height();
-		double ri = Math.sqrt(Math.pow((cx - x), 2) + Math.pow((cy - y), 2));
+		int cx = getRadius();
+		int cy = getRadius();
+		int hi = getSquareHeight();
+		double ri = Math.sqrt(Math.pow(cx - x, 2) + Math.pow(cy - y, 2));
 
-		double ai = 0;
 		// Calculate the angle depending on the quadrant
-		if (x > cx && y < cy) {
-			ai = Math.toDegrees(Math.asin((x - cx) / ri));
-		} else if (x > cx && y > cy) {
-			ai = 90 + Math.toDegrees(Math.acos((x - cx) / ri));
-		} else if (x < cx && y > cy) {
-			ai = 180 + Math.toDegrees(Math.asin((cx - x) / ri));
-		} else if (x < cx && y < cy) {
-			ai = 270 + Math.toDegrees(Math.acos((cx - x) / ri));
-		}
+		double ai = calculateAngle(x, y, cx, cy, ri);
+		double squareX = ai / 15;
+		double squareY = (cy - ri) / hi;
 
-		double square_x = (ai / 15);// count which field in X was
-									// clicked
-
-		double square_y = (cy - ri) / hi;// count which field
-											// in Y
-											// was
 		Square result;
 		try {
-			result = initial.squares[(int) square_x][(int) square_y];
+			result = getSquareFromIndexes((int) squareX,(int) squareY);
 			return result;
 
 		} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
-			System.out.println("!!Array out of bounds when getting Square with Chessboard.getSquare(int,int) : " + exc);
+			LogToFile.log(exc, "ERROR", "Array out of bounds when getting Square with Chessboard.getSquare(int,int)");
 			return null;
 		}
 	}
 
+	private double calculateAngle(int x, int y, int cx, int cy, double ri) {
+		if (x > cx && y < cy) {
+			return  Math.toDegrees(Math.asin((x - cx) / ri));
+		} else if (x > cx && y > cy) {
+			return 90 + Math.toDegrees(Math.acos((x - cx) / ri));
+		} else if (x < cx && y > cy) {
+			return 180 + Math.toDegrees(Math.asin((cx - x) / ri));
+		} else if (x < cx && y < cy) {
+			return 270 + Math.toDegrees(Math.acos((cx - x) / ri));
+		}
+		return 0;
+
+	}
+
 	public void select(Square sq) {
-		this.display.activeSquare = sq;
-		this.display.active_x_square = sq.getPozX();
-		this.display.active_y_square = sq.getPozY();
-		System.out.println("active_x: " + this.display.active_x_square + " active_y: " + this.display.active_y_square);
+		this.display.setActiveSquare(sq);
+		LogToFile.log(null, "INFO",
+				"active_x: " + this.display.getActiveSquare().getPosX() + " active_y: " + this.display.getActiveSquare().getPosY());
 		display.repaint();
 	}
 
 	public void unselect() {
-		this.display.active_x_square = -1;
-		this.display.active_y_square = -1;
-		this.display.activeSquare = null;
+		this.display.setActiveSquare(null);
 		display.repaint();
 	}
 
 	public void setPieces(Player[] players) {
-
 		initial.setPieces(players);
-
 	}
 
 	public int get_height() {
@@ -105,41 +109,131 @@ public class CircleBoard implements IChessboard {
 		return initial.squares;
 	}
 
-	public void move(Square begin, Square end) {
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * If the piece is a pawn checks if it has passed the center so that the
+	 * regular move is changed from forward to backward in the y axis.
+	 * 
+	 */
+	public void move(Square begin, Square end, Boolean displayWindow) {
+
 		// Check if pawn passed the center
-		if (begin.piece instanceof Pawn) {
-			Pawn movedPawn = (Pawn) begin.piece;
-			if (movedPawn.getSquare().getPozY() == 5 && end.getPozY() == 5)
-				movedPawn.passedCenter = true;
+		if (begin.getPiece().getType().equals(PieceType.Pawn)) {
+			Piece movedPawn = begin.getPiece();
+			if (movedPawn.getPosY() == 5 && end.getPosY() == 5) {
+				PawnMovesInCircleBoard pawnBeh = (PawnMovesInCircleBoard) movedPawn.getMoveBehaviour();
+				pawnBeh.passCenter();
+			}
 		}
 
-		begin.piece.setSquare(end);// set square of piece to ending
-		end.piece = begin.piece;// for ending square set piece from beginning
-								// square
+		// Check if first move
+		if (!begin.getPiece().wasMoved()) {
+			begin.getPiece().setWasMoved(true);
+		}
 
-		begin.piece = null;// make null piece for beginning square
+		LogToFile.log(null, "INFO", begin.getPiece().getType().toString() + " moved from " + begin.getPosX() + ","
+				+ begin.getPosY() + " to " + end.getPosX() + " , " + end.getPosY());
+
+		if (end.getPiece() != null) {
+			LogToFile.log(null, "INFO", begin.getPiece().getType().toString() + " " + begin.getPiece().getPlayer().getColor()
+					+ " taked " + end.getPiece().getType().toString() + " " + end.getPiece().getPlayer().getColor());
+
+		}
+
+		if (end.getPiece() != null && begin.getPiece().getType().equals(PieceType.Rook)) {
+			if (displayWindow){
+				// Create Dragon if a rook captures a piece
+				JOptionPane.showMessageDialog(null, "The princess " + end.getPiece().getType().toString() + " "
+						+ end.getPiece().getPlayer().getColor()
+						+ " is captured, if the dragon is defeated, you will get a queen. \n Be careful with the dragon, although he can only be used 3 times, he can throw fire to all the pieces around him, and with each move, his power grows. \n Good luck! ");
+			}
+			
+			end.setPiece(PieceFactory.createSpecificPieceForCircleBoard(this, begin.getPiece().getPlayer(), PieceType.Dragon));
+			end.getPiece().setSquare(end);
+			begin.setPiece(null);
+		} else if (begin.getPiece().getType().equals(PieceType.Dragon) && end.getPiece() != null) {
+			// The Dragon throws fire to the captured piece, but remains in his
+			// original place
+			Piece dragon = begin.getPiece();
+			DragonMovesInCircleBoard dragonBeh = (DragonMovesInCircleBoard) dragon.getMoveBehaviour();
+			dragonBeh.increaseFireLoader();
+
+			end.setPiece(null);
+
+			// Check if the dragon has made all his moves, if so bring the rook
+			// back
+			if (dragonBeh.getFireLoader() == 4) {
+				if (displayWindow){
+					JOptionPane.showMessageDialog(null, "Nobody defeated the dragon!");
+				}
+				begin.setPiece(PieceFactory.createSpecificPieceForCircleBoard(this, begin.getPiece().getPlayer(),
+						PieceType.Rook));
+				begin.getPiece().setSquare(begin);
+			}
+
+		} else if (end.getPiece() != null && end.getPiece().getType().equals(PieceType.Dragon)) {
+			// The active player defeated the dragon, and earn a queen
+			Piece warrior = begin.getPiece();
+			if (displayWindow){
+				JOptionPane.showMessageDialog(null, begin.getPiece().getPlayer().getName() + " defeated the dragon! Your have earned a queen");
+			}
+			
+			warrior.setSquare(end);
+			end.setPiece(warrior);
+			begin.setPiece(PieceFactory.createSpecificPieceForCircleBoard(this, begin.getPiece().getPlayer(),
+					PieceType.Queen));
+			begin.getPiece().setSquare(begin);
+
+		} else {
+			// Regular move
+			begin.getPiece().setSquare(end);
+			end.setPiece(begin.getPiece());
+			begin.setPiece(null);
+		}
 		this.unselect();// unselect square
 		display.repaint();
-
 	}
 
 	@Override
-	public boolean undo() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean redo() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public Square getActiveSquare() {
-		return display.activeSquare;
+		return display.getActiveSquare();
 	}
 
-	public King getKing(Player player) {
+	@Override
+	public ChessboardDisplay getDisplay() {
+		return display;
+	}
+
+	/**
+	 * Method calculating the square height of the circle board, based on the
+	 * actual radius.
+	 * 
+	 * @return the square height of the CircleBoard
+	 * 
+	 */
+	public int getSquareHeight() {
+		return (getRadius() - getRadius() / 3) / 6;
+	}
+
+	/**
+	 * Method calculating the radius of the circle board, based on the board
+	 * layout height.
+	 * 
+	 * @return the radius of the CircleBoard
+	 * 
+	 */
+	public int getRadius() {
+		return board_layout.image.getHeight(null) / 2;
+	}
+
+	@Override
+	public Square getSquareFromIndexes(int i, int j) {
+		return initial.getSquares()[i][j];
+	}
+
+	@Override
+	public Piece getKing(Player player) {
 		if (player.getColor().equals(Player.colors.white)) {
 			return initial.kingWhite;
 		} else if (player.getColor().equals(Player.colors.black)) {
@@ -149,17 +243,12 @@ public class CircleBoard implements IChessboard {
 		}
 		return null;
 	}
-
-	public ChessboardDisplay getDisplay() {
-		return display;
+	
+	public PieceBehaviour getPieceBehaviour() {
+		return pieceBehaviour;
 	}
 
-	public int get_square_height() {
-		return (getRadius() - getRadius() / 3) / 6;
+	public void setKing(Piece king){
+		initial.setKing(king);
 	}
-
-	public int getRadius() {
-		return board_layout.image.getHeight(null) / 2;
-	}
-
 }

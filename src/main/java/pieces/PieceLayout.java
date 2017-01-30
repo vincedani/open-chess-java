@@ -9,14 +9,12 @@ public class PieceLayout {
 	public Image image;
 
 	public PieceLayout(String imagePath) {
-		orgImage= GUI.loadImage(imagePath);
+		orgImage = GUI.loadImage(imagePath);
 		image = orgImage;
 	}
 
 	public void setImage(Image scaledInstance) {
-		// TODO Auto-generated method stub
 		this.image = scaledInstance;
 	}
-	
-	
+
 }
