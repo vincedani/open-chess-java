@@ -6,7 +6,6 @@ import main.java.board.IChessboard;
 import main.java.board.IKing;
 import main.java.board.IMove;
 import main.java.board.Square;
-import main.java.board.IKing.KingState;
 import main.java.pieces.Piece;
 import main.java.pieces.PieceFactory.PieceType;
 

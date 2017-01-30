@@ -119,7 +119,7 @@ public class KingMovesInSquareBoardTest {
 		assertEquals(km.isCheckmatedOrStalemated(board, king), KingState.checkmate);
 	}
 
-	// Checkmate
+	// Checked
 	@Test
 	public final void testChecked() {
 		int x = 3;
@@ -146,4 +146,92 @@ public class KingMovesInSquareBoardTest {
 		KingMovesInSquareBoard km = (KingMovesInSquareBoard) king.getMoveBehaviour();
 		assertTrue(!km.isSafe(board, king, king.getSquare()) && km.isCheckmatedOrStalemated(board, king) == KingState.safe);
 	}
+	
+	@Test
+	public final void castlingTest(){
+		int xRook = 7; 
+		int xRook2 = 0; 
+		int yRook = 0; 
+		
+		int xKing = 4; 
+		int yKing = 0;
+		
+		SquareBoard board = new SquareBoard(settings); 
+		
+		// Set King
+		Piece king = PieceFactory.createSpecificPieceForSquareBoard(board, p1, PieceType.King);
+		board.getSquares()[xKing][yKing].setPiece(king);
+		king.setSquare(board.getSquares()[xKing][yKing]);
+		board.setKing(king);
+		
+		// Set Rook Right
+		Piece rook = PieceFactory.createSpecificPieceForSquareBoard(board, p1, PieceType.Rook);
+		board.getSquares()[xRook][yRook].setPiece(rook);
+		rook.setSquare(board.getSquares()[xRook][yRook]);
+		
+		// Set Rook Left
+		Piece rook2 = PieceFactory.createSpecificPieceForSquareBoard(board, p1, PieceType.Rook);
+		board.getSquares()[xRook2][yRook].setPiece(rook2);
+		rook2.setSquare(board.getSquares()[xRook2][yRook]);
+		
+		// Expected
+		ArrayList<Square> expected = new ArrayList<Square>(); 
+		expected.add(board.getSquares()[6][yRook]);
+		expected.add(board.getSquares()[2][yRook]);
+		
+		// Obtained by Algorithm
+		KingMovesInSquareBoard km = new KingMovesInSquareBoard(); 
+		ArrayList<Square> obtained = km.getMoves(board, king, true);
+		
+		assertTrue(obtained.containsAll(expected));
+	}
+	
+	@Test
+	public final void castlingFalseTest(){
+		int xRook = 7; 
+		int xRook2 = 0; 
+		int yRook = 0; 
+		
+		int xKing = 4; 
+		int yKing = 0;
+		
+		SquareBoard board = new SquareBoard(settings); 
+		
+		// Set King
+		Piece king = PieceFactory.createSpecificPieceForSquareBoard(board, p1, PieceType.King);
+		board.getSquares()[xKing][yKing].setPiece(king);
+		king.setSquare(board.getSquares()[xKing][yKing]);
+		board.setKing(king);
+		
+		// Set Pawn to Right
+		Piece pawn1 = PieceFactory.createSpecificPieceForCircleBoard(board, p1, PieceType.Pawn);
+		board.getSquares()[5][0].setPiece(pawn1);
+		
+		// Set Rook Right
+		Piece rook = PieceFactory.createSpecificPieceForSquareBoard(board, p1, PieceType.Rook);
+		board.getSquares()[xRook][yRook].setPiece(rook);
+		rook.setSquare(board.getSquares()[xRook][yRook]);
+		
+		// Set Pawn to Left
+		Piece pawn2 = PieceFactory.createSpecificPieceForCircleBoard(board, p1, PieceType.Pawn);
+		board.getSquares()[3][0].setPiece(pawn2);
+		
+		// Set Rook Left
+		Piece rook2 = PieceFactory.createSpecificPieceForSquareBoard(board, p1, PieceType.Rook);
+		board.getSquares()[xRook2][yRook].setPiece(rook2);
+		rook2.setSquare(board.getSquares()[xRook2][yRook]);
+		
+		// Expected
+		ArrayList<Square> expected = new ArrayList<Square>(); 
+		expected.add(board.getSquares()[6][yRook]);
+		expected.add(board.getSquares()[2][yRook]);
+		
+		// Obtained by Algorithm
+		KingMovesInSquareBoard km = new KingMovesInSquareBoard(); 
+		ArrayList<Square> obtained = km.getMoves(board, king, true);
+		
+		assertFalse(obtained.containsAll(expected)); // Does not contain Castling move
+	}
+	
+	
 }
