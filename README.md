@@ -1,6 +1,6 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This is just a copy of the original project in Bitbucket https://bitbucket.org/aczapata/jopenchess as an assignment in a Clean Code Development course.
 
 ### What is this repository for? ###
 
