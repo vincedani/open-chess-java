@@ -72,7 +72,7 @@ public class RookMovesInCircleBoardTest {
 				}
 			}
 			if (sum == 0){
-				System.out.println("No está: " + esperado.getPozX() + ", " + esperado.getPozY());
+
 			}
 			
 		}*/

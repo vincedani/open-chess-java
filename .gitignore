@@ -2,3 +2,6 @@
 config.txt
 *.LOG
 *.LOG.lck
+
+build/*
+out/*
