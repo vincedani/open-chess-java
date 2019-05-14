@@ -38,178 +38,177 @@ import main.java.pieces.PieceFactory.PieceType;
  */
 public class Piece {
 
-	private PieceBehaviour pieceBehaviour;
-	private Square square;
-	private Player player;
-	private PieceType type;
-	protected String symbol;
-	private PieceLayout layout;
-	private PieceDisplay display;
-	private IMove moveBehaviour;
-	private boolean wasMoved = false;
+  private PieceBehaviour pieceBehaviour;
+  private Square square;
+  private Player player;
+  private PieceType type;
+  protected String symbol;
+  private PieceLayout layout;
+  private PieceDisplay display;
+  private IMove moveBehaviour;
+  private boolean wasMoved = false;
 
-	
-	public Piece(IChessboard chessboard, Player player, PieceType pieceType) {
 
-		this.setPlayer(player);
+  public Piece(IChessboard chessboard, Player player, PieceType pieceType) {
 
-		colors color = player.getColor();
-		String imageColorPath = "";
-		
-		if(pieceType.equals(PieceType.Knight)){
-			symbol = pieceType.toString().substring(0, 2);
-		}else{
-			symbol = pieceType.toString().substring(0, 1);
-		}
-		
-		switch (color) {
-		case black:
-			imageColorPath = "-Black.png";
-			symbol += "-Bk";
-			break;
-		case white:
-			imageColorPath = "-White.png";
-			symbol += "-W";
-			break;
-		case blue:
-			imageColorPath = "-Blue.png";
-			symbol += "-Bl";
-			break;
-		
-		}
-		this.setType(pieceType);
-		imageColorPath = pieceType.toString()+ imageColorPath;
-		setLayout(new PieceLayout(imageColorPath));
-		this.pieceBehaviour = chessboard.getPieceBehaviour();
-		this.display = new PieceDisplay(this);
-	}
+    this.setPlayer(player);
 
-	public ArrayList<Square> allMoves(IChessboard board, boolean ignoreKing) {
-		
-		return getMoveBehaviour().getMoves(board, this, ignoreKing);
-	}
-	/*
-	public IKing myKing() {
-		return chessboard.getKing(player);
-	}
+    colors color = player.getColor();
+    String imageColorPath = "";
+
+    if(pieceType.equals(PieceType.Knight)){
+      symbol = pieceType.toString().substring(0, 2);
+    }else{
+      symbol = pieceType.toString().substring(0, 1);
+    }
+
+    switch (color) {
+    case black:
+      imageColorPath = "-Black.png";
+      symbol += "-Bk";
+      break;
+    case white:
+      imageColorPath = "-White.png";
+      symbol += "-W";
+      break;
+    case blue:
+      imageColorPath = "-Blue.png";
+      symbol += "-Bl";
+      break;
+
+    }
+    this.setType(pieceType);
+    imageColorPath = pieceType.toString()+ imageColorPath;
+    setLayout(new PieceLayout(imageColorPath));
+    this.pieceBehaviour = chessboard.getPieceBehaviour();
+    this.display = new PieceDisplay(this);
+  }
+
+  public ArrayList<Square> allMoves(IChessboard board, boolean ignoreKing) {
+
+    return getMoveBehaviour().getMoves(board, this, ignoreKing);
+  }
+  /*
+  public IKing myKing() {
+    return chessboard.getKing(player);
+  }
 */
-	
-	public int getPosX(){
-		return getSquare().getPosX();
-	}
-	
-	public int getPosY(){
-		return getSquare().getPosY();
-	}
-	
 
-	public Player getPlayer() {
-		return player;
-	}
+  public int getPosX(){
+    return getSquare().getPosX();
+  }
 
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-
-	public Square getSquare() {
-		return square;
-	}
-
-	public void setSquare(Square square) {
-		this.square = square;
-	}
+  public int getPosY(){
+    return getSquare().getPosY();
+  }
 
 
-	public void draw(Graphics g) {
-		display.draw(g);
-	}
+  public Player getPlayer() {
+    return player;
+  }
+
+  public void setPlayer(Player player) {
+    this.player = player;
+  }
+
+  public Square getSquare() {
+    return square;
+  }
+
+  public void setSquare(Square square) {
+    this.square = square;
+  }
 
 
-	/**
-	 * @return the layout
-	 */
-	public PieceLayout getLayout() {
-		return layout;
-	}
+  public void draw(Graphics g) {
+    display.draw(g);
+  }
 
-	/**
-	 * @param layout the layout to set
-	 */
-	public void setLayout(PieceLayout layout) {
-		this.layout = layout;
-	}
 
-	/**
-	 * @return if wasMoved
-	 */
-	public boolean wasMoved() {
-		return wasMoved;
-	}
+  /**
+   * @return the layout
+   */
+  public PieceLayout getLayout() {
+    return layout;
+  }
 
-	/**
-	 * @param wasMoved the wasMoved to set
-	 */
-	public void setWasMoved(boolean wasMoved) {
-		this.wasMoved = wasMoved;
-	}
+  /**
+   * @param layout the layout to set
+   */
+  public void setLayout(PieceLayout layout) {
+    this.layout = layout;
+  }
 
-	public String getSymbol() {
-		return this.symbol;
-	}
+  /**
+   * @return if wasMoved
+   */
+  public boolean wasMoved() {
+    return wasMoved;
+  }
 
-	/**
-	 * @return the type
-	 */
-	public PieceType getType() {
-		return type;
-	}
+  /**
+   * @param wasMoved the wasMoved to set
+   */
+  public void setWasMoved(boolean wasMoved) {
+    this.wasMoved = wasMoved;
+  }
 
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(PieceType type) {
-		this.type = type;
-	}
-	
-	public IMove getMoveBehaviour() {
-		return moveBehaviour;
-	}
+  public String getSymbol() {
+    return this.symbol;
+  }
 
-	public boolean isout(int x, int y) {
-		
-		return pieceBehaviour.isout(x, y);
-	}
+  /**
+   * @return the type
+   */
+  public PieceType getType() {
+    return type;
+  }
 
-	public boolean checkPiece(int i, int j) {
-		
-		return pieceBehaviour.checkMyPiece(this, i, j);
-	}
+  /**
+   * @param type the type to set
+   */
+  public void setType(PieceType type) {
+    this.type = type;
+  }
 
-	public IKing myKing() {
-		return pieceBehaviour.getKing(this.player);
-	}
+  public IMove getMoveBehaviour() {
+    return moveBehaviour;
+  }
 
-	public Piece myKingAsPiece() {
-		return pieceBehaviour.getKingAsPiece(this.player);
-	}
-	
-	public boolean otherOwner(int i, int j) {
-		return pieceBehaviour.otherOwner(this, i, j);
-	}
+  public boolean isout(int x, int y) {
 
-	/**
-	 * @param moveBehaviour the moveBehaviour to set
-	 */
-	public void setMoveBehaviour(IMove moveBehaviour) {
-		this.moveBehaviour = moveBehaviour;
-	}
+    return pieceBehaviour.isout(x, y);
+  }
 
-	public BoardType getChessboardType() {
-		return pieceBehaviour.getChessboardType();
-	}
+  public boolean checkPiece(int i, int j) {
 
-	public IChessboard getChessboard() {
-		return pieceBehaviour.getChessboard();
-	}
+    return pieceBehaviour.checkMyPiece(this, i, j);
+  }
 
+  public IKing myKing() {
+    return pieceBehaviour.getKing(this.player);
+  }
+
+  public Piece myKingAsPiece() {
+    return pieceBehaviour.getKingAsPiece(this.player);
+  }
+
+  public boolean otherOwner(int i, int j) {
+    return pieceBehaviour.otherOwner(this, i, j);
+  }
+
+  /**
+   * @param moveBehaviour the moveBehaviour to set
+   */
+  public void setMoveBehaviour(IMove moveBehaviour) {
+    this.moveBehaviour = moveBehaviour;
+  }
+
+  public BoardType getChessboardType() {
+    return pieceBehaviour.getChessboardType();
+  }
+
+  public IChessboard getChessboard() {
+    return pieceBehaviour.getChessboard();
+  }
 }
