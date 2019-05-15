@@ -1,5 +1,6 @@
 package test.java.game;
 
+import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.game.Player;
 import main.java.game.Settings;
@@ -26,7 +27,9 @@ public class PieceDisplayTest {
     public final void testSquareDrawing() {
         Settings settings = new Settings(players, Settings.BoardType.squareBoard);
         SquareBoard board = new SquareBoard(settings);
+
         Piece piece = new Piece(board, players[0], PieceFactory.PieceType.Queen);
+        piece.setSquare(new Square(1, 2, piece));
 
         PieceDisplay display = new PieceDisplay(piece);
         Graphics2D graphics2D = mock(Graphics2D.class);
@@ -36,11 +39,12 @@ public class PieceDisplayTest {
     @Test
     public void testCircleDrawing() {
         CircleBoard board = new CircleBoard();
+
         Piece piece = new Piece(board, players[0], PieceFactory.PieceType.Queen);
+        piece.setSquare(new Square(1, 2, piece));
 
         PieceDisplay display = new PieceDisplay(piece);
         Graphics2D graphics2D = mock(Graphics2D.class);
         display.draw(graphics2D);
-
     }
 }
