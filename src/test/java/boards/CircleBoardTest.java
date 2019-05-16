@@ -3,9 +3,13 @@ package test.java.boards;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+
+import main.java.gui.GUI;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
+import java.awt.Image;
 import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.game.Player;
@@ -106,6 +110,21 @@ public class CircleBoardTest {
 		Piece warrior = begin.getPiece();
 		verify(end, atLeast(1)).setPiece(warrior);		
 		
+	}
+
+	@Test
+	public final void testSelect() {
+		CircleBoard board = new CircleBoard();
+		Square square = new Square(1, 1, null);
+		board.select(square);
+		assertEquals(square, board.getActiveSquare());
+	}
+
+	@Test
+	public final void testGetHeight() {
+		CircleBoard board = new CircleBoard();
+		Image image = GUI.loadImage("circle_chessboard.png");
+		assertEquals(image.getHeight(null), board.get_height());
 	}
 	/*
 	@Test
