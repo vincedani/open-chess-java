@@ -1,23 +1,13 @@
 package test.java.boards;
 
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
-import main.java.gui.GUI;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 import java.awt.*;
 
-import main.java.board.Square;
 import main.java.circleBoard.CircleBoard;
 import main.java.circleBoard.CircleBoardDisplay;
-import main.java.game.Player;
-import main.java.pieces.Piece;
-import main.java.pieces.PieceFactory;
-import main.java.pieces.PieceFactory.PieceType;
 
 public class CircleBoardDisplayTest {
 

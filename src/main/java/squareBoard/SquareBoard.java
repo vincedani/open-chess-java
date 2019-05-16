@@ -127,7 +127,10 @@ public class SquareBoard implements IChessboard {
 	}/*--endOf-get_widht--*/
 
 	public int get_height(boolean includeLabels) {
-		return board_layout.image.getHeight(null) + display.upDownLabel.getHeight(null);
+		if (includeLabels)
+			return board_layout.image.getHeight(null) + display.upDownLabel.getHeight(null);
+		else
+			return board_layout.image.getHeight(null);
 
 	}/*--endOf-get_height--*/
 

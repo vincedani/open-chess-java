@@ -76,6 +76,15 @@ public class SquareBoardTest {
 		board.move(board.getSquares()[xKing][yKing], board.getSquares()[6][0], false);		
 		assertTrue(board.getSquares()[6][0].getPiece()==king && board.getSquares()[5][0].getPiece()==rook);
 	}
-	
+
+	@Test
+	public final void testSetPieces() {
+		Player[] players = {
+				new Player("me", "white"),
+				new Player("you", "black")
+		};
+		SquareBoard board = new SquareBoard(settings);
+		board.setPieces(players);
+	}
 	
 }
